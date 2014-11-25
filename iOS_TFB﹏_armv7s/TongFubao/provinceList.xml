@@ -1,0 +1,421 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<msc type="form">
+	<provinces>
+		<province key="11" value="北京市">
+			<city cid="101010100" value="北京市" />
+		</province>
+		<province key="12" value="天津市">
+			<city cid="101030100" value="天津市" />
+		</province>
+		<province key="13" value="河北省">
+			<city cid="101090101" value="石家庄市" />
+			<city cid="101090501" value="唐山市" />
+			<city cid="101091101" value="秦皇岛市" />
+			<city cid="101091001" value="邯郸市" />
+			<city cid="101090901" value="邢台市" />
+			<city cid="101090201" value="保定市" />
+			<city cid="101090301" value="张家口市" />
+			<city cid="101090402" value="承德市" />
+			<city cid="101090701" value="沧州市" />
+			<city cid="101090601" value="廊坊市" />
+			<city cid="101090801" value="衡水市" />
+		</province>
+		<province key="14" value="山西省">
+			<city cid="101100101" value="太原市" />
+			<city cid="101100201" value="大同市" />
+			<city cid="101100301" value="阳泉市" />
+			<city cid="101100501" value="长治市" />
+			<city cid="101100601" value="晋城市" />
+			<city cid="101100901" value="朔州市" />
+			<city cid="101100401" value="晋中市" />
+			<city cid="101100801" value="运城市" />
+			<city cid="101101001" value="忻州市" />
+			<city cid="101100701" value="临汾市" />
+			<city cid="101101101" value="吕梁市" />
+		</province>
+		<province key="15" value="内蒙古自治区">
+			<city cid="101080101" value="呼和浩特市" />
+			<city cid="101080201" value="包头市" />
+			<city cid="101080301" value="乌海市" />
+			<city cid="101080601" value="赤峰市" />
+			<city cid="101080501" value="通辽市" />
+			<city cid="101080701" value="鄂尔多斯市" />
+			<city cid="101081000" value="呼伦贝尔市" />
+			<city cid="101080901" value="锡林浩特" />
+			<city cid="101081001" value="海拉尔" />
+		</province>
+		<province key="21" value="辽宁省">
+			<city cid="101070101" value="沈阳市" />
+			<city cid="101070201" value="大连市" />
+			<city cid="101070301" value="鞍山市" />
+			<city cid="101070401" value="抚顺市" />
+			<city cid="101070501" value="本溪市" />
+			<city cid="101070601" value="丹东市" />
+			<city cid="101070701" value="锦州市" />
+			<city cid="101070801" value="营口市" />
+			<city cid="101070901" value="阜新市" />
+			<city cid="101071001" value="辽阳市" />
+			<city cid="101071301" value="盘锦市" />
+			<city cid="101071101" value="铁岭市" />
+			<city cid="101071201" value="朝阳市" />
+			<city cid="101071401" value="葫芦岛市" />
+		</province>
+		<province key="22" value="吉林省">
+			<city cid="101060101" value="长春市" />
+			<city cid="101060201" value="吉林市" />
+			<city cid="101060401" value="四平市" />
+			<city cid="101060701" value="辽源市" />
+			<city cid="101060501" value="通化市" />
+			<city cid="101060901" value="白山市" />
+			<city cid="101060801" value="松原市" />
+			<city cid="101060601" value="白城市" />
+			<city cid="101060301" value="延吉市" />
+		</province>
+		<province key="23" value="黑龙江省">
+			<city cid="101050101" value="哈尔滨市" />
+			<city cid="101050201" value="齐齐哈尔市" />
+			<city cid="101051101" value="鸡西市" />
+			<city cid="101051201" value="鹤岗市" />
+			<city cid="101051301" value="双鸭山市" />
+			<city cid="101050901" value="大庆市" />
+			<city cid="101050801" value="伊春市" />
+			<city cid="101050401" value="佳木斯市" />
+			<city cid="101051002" value="七台河市" />
+			<city cid="101050301" value="牡丹江市" />
+			<city cid="101050601" value="黑河市" />
+			<city cid="101050501" value="绥化市" />
+			<city cid="101050701" value="大兴安岭" />
+		</province>
+		<province key="31" value="上海市">
+			<city cid="101020100" value="上海市" />
+		</province>
+		<province key="32" value="江苏省">
+			<city cid="101190101" value="南京市" />
+			<city cid="101190201" value="无锡市" />
+			<city cid="101190801" value="徐州市" />
+			<city cid="101191101" value="常州市" />
+			<city cid="101190402" value="常熟市" />
+			<city cid="101190404" value="昆山市" />
+			<city cid="101190401" value="苏州市" />
+			<city cid="101190501" value="南通市" />
+			<city cid="101190408" value="太仓市" />
+			<city cid="101190406" value="吴县" />
+			<city cid="101190203" value="宜兴市" />
+			<city cid="101191001" value="连云港市" />
+			<city cid="101190901" value="淮安市" />
+			<city cid="101190701" value="盐城市" />
+			<city cid="101190601" value="扬州市" />
+			<city cid="101190301" value="镇江市" />
+			<city cid="101191201" value="泰州市" />
+			<city cid="101191301" value="宿迁市" />
+		</province>
+		<province key="33" value="浙江省">
+			<city cid="101210101" value="杭州市" />
+			<city cid="101210401" value="宁波市" />
+			<city cid="101210701" value="温州市" />
+			<city cid="101210301" value="嘉兴市" />
+			<city cid="101210201" value="湖州市" />
+			<city cid="101210501" value="绍兴市" />
+			<city cid="101210901" value="金华市" />
+			<city cid="101211001" value="衢州市" />
+			<city cid="101211101" value="舟山市" />
+			<city cid="101210601" value="台州市" />
+			<city cid="101210801" value="丽水市" />
+		</province>
+		<province key="34" value="安徽省">
+			<city cid="101220101" value="合肥市" />
+			<city cid="101220301" value="芜湖市" />
+			<city cid="101220201" value="蚌埠市" />
+			<city cid="101220401" value="淮南市" />
+			<city cid="101220501" value="马鞍山市" />
+			<city cid="101221201" value="淮北市" />
+			<city cid="101221301" value="铜陵市" />
+			<city cid="101220601" value="安庆市" />
+			<city cid="101221101" value="滁州市" />
+			<city cid="101220801" value="阜阳市" />
+			<city cid="101220701" value="宿州市" />
+			<city cid="101221601" value="巢湖市" />
+			<city cid="101221501" value="六安市" />
+			<city cid="101220901" value="亳州市" />
+			<city cid="101221701" value="池州市" />
+			<city cid="101221401" value="宣城市" />
+		</province>
+		<province key="35" value="福建省">
+			<city cid="101230101" value="福州市" />
+			<city cid="101230201" value="厦门市" />
+			<city cid="101230401" value="莆田市" />
+			<city cid="101230801" value="三明市" />
+			<city cid="101230501" value="泉州市" />
+			<city cid="101230601" value="漳州市" />
+			<city cid="101230901" value="南平市" />
+			<city cid="101230701" value="龙岩市" />
+			<city cid="101230301" value="宁德市" />
+		</province>
+		<province key="36" value="江西省">
+			<city cid="101240101" value="南昌市" />
+			<city cid="101240801" value="景德镇市" />
+			<city cid="101240901" value="萍乡市" />
+			<city cid="101240201" value="九江市" />
+			<city cid="101241001" value="新余市" />
+			<city cid="101241101" value="鹰潭市" />
+			<city cid="101240701" value="赣州市" />
+			<city cid="101240601" value="吉安市" />
+			<city cid="101240501" value="宜春市" />
+			<city cid="101240401" value="抚州市" />
+			<city cid="101240301" value="上饶市" />
+		</province>
+		<province key="37" value="山东省">
+			<city cid="101120101" value="济南市" />
+			<city cid="101120201" value="青岛市" />
+			<city cid="101120301" value="淄博市" />
+			<city cid="101121401" value="枣庄市" />
+			<city cid="101121201" value="东营市" />
+			<city cid="101120501" value="烟台市" />
+			<city cid="101120601" value="潍坊市" />
+			<city cid="101120701" value="济宁市" />
+			<city cid="101120801" value="泰安市" />
+			<city cid="101121301" value="威海市" />
+			<city cid="101121501" value="日照市" />
+			<city cid="101121601" value="莱芜市" />
+			<city cid="101120901" value="临沂市" />
+			<city cid="101120401" value="德州市" />
+			<city cid="101121701" value="聊城市" />
+			<city cid="101121101" value="滨州市" />
+			<city cid="101121001" value="菏泽市" />
+			<city cid="101120710" value="曲阜市" />
+		</province>
+		<province key="41" value="河南省">
+			<city cid="101180101" value="郑州市" />
+			<city cid="101180801" value="开封市" />
+			<city cid="101180901" value="洛阳市" />
+			<city cid="101180501" value="平顶山市" />
+			<city cid="101180201" value="安阳市" />
+			<city cid="101181201" value="鹤壁市" />
+			<city cid="101180301" value="新乡市" />
+			<city cid="101181101" value="焦作市" />
+			<city cid="101181301" value="濮阳市" />
+			<city cid="101180401" value="许昌市" />
+			<city cid="101181501" value="漯河市" />
+			<city cid="101181701" value="三门峡市" />
+			<city cid="101180701" value="南阳市" />
+			<city cid="101181001" value="商丘市" />
+			<city cid="101180601" value="信阳市" />
+			<city cid="101181401" value="周口市" />
+			<city cid="101181601" value="驻马店市" />
+		</province>
+		<province key="42" value="湖北省">
+			<city cid="101200301" value="鄂州市" />
+			<city cid="101201401" value="荆门市" />
+			<city cid="101200401" value="孝感市" />
+			<city cid="101200801" value="荆州市" />
+			<city cid="101200501" value="黄冈市" />
+			<city cid="101200701" value="咸宁市" />
+			<city cid="101201301" value="随州市" />
+			<city cid="101201001" value="恩施市" />
+			<city cid="101201201" value="神农架" />
+			<city cid="101200101" value="武汉市" />
+			<city cid="101200601" value="黄石市" />
+			<city cid="101201101" value="十堰市" />
+			<city cid="101200901" value="宜昌市" />
+			<city cid="101200201" value="襄阳市" />
+		</province>
+		<province key="43" value="湖南省">
+			<city cid="101250101" value="长沙市" />
+			<city cid="101250301" value="株洲市" />
+			<city cid="101250201" value="湘潭市" />
+			<city cid="101250401" value="衡阳市" />
+			<city cid="101250901" value="邵阳市" />
+			<city cid="101251001" value="岳阳市" />
+			<city cid="101250601" value="常德市" />
+			<city cid="101251101" value="张家界市" />
+			<city cid="101250701" value="益阳市" />
+			<city cid="101250501" value="郴州市" />
+			<city cid="101251401" value="永州市" />
+			<city cid="101251201" value="怀化市" />
+			<city cid="101250801" value="娄底市" />
+			<city cid="101251501" value="吉首市" />
+			<city cid="101250202" value="韶山市" />
+		</province>
+		<province key="44" value="广东省">
+			<city cid="101280101" value="广州市" />
+			<city cid="101280201" value="韶关市" />
+			<city cid="101280601" value="深圳市" />
+			<city cid="101280701" value="珠海市" />
+			<city cid="101280501" value="汕头市" />
+			<city cid="101280800" value="佛山市" />
+			<city cid="101281101" value="江门市" />
+			<city cid="101281001" value="湛江市" />
+			<city cid="101282001" value="茂名市" />
+			<city cid="101280901" value="肇庆市" />
+			<city cid="101280301" value="惠州市" />
+			<city cid="101280401" value="梅州市" />
+			<city cid="101282101" value="汕尾市" />
+			<city cid="101281201" value="河源市" />
+			<city cid="101281801" value="阳江市" />
+			<city cid="101280905" value="德庆市" />
+			<city cid="101281301" value="清远市" />
+			<city cid="101281601" value="东莞市" />
+			<city cid="101281701" value="中山市" />
+			<city cid="101281501" value="潮州市" />
+			<city cid="101281901" value="揭阳市" />
+			<city cid="101281401" value="云浮市" />
+		</province>
+		<province key="45" value="广西">
+			<city cid="101300101" value="南宁市" />
+			<city cid="101300301" value="柳州市" />
+			<city cid="101300501" value="桂林市" />
+			<city cid="101300601" value="梧州市" />
+			<city cid="101301301" value="北海市" />
+			<city cid="101301401" value="防城港市" />
+			<city cid="101301101" value="钦州市" />
+			<city cid="101300801" value="贵港市" />
+			<city cid="101300901" value="玉林市" />
+			<city cid="101301001" value="百色市" />
+			<city cid="101300701" value="贺州市" />
+			<city cid="101301201" value="河池市" />
+			<city cid="101300401" value="来宾市" />
+			<city cid="101300201" value="崇左市" />
+			<city cid="101300802" value="桂平市" />
+			<city cid="101300510" value="阳朔市" />
+		</province>
+		<province key="46" value="海南省">
+			<city cid="101310101" value="海口市" />
+			<city cid="101310201" value="三亚市" />
+			<city cid="101310205" value="儋州市" />
+			<city cid="101310102" value="琼山市" />
+			<city cid="101310222" value="通什市" />
+			<city cid="101310212" value="文昌市" />
+		</province>
+		<province key="50" value="重庆市">
+			<city cid="101040100" value="重庆市" />
+		</province>
+		<province key="51" value="四川省">
+			<city cid="101270101" value="成都市" />
+			<city cid="101270301" value="自贡市" />
+			<city cid="101270201" value="攀枝花市" />
+			<city cid="101271001" value="泸州市" />
+			<city cid="101272001" value="德阳市" />
+			<city cid="101270401" value="绵阳市" />
+			<city cid="101272101" value="广元市" />
+			<city cid="101270701" value="遂宁市" />
+			<city cid="101271201" value="内江市" />
+			<city cid="101271401" value="乐山市" />
+			<city cid="101270501" value="南充市" />
+			<city cid="101271501" value="眉山市" />
+			<city cid="101271101" value="宜宾市" />
+			<city cid="101270801" value="广安市" />
+			<city cid="101270601" value="达州市" />
+			<city cid="101271701" value="雅安市" />
+			<city cid="101270901" value="巴中市" />
+			<city cid="101271301" value="资阳市" />
+			<city cid="101271901" value="阿坝" />
+			<city cid="101271801" value="甘孜州" />
+			<city cid="101271601" value="凉山" />
+		</province>
+		<province key="52" value="贵州省">
+			<city cid="101260101" value="贵阳市" />
+			<city cid="101260801" value="六盘水市" />
+			<city cid="101260201" value="遵义市" />
+			<city cid="101260301" value="安顺市" />
+			<city cid="101260601" value="铜仁" />
+			<city cid="101260208" value="赤水市" />
+			<city cid="101260701" value="毕节" />
+			<city cid="101260501" value="凯里" />
+			<city cid="101260401" value="都匀" />
+		</province>
+		<province key="53" value="云南省">
+			<city cid="101290101" value="昆明市" />
+			<city cid="101290401" value="曲靖市" />
+			<city cid="101290701" value="玉溪市" />
+			<city cid="101290501" value="保山市" />
+			<city cid="101291001" value="昭通市" />
+			<city cid="101291401" value="丽江市" />
+			<city cid="101291101" value="临沧市" />
+			<city cid="101290801" value="楚雄" />
+			<city cid="101290301" value="红河" />
+			<city cid="101290601" value="文山" />
+			<city cid="101290201" value="大理" />
+			<city cid="101291501" value="德宏" />
+			<city cid="101291201" value="怒江" />
+			<city cid="101290901" value="思茅" />
+		</province>
+		<province key="54" value="西藏">
+			<city cid="101140101" value="拉萨市" />
+			<city cid="101140501" value="昌都" />
+			<city cid="101140301" value="山南" />
+			<city cid="101140201" value="日喀则" />
+			<city cid="101140601" value="那曲" />
+			<city cid="101140701" value="阿里" />
+			<city cid="101140401" value="林芝" />
+		</province>
+		<province key="61" value="陕西省">
+			<city cid="101110101" value="西安市" />
+			<city cid="101111001" value="铜川市" />
+			<city cid="101110901" value="宝鸡市" />
+			<city cid="101110200" value="咸阳市" />
+			<city cid="101110501" value="渭南市" />
+			<city cid="101110300" value="延安市" />
+			<city cid="101110801" value="汉中市" />
+			<city cid="101110401" value="榆林市" />
+			<city cid="101110701" value="安康市" />
+			<city cid="101110601" value="商洛市" />
+			<city cid="101110510" value="韩城市" />
+		</province>
+		<province key="62" value="甘肃省">
+			<city cid="101160101" value="兰州市" />
+			<city cid="101160601" value="金昌市" />
+			<city cid="101161301" value="白银市" />
+			<city cid="101160901" value="天水市" />
+			<city cid="101160501" value="武威市" />
+			<city cid="101160701" value="张掖市" />
+			<city cid="101160301" value="平凉市" />
+			<city cid="101160801" value="酒泉市" />
+			<city cid="101160401" value="庆阳市" />
+			<city cid="101160201" value="定西市" />
+			<city cid="101050204" value="甘南" />
+			<city cid="101161101" value="临夏" />
+		</province>
+		<province key="63" value="青海省">
+			<city cid="101150101" value="西宁市" />
+			<city cid="101150201" value="海东" />
+			<city cid="101150801" value="海北" />
+			<city cid="101150301" value="黄南" />
+			<city cid="101150401" value="海南" />
+			<city cid="101150501" value="果洛" />
+			<city cid="101150601" value="玉树" />
+			<city cid="101150701" value="海西" />
+		</province>
+		<province key="64" value="宁夏">
+			<city cid="101170101" value="银川市" />
+			<city cid="101170201" value="石嘴山市" />
+			<city cid="101170301" value="吴忠市" />
+			<city cid="101170401" value="固原市" />
+			<city cid="101170501" value="中卫市" />
+		</province>
+		<province key="65" value="新疆">
+			<city cid="101130101" value="乌鲁木齐" />
+			<city cid="101130201" value="克拉玛依" />
+			<city cid="101130501" value="吐鲁番" />
+			<city cid="101131201" value="哈密" />
+			<city cid="101130401" value="昌吉" />
+			<city cid="101130801" value="阿克苏" />
+			<city cid="101131001" value="伊宁" />
+			<city cid="101130901" value="喀什" />
+			<city cid="101131301" value="和田" />
+			<city cid="101131101" value="塔城" />
+			<city cid="101131401" value="阿勒泰" />
+			<city cid="101130301" value="石河子" />
+			<city cid="101130601" value="库尔勒" />
+		</province>
+		<province key="71" value="台湾省">
+			<city cid="101340102" value="台北" />
+			<city cid="101340201" value="高雄" />
+		</province>
+		<province key="81" value="香港特别行政区">
+			<city cid="101320101" value="香港特别行政区" />
+		</province>
+		<province key="82" value="澳门特别行政区">
+			<city cid="101330101" value="澳门特别行政区" />
+		</province>
+	</provinces>
+</msc>

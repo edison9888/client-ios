@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Adress" representedClassName="TFAdress" syncable="YES">
+        <attribute name="adress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="postcode" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Agent" representedClassName="TFAgent" syncable="YES">
+        <attribute name="account" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="PersonMain" representedClassName="Person" syncable="YES">
+        <attribute name="mnuid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mnuisconst" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mnuname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mnuno" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mnuorder" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mnutypeid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mnutypename" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pointnum" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Adress" positionX="-54" positionY="0" width="128" height="103"/>
+        <element name="Agent" positionX="-63" positionY="-18" width="128" height="60"/>
+        <element name="PersonMain" positionX="-54" positionY="18" width="128" height="163"/>
+    </elements>
+</model>

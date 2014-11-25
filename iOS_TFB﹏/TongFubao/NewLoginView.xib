@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none">
+    <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewLoginView">
+            <connections>
+                <outlet property="BGimageView" destination="2cj-tp-wF6" id="yJs-2q-6iF"/>
+                <outlet property="LableRZ" destination="cWN-x8-Eiu" id="F5V-K9-i7m"/>
+                <outlet property="LoginBtn" destination="ljL-2E-1n3" id="9ph-Xg-RwS"/>
+                <outlet property="LoginLogo" destination="Osu-SJ-gKK" id="Ijg-MP-U6P"/>
+                <outlet property="PhoneIcon" destination="QNW-mP-OnO" id="xZ0-38-Ljc"/>
+                <outlet property="Uimage1" destination="mCC-Pn-swZ" id="0oD-WI-2CP"/>
+                <outlet property="Uimage2" destination="pEw-QD-0hm" id="NQx-tB-qOB"/>
+                <outlet property="forgetBtn" destination="YvM-pe-CC1" id="eJI-sv-u1J"/>
+                <outlet property="myLogonBtn" destination="721-Lf-NlX" id="cSw-mw-XWr"/>
+                <outlet property="passwordConfirmField" destination="Hbw-Xp-fFT" id="tTV-Og-wWm"/>
+                <outlet property="phonetextfiled" destination="RKS-GI-0F2" id="VmJ-Wu-tZ0"/>
+                <outlet property="view" destination="tvW-b7-6uS" id="RHe-AB-6Zd"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="tvW-b7-6uS">
+            <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="input_field.png" id="pEw-QD-0hm">
+                    <rect key="frame" x="16" y="245" width="288" height="46"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                </imageView>
+                <view contentMode="scaleToFill" id="Hbw-Xp-fFT" customClass="BZGFormField">
+                    <rect key="frame" x="20" y="249" width="275" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="Osu-SJ-gKK">
+                    <rect key="frame" x="60" y="43" width="201" height="122"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="系统登陆" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cWN-x8-Eiu">
+                    <rect key="frame" x="191" y="138" width="68" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="STHeitiSC-Medium" family="Heiti SC" pointSize="16"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="input_field.png" id="mCC-Pn-swZ">
+                    <rect key="frame" x="16" y="186" width="288" height="46"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ljL-2E-1n3">
+                    <rect key="frame" x="204" y="341" width="102" height="39"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                    <state key="normal" title="新用户注册">
+                        <color key="titleColor" red="0.67638001824817517" green="0.67304402372262773" blue="0.66517449817518248" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="LoginNewPeople:" destination="-1" eventType="touchUpInside" id="fay-gm-3sP"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YvM-pe-CC1">
+                    <rect key="frame" x="7" y="341" width="135" height="39"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                    <state key="normal" title="忘记支付密码？">
+                        <color key="titleColor" red="0.66936587591240881" green="0.67384238138686137" blue="0.67834739963503654" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="MissPasswd:" destination="-1" eventType="touchUpInside" id="vMH-hR-7Ch"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="721-Lf-NlX">
+                    <rect key="frame" x="16" y="266" width="288" height="39"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" title="登录" backgroundImage="next_press.png">
+                        <color key="titleColor" red="0.96681441574281324" green="1" blue="0.97856456804870506" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onLogonBtnClicked:" destination="-1" eventType="touchUpInside" id="EZd-x7-Jtx"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone.png" id="QNW-mP-OnO">
+                    <rect key="frame" x="25" y="191" width="34" height="35"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                </imageView>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入您的手机账户" clearsOnBeginEditing="YES" minimumFontSize="18" id="RKS-GI-0F2">
+                    <rect key="frame" x="79" y="195" width="205" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+        <view contentMode="scaleToFill" id="2cj-tp-wF6">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="input_field.png" width="288" height="39"/>
+        <image name="logo.png" width="153" height="98"/>
+        <image name="next_press.png" width="288" height="39"/>
+        <image name="phone.png" width="17" height="17"/>
+    </resources>
+</document>
