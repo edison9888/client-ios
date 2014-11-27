@@ -55,6 +55,7 @@
 	UIActivityIndicatorView *indicator = (UIActivityIndicatorView *)[self viewWithTag:INDICATOR_TAG];
 	[indicator stopAnimating];
     [self removeFromSuperview];
+    
 }
 
 - (void) setTipsText:(NSString*) aText

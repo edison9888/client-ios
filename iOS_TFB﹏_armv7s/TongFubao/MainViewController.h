@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *table;
 @property (nonatomic, strong) NSMutableArray *dataArray;
-
++ (id)singleton;
+-(void)reloadtable;
 @end

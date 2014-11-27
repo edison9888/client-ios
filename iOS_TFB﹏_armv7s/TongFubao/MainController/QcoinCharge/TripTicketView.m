@@ -13,6 +13,7 @@
 #import "TicketCustomTableViewCell.h"
 
 #define STATABLEHIETH 45
+#define MOVEHIETH -50
 
 @implementation TripTicketView
 
@@ -52,7 +53,7 @@
 
         
         // 左视图
-        self.leftTicket = [[leftView alloc]initWithFrame:CGRectMake(-160, -50, 160, self.frame.size.height+5)];
+        self.leftTicket = [[leftView alloc]initWithFrame:CGRectMake(-160, MOVEHIETH, 160, self.frame.size.height+5)];
         self.leftTicket.delegate = self;
         self.leftTicket.layer.shadowOffset = CGSizeMake(1, -1);
         self.leftTicket.layer.shadowRadius = 2.0f;
@@ -61,7 +62,7 @@
         selectionButton = YES;
         [self addSubview:self.leftTicket];
         // 右视图
-        self.rigthTicket = [[RigthView alloc]initWithFrame:CGRectMake(320, -50, 160, self.frame.size.height+5) ];
+        self.rigthTicket = [[RigthView alloc]initWithFrame:CGRectMake(320, MOVEHIETH, 160, self.frame.size.height+5) ];
         self.rigthTicket.delegate = self;
         self.rigthTicket.layer.shadowOffset = CGSizeMake(-1,-1);
         self.rigthTicket.layer.shadowRadius = 2.0f;
@@ -140,6 +141,7 @@
     cell.selectedBackgroundView = backviewcell;
 
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if ([self.PaiXuaAllArray count] > 0) {
     NSString *fromTimeData = [[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:0] substringWithRange:NSMakeRange(11, 5)];
     NSString *toTimeData = [[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:1] substringWithRange:NSMakeRange(11, 5)];
     NSString *chaotoTimeData = [[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:1] substringWithRange:NSMakeRange(11, 1)];
@@ -155,6 +157,7 @@
     }
     
     [cell nameTicket:[NSString stringWithFormat:@"%@-%@",[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:5],[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:6]] timeTicket:[NSString stringWithFormat:@"￥%@",[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:2]] priceTicket:@" " discountTicket:[NSString stringWithFormat:@"%@-%@%@",fromTimeData,toTimeData,addString] modelsTicket:[NSString stringWithFormat:@"%@/%@",[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:4],[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:7]]];
+    }
     return cell;
 }
 
@@ -209,9 +212,9 @@
         if (selectionButton == YES)
         {
             [UIView animateWithDuration:0.3 animations:^{
-                self.leftTicket.frame = CGRectMake(0, -50, 160, self.frame.size.height+5);
+                self.leftTicket.frame = CGRectMake(0, MOVEHIETH, 160, self.frame.size.height+5);
                 selectionButton = NO;
-                self.rigthTicket.frame = CGRectMake(320, -50, 160, self.frame.size.height+5);
+                self.rigthTicket.frame = CGRectMake(320, MOVEHIETH, 160, self.frame.size.height+5);
                 rigthButton = YES;
                 self.tapGesture.enabled = YES;
 
@@ -220,9 +223,9 @@
         else
         {
             [UIView animateWithDuration:0.3 animations:^{
-                self.leftTicket.frame = CGRectMake(-160, -50, 160, self.frame.size.height+5);
+                self.leftTicket.frame = CGRectMake(-160, MOVEHIETH, 160, self.frame.size.height+5);
                 selectionButton = YES;
-                self.rigthTicket.frame = CGRectMake(320, -50, 160, self.frame.size.height+5);
+                self.rigthTicket.frame = CGRectMake(320, MOVEHIETH, 160, self.frame.size.height+5);
                 rigthButton = YES;
                 self.tapGesture.enabled = NO;
             }];
@@ -234,9 +237,9 @@
         if (rigthButton == YES)
         {
             [UIView animateWithDuration:0.3 animations:^{
-                self.rigthTicket.frame = CGRectMake(160, -50, 160, self.frame.size.height+5);
+                self.rigthTicket.frame = CGRectMake(160, MOVEHIETH, 160, self.frame.size.height+5);
                 rigthButton = NO;
-                self.leftTicket.frame = CGRectMake(-160, -50, 160, self.frame.size.height+5);
+                self.leftTicket.frame = CGRectMake(-160, MOVEHIETH, 160, self.frame.size.height+5);
                 selectionButton = YES;
                 self.tapGesture.enabled = YES;
 
@@ -246,9 +249,9 @@
         else
         {
             [UIView animateWithDuration:0.3 animations:^{
-                self.rigthTicket.frame = CGRectMake(320,-50, 160, self.frame.size.height+5);
+                self.rigthTicket.frame = CGRectMake(320,MOVEHIETH, 160, self.frame.size.height+5);
                 rigthButton = YES;
-                self.leftTicket.frame = CGRectMake(-160, -50, 160, self.frame.size.height+5);
+                self.leftTicket.frame = CGRectMake(-160, MOVEHIETH, 160, self.frame.size.height+5);
                 selectionButton = YES;
                 self.tapGesture.enabled = NO;
 
@@ -260,9 +263,9 @@
 -(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
     [UIView animateWithDuration:0.3 animations:^{
-        self.rigthTicket.frame = CGRectMake(320,-50, 160, self.frame.size.height+5);
+        self.rigthTicket.frame = CGRectMake(320,MOVEHIETH, 160, self.frame.size.height+5);
         rigthButton = YES;
-        self.leftTicket.frame = CGRectMake(-160, -50, 160, self.frame.size.height+5);
+        self.leftTicket.frame = CGRectMake(-160, MOVEHIETH, 160, self.frame.size.height+5);
         selectionButton = YES;
         self.tapGesture.enabled = NO;
 
@@ -271,9 +274,9 @@
 -(void)tapAction
 {
     [UIView animateWithDuration:0.3 animations:^{
-        self.rigthTicket.frame = CGRectMake(320,-50, 160, self.frame.size.height+5);
+        self.rigthTicket.frame = CGRectMake(320,MOVEHIETH, 160, self.frame.size.height+5);
         rigthButton = YES;
-        self.leftTicket.frame = CGRectMake(-160, -50, 160, self.frame.size.height+5);
+        self.leftTicket.frame = CGRectMake(-160, MOVEHIETH, 160, self.frame.size.height+5);
         selectionButton = YES;
     }];
     self.tapGesture.enabled = NO;
@@ -283,9 +286,9 @@
 {
     [_AirView leftBackLableMove];
     [UIView animateWithDuration:0.3 animations:^{
-        self.rigthTicket.frame = CGRectMake(160,-50, 160, self.frame.size.height+5);
+        self.rigthTicket.frame = CGRectMake(160,MOVEHIETH, 160, self.frame.size.height+5);
         rigthButton = YES;
-        self.leftTicket.frame = CGRectMake(-160, -50, 160, self.frame.size.height+5);
+        self.leftTicket.frame = CGRectMake(-160, MOVEHIETH, 160, self.frame.size.height+5);
         selectionButton = YES;
         self.tapGesture.enabled = YES;
 
@@ -295,9 +298,9 @@
 {
     [_AirView backLableMove];
     [UIView animateWithDuration:0.3 animations:^{
-        self.rigthTicket.frame = CGRectMake(320,-50, 160, self.frame.size.height+5);
+        self.rigthTicket.frame = CGRectMake(320, MOVEHIETH, 160, self.frame.size.height+5);
         rigthButton = YES;
-        self.leftTicket.frame = CGRectMake(0, -50, 160, self.frame.size.height+5);
+        self.leftTicket.frame = CGRectMake(0, MOVEHIETH, 160, self.frame.size.height+5);
         selectionButton = YES;
         self.tapGesture.enabled = YES;
 
@@ -309,7 +312,7 @@
 -(void)AirLineCode:(NSString *)newAirLineCode
 {
     [UIView animateWithDuration:0.3 animations:^{
-        self.rigthTicket.frame = CGRectMake(320,-50, 160, self.frame.size.height+5);
+        self.rigthTicket.frame = CGRectMake(320, MOVEHIETH, 160, self.frame.size.height+5);
         rigthButton = YES;
     }];
     if ([newAirLineCode isEqualToString:@"KEY"])
@@ -326,7 +329,7 @@
 -(void)ClearData
 {
     [UIView animateWithDuration:0.3 animations:^{
-        self.rigthTicket.frame = CGRectMake(320,-50, 160, self.frame.size.height+5);
+        self.rigthTicket.frame = CGRectMake(320, MOVEHIETH, 160, self.frame.size.height+5);
         rigthButton = YES;
     }];
     Play = 0;

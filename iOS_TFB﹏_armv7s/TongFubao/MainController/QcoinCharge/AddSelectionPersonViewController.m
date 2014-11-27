@@ -8,6 +8,8 @@
 
 #import "AddSelectionPersonViewController.h"
 #import "PlayCustomActivityView.h"
+#import "NLUtils.h"
+
 @interface AddSelectionPersonViewController ()
 
 @end
@@ -50,7 +52,6 @@
 -(void)rightItemClick:(id)sender
 {
     
-    
     UITextField *textFieldName = [_textFiedArray objectAtIndex:0];
     UITextField *textFieldIphone = [_textFiedArray objectAtIndex:1];
     [textFieldName resignFirstResponder];
@@ -60,18 +61,9 @@
     self.PassengerName = textFieldName.text;
     self.PassengerIphone = textFieldIphone.text;
     
-    NSString * MOBILE = @"^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";
-    NSString * CM = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$";
-    NSString * CU = @"^1(3[0-2]|5[256]|8[56])\\d{8}$";
-    NSString * CT = @"^1((33|53|8[09])[0-9]|349)\\d{7}$";
-    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
-    NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
-    NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
-    NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
-    UITextField *iphoneField =[_textFiedArray objectAtIndex:1];
-    
-    
-    if (([regextestmobile evaluateWithObject:iphoneField.text]||[regextestcm evaluateWithObject:iphoneField.text]||[regextestcu evaluateWithObject:iphoneField.text]||[regextestct evaluateWithObject:iphoneField.text]) && ([self.PassengerName length] >0 && [self.PassengerIphone length] > 0))
+    BOOL result = [NLUtils checkMobilePhone:self.PassengerIphone];
+
+    if (result == YES && ([self.PassengerName length] >0 && [self.PassengerIphone length] > 0))
     {
         _activityView = [[PlayCustomActivityView alloc] initWithFrame:CGRectMake(0, 0, 130, 130)];
         _activityView.center = self.view.center;
@@ -82,11 +74,11 @@
         
         NSString* name = [NLUtils getNameForRequest:Notify_SavePassenger];
         REGISTER_NOTIFY_OBSERVER(self, GetSavePassengerNotify, name);
-        [[[NLProtocolRequest alloc]initWithRegister:YES]savePassengerName:self.PassengerName savePassengerCardType:@"" savePassengerCardId:@"" savePassengerPhoneNumber:self.PassengerIphone savePassengerPassengerType:@"2"];
+        [[[NLProtocolRequest alloc]initWithRegister:YES]savePassengerName:self.PassengerName savePassengerCardType:@"" savePassengerCardId:@"" savePassengerPhoneNumber:self.PassengerIphone savePassengerPassengerType:@"2" birthday:@" "];
     }
     else
     {
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:@"请正确填写手机号和名字" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:@"请正确填写手机号或姓名" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
         [alert show];
     }
     
@@ -121,7 +113,6 @@
         {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！加载数据失败！" delegate:self cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
             [alert show];
-            
         }
         
     }
@@ -144,22 +135,32 @@
     {
         // 机票实际价格
         //        self.priceArray = [response.data find:@"msgbody/msgchild/price"];
-        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
-        [_activityView removeFromSuperview];
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！加载数据成功！" delegate:self cancelButtonTitle:@"退出添加联系人" otherButtonTitles:nil, nil];
-        [alert show];
         UITextField *textFieldName = [_textFiedArray objectAtIndex:0];
         textFieldName.text = nil;
         textFieldName.placeholder = @"请输入姓名";
         UITextField *textFieldIphone = [_textFiedArray objectAtIndex:1];
         textFieldIphone.text = nil;
         textFieldIphone.placeholder = @"请输入手机号码";
-        
+        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+        [_activityView removeFromSuperview];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(message:) name:@"添加联系人" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"添加联系人" object:nil];
     }
-    
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！是否需要添加联系人！" delegate:self cancelButtonTitle:@"添加联系人" otherButtonTitles:@"退出", nil];
+    alert.tag = 100;
+    [alert show];
+
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 100)
+    {
+        if (buttonIndex == 1)
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
 }
 -(void)message:(NSNotificationCenter *)sender
 {
@@ -180,6 +181,7 @@
     {
         UITextField *infoField = [[UITextField alloc]initWithFrame:CGRectMake(10, 64+j*60, 300, 60)];
         infoField.placeholder = [infoArray objectAtIndex:j];
+        infoField.clearButtonMode=UITextFieldViewModeAlways;
         infoField.tag = j;
         if (infoField.tag ==1 )
         {
@@ -189,7 +191,20 @@
         [self.view addSubview:infoField];
     }
     
+//    UIButton *button = [UIButton buttonWithType:(UIButtonTypeCustom)];
+//    button.frame = CGRectMake(30, 200, 260, 40);
+//    button.layer.masksToBounds = YES;
+//    button.layer.cornerRadius = 5;
+//    button.backgroundColor = [UIColor orangeColor];
+//    [button setTitle:@"添加联系人" forState:(UIControlStateNormal)];
+//    [button addTarget:self action:@selector(sureButton) forControlEvents:(UIControlEventTouchUpInside)];
+//    [self.view addSubview:button];
+    
 }
+//-(void)sureButton
+//{
+//    
+//}
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [[_textFiedArray objectAtIndex:0] resignFirstResponder];

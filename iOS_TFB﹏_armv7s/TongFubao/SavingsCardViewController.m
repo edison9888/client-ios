@@ -591,7 +591,7 @@
 #pragma mark - 银行列表
 
 - (void)dataSearch:(NLBankListViewController *)controller didSelectWithObject:(id)aObject
-         withState:(NSString *)state
+         withState:(NSString *)state andBankctt:(NSString *)bankctt
 {
     _shoucardbank = (NSString*)aObject;
     TicketCustomTableViewCell *cell = (TicketCustomTableViewCell*)[self.SavingsCardTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:TableViewCardBankRowType inSection:SWIPINGCARDIMAGESECTION]];

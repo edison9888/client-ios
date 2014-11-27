@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 MD313. All rights reserved.
 //
 
-//购买授权码主页
+//  购买授权码主界面
 
 #import <UIKit/UIKit.h>
 

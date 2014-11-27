@@ -2,8 +2,8 @@
 //  TFAgentSearchByDay.h
 //  TongFubao
 //
-//  Created by ec on 14-6-16.
-//  Copyright (c) 2014年 MD313. All rights reserved.
+//  Created by 〝Cow﹏. on 14-6-16.
+//  Copyright (c) 2014年 〝Cow﹏. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -31,8 +31,8 @@ typedef enum : NSUInteger {
 @property (nonatomic,assign) id<TFAgentSearchByTypeDelegate> delegate;
 
 -(id)initWithType:(TFAgentSearchType)type;
-
--(void)searchByTime:(NSString *)time;
+/*选择点击日历的时间*/
+-(void)searchByTime:(NSString *)time andTime:(NSString*)aTime;
 
 -(void)clickType;
 

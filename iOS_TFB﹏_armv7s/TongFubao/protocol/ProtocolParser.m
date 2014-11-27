@@ -309,7 +309,6 @@
                  ||(xmlStrcmp(child->name, BAD_CAST"bkcardfudefault") == 0)
                  
                  
-                 
                  ||(xmlStrcmp(child->name, BAD_CAST"gesturepasswd") == 0
                     )
                  ||(xmlStrcmp(child->name, BAD_CAST"accountnumber") == 0
@@ -389,7 +388,11 @@
                  ||(xmlStrcmp(child->name, BAD_CAST"takeOffTime") == 0)
                  ||(xmlStrcmp(child->name, BAD_CAST"dPortCode") == 0)
                  ||(xmlStrcmp(child->name, BAD_CAST"aPortCode") == 0)
+                 ||(xmlStrcmp(child->name, BAD_CAST"ctripbankctt") == 0)
                  ||(xmlStrcmp(child->name, BAD_CAST"dCityCode") == 0)
+
+
+                 
 
                  
                  
@@ -417,7 +420,6 @@
                  ||(xmlStrcmp(child->name, BAD_CAST"receivePhone") == 0)
                  ||(xmlStrcmp(child->name, BAD_CAST"requrl") == 0)
                  ||(xmlStrcmp(child->name, BAD_CAST"flight") == 0)
-
                  
                  /*读取乘机人*/
                  ||(xmlStrcmp(child->name, BAD_CAST"msgchild") == 0)
@@ -427,6 +429,8 @@
                  ||(xmlStrcmp(child->name, BAD_CAST"cardId") == 0)
                  ||(xmlStrcmp(child->name, BAD_CAST"phoneNumber") == 0)
                  ||(xmlStrcmp(child->name, BAD_CAST"passengerType") == 0)
+                 ||(xmlStrcmp(child->name, BAD_CAST"birthDay") == 0)
+
                  
                  /*飞机生成订单号*/
                  ||(xmlStrcmp(child->name, BAD_CAST"orderId") == 0)
@@ -440,7 +444,7 @@
                  ||(xmlStrcmp(child->name, BAD_CAST"flight") == 0)
                  ||(xmlStrcmp(child->name, BAD_CAST"craftType") == 0)
                  ||(xmlStrcmp(child->name, BAD_CAST"totalPrice") == 0)
-                 ||(xmlStrcmp(child->name, BAD_CAST"status") == 0)
+                 ||(xmlStrcmp(child->name, BAD_CAST"orderProcess") == 0)
                  
                  
                  

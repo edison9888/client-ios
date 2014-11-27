@@ -1479,12 +1479,14 @@
     
 }
 // 添加乘机人
-- (void)savePassengerName:(NSString*)newSavePassengerName savePassengerCardType:(NSString*)newSavePassengerCardType savePassengerCardId:(NSString*)newSavePassengerCardId savePassengerPhoneNumber:(NSString*)newsavePassengerPhoneNumber savePassengerPassengerType:(NSString *)newSavePassengerPassengerType
+
+- (void)savePassengerName:(NSString*)newSavePassengerName savePassengerCardType:(NSString*)newSavePassengerCardType savePassengerCardId:(NSString*)newSavePassengerCardId savePassengerPhoneNumber:(NSString*)newsavePassengerPhoneNumber savePassengerPassengerType:(NSString *)newSavePassengerPassengerType birthday:(NSString *)newBirthDay
 {
     BOOL send= [self preRequest:NLProtocolRequest_SavePassenger name:Notify_SavePassenger];
     if (!send)
     {
-        NLProtocolData *pd= [[NLProtocolXML shareProtocolXML]getSavePassengerNameXML:newSavePassengerName SavePassengerCardType:newSavePassengerCardType SavePassengerCardId:newSavePassengerCardId phoneNumber:newsavePassengerPhoneNumber passengerType:newSavePassengerPassengerType];
+        NLProtocolData *pd= [[NLProtocolXML shareProtocolXML]getSavePassengerNameXML:newSavePassengerName SavePassengerCardType:newSavePassengerCardType SavePassengerCardId:newSavePassengerCardId phoneNumber:newsavePassengerPhoneNumber passengerType:newSavePassengerPassengerType birthdayXML:newBirthDay];
+        
         
         [_request startRequest:pd action:Notify_SavePassenger];
     }
@@ -1542,15 +1544,16 @@
 
 // 确信支付
 
--(void)TicketBillId:(NSString *)newTicketBillId backTicketId:(NSString *)newBackTicketBillId  styGoBack:(NSString *)newStyGoBsack  perSonIdArray:(NSMutableArray *)newperSonIdArray ContactIdArray:(NSMutableArray *)newContactIdArray   payinfoCardInfoArray:(NSMutableArray *)newpayinfoCardInfoArray;
+-(void)TicketBillId:(NSString *)newTicketBillId backTicketId:(NSString *)newBackTicketBillId  styGoBack:(NSString *)newStyGoBsack  perSonIdArray:(NSMutableArray *)newperSonIdArray ContactIdArray:(NSMutableArray *)newContactIdArray   payinfoCardInfoArray:(NSMutableArray *)newpayinfoCardInfoArray validity:(NSString *)newValidity amount:(NSString *)newAmount;
 {
     BOOL send= [self preRequest:NLProtocolRequest_createOrder name:Notify_createOrder];
     if (!send)
     {
-        NLProtocolData *pd= [[NLProtocolXML shareProtocolXML] TicketBillIdXML:newTicketBillId  backTicketIdXML:newBackTicketBillId  styGoBack:newStyGoBsack perSonIdArrayXML:newperSonIdArray ContactIdArrayXML:newContactIdArray   payinfoCardInfoArrayXML:newpayinfoCardInfoArray];
+        NLProtocolData *pd= [[NLProtocolXML shareProtocolXML] TicketBillIdXML:newTicketBillId  backTicketIdXML:newBackTicketBillId  styGoBack:newStyGoBsack perSonIdArrayXML:newperSonIdArray ContactIdArrayXML:newContactIdArray   payinfoCardInfoArrayXML:newpayinfoCardInfoArray  ValidityXML:newValidity AmountXML:newAmount];
         [_request startRequest:pd action:Notify_createOrder];
     }
 }
+
 
 //菜单模板读取
 - (void)getApireadMenuModule:(NSString*)paycardkey appversion:(NSString*)appversion

@@ -91,8 +91,7 @@
 @synthesize cardInfo = _cardInfo;
 @synthesize couponid = _couponid;
 
-@synthesize PayperSonIdArray,PayContactIdArray,PayTicketBillId,playBackTicketId,PayCarTextString,PayPriceOilTax,OrderId,verify,playStyGoBack;
-
+@synthesize PayperSonIdArray,PayContactIdArray,PayTicketBillId,playBackTicketId,PayCarTextString,PayPriceOilTax,OrderId,verify,playStyGoBack,planePayCTT,Bankctt;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -456,7 +455,7 @@
                 {
 //                    UITextField *alertViewText=[alertView textFieldAtIndex:0];
                     NSLog(@"=====alertViewText=====%@",verifyCodeStr);
-                    if ([verifyCodeStr isEqualToString:self.verify])
+                    if ([verifyCodeStr length] > 0)
                        {
                          [self playTicketURL];
                        }
@@ -1239,6 +1238,7 @@
             NLBankListViewController *vc = [[NLBankListViewController alloc] initWithNibName:@"NLBankListViewController" bundle:nil];
             vc.delegate = self;
             vc.banKtype= YES;
+            vc.BankListCCT = planePayCTT;
             [self.navigationController pushViewController:vc animated:YES];
             
         }
@@ -1355,17 +1355,23 @@
 -(void)orderNumberVerificationCode
 {
     
-    NSLog(@"===%@===%@===%@==%@==%d", PayperSonIdArray,PayContactIdArray,PayTicketBillId,PayCarTextString,PayPriceOilTax);
+//    NSLog(@"===%@===%@===%@==%@==%d", PayperSonIdArray,PayContactIdArray,PayTicketBillId,PayCarTextString,PayPriceOilTax);
     NSString *yearMonth =[NSString stringWithFormat:@"%@-%@",_yearTF.text,_monthTF.text];
-    NSMutableArray *sureInfoArray = [[NSMutableArray alloc]initWithObjects:self.paycard.text,yearMonth, self.payYZM.text,self.payName.text,@"1",self.payId.text ,nil];
-    NSLog(@"=====sureInfoArray======%@",sureInfoArray);
+//    NSLog(@"=====yearMonth======%@",yearMonth);
 
+    NSMutableArray *sureInfoArray = [[NSMutableArray alloc]initWithObjects:self.paycard.text,yearMonth, self.payYZM.text,self.payName.text,@"1",self.payId.text ,_payPhone.text,banName,self.Bankctt,nil];
+//    NSMutableArray *bankInfoArray = [[NSMutableArray alloc]initWithObjects:_bkcardnos,bankYm,_bkcardcvv,_bkcardbankman,@"1",_bkcardnos,_bkcardbankphones,_bankString, _bkcardbankcct,nil];
+
+    NSLog(@"=====sureInfoArray======%@",sureInfoArray);
+    
     NSString *name = [NLUtils getNameForRequest:Notify_createOrder];
     REGISTER_NOTIFY_OBSERVER(self, GetcreateOrder, name);
+    NSLog(@"=====carYearMonth======%@",_monthTF.text);
+
     // 票,乘机人,联系人,卡
-//    [[[NLProtocolRequest alloc]initWithRegister:YES] TicketBillId:self.PayTicketBillId perSonIdArray:self.PayperSonIdArray ContactIdArray:self.PayContactIdArray   payinfoCardInfoArray:sureInfoArray];
-    
-    [[[NLProtocolRequest alloc]initWithRegister:YES] TicketBillId:self.PayTicketBillId  backTicketId:self.playBackTicketId  styGoBack:self.playStyGoBack perSonIdArray:self.PayperSonIdArray ContactIdArray:self.PayContactIdArray   payinfoCardInfoArray:sureInfoArray];
+    NSString *carYearMonth = [_yearTF.text stringByAppendingString:_monthTF.text];
+//    NSLog(@"=====carYearMonth======%@",carYearMonth);
+    [[[NLProtocolRequest alloc]initWithRegister:YES] TicketBillId:self.PayTicketBillId  backTicketId:self.playBackTicketId  styGoBack:self.playStyGoBack perSonIdArray:self.PayperSonIdArray ContactIdArray:self.PayContactIdArray   payinfoCardInfoArray:sureInfoArray   validity:carYearMonth amount:[NSString stringWithFormat:@"%d",PayPriceOilTax]];
     
 }
 
@@ -1404,19 +1410,19 @@
         NSArray *OrderIdArray = [response.data find:@"msgbody/orderId"];
         NLProtocolData *OrderIdCode = [OrderIdArray objectAtIndex:0];
         self.OrderId  = OrderIdCode.value;
-        NSLog(@"=====verifyCode=====%@",self.OrderId);
+        NSLog(@"=====OrderId=====%@",self.OrderId);
         
         NSArray *verifyArray = [response.data find:@"msgbody/verifyCode"];
         NLProtocolData *verifyCode = [verifyArray objectAtIndex:0];
         self.verify  = verifyCode.value;
+        NSLog(@"=====verifyCode=====%@",verifyCode.value);
         NSLog(@"=====verifyCode=====%@",self.verify);
-        
 //       _AlertView = [[UIAlertView alloc]initWithTitle:@"请输入验证码" message:self.verify delegate:self cancelButtonTitle:@"退出" otherButtonTitles:@"支付", nil];
 ////        _AlertView.tag = 10;
 //        [_AlertView setAlertViewStyle:UIAlertViewStyleSecureTextInput];
 //        [_AlertView show];
         
-        UIAlertView *agentAlertView = [[UIAlertView alloc] initWithTitle:@"请输入验证码"  message:self.verify delegate:self cancelButtonTitle:@"退出" otherButtonTitles:@"支付", nil];
+        UIAlertView *agentAlertView = [[UIAlertView alloc] initWithTitle:@"请输入验证码"  message:nil delegate:self cancelButtonTitle:@"退出" otherButtonTitles:@"支付", nil];
         agentAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
         [agentAlertView show];
         alertText = [agentAlertView textFieldAtIndex:0];
@@ -1793,10 +1799,14 @@
 
 #pragma mark - NLBankLisDelegate
 - (void)dataSearch:(NLBankListViewController *)controller didSelectWithObject:(id)aObject
-         withState:(NSString *)state
+         withState:(NSString *)state andBankctt:(NSString *)newBankctt
 {
     bankId = state;
     banName= (NSString *)aObject;
+    NSLog(@"=====newBankctt====0000====%@",newBankctt);
+    self.Bankctt = newBankctt;
+    NSLog(@"=====self.Bankctt====0000====%@",self.Bankctt);
+
     
     [_bankList setTitle:banName forState:UIControlStateNormal];
     _bankList.titleLabel.frame= CGRectMake(self.bankList.frame.origin.x, self.bankList.frame.origin.y, self.bankList.frame.size.width, 120);

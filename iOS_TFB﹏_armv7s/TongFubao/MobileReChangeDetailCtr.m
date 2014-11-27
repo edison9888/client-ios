@@ -36,7 +36,7 @@
     // Do any additional setup after loading the view from its nib.
     
     [self dataInit];
-    
+    [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
     [self setExtraCellLineHidden:self.myTableView];
 }
 

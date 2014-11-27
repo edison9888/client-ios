@@ -179,7 +179,7 @@
                   symbolName = "-[NewloginRestive removeSelf]"
                   moduleName = "TongFubao"
                   urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/NewloginRestive.m"
-                  timestampString = "438057328.358716"
+                  timestampString = "438689543.844823"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "415"
@@ -193,7 +193,7 @@
                   symbolName = "__29-[NewloginRestive removeSelf]_block_invoke"
                   moduleName = "TongFubao"
                   urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/NewloginRestive.m"
-                  timestampString = "438057328.359339"
+                  timestampString = "438689543.845649"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "415"
@@ -381,7 +381,7 @@
                   symbolName = "-[PhoneMoneyToOK STAlertView]"
                   moduleName = "TongFubao"
                   urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/PhoneMoneyToOK.m"
-                  timestampString = "438057328.362875"
+                  timestampString = "438689545.434874"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "14"
@@ -395,7 +395,7 @@
                   symbolName = "-[PhoneMoneyToOK setSTAlertView:]"
                   moduleName = "TongFubao"
                   urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/PhoneMoneyToOK.m"
-                  timestampString = "438057328.363353"
+                  timestampString = "438689545.43579"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "14"
@@ -492,11 +492,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TongFubao/MainController/NLTransferThirdViewController.mm"
-            timestampString = "430024467.322164"
+            timestampString = "438666265.147783"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
             landmarkName = "-alertNotoBtn"
             landmarkType = "5">
          </BreakpointContent>
@@ -508,11 +508,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TongFubao/MainController/NLTransferThirdViewController.mm"
-            timestampString = "430024467.322164"
+            timestampString = "438666265.147783"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "321"
-            endingLineNumber = "321"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
             landmarkName = "-onButtonBtnClicked:"
             landmarkType = "5">
          </BreakpointContent>
@@ -731,7 +731,7 @@
                   symbolName = "-[NLFindPasswordViewController doforgetPwdModifyNotify:]"
                   moduleName = "TongFubao"
                   urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/LeftController/NLFindPasswordViewController.m"
-                  timestampString = "438057328.367649"
+                  timestampString = "438689546.025645"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "225"
@@ -745,7 +745,7 @@
                   symbolName = "-[NLFindPasswordViewController doforgetPwdModifyNotify:]"
                   moduleName = "TongFubao"
                   urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/LeftController/NLFindPasswordViewController.m"
-                  timestampString = "438057328.367987"
+                  timestampString = "438689546.026293"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "225"
@@ -858,11 +858,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TongFubao/NewLoginView.m"
-            timestampString = "437991794.87817"
+            timestampString = "438598321.675457"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "671"
-            endingLineNumber = "671"
+            startingLineNumber = "680"
+            endingLineNumber = "680"
             landmarkName = "-keyboardWasHidden:"
             landmarkType = "5">
             <Locations>
@@ -873,11 +873,11 @@
                   symbolName = "-[NewLoginView keyboardWasHidden:]"
                   moduleName = "TongFubao"
                   urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/NewLoginView.m"
-                  timestampString = "438057328.371328"
+                  timestampString = "438689546.223857"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "671"
-                  endingLineNumber = "671"
+                  startingLineNumber = "680"
+                  endingLineNumber = "680"
                   offsetFromSymbolStart = "92">
                </Location>
                <Location
@@ -887,11 +887,11 @@
                   symbolName = "__34-[NewLoginView keyboardWasHidden:]_block_invoke"
                   moduleName = "TongFubao"
                   urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/NewLoginView.m"
-                  timestampString = "438057328.371718"
+                  timestampString = "438689546.224577"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "671"
-                  endingLineNumber = "671"
+                  startingLineNumber = "680"
+                  endingLineNumber = "680"
                   offsetFromSymbolStart = "30">
                </Location>
             </Locations>
@@ -920,27 +920,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TongFubao/MainController/&#x672a;&#x547d;&#x540d;&#x6587;&#x4ef6;&#x5939;/BossPayMoneyMain.m"
-            timestampString = "436844373.609571"
+            timestampString = "438507397.200176"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "363"
-            endingLineNumber = "363"
-            landmarkName = "-payWagecwedit"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TongFubao/MainController/&#x672a;&#x547d;&#x540d;&#x6587;&#x4ef6;&#x5939;/BossPayMoneyMain.m"
-            timestampString = "436844373.609571"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "642"
-            endingLineNumber = "642"
+            startingLineNumber = "646"
+            endingLineNumber = "646"
             landmarkName = "-btnOnClick:"
             landmarkType = "5">
          </BreakpointContent>
@@ -984,11 +968,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PushViewController.m"
-            timestampString = "438053679.811834"
+            timestampString = "438486684.966712"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1708"
-            endingLineNumber = "1708"
+            startingLineNumber = "1709"
+            endingLineNumber = "1709"
             landmarkName = "-getGuardUser:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1012,23 +996,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TongFubao/SecretText.m"
-            timestampString = "437386827.538984"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "851"
-            endingLineNumber = "851"
-            landmarkName = "-keyboardWasHidden:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TongFubao/SecretText.m"
@@ -1038,22 +1006,6 @@
             startingLineNumber = "836"
             endingLineNumber = "836"
             landmarkName = "-registerForKeyboardNotifications"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TongFubao/SecretText.m"
-            timestampString = "437386827.538984"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "844"
-            endingLineNumber = "844"
-            landmarkName = "-keyboardWasShown:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1239,13 +1191,253 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TongFubao/TransferInfoController.m"
-            timestampString = "437991972.217579"
+            filePath = "TongFubao/TFData.m"
+            timestampString = "438081837.459194"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "453"
-            endingLineNumber = "453"
-            landmarkName = "-enterBtnAction:"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "+getdic"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NLLoginView.m"
+            timestampString = "438159866.806071"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
+            landmarkName = "-docheckAuthorLoginNotify:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NLLoginView.m"
+            timestampString = "438159894.341416"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
+            landmarkName = "-docheckAuthorLoginNotify:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TongFubao/UIView+IQKeyboardToolbar.m"
+            timestampString = "438659003.767227"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "-addRightButtonOnKeyboardWithText:target:action:titleText:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TongFubao/UIView+IQKeyboardToolbar.m"
+            timestampString = "438659077.159872"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "-addRightLeftOnKeyboardWithTarget:leftButtonTitle:rightButtonTitle:rightButtonAction:leftButtonAction:titleText:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TongFubao/UIView+IQKeyboardToolbar.m"
+            timestampString = "438659132.085484"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
+            landmarkName = "-addCancelDoneOnKeyboardWithTarget:cancelAction:doneAction:titleText:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TongFubao/UIView+IQKeyboardToolbar.m"
+            timestampString = "438659134.263573"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
+            landmarkName = "-addCancelDoneOnKeyboardWithTarget:cancelAction:doneAction:titleText:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TongFubao/UIView+IQKeyboardToolbar.m"
+            timestampString = "438659139.335566"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "-addRightLeftOnKeyboardWithTarget:leftButtonTitle:rightButtonTitle:rightButtonAction:leftButtonAction:titleText:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TongFubao/UIView+IQKeyboardToolbar.m"
+            timestampString = "438659146.365355"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "-addRightButtonOnKeyboardWithText:target:action:titleText:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TongFubao/UIView+IQKeyboardToolbar.m"
+            timestampString = "438659148.010419"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "-addRightButtonOnKeyboardWithText:target:action:titleText:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TongFubao/IQKeyboardManager.m"
+            timestampString = "438659371.830397"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
+            landmarkName = "-adjustFrame"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TongFubao/IQKeyboardManager.m"
+            timestampString = "438659627.021922"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "395"
+            endingLineNumber = "395"
+            landmarkName = "-adjustFrame"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TongFubao/IQKeyboardManager.m"
+            timestampString = "438659631.217159"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "388"
+            endingLineNumber = "388"
+            landmarkName = "-adjustFrame"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TongFubao/IQKeyboardManager.m"
+            timestampString = "438659632.529314"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "384"
+            endingLineNumber = "384"
+            landmarkName = "-adjustFrame"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TongFubao/MainController/PhoneMoneyGive.m"
+            timestampString = "438687590.300257"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1100"
+            endingLineNumber = "1100"
+            landmarkName = "-alertView:clickedButtonAtIndex:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TongFubao/MainController/QcoinCharge/QcoinMoneyGive.m"
+            timestampString = "438689447.804467"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
+            landmarkName = "-jumpToPayType"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -29,6 +29,11 @@
     NSString *_bkcardbankids;
     NSString *_bkcardnos;
     NSString *_bkcardbankmans;
+    NSString *_bkcardbankcct;
+    NSString *bkcardtypeCCTStr;
+
+    
+
     UIImageView *_imageview1;
     VisaReader   * _visaReader;
     UIScrollView *_scrollView ;
@@ -120,6 +125,7 @@
     NSLog(@"========ContactIdArray=========%@",self.ContactIdArray);
     // 插卡
     [self initVisaReader];
+
     // 默认读取信用卡
     [self ApiPaychannelInfo];
     // 导航
@@ -252,8 +258,7 @@
     /*银行卡号*/
     NSString *bkcardno_check= _cardno;
     /*交易类型*/
-    paytype_check= [[[NSUserDefaults standardUserDefaults]objectForKey:BANK_PAYTYPE_CHECK] objectAtIndex:0];
-    
+    paytype_check= @"airplane";
     NSString* name = [NLUtils getNameForRequest:Notify_ApipayCardCheck];
     REGISTER_NOTIFY_OBSERVER(self, ApipayCardCheckNotify, name);
     [[[NLProtocolRequest alloc] initWithRegister:YES]getApipayCardCheck:paycardkey_check bkcardno:bkcardno_check paytype:paytype_check readmode:@""];
@@ -337,36 +342,50 @@
         //银行卡号
         NLProtocolData* bkcardnoCheck = [response.data find:@"msgbody/bkcardno" index:0];
         bkcardnoCheckStr = bkcardnoCheck.value;
+        NSLog(@"=======bkcardnoCheckStr=======%@",bkcardnoCheckStr);
+
         //执卡人
         NLProtocolData* bkcardmanCheck = [response.data find:@"msgbody/bkcardman" index:0];
         bkcardmanCheckStr = bkcardmanCheck.value;
+        NSLog(@"=======bkcardmanCheckStr=======%@",bkcardmanCheckStr);
+
         
         //预留手机号码
         NLProtocolData* bkcardphoneCheck = [response.data find:@"msgbody/bkcardphone" index:0];
-        bkcardphoneStr= bkcardphoneCheck.value;
+        bkcardphoneStr = bkcardphoneCheck.value;
+        NSLog(@"=======bkcardphoneStr=======%@",bkcardphoneStr);
+
         
         //银行id
         NLProtocolData* bkcardbankidCheck = [response.data find:@"msgbody/bkcardbankid" index:0];
-        bkcardbankidCheckStr= bkcardbankidCheck.value;
+        bkcardbankidCheckStr = bkcardbankidCheck.value;
+        NSLog(@"=======bkcardbankidCheckStr=======%@",bkcardbankidCheckStr);
+
         
         //银行名
         NLProtocolData* bkcardbanknameCheck = [response.data find:@"msgbody/bkcardbankname" index:0];
-        bkcardbanknameStr= bkcardbanknameCheck.value;
+        bkcardbanknameStr = bkcardbanknameCheck.value;
+        NSLog(@"=======bkcardbanknameStr=======%@",bkcardbanknameStr);
+
         //有效月
         NLProtocolData* bkcardyxmonthCheck = [response.data find:@"msgbody/bkcardyxmonth" index:0];
-        bkcardyxmonthStr= bkcardyxmonthCheck.value;
-        if ([bkcardyxmonthCheck.value length]==1) {
+        bkcardyxmonthStr = bkcardyxmonthCheck.value;
+        NSLog(@"=======bkcardyxmonthStr=======%@",bkcardyxmonthStr);
+
+        if ([bkcardyxmonthCheck.value length]==1)
+        {
             bkcardyxmonthStr = [NSString stringWithFormat:@"0%@",bkcardyxmonthCheck.value];
         }
         else
         {
             bkcardyxmonthStr = bkcardyxmonthCheck.value;
-            
         }
         
         //有效年
         NLProtocolData* bkcardyxyearCheck = [response.data find:@"msgbody/bkcardyxyear" index:0];
-        bkcardyxyearStr= bkcardyxyearCheck.value;
+        bkcardyxyearStr = bkcardyxyearCheck.value;
+        NSLog(@"=======bkcardyxyearStr=======%@",bkcardyxyearStr);
+
         
         NSString *validityStr = [bkcardyxyearStr stringByAppendingString:bkcardyxmonthStr];
         self.carYearMonth = validityStr;
@@ -375,15 +394,38 @@
         
         //CVV校验
         NLProtocolData* bkcardcvvCheck = [response.data find:@"msgbody/bkcardcvv" index:0];
-        bkcardcvvStr= bkcardcvvCheck.value;
+        bkcardcvvStr = bkcardcvvCheck.value;
+        NSLog(@"=======bkcardcvvStr=======%@",bkcardcvvStr);
+
         //身份证
         NLProtocolData* bkcardidcardCheck = [response.data find:@"msgbody/bkcardidcard" index:0];
-        bkcardidcardStr= bkcardidcardCheck.value;
+        bkcardidcardStr = bkcardidcardCheck.value;
+        NSLog(@"=======bkcardidcardStr=======%@",bkcardidcardStr);
+
         //银行卡类型
         NLProtocolData* bkcardtypeCheck = [response.data find:@"msgbody/bkcardtype" index:0];
-        bkcardtypeStr= bkcardtypeCheck.value;
-        
-        /*填充信息 传到易宝*/
+        bkcardtypeStr = bkcardtypeCheck.value;
+        NSLog(@"=======bkcardtypeStr=======%@",bkcardtypeStr);
+
+        //银行卡类型
+        NLProtocolData* bkcardtypeCCT = [response.data find:@"msgbody/ctripbankctt" index:0];
+        bkcardtypeCCTStr = bkcardtypeCCT.value;
+        NSLog(@"=======bkcardtypeCCTStr=======%@",bkcardtypeCCTStr);
+        //刷卡状态
+        SHUAKA = YES;
+
+        self.carYearMonth = [bkcardyxyearStr stringByAppendingString:bkcardyxmonthStr];
+        NSMutableArray *personArray = [[NSMutableArray alloc]initWithObjects:bkcardnoCheckStr,self.carYearMonth,bkcardcvvStr,bkcardmanCheckStr,@"1", bkcardidcardStr,bkcardphoneStr, bkcardbanknameStr,bkcardtypeCCTStr,nil];
+        NSLog(@"=======personArray=======%@",personArray);
+
+        for (NSString *STRING in personArray)
+        {
+            NSLog(@"====STRING===%@",STRING);
+        }
+        if ([personArray count] == 9) {
+            self.sureInfoArray =personArray;
+        }
+
         
     }
 }
@@ -391,6 +433,9 @@
 /*读取默认信用卡支付*/
 -(void)ApiPaychannelInfo
 {
+    // 一开始默认刷卡状态为no
+    SHUAKA = NO;
+
     NSString *bkcardid= @" ";
     NSString *bkcardisdefault= @"1";
     
@@ -506,6 +551,8 @@
         //预留电话
         NLProtocolData* bkcardbankphonesData = [response.data find:@"msgbody/msgchild/bkcardbankphone" index:0];
         _bkcardbankphones = bkcardbankphonesData.value;
+        NSLog(@"=======_bkcardbankphones=======%@",_bkcardbankphones);
+
         
         
         //所属银行id
@@ -522,6 +569,11 @@
         NLProtocolData* bkcardbankmansData = [response.data find:@"msgbody/msgchild/bkcardbankman" index:0];
         _bkcardbankmans = bkcardbankmansData.value;
         
+        //cct
+        NLProtocolData* bkcardbankcctData = [response.data find:@"msgbody/msgchild/ctripbankctt" index:0];
+        _bkcardbankcct = bkcardbankcctData.value;
+        NSLog(@"=======_bkcardbankcct=======%@",_bkcardbankcct);
+        
         
         //        NSLog(@"==%@===%@===%@==%@===%@==%@===%@===%@====%@====%@====%@===%@=",_bankString,
         //              _cardNumbe,
@@ -535,13 +587,13 @@
         //              _bkcardnos,
         //              _bkcardbankmans,_bkcardyxmonths);
         NSString *bankYm = [NSString stringWithFormat:@"%@－%@",_bkcardyxyears,_bkcardyxmonths];
-        NSMutableArray *bankInfoArray = [[NSMutableArray alloc]initWithObjects:_bkcardnos,bankYm,_bkcardcvv,_bkcardbankman,@"1",_bkcardnos, nil];
+        NSMutableArray *bankInfoArray = [[NSMutableArray alloc]initWithObjects:_bkcardnos,bankYm,_bkcardcvv,_bkcardbankman,@"1",_bkcardnos,_bkcardbankphones,_bankString, _bkcardbankcct,nil];
+        NSLog(@"======bankInfoArray=====%@",bankInfoArray);
         self.sureInfoArray =bankInfoArray;
         // 判断1是有默认卡
         STY = 1;
         [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
         [_activityView removeFromSuperview];
-        
         
         [self allControllerView];
     }
@@ -560,13 +612,13 @@
 {
     _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     _scrollView.delegate = self;
-    [_scrollView setContentSize:CGSizeMake(self.view.frame.size.width, 600)];
+    [_scrollView setContentSize:CGSizeMake(self.view.frame.size.width, 650)];
     [self.view addSubview:_scrollView];
     
-    NSArray *infoArray = @[@"账单信息",@"票价(元)",@"基建(元)",@"燃油费(元)",@"总金额(元)"];
+    NSArray *infoArray = @[@"账单信息",@"总票价(元)",@"总基建(元)",@"总油费(元)",@"总票数(张)",@"总金额(元)"];
     ticketPriceObject *ticketObject = [[ticketPriceObject alloc]init];
     int ADULT = 0,CHILDREN = 0,BABY = 0;
-    
+    NSLog(@"===========TicketBillsArray=======%d",[self.TicketBillsArray count]);
     for (int i = 0; i < [self.TicketBillsArray count]; i++)
     {
         if ([[[self.TicketBillsArray objectAtIndex:i] objectAtIndex:4] isEqualToString:@"1" ])
@@ -583,11 +635,13 @@
         }
     }
     //  每张票价信息
+//    NSLog(@"=========asdfasdf========%d",[self.TicketBillsArray count]);
     
     
     
     //    NSLog(@"========self.TicketBillsArray======%@",self.TicketBillsArray);
     //    NSLog(@"========allPriceBillsArray======%@",allPriceBillsArray);
+    
     
     if ([styGoBack isEqualToString:@"S"])
     {
@@ -601,7 +655,7 @@
         // 所有费用
         priceOilTax = priceInteger + OilInteger + TaxInteger;
         
-        _moneyArray = @[[NSString stringWithFormat:@"￥%d",priceInteger],[NSString stringWithFormat:@"￥%d",OilInteger],[NSString stringWithFormat:@"￥%d",TaxInteger]];
+        _moneyArray = @[[NSString stringWithFormat:@"￥%d",priceInteger],[NSString stringWithFormat:@"￥%d",OilInteger],[NSString stringWithFormat:@"￥%d",TaxInteger],[NSString stringWithFormat:@"%d张", [self.TicketBillsArray count]]];
     }
     else
     {
@@ -629,12 +683,12 @@
         
         priceOilTax = gopriceOilTax + backpriceOilTax;
         
-        _moneyArray = @[[NSString stringWithFormat:@"￥%d",priceInteger + backpriceInteger],[NSString stringWithFormat:@"￥%d",OilInteger + backOilInteger],[NSString stringWithFormat:@"￥%d",TaxInteger + backTaxInteger]];
+        _moneyArray = @[[NSString stringWithFormat:@"￥%d",priceInteger + backpriceInteger],[NSString stringWithFormat:@"￥%d",OilInteger + backOilInteger],[NSString stringWithFormat:@"￥%d",TaxInteger + backTaxInteger],[NSString stringWithFormat:@"%d张", [self.TicketBillsArray count]*2]];
     }
     
     
     
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 6; i++)
     {
         UILabel *contactLabel = [[UILabel alloc]init];
         contactLabel.tag = i;
@@ -654,15 +708,16 @@
     [_scrollView addSubview:lineAccorIamge];
     
     
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {
         UILabel *moneyLabel = [[UILabel alloc]init];
         moneyLabel.tag = i;
         moneyLabel.backgroundColor = [UIColor clearColor];
         moneyLabel.textColor = [UIColor grayColor];
         moneyLabel.text = [_moneyArray objectAtIndex:i];
-        moneyLabel.font = [UIFont boldSystemFontOfSize:20];
+        moneyLabel.font = [UIFont systemFontOfSize:20];
         moneyLabel.frame = CGRectMake(210, 110+40*i, 100, 40);
+        moneyLabel.textAlignment = UITextAlignmentRight;
         [_scrollView addSubview:moneyLabel];
     }
     UILabel *moneyLabel = [[UILabel alloc]init];
@@ -670,13 +725,13 @@
     moneyLabel.textColor = [UIColor orangeColor];
     moneyLabel.font = [UIFont boldSystemFontOfSize:30];
     moneyLabel.text =  [NSString stringWithFormat:@"￥%d",priceOilTax];
-    moneyLabel.textAlignment = UITextAlignmentCenter;
-    moneyLabel.frame = CGRectMake(180, 230, 120, 40);
+    moneyLabel.textAlignment = UITextAlignmentRight;
+    moneyLabel.frame = CGRectMake(180, 270, 130, 40);
     [_scrollView addSubview:moneyLabel];
     
     
     UILabel *zhifuLabel = [[UILabel alloc]init];
-    zhifuLabel.frame = CGRectMake(10,STY == 0 ? 340 : 290, 300, 20);
+    zhifuLabel.frame = CGRectMake(10,STY == 0 ? 380 : 330, 300, 20);
     zhifuLabel.backgroundColor = [UIColor clearColor];
     zhifuLabel.textColor = RGBACOLOR(19, 193, 245, 1);
     zhifuLabel.font = [UIFont boldSystemFontOfSize:20];
@@ -684,7 +739,7 @@
     [_scrollView addSubview:zhifuLabel];
     
     
-    UIImageView *lineAIamge = [[UIImageView alloc]initWithFrame:CGRectMake(10, 320, 300, 1)];
+    UIImageView *lineAIamge = [[UIImageView alloc]initWithFrame:CGRectMake(10, 360, 300, 1)];
     lineAIamge.image = [UIImage imageNamed:@"line@2x.png"];
     if (STY == 0)
     {
@@ -696,7 +751,7 @@
     }
     [_scrollView addSubview:lineAIamge];
     
-    
+    if (_bkcardbankcct > 0) {
     // 默认支付按钮
     if (STY == 1)
     {
@@ -709,12 +764,12 @@
             _moreiButton.tag = i;
             if (_moreiButton.tag == 0)
             {
-                _moreiButton.frame = CGRectMake(10, 327, 40, 40);
+                _moreiButton.frame = CGRectMake(10, 372, 30, 30);
                 [_moreiButton setImage:[UIImage imageNamed:@"9@2x.png"] forState:(UIControlStateNormal)];
             }
             else if (_moreiButton.tag == 1)
             {
-                _moreiButton.frame = CGRectMake(10, 385, 40, 40);
+                _moreiButton.frame = CGRectMake(10, 430, 30, 30);
                 [_moreiButton setImage:[UIImage imageNamed:@"91@2x.png"] forState:(UIControlStateNormal)];
             }
             [_moreiButton addTarget:self action:@selector(moreiSelection:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -722,12 +777,13 @@
             [_scrollView addSubview:_moreiButton];
         }
     }
+    }
     else
     {
         // 按钮状态
         BUTTONSTATE = YES;
         UIButton * _moreiButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        _moreiButton.frame = CGRectMake(10, 385, 40, 40);
+        _moreiButton.frame = CGRectMake(10, 430, 30, 30);
         _moreiButton.selected = YES;
         [_moreiButton setImage:[UIImage imageNamed:@"9@2x.png"] forState:(UIControlStateNormal)];
         [_moreiButton addTarget:self action:@selector(twoSelection:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -736,7 +792,7 @@
     
     
     UILabel *moreiLabel = [[UILabel alloc]init];
-    moreiLabel.frame = CGRectMake(60, 320, 150, 25);
+    moreiLabel.frame = CGRectMake(60, 360, 150, 25);
     moreiLabel.backgroundColor = [UIColor clearColor];
     moreiLabel.textColor = [UIColor grayColor];
     moreiLabel.font = [UIFont boldSystemFontOfSize:15];
@@ -760,18 +816,18 @@
         moreiLabel.textColor = [UIColor grayColor];
         if (moreiLabel.tag == 0)
         {
-            moreiLabel.frame = CGRectMake(60, 345, 80, 25);
+            moreiLabel.frame = CGRectMake(60, 385, 80, 25);
             moreiLabel.text = _bankString;
         }
         else if (moreiLabel.tag == 1)
         {
-            moreiLabel.frame = CGRectMake(135, 345, 35, 25);
+            moreiLabel.frame = CGRectMake(135, 385, 35, 25);
             moreiLabel.text = @"尾号";
         }
         else if (moreiLabel.tag == 2)
         {
             moreiLabel.text = _cardNumbe;
-            moreiLabel.frame = CGRectMake(165, 345, 35, 25);
+            moreiLabel.frame = CGRectMake(165, 385, 35, 25);
             moreiLabel.textColor = [UIColor orangeColor];
         }
         else
@@ -785,8 +841,7 @@
                 moreiLabel.text = _bkcardbankmans;
             }
             
-            moreiLabel.frame = CGRectMake(55+i*52, 345, 55, 25);
-            
+            moreiLabel.frame = CGRectMake(55+i*52, 385, 55, 25);
         }
         if (STY == 0)
         {
@@ -801,13 +856,13 @@
         [_scrollView addSubview:moreiLabel];
     }
     
-    UIImageView *linAIamge = [[UIImageView alloc]initWithFrame:CGRectMake(10, 375, 300, 1)];
+    UIImageView *linAIamge = [[UIImageView alloc]initWithFrame:CGRectMake(10, 415, 300, 1)];
     linAIamge.image = [UIImage imageNamed:@"line@2x.png"];
     [_scrollView addSubview:linAIamge];
     
     
     UILabel *yhLabel = [[UILabel alloc]init];
-    yhLabel.frame = CGRectMake(60, 385, 150, 40);
+    yhLabel.frame = CGRectMake(60, 425, 150, 40);
     yhLabel.backgroundColor = [UIColor clearColor];
     yhLabel.textColor = [UIColor grayColor];
     yhLabel.font = [UIFont boldSystemFontOfSize:20];
@@ -816,7 +871,7 @@
     
     
     UIButton *selecButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    selecButton.frame = CGRectMake(190, 385, 120, 40);
+    selecButton.frame = CGRectMake(190, 425, 120, 40);
     selecButton.backgroundColor = RGBACOLOR(19, 195, 245, 1);
     selecButton.layer.masksToBounds = YES;
     selecButton.layer.cornerRadius = 2;
@@ -824,11 +879,11 @@
     [selecButton addTarget:self action:@selector(SeleButton) forControlEvents:(UIControlEventTouchUpInside)];
     [_scrollView addSubview:selecButton];
     
-    UIImageView *lineIamge = [[UIImageView alloc]initWithFrame:CGRectMake(10, 435, 300, 1)];
+    UIImageView *lineIamge = [[UIImageView alloc]initWithFrame:CGRectMake(10, 475, 300, 1)];
     lineIamge.image = [UIImage imageNamed:@"line@2x.png"];
     [_scrollView addSubview:lineIamge];
     
-    _carText = [[UITextField alloc]initWithFrame:CGRectMake(10, 450, 300, 40)];
+    _carText = [[UITextField alloc]initWithFrame:CGRectMake(10, 490, 300, 40)];
     _carText.borderStyle = UITextBorderStyleRoundedRect;
     if (BUTTONSTATE == YES)
     {
@@ -857,7 +912,7 @@
     [_scrollView addSubview:_carText];
     
     UIButton *sureButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    sureButton.frame = CGRectMake(10, 505, 300, 45);
+    sureButton.frame = CGRectMake(10, 545, 300, 45);
     sureButton.titleLabel.text = @"确认提交";
     sureButton.layer.masksToBounds = YES;
     sureButton.layer.cornerRadius = 5;
@@ -868,7 +923,7 @@
     [_scrollView addSubview:sureButton];
     
     UILabel *tishiLabel = [[UILabel alloc]init];
-    tishiLabel.frame = CGRectMake(20, 560, 300, 20);
+    tishiLabel.frame = CGRectMake(20, 600, 300, 20);
     tishiLabel.backgroundColor = [UIColor clearColor];
     tishiLabel.textColor = [UIColor grayColor];
     tishiLabel.font = [UIFont systemFontOfSize:15];
@@ -882,22 +937,28 @@
     UIButton *button = (UIButton *)sender;
     if (button.tag == 0)
     {
+        // 刷卡
+        SHUAKA = NO;
         PushState = NO;
         BUTTONSTATE = NO;
         _carText.enabled = NO;
         _carText.text = nil;
         _carText.hidden = YES;
+        
         NSString *bankYm = [NSString stringWithFormat:@"%@－%@",_bkcardyxyears,_bkcardyxmonths];
-        NSMutableArray *bankInfoArray = [[NSMutableArray alloc]initWithObjects:_bkcardnos,bankYm,_bkcardcvv,_bkcardbankman,@"1",_bkcardnos, nil];
+        NSMutableArray *bankInfoArray = [[NSMutableArray alloc]initWithObjects:_bkcardnos,bankYm,_bkcardcvv,_bkcardbankman,@"1",_bkcardnos,_bkcardbankphones,_bankString, _bkcardbankcct,nil];
+        NSLog(@"======bankInfoArray=====%@",bankInfoArray);
         NSString *validityStr = [_bkcardyxyears stringByAppendingString:_bkcardyxmonths];
         self.carYearMonth = validityStr;
         self.sureInfoArray =bankInfoArray;
+
     }
     if(button.tag == 1)
     {
         BUTTONSTATE = YES;
         _carText.enabled = YES;
         _carText.hidden = NO;
+
     }
     for (int i = 0 ; i < 2; i++)
     {
@@ -922,7 +983,6 @@
         [button setImage:[UIImage imageNamed:@"91@2x.png"] forState:(UIControlStateNormal)];
         button.selected = NO;
         BUTTONSTATE = YES;
-        
     }
     else
     {
@@ -935,12 +995,20 @@
 #pragma mark -- 选银行卡
 -(void)SeleButton
 {
+
     if (BUTTONSTATE == YES)
     {
+        // 刷卡为no
+        SHUAKA = NO;
         MyBankCardViewController *myBankCardView = [[MyBankCardViewController alloc]init];
         myBankCardView.planeFlag = YES;
         myBankCardView.bankPayListDelegate = self;
         [self.navigationController pushViewController:myBankCardView animated:YES];
+    }
+    else
+    {
+        UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！请您选择银行卡支付按钮！" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alertView show];
     }
 }
 
@@ -955,12 +1023,15 @@
     
     
     NSString *cardYM = [NSString stringWithFormat:@"%@-%@",[person valueForKey:@"bkcardyxyears"],[person valueForKey:@"bkcardyxmonths"]];
-    NSMutableArray *personArray = [[NSMutableArray alloc]initWithObjects:[person valueForKey:@"bkcardnos"],cardYM,[person valueForKey:@"bkcardcvvs"],[person valueForKey:@"bkcardbankmans"],@"1", [person valueForKey:@"bkcardidcards"],[person valueForKey:@"bkcardbankphones"], [person valueForKey:@"bkcardbanks"],nil];
+    NSMutableArray *personArray = [[NSMutableArray alloc]initWithObjects:[person valueForKey:@"bkcardnos"],cardYM,[person valueForKey:@"bkcardcvvs"],[person valueForKey:@"bkcardbankmans"],@"1", [person valueForKey:@"bkcardidcards"],[person valueForKey:@"bkcardbankphones"], [person valueForKey:@"bkcardbanks"],[person valueForKey:@"bkcardbankcctp"],nil];
+
     for (NSString *STRING in personArray)
     {
         NSLog(@"====STRING===%@",STRING);
     }
-    self.sureInfoArray = personArray;
+    if ([person valueForKey:@"bkcardbankcctp"] > 0) {
+        self.sureInfoArray = personArray;
+    }
     self.textString = [personArray objectAtIndex:0];
     _carText.text =self.textString;
     _scrollView.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64);
@@ -968,9 +1039,9 @@
 #pragma mark -- 输入框
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [UIView animateWithDuration:0.3 animations:^{
-        [_scrollView setContentOffset:CGPointMake(0, 200) animated:YES];
-    }];
+//    [UIView animateWithDuration:0.3 animations:^{
+//        [_scrollView setContentOffset:CGPointMake(0, 100) animated:YES];
+//    }];
 }
 
 //-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -992,7 +1063,7 @@
 {
     [_carText resignFirstResponder];
     [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-    if (BUTTONSTATE == YES && ![self.textString isEqualToString:_carText.text] && ([_carText.text length] > 15 && [_carText.text length] < 20))
+    if (BUTTONSTATE == YES && ![self.textString isEqualToString:_carText.text] && [_carText.text length] == 16)
     {
         _scrollView.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64);
         planePay *planePayView = [[planePay alloc]init];
@@ -1011,30 +1082,35 @@
         // 票识
         //        planePayView.TICKETSTY = YES;
         planePayView.myViewYiBaoType = YibaoPlayTicket;
+        // ctt
+//        planePayView.planePayCTT = 10;
         
         [self.navigationController pushViewController:planePayView animated:YES];
     }
-    else if(BUTTONSTATE == NO && PushState == NO && STY == 1)
+    else if(BUTTONSTATE == NO && PushState == NO && STY == 1 &&([_bkcardnos length] == 16 ||[bkcardnoCheckStr length] == 16))
     {
         [self orderNumberVerificationCode];
     }
-    else if (BUTTONSTATE == YES && PushState == YES && [self.textString isEqualToString:_carText.text]  && ([_carText.text length] > 15 && [_carText.text length] < 20))
+    else if (BUTTONSTATE == YES && PushState == YES && [self.textString isEqualToString:_carText.text]  && [_carText.text length] == 16 && self.sureInfoArray != nil && [self.sureInfoArray count] > 0)
     {
         [self orderNumberVerificationCode];
     }
-    else if ([_carText.text length] < 16 || [_carText.text length] > 19)
+    else if (SHUAKA == YES && [self.sureInfoArray count] == 9)
     {
-        UIAlertView *alertView = [[UIAlertView alloc ] initWithTitle:@"温馨提示" message:@"请您输入正确卡号进行交易！" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [self orderNumberVerificationCode];
+    }
+    else if ([_carText.text length] != 16)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc ] initWithTitle:@"温馨提示" message:@"请您正确使用卡号进行交易！" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
         [alertView show];
     }
 }
 #pragma mark === 生成订单号
 -(void)orderNumberVerificationCode
 {
-    
     _activityView = [[PlayCustomActivityView alloc] initWithFrame:CGRectMake(0, 0, 130, 130)];
     _activityView.center = self.view.center;
-    [_activityView setTipsText:@"正在加载数据..."];
+    [_activityView setTipsText:@"正在提交信息..."];
     [_activityView starActivity];
     [self.view addSubview:_activityView];
     
@@ -1050,7 +1126,7 @@
     
     NSLog(@"=======self.carYearMonth=======%@",self.carYearMonth);
     // 票,乘机人,联系人,卡
-//    [[[NLProtocolRequest alloc]initWithRegister:YES] TicketBillId:self.TicketBillId  backTicketId:self.backTicketId  styGoBack:self.styGoBack perSonIdArray:self.perSonIdArray ContactIdArray:self.ContactIdArray   payinfoCardInfoArray:self.sureInfoArray validity:self.carYearMonth amount:[NSString stringWithFormat:@"%d",priceOilTax]];
+    [[[NLProtocolRequest alloc]initWithRegister:YES] TicketBillId:self.TicketBillId  backTicketId:self.backTicketId  styGoBack:self.styGoBack perSonIdArray:self.perSonIdArray ContactIdArray:self.ContactIdArray   payinfoCardInfoArray:self.sureInfoArray validity:self.carYearMonth amount:[NSString stringWithFormat:@"%d",priceOilTax]];
 }
 
 -(void)GetcreateOrder:(NSNotification *)senderFication
@@ -1067,8 +1143,7 @@
     {
         [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
         [_activityView removeFromSuperview];
-        
-        
+    
         return ;
     }
     else
@@ -1098,14 +1173,14 @@
         NSArray *OrderIdArray = [response.data find:@"msgbody/orderId"];
         NLProtocolData *OrderIdCode = [OrderIdArray objectAtIndex:0];
         self.OrderId  = OrderIdCode.value;
-        NSLog(@"=====verifyCode=====%@",self.OrderId);
+        NSLog(@"=====OrderId=====%@",self.OrderId);
         
-        NSArray *verifyArray = [response.data find:@"msgbody/verifyCode"];
-        NLProtocolData *verifyCode = [verifyArray objectAtIndex:0];
-        self.verify  = verifyCode.value;
-        NSLog(@"=====verifyCode=====%@",self.verify);
+//        NSArray *verifyArray = [response.data find:@"msgbody/verifyCode"];
+//        NLProtocolData *verifyCode = [verifyArray objectAtIndex:0];
+//        self.verify  = verifyCode.value;
+//        NSLog(@"=====verifyCode=====%@",self.verify);
         
-        UIAlertView *_AlertView = [[UIAlertView alloc]initWithTitle:@"请输入验证码" message:self.verify delegate:self cancelButtonTitle:@"支付" otherButtonTitles:@"退出", nil];
+        UIAlertView *_AlertView = [[UIAlertView alloc]initWithTitle:@"请输入验证码" message:nil delegate:self cancelButtonTitle:@"支付" otherButtonTitles:@"退出", nil];
         _AlertView.tag = 10;
         [_AlertView setAlertViewStyle:UIAlertViewStyleSecureTextInput];
         [_AlertView show];
@@ -1120,19 +1195,28 @@
 {
     if (alertView.tag == 10)
     {
+
+
         UITextField *alertViewText=[alertView textFieldAtIndex:0];
         NSLog(@"=====alertViewText=====%@",alertViewText.text);
-        if ([alertViewText.text isEqualToString:self.verify])
+        if ([alertView textFieldAtIndex:0] > 0)
         {
             if (buttonIndex == 0)
             {
+                _activityView = [[PlayCustomActivityView alloc] initWithFrame:CGRectMake(0, 0, 130, 130)];
+                _activityView.center = self.view.center;
+                [_activityView setTipsText:@"正在提交信息..."];
+                [_activityView starActivity];
+                [self.view addSubview:_activityView];
+
                 NSString* name = [NLUtils getNameForRequest:Notify_getpayWithCreditCard];
                 REGISTER_NOTIFY_OBSERVER(self, ApipayValidationCreditCardNotify, name);
-                [[[NLProtocolRequest alloc] initWithRegister:YES] getApiPayverify:self.OrderId OrderId:alertViewText.text];
+                [[[NLProtocolRequest alloc] initWithRegister:YES] getApiPayverify:self.OrderId OrderId:self.verify];
             }
         }
         else
         {
+            
             UIAlertView *AlertView = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"验证码不正确交易不成功！" delegate:nil cancelButtonTitle:@"请重新确认提交" otherButtonTitles:nil, nil];
             AlertView.tag = 22;
             [AlertView show];
@@ -1148,6 +1232,7 @@
     if (error == RSP_NO_ERROR)
     {
         [self getpayValidationWithCreditCard:response];
+
     }
     else if (error == RSP_TIMEOUT)
     {
@@ -1162,6 +1247,9 @@
         [AlertView show];
         
     }
+    [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+    [_activityView removeFromSuperview];
+
 }
 - (void)getpayValidationWithCreditCard:(NLProtocolResponse *)response
 {
@@ -1194,6 +1282,9 @@
         //            NSLog(@"=====bkcardnoCheck==%@",bkcardnoCheck.value);
         //        }
     }
+    [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+    [_activityView removeFromSuperview];
+
 }
 
 

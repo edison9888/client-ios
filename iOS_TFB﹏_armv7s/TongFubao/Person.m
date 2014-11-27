@@ -87,11 +87,11 @@
 
 @implementation BankPayList
 
-@synthesize bkcardbanks,bkcardbankmans,bkcardnos,bkcardids,bkcardbankids,Bkcardbanklogos,bkcardbankphones,bkcardyxmonths,bkcardyxyears,bkcardcvvs,bkcardidcards,bkcardisdefaults,bkcardcardtypes,bkcardbankcode,bkcardisdefaultpayment;
+@synthesize bkcardbanks,bkcardbankmans,bkcardnos,bkcardids,bkcardbankids,Bkcardbanklogos,bkcardbankphones,bkcardyxmonths,bkcardyxyears,bkcardcvvs,bkcardidcards,bkcardisdefaults,bkcardcardtypes,bkcardbankcode,bkcardisdefaultpayment,bkcardbankcctp;
 
 -(NSString *)description{
     
-    NSString *print= [NSString stringWithFormat:@"bkcardbanks- %@, bkcardbankmans=%@ bkcardnos=%@ bkcardids=%@ bkcardbankids=%@ Bkcardbanklogos=%@ bkcardbankphones=%@ bkcardyxmonths=%@ bkcardyxyears=%@ bkcardcvvs=%@ bkcardidcards=%@ bkcardisdefaults=%@ bkcardcardtypes=%@ bkcardbankcode = %@ bkcardisdefaultpayment = %@",bkcardbanks,bkcardbankmans,bkcardnos,bkcardids,bkcardbankids,Bkcardbanklogos,bkcardbankphones,bkcardyxmonths,bkcardyxyears,bkcardcvvs,bkcardidcards,bkcardisdefaults,bkcardcardtypes,bkcardbankcode,bkcardisdefaultpayment];
+    NSString *print= [NSString stringWithFormat:@"bkcardbanks- %@, bkcardbankmans=%@ bkcardnos=%@ bkcardids=%@ bkcardbankids=%@ Bkcardbanklogos=%@ bkcardbankphones=%@ bkcardyxmonths=%@ bkcardyxyears=%@ bkcardcvvs=%@ bkcardidcards=%@ bkcardisdefaults=%@ bkcardcardtypes=%@ bkcardbankcode = %@ bkcardisdefaultpayment = %@ bkcardbankcctp = %@",bkcardbanks,bkcardbankmans,bkcardnos,bkcardids,bkcardbankids,Bkcardbanklogos,bkcardbankphones,bkcardyxmonths,bkcardyxyears,bkcardcvvs,bkcardidcards,bkcardisdefaults,bkcardcardtypes,bkcardbankcode,bkcardisdefaultpayment,bkcardbankcctp];
 
     return print;
 }

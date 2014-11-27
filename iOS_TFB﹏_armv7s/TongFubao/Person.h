@@ -12,7 +12,7 @@
 
 @property (nonatomic,copy)NSString *mnutypeid;  /*功能分类id*/
 @property (nonatomic,copy)NSString *mnuname;    /*功能名*/
-@property (nonatomic,copy)NSString *mnutypename;/*功能分类名*/
+@property (nonatomic,copy)NSString *mnutypename;            /*功能分类名*/
 @property (nonatomic,copy)NSString *mnuisconst; /*固定功能图标*/
 @property (nonatomic,copy)NSString *mnuid;      /*固定id*/
 @property (nonatomic,copy)NSString *pointnum;   /*使用次数*/
@@ -23,7 +23,7 @@
 
 @interface BankPayList : NSObject
 
-@property (nonatomic,copy)NSString *bkcardbanks;      /*银行卡名*/
+@property (nonatomic,copy)NSString *bkcardbanks;                 /*银行卡名*/
 @property (nonatomic,copy)NSString *bkcardbankmans;   /*用户名*/
 @property (nonatomic,copy)NSString *bkcardnos;        /*卡号*/
 @property (nonatomic,copy)NSString *bkcardids;        /*银行卡id*/
@@ -38,6 +38,9 @@
 @property (nonatomic,copy)NSString *bkcardisdefaultpayment; /*默认付款*/
 @property (nonatomic,copy)NSString *bkcardcardtypes;  /*卡类型*/
 @property (nonatomic,copy) NSString *bkcardbankcode;
+@property (nonatomic,copy) NSString *bkcardbankcctp;
+
+
 
 @end
 

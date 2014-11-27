@@ -24,7 +24,7 @@
 
 }
 
-@synthesize CellDateArray,ticketArray,teger;
+@synthesize CellDateArray,ticketArray,teger,CellButtonArray;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -41,22 +41,20 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    self.CellButtonArray = [[NSMutableArray alloc]init];
     
     // 导航
     [self navigationView];
     [self allControllerView];
        worldUnmber = [[NSDictionary alloc]initWithObjectsAndKeys:@"身份证",@"1",@"护照",@"2",@"军人证",@"4",@"回乡证",@"7",@"台胞证",@"8",@"港澳通行证",@"10",@"国际海员证",@"11",@"外国人永久居留证",@"20",@"户口簿",@"25",@"出生证明",@"27",@"其它", @"99",nil];
-    NSLog(@"=========worldunmber=====%@",[worldUnmber objectForKey:@"1"]);
-    NSLog(@"=========worldunmber=====%@",[worldUnmber objectForKey:@"身份证"]);
-    NSLog(@"=========worldunmber=====%@",worldUnmber);
-    NSLog(@"=========worldunmber=====%@",[worldUnmber allKeys]);
-
-
+//    NSLog(@"=========worldunmber=====%@",[worldUnmber objectForKey:@"1"]);
+//    NSLog(@"=========worldunmber=====%@",[worldUnmber objectForKey:@"身份证"]);
+//    NSLog(@"=========worldunmber=====%@",worldUnmber);
+//    NSLog(@"=========worldunmber=====%@",[worldUnmber allKeys]);
+    [self InternetDownloads];
 
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(personMessage:) name:@"添加乘机人" object:nil];
-    [self InternetDownloads];
     
 }
 -(void)navigationView
@@ -78,21 +76,19 @@
     
     if (_historicalTableView.editing == NO)
     {
+        [self addRightButtonItemWithTitle:@"删除"];
         [_historicalTableView setEditing:YES animated:YES ];
     }
     else
     {
+        [self addRightButtonItemWithTitle:@"编辑"];
         [_historicalTableView setEditing:NO animated:YES ];
     }
 }
-//-(void)viewDidAppear:(BOOL)animated
-//{
-//    self.CellDateArray  = [[NSMutableArray alloc]init];
-//    [self InternetDownloads];
-//}
 #pragma mark --- 通知方法
 -(void)personMessage:(NSNotificationCenter *)sender
 {
+//    [self.CellButtonArray removeAllObjects];
     [self InternetDownloads];
 }
 
@@ -117,10 +113,15 @@
     if (error == RSP_NO_ERROR)
     {
         [self getPassenger:response];
+        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+        [_activityView removeFromSuperview];
         
     }
     else if (error == RSP_TIMEOUT)
     {
+        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+        [_activityView removeFromSuperview];
+
         return ;
     }
     else
@@ -129,8 +130,7 @@
         NSLog(@"===string====%@",string);
         [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
         [_activityView removeFromSuperview];
-//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！加载数据失败！" delegate:self cancelButtonTitle:@"请重新加载" otherButtonTitles:@"退出", nil];
-//        [alert show];
+
         
     }
 }
@@ -158,8 +158,6 @@
         //获取错误信息
         NLProtocolData *errorData = [response.data find:@"msgbody/message" index:0];
         NSLog(@"errorData = %@",errorData);
-        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
-        [_activityView removeFromSuperview];
         
     }
     else
@@ -175,7 +173,7 @@
             for (NLProtocolData *PassengerNameData in PassengerName)
             {
                 [PassengerNameArray addObject:PassengerNameData.value];
-                NSLog(@"=====PassengerNameArray====%@",PassengerNameArray);
+//                NSLog(@"=====PassengerNameArray====%@",PassengerNameArray);
 
             }
 
@@ -187,8 +185,8 @@
         {
 
             [PassengerCardTypeArray addObject:PassengerCardData.value];
-            NSLog(@"=====PassengerCardTypeArray====%@",PassengerCardTypeArray);
-            NSLog(@"=====PassengerCardData====%@",PassengerCardData.value);
+//            NSLog(@"=====PassengerCardTypeArray====%@",PassengerCardTypeArray);
+//            NSLog(@"=====PassengerCardData====%@",PassengerCardData.value);
 
 
         }
@@ -199,7 +197,7 @@
             for (NLProtocolData *PassengerCardIdData in PassengerCardId)
             {
                 [PassengerCardIdArray addObject:PassengerCardIdData.value];
-                NSLog(@"=====passengerTypeData====%@",PassengerCardIdArray);
+//                NSLog(@"=====passengerTypeData====%@",PassengerCardIdArray);
 
             }
         }
@@ -209,19 +207,18 @@
             for (NLProtocolData *passengerIdData in PassengerId)
             {
                 [PassengerIdArray addObject:passengerIdData.value];
-                NSLog(@"=====PassengerIdArray====%@",PassengerIdArray);
-
+//                NSLog(@"=====PassengerIdArray====%@",PassengerIdArray);
             }
 
         }
         
         NSArray *PassengerType = [response.data find:@"msgbody/msgchild/passengerType"];
-        NSLog(@"=====PassengerType====%@",PassengerType);
+//        NSLog(@"=====PassengerType====%@",PassengerType);
 
         if ([PassengerType count] > 0) {
             for (NLProtocolData *passengerTypeData in PassengerType)
             {
-                NSLog(@"=====passengerTypeData====%@",passengerTypeData.value);
+//                NSLog(@"=====passengerTypeData====%@",passengerTypeData.value);
                 [PassengerTypeArray addObject:passengerTypeData.value];
             }
         }
@@ -230,31 +227,31 @@
             {
                 NSMutableArray *otherArray = [[NSMutableArray alloc]init];
                 [otherArray addObject:[PassengerNameArray objectAtIndex:i]];
-                NSLog(@"====otherArray===%@",otherArray);
+//                NSLog(@"====otherArray===%@",otherArray);
 
                 [otherArray addObject:[worldUnmber objectForKey:[PassengerCardTypeArray objectAtIndex:i]]];
-                NSLog(@"====otherArray===%@",otherArray);
+//                NSLog(@"====otherArray===%@",otherArray);
 
                 [otherArray addObject:[PassengerCardIdArray objectAtIndex:i]];
-                NSLog(@"====otherArray===%@",otherArray);
+//                NSLog(@"====otherArray===%@",otherArray);
 
                 [otherArray addObject:[PassengerIdArray objectAtIndex:i]];
-                NSLog(@"====otherArray===%@",otherArray);
+//                NSLog(@"====otherArray===%@",otherArray);
 
                 [otherArray addObject:[PassengerTypeArray objectAtIndex:i]];
-                NSLog(@"====otherArray===%@",otherArray);
+//                NSLog(@"====otherArray===%@",otherArray);
                 
                 [otherArray addObject:[PassengerCardTypeArray objectAtIndex:i]];
-                NSLog(@"====otherArray===%@",otherArray);
+//                NSLog(@"====otherArray===%@",otherArray);
                 
                 [self.CellDateArray addObject:otherArray];
-                NSLog(@"====self.CellDateArray===%@",self.CellDateArray);
+//                NSLog(@"====self.CellDateArray===%@",self.CellDateArray);
 
             }
 
         }
     }
-       NSLog(@"====CellDateArray===%@",self.CellDateArray);
+//       NSLog(@"====CellDateArray===%@",self.CellDateArray);
 //    for (NSString *string in self.CellDateArray)
 //    {
 //        NSLog(@"=====string====%@",string);
@@ -305,8 +302,6 @@
             }
         }
     }
-    [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
-    [_activityView removeFromSuperview];
     [_historicalTableView reloadData];
     }
     
@@ -354,6 +349,9 @@
     [_activityView setTipsText:@"正在删除数据..."];
     [_activityView starActivity];
     [self.view addSubview:_activityView];
+    [self.CellButtonArray removeObjectAtIndex:indexPathId];
+    [[self.CellDateArray objectAtIndex:indexPathId] removeObjectAtIndex:6];
+
     
     
     NSString* name = [NLUtils getNameForRequest:Notify_deletePassenger];
@@ -422,11 +420,12 @@
 -(TicketCustomTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *indefault = @"cell";
-    TicketCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:indefault];
-    if (!cell)
-    {
-        cell = [[TicketCustomTableViewCell alloc]initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:indefault];
-    }
+//    TicketCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:indefault];
+//    if (!cell)
+//    {
+        TicketCustomTableViewCell *cell = [[TicketCustomTableViewCell alloc]initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:indefault];
+//    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if ([self.CellDateArray count] > 0) {
     NSArray *arraycell=[cell.contentView subviews];
     for (UILabel *coview in arraycell) {
@@ -437,7 +436,7 @@
     }
     
     UIButton *selectionBotton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    selectionBotton.frame =  CGRectMake(280, 5, 40, 40);
+    selectionBotton.frame =  CGRectMake(280, 10, 30, 30);
     selectionBotton.tag =indexPath.row;
     NSString * Stdey = [[self.CellDateArray objectAtIndex:indexPath.row] objectAtIndex:6];
     
@@ -451,7 +450,10 @@
     }
     selectionBotton.selected = YES;
     selectionBotton.tag = indexPath.row;
-    [selectionBotton addTarget:self action:@selector(btnclick:event:) forControlEvents:(UIControlEventTouchUpInside)];
+        selectionBotton.enabled = NO;
+//    [selectionBotton addTarget:self action:@selector(btnclick:event:) forControlEvents:(UIControlEventTouchUpInside)];
+        [self.CellButtonArray addObject:selectionBotton];
+
     cell. accessoryView = selectionBotton;
     
     
@@ -473,16 +475,18 @@
     return cell;
 }
 
-#pragma mark-单选中按钮状态
--(void)btnclick:(UIButton *)sender event:(id)event1
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSSet *touches =[event1 allTouches];
-    UITouch *touch =[touches anyObject];
-    CGPoint currentTouchPosition = [touch locationInView:_historicalTableView];
-    NSIndexPath *indexPath = [_historicalTableView indexPathForRowAtPoint:currentTouchPosition];
-    if (indexPath!= nil)
+    
+    UIButton *button = [self.CellButtonArray objectAtIndex:indexPath.row];
+    [button addTarget:self action:@selector(btnclick:indexPath:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self buttonID:button newIndexPath:indexPath];
+}
+-(void)buttonID:(UIButton *)sender newIndexPath:(NSIndexPath*)senderIndex
+{
+    NSLog(@"============senderIndex=========%@",senderIndex);
+    if (senderIndex!= nil)
     {
-        //        [self tableView:_historicalTableView accessoryButtonTappedForRowWithIndexPath:indexPath];
         if (sender.selected == YES)
         {
             [sender setImage:[UIImage imageNamed:@"9@2x.png"] forState:(UIControlStateNormal)];
@@ -498,8 +502,35 @@
             sender.selected = YES;
         }
     }
-    
 }
+
+//#pragma mark-单选中按钮状态
+//-(void)btnclick:(UIButton *)sender event:(id)event1
+//{
+//    NSSet *touches =[event1 allTouches];
+//    UITouch *touch =[touches anyObject];
+//    CGPoint currentTouchPosition = [touch locationInView:_historicalTableView];
+//    NSIndexPath *indexPath = [_historicalTableView indexPathForRowAtPoint:currentTouchPosition];
+//    if (indexPath!= nil)
+//    {
+//        //        [self tableView:_historicalTableView accessoryButtonTappedForRowWithIndexPath:indexPath];
+//        if (sender.selected == YES)
+//        {
+//            [sender setImage:[UIImage imageNamed:@"9@2x.png"] forState:(UIControlStateNormal)];
+//            [[self.CellDateArray objectAtIndex:sender.tag] removeObjectAtIndex:6];
+//            [[self.CellDateArray objectAtIndex:sender.tag] addObject:@"b"];
+//            sender.selected = NO;
+//        }
+//        else
+//        {
+//            [sender setImage:[UIImage imageNamed:@"91@2x.png"] forState:(UIControlStateNormal)];
+//            [[self.CellDateArray objectAtIndex:sender.tag] removeObjectAtIndex:6];
+//            [[self.CellDateArray objectAtIndex:sender.tag] addObject:@"a"];
+//            sender.selected = YES;
+//        }
+//    }
+//
+//}
 //-(void)tableView:(UITableView*)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath*)indexPath
 //{
 //}

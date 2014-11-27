@@ -121,6 +121,9 @@
     NSString *okbankname;
     NSString *okpeoplename;
     NSString *okbankCard;
+    
+    /*输入卡号的新功能跳转*/
+    NSString *bankTypeStr;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *OnBtnClick;
@@ -334,10 +337,10 @@
     PhoneLable= [LableModel LableTile:PhoneNum TitleFrame:CGRectMake(118, 85-IOS7HEIGHT, 280, 30) TitleNum:1 titleColor:[UIColor colorWithRed:91/255.0 green:192/255.0 blue:222/255.0 alpha:1] BGColor:[UIColor clearColor] fontSize:17 boldSize:25];
     
     AddressLable= [LableModel LableTile:PhoneAddress TitleFrame:CGRectMake(118, 116-IOS7HEIGHT, 280, 30) TitleNum:1 titleColor:[UIColor colorWithRed:57/255.0 green:180/255.0 blue:211/255.0 alpha:1] BGColor:[UIColor clearColor] fontSize:17 boldSize:19];
-    
-    PayMoneyLable= [LableModel LableTile:[NSString stringWithFormat:@"%@元",PhoneGiveStr] TitleFrame:CGRectMake(118, 147-IOS7HEIGHT, 280, 30) TitleNum:1 titleColor:[UIColor colorWithRed:240/255.0 green:173/255.0 blue:78/255.0 alpha:1] BGColor:[UIColor clearColor] fontSize:17 boldSize:23];
+
+    PayMoneyLable= [LableModel LableTile:[NSString stringWithFormat:@"%@元",[PhoneGiveStr stringByReplacingOccurrencesOfString:@"￥" withString:@""]] TitleFrame:CGRectMake(118, 147-IOS7HEIGHT, 280, 30) TitleNum:1 titleColor:[UIColor colorWithRed:240/255.0 green:173/255.0 blue:78/255.0 alpha:1] BGColor:[UIColor clearColor] fontSize:17 boldSize:23];
    
-    PayMoney_Lable= [LableModel LableTile:[NSString stringWithFormat:@"￥%@元",PhoneGiveStr2] TitleFrame:CGRectMake(118, 179-IOS7HEIGHT, 280, 30) TitleNum:1 titleColor:[UIColor colorWithRed:238/255.0 green:162/255.0 blue:54/255.0 alpha:1] BGColor:[UIColor clearColor] fontSize:17 boldSize:23];
+    PayMoney_Lable= [LableModel LableTile:[NSString stringWithFormat:@"%@元",PhoneGiveStr2] TitleFrame:CGRectMake(118, 179-IOS7HEIGHT, 280, 30) TitleNum:1 titleColor:[UIColor colorWithRed:238/255.0 green:162/255.0 blue:54/255.0 alpha:1] BGColor:[UIColor clearColor] fontSize:17 boldSize:23];
     
     [self.Scroller addSubview:PhoneLable];
     [self.Scroller addSubview:AddressLable];
@@ -513,15 +516,23 @@
             
             if (bkcardcvvStr.length==0) {
                 
-                /*16位的储蓄卡*/
+                /*16位的储蓄卡 修改新增字段*/
                 if ([bkcardtypeStr isEqualToString:@"bankcard"]) {
                     
                     /*银联*/
                     [self PhoneMoneyRq];
                 }else{
                     
-                    if (_TextFiledCared.text.length==16) {
-                        [self alertNotoBtn];
+                    if (![bankTypeStr isEqualToString:@"bankcard"]) {
+//                        [self alertNotoBtn];
+                        if (_TextFiledCared.text.length >16) {
+                            /*储蓄卡*/
+                            [self PhoneMoneyRq];
+                        }else{
+                            /*刷卡易宝信用卡通道*/
+                            [self XYdefualtoPay];
+                        }
+                       
                     }else{
                         /*银联*/
                         [self PhoneMoneyRq];
@@ -530,7 +541,7 @@
                 
             }else{
                 /*刷卡后信用卡有数据返回则是否储蓄卡或信用卡*/
-                if (_TextFiledCared.text.length==16) {
+                if (![bkcardtypeStr isEqualToString:@"bankcard"]) {
                     
                     /*刷卡易宝信用卡通道*/
                     [self getApipayCardCheckStrYiBao];
@@ -561,10 +572,17 @@
                 
             }else{
                 /*手写的状态*/
-                if (_TextFiledCared.text.length==16)
+                if (![bankTypeStr isEqualToString:@"bankcard"])
                 {
-                    /*手输入*/
-                    [self alertNotoBtn];
+                    if (_TextFiledCared.text.length >16) {
+                        /*储蓄卡*/
+                        [self PhoneMoneyRq];
+                    }else if(bankTypeStr!=nil) {
+                        [self XYdefualtoPay];
+                    }
+                 
+                    /*手输入
+                    [self alertNotoBtn];*/
                 }else
                 {
                     /*储蓄卡*/
@@ -575,10 +593,11 @@
     }
 }
 
+
 /*刷卡获取后台是否有数据 信用卡通道*/
 -(void)getApipayCardCheckStrYiBao
 {
-    NSString *strRechamoney= [PhoneGiveStr stringByReplacingOccurrencesOfString:@"￥" withString:@""];
+    NSString *strRechamoney= [PhoneGiveStr stringByReplacingOccurrencesOfString:@"元" withString:@""];
     NSString *mobileProvince= AddressLable.text;
     NSString* name = [NLUtils getNameForRequest:Notify_ApiYiBaoPhonePay];
     REGISTER_NOTIFY_OBSERVER(self, YIBAOMorePayNotify, name);
@@ -628,7 +647,14 @@
             }else{
                 /*成功显示*/
 //                [self viewtoYiBaotoOK];
-                [self jumpToPayType];
+                [self.view endEditing:YES];
+                if (bankTypeStr==nil && [BankType isEqualToString: @"3"])
+                {
+                    [self bankcardtype];
+                }else
+                {
+                    [self jumpToPayType];
+                }
             }
         }
         break;
@@ -758,7 +784,7 @@
 {
     flagTY= YES;
     /*话费信息 PhoneGiveStr2优惠*/
-    NSString *strRechamoney= [PhoneGiveStr stringByReplacingOccurrencesOfString:@"￥" withString:@""];
+    NSString *strRechamoney= [PhoneGiveStr stringByReplacingOccurrencesOfString:@"元" withString:@""];
     NSString *mobileProvince= AddressLable.text;
     NSString* name = [NLUtils getNameForRequest:Notify_ApiYiBaoPhonePay];
     REGISTER_NOTIFY_OBSERVER(self, YIBAOMorePayNotify, name);
@@ -826,7 +852,7 @@
     */
     
     /*话费信息*/
-    NSString *strRechamoney= [PhoneGiveStr stringByReplacingOccurrencesOfString:@"￥" withString:@""];
+    NSString *strRechamoney= [PhoneGiveStr stringByReplacingOccurrencesOfString:@"元" withString:@""];
     NSString *mobileProvince= AddressLable.text;
     NSString* name = [NLUtils getNameForRequest:Notify_ApiYiBaoPhonePay];
     REGISTER_NOTIFY_OBSERVER(self, YIBAOMorePayNotify, name);
@@ -985,7 +1011,6 @@
 /*返回成功数据*/
 -(void)doYIBAOMorePayNotify:(NLProtocolResponse*)response
 {
-
     NLProtocolData* data = [response.data find:@"msgbody/result" index:0];
     NSString *result = data.value;
     NSRange range = [result rangeOfString:@"succ"];
@@ -1049,7 +1074,8 @@
 /*信用卡跳转*/
 -(void)XYdefualtoPay
 {
-    NSString *strRechamoney= [PhoneGiveStr stringByReplacingOccurrencesOfString:@"￥" withString:@""];
+    [self.view endEditing:YES];
+    NSString *strRechamoney= [PhoneGiveStr stringByReplacingOccurrencesOfString:@"元" withString:@""];
     planePay *pla= [[planePay alloc]initWithNibName:@"planePay" bundle:nil];
     pla.AddressStr= AddressLable.text;
     pla.paymoneyStr=  PhoneGiveStr2;
@@ -1438,6 +1464,8 @@
 //            [self payCardCheck];
             /*刷卡验证是否有此默认信用卡*/
             [self ApipayCardCheck];
+            /*卡号类型判断*/
+            [self bankcardtype];
         }
     }
 }
@@ -1492,9 +1520,9 @@
     else
     {
         
-        NLProtocolData* data = [response.data find:@"msgbody/message" index:0];
-        NSString* result = data.value;
-        [self showErrorInfo:result status:NLHUDState_NoError];
+//        NLProtocolData* data = [response.data find:@"msgbody/message" index:0];
+//        NSString* result = data.value;
+//        [self showErrorInfo:result status:NLHUDState_NoError];
         
         //银行卡号
         NLProtocolData* bkcardnoCheck = [response.data find:@"msgbody/bkcardno" index:0];
@@ -1633,7 +1661,7 @@
     NSString* str = [_visaReaderArray objectAtIndex:2];
     NSData* data = [NLUtils stringToData:str];
     NSString* merReserved = [GTMBase64 stringByEncodingData:data];
-    NSString *strRechamoney= [PhoneGiveStr stringByReplacingOccurrencesOfString:@"￥" withString:@""];
+    NSString *strRechamoney= [PhoneGiveStr stringByReplacingOccurrencesOfString:@"元" withString:@""];
     
     if (flagOnePay==YES) {
         _cardno= _TextFiledCared.text;
@@ -1803,7 +1831,7 @@
     vc.myNavigationTitle = @"充值结果";
     vc.myTitle = @"交易成功";
     
-     NSString *strRechamoney= [PhoneGiveStr stringByReplacingOccurrencesOfString:@"￥" withString:@""];
+     NSString *strRechamoney= [PhoneGiveStr stringByReplacingOccurrencesOfString:@"元" withString:@""];
     
     NSMutableArray* arr = [NSMutableArray arrayWithCapacity:1];
     /*话费充值*/
@@ -1845,8 +1873,36 @@
         flagText= YES;
         flagYZM= NO;
     }
-   
+  
     [self performSelector:@selector(change:) withObject:nil];
+}
+
+/*识别银行卡所属银行以及类型*/
+-(void)bankcardtype
+{
+    NSDictionary *dataDictionary = @{ @"bkcardno" : _TextFiledCared.text, };
+    
+    /**/
+    [LoadDataWithASI loadDataWithMsgbody:dataDictionary apiName:@"ApiAppInfo" apiNameFunc:@"checkBanckCardType" rolePath:@"//operation_response/msgbody" type:PublicCommon completionBlock:^(NSDictionary *data, NSError *error) {
+        NSLog(@"bkcardno %@",data);
+        
+        if ([BankType isEqualToString: @"3"]) {
+            [self jumpToPayType];
+        }
+        
+        NSRange range = [data[@"result"] rangeOfString:@"succ"];
+        if (range.length <= 0)
+        {
+            [self showErrorInfo:data[@"message"] status:NLHUDState_Error];
+            [_hud hide:YES afterDelay:1.5];
+        }else
+        {
+            /*卡的类型*/
+            bankTypeStr = [[data valueForKey:@"bkcardtype"]length] > 2 ?[data valueForKey:@"bkcardtype"] : @" " ;
+        }
+        
+    }];
+    
 }
 
 -(void)changeTextEvent:(UITextField *)textField;
@@ -1891,7 +1947,12 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    /*使视图回到原来的位置*/
+    /*输入判断的*/
+    if (_TextFiledCared.text.length >= 15) {
+        
+        [self bankcardtype];
+    }
+    
     CGAffineTransform pTransform = CGAffineTransformMakeTranslation(0, 0);
     //使视图使用这个变换
     [UIView
@@ -1914,6 +1975,8 @@
         {
             retValue=NO;
         }
+        
+       
     }
     return retValue;
 }

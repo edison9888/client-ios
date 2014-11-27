@@ -23,6 +23,7 @@
 #import "MobileRechangeHistoryCtr.h"
 #import "NLProtocolRequest.h"
 
+#import "XIAOYU_TheControlPackage.h"
 
 @interface PaySKQ ()<SGFocusImageFrameDelegate>
 {
@@ -56,8 +57,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title= @"购买刷卡器";
-        
+    
+        self.title = @"购买刷卡器";
     }
     return self;
 }
@@ -65,6 +66,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self leftBarButtonBack];//返回按钮
+    
     // Do any additional setup after loading the view from its nib.
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
     
@@ -76,7 +80,7 @@
     _myArray = [NSMutableArray array];
    
     [self SGFocusImageFrame_Action];
-   
+    [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"历史记录"
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
@@ -91,7 +95,12 @@
     
     //请求设备信息接口
     [self performSelector:@selector(readSKQInfo) withObject:nil afterDelay:0.1];
+    
+    
 }
+
+
+
 
 -(void)viewWillAppear:(BOOL)animated
 {

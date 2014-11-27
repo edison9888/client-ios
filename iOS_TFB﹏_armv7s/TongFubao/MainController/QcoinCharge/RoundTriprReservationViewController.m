@@ -26,7 +26,7 @@
 
 @implementation RoundTriprReservationViewController
 
-@synthesize DepartCodeCtity,arriveCodeCity,departFromTime,returnToTime,cityIDFrom,cityIDTo,searchType,HotCityArray,takeOffTimeArray,arriveTimeArray,flightArray,craftTypeArray,airLineCodeArray,priceArray,quantityArray,dPortNameArray,aPortNameArray,dPortCodeArray,aPortCodeArray,airLineNameArray,TripFromTimeArray,firstPlayInfoArray,seconPlayInfoArray,RoundArriveCity,RoundDepartCity;
+@synthesize DepartCodeCtity,arriveCodeCity,departFromTime,returnToTime,cityIDFrom,cityIDTo,searchType,HotCityArray,takeOffTimeArray,arriveTimeArray,flightArray,craftTypeArray,airLineCodeArray,priceArray,quantityArray,dPortNameArray,aPortNameArray,dPortCodeArray,aPortCodeArray,airLineNameArray,TripFromTimeArray,firstPlayInfoArray,seconPlayInfoArray,RoundArriveCity,RoundDepartCity,dCityCodeArray;
 
 
 
@@ -45,8 +45,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     // 是否推送页面
     PageSwitching =NO;
-    // 生成警告框
-    AlertBoxBool = YES;
+//    // 生成警告框
+//    AlertBoxBool = YES;
     // 导航
     [self navigationView];
     [self allControllerView];
@@ -58,7 +58,7 @@
 -(void)navigationView
 {
     [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
-    self.title= @"行程机票";
+    self.title= [NSString stringWithFormat:@"去程(%@-%@)",self.RoundDepartCity,self.RoundArriveCity];
     //    [self addRightButtonItemWithImage:[UIImage imageNamed:@"sugust"]];
 }
 // 回调
@@ -71,13 +71,25 @@
         // 重新计时间
         NSString * compareString = [watchTimeObject selectionTime:self.departFromTime];
         timeInteger = [compareString integerValue];
-        if (timeInteger > 0)
+        
+        if (timeInteger > 1)
         {
             timeInteger++;
         }
+        else if (timeInteger <= 0)
+        {
+            timeInteger = 0;
+        }
+        else if (timeInteger == 1)
+        {
+            timeInteger = 1;
+        }
+        NSLog(@"====timeInteger===%d",timeInteger);
+        
+
         [_ButtonView selectionDateTime:self.departFromTime  goTime:[watchTimeObject changeTime]  shijianca:timeInteger];
         _ticketView.hidden = NO;
-        self.title= @"行程机票";
+        self.title= [NSString stringWithFormat:@"去程(%@-%@)",self.RoundDepartCity,self.RoundArriveCity];
         [_ticketView ShowInterfaceTripTicketView];
         PageSwitching = NO;
         // 将回程页面左右页面初始化位置隐藏
@@ -102,6 +114,8 @@
     [self.view addSubview:_activityView];
 
     NSLog(@"===departFromTime====%@======returnToTime====%@===",self.departFromTime,self.returnToTime);
+    NSLog(@"===DepartCodeCtity====%@======arriveCodeCity====%@===",self.DepartCodeCtity,self.arriveCodeCity);
+
     NSString* name = [NLUtils getNameForRequest:Notify_ApigetAirline];
     REGISTER_NOTIFY_OBSERVER(self, getApigetAirline, name);
     [[[NLProtocolRequest alloc]initWithRegister:YES]getApigetAirline:self.DepartCodeCtity arriveCityCode:self.arriveCodeCity departDate:self.departFromTime returnDate:self.returnToTime searchType:self.searchType];
@@ -110,39 +124,63 @@
 {
     NLProtocolResponse *response = (NLProtocolResponse *)senderFication.object;
     int error = response.errcode;
+    NSLog(@"======error====%d",error);
+    // 没有数据
+    NSString *string = response.detail;
+    NSLog(@"=======string=======%@",string);
+
     
     if (error == RSP_NO_ERROR)
     {
         [self getDataWithAirline:response];
     }
-    else if (error == RSP_TIMEOUT)
-    {
-        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
-        [_activityView removeFromSuperview];
-        [_ticketView tripTicketTableViewdataSource];
-        [_BackticketView BackTripTableViewdataSource];
-
-        return ;
-    }
     else
     {
-        // 没有数据
-        NSString *string = response.detail;
-        NSLog(@"=======string=======%@",string);
-        
-        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
-        [_activityView removeFromSuperview];
+     if (error == RSP_TIMEOUT)
+    {
         [_ticketView tripTicketTableViewdataSource];
         [_BackticketView BackTripTableViewdataSource];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
 
-        if (AlertBoxBool == YES)
-        {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲!本日期没有航班!" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
-            [alert show];
-            AlertBoxBool = NO;
-        }
+    }
+    else if (error == RSP_CANCEL)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
         
     }
+    else if (error == RSP_HAS_EXIST)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    else if (error == RSP_XML_RETTYPE_FAILURE)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    else if (error == RSP_XML_RESULT_FAILURE)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    else if (error == RSP_XML_RETCODE_FAILURE)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+        [_ticketView tripTicketTableViewdataSource];
+        [_BackticketView BackTripTableViewdataSource];
+    }
+    
+    [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+    [_activityView removeFromSuperview];
+
 }
 
 - (void)getDataWithAirline:(NLProtocolResponse *)response
@@ -162,6 +200,9 @@
         [_activityView removeFromSuperview];
         [_ticketView tripTicketTableViewdataSource];
         [_BackticketView BackTripTableViewdataSource];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+
 
     }
     else
@@ -188,96 +229,157 @@
         
         // 起飞时间
         self.takeOffTimeArray = [response.data find:@"msgbody/msgchild/takeOffTime"];
-        for (NLProtocolData *takeOffTime  in self.takeOffTimeArray)
+        NSLog(@"=====self.takeOffTimeArray=====%@",self.takeOffTimeArray);
+
+        if ([self.takeOffTimeArray count] > 0)
         {
-            [PaiXutakeOffTimeArray addObject:takeOffTime.value];
+            for (NLProtocolData *takeOffTime  in self.takeOffTimeArray)
+            {
+                [PaiXutakeOffTimeArray addObject:takeOffTime.value];
+            }
         }
         
         // 到达时间
         self.arriveTimeArray = [response.data find:@"msgbody/msgchild/arriveTime"];
+        NSLog(@"=====arriveTimeArray=====%@",self.arriveTimeArray);
+
+        if ([self.arriveTimeArray count] > 0)
+        {
         for (NLProtocolData *arriveTime  in self.arriveTimeArray)
         {
             [PaiXuarriveTimeArray addObject:arriveTime.value];
         }
-        
+        }
         // 航空名
         self.airLineNameArray = [response.data find:@"msgbody/msgchild/airLineName"];
+        NSLog(@"=====airLineNameArray=====%@",self.airLineNameArray);
+
+        if ([self.airLineNameArray count] > 0)
+        {
         for (NLProtocolData *airLineName  in self.airLineNameArray)
         {
             [PaiXuairLineNameArray addObject:airLineName.value];
         }
-        
+        }
+    
         // 航班号
         self.flightArray = [response.data find:@"msgbody/msgchild/flight"];
+        NSLog(@"=====flightArray=====%@",self.flightArray);
+
+        if ([self.flightArray count] > 0)
+        {
         for (NLProtocolData *flight  in self.flightArray)
         {
             [PaiXuflightArray addObject:flight.value];
         }
+        }
         
         // 机型
         self.craftTypeArray = [response.data find:@"msgbody/msgchild/craftType"];
+        NSLog(@"=====craftTypeArray=====%@",self.craftTypeArray);
+
+        if ([self.craftTypeArray count] > 0){
+
         for (NLProtocolData *craftType  in self.craftTypeArray)
         {
             [PaiXucraftTypeArray addObject:craftType.value];
         }
-        
+    }
+    
         // 航空公司代码
         self.airLineCodeArray = [response.data find:@"msgbody/msgchild/airLineCode"];
+        NSLog(@"=====airLineCodeArray=====%@",self.airLineCodeArray);
+
+        if ([self.airLineCodeArray count] > 0){
+
         for (NLProtocolData *airLineCode  in self.airLineCodeArray)
         {
             [PaiXuairLineCodeArray addObject:airLineCode.value];
         }
+        }
         
         // 机票实际价格
         self.priceArray = [response.data find:@"msgbody/msgchild/price"];
+        NSLog(@"=====priceArray=====%@",self.priceArray);
+
+        if ([self.priceArray count] > 0){
+
         for (NLProtocolData *price  in self.priceArray)
         {
             [PaiXupriceArray addObject:price.value];
         }
+        }
         
         // 剩余票量
         self.quantityArray = [response.data find:@"msgbody/msgchild/quantity"];
+        NSLog(@"=====quantityArray=====%@",self.quantityArray);
+
+        if ([self.quantityArray count] > 0){
+
         for (NLProtocolData *quantity  in self.quantityArray)
         {
             [PaiXuquantityArray addObject:quantity.value];
         }
+        }
         
         // 出发机场
         self.dPortNameArray = [response.data find:@"msgbody/msgchild/dPortName"];
+        NSLog(@"=====dPortNameArray=====%@",self.dPortNameArray);
+
+        if ([self.dPortNameArray count] > 0){
+
         for (NLProtocolData *dPortName  in self.dPortNameArray)
         {
             [PaiXudPortNameArray addObject:dPortName.value];
         }
+        }
         
         // 到达机场
         self.aPortNameArray = [response.data find:@"msgbody/msgchild/aPortName"];
+        NSLog(@"=====aPortNameArray=====%@",self.aPortNameArray);
+
+        if ([self.aPortNameArray count] > 0){
+
         for (NLProtocolData *aPortName  in self.aPortNameArray)
         {
             [PaiXuaPortNameArray addObject:aPortName.value];
         }
+        }
         
         // 出发机场三字码
         self.dPortCodeArray = [response.data find:@"msgbody/msgchild/dPortCode"];
+        NSLog(@"=====dPortCodeArray=====%@",self.dPortCodeArray);
+
+        if ([self.dPortCodeArray count] > 0){
+
         for (NLProtocolData *dPortCode  in self.dPortCodeArray)
         {
             [PaiXudPortCodeArray addObject:dPortCode.value];
         }
-        NSArray  *dCityCodeArray = [response.data find:@"msgbody/msgchild/dCityCode"];
+        }
 
         
         // 到达机场三字码
         self.aPortCodeArray = [response.data find:@"msgbody/msgchild/aPortCode"];
+        NSLog(@"=====aPortCodeArray=====%@",self.aPortCodeArray);
+
+        if ([self.aPortCodeArray count] > 0){
+
         for (NLProtocolData *aPortCode  in self.aPortCodeArray)
         {
             [PaiXuaPortCodeArray addObject:aPortCode.value];
         }
-        
+        }
         // 出发城市
-        for (NLProtocolData *dPortCode  in dCityCodeArray)
+        self.dCityCodeArray= [response.data find:@"msgbody/msgchild/dCityCode"];
+        NSLog(@"=====self.dCityCodeArray=====%@",self.dCityCodeArray);
+        if ([self.dCityCodeArray count] > 0){
+        for (NLProtocolData *dPortCode  in self.dCityCodeArray)
         {
             [PaiXuaCityCodeArray addObject:dPortCode.value];
         }
-        
+        }
+        if ([PaiXutakeOffTimeArray count] > 0) {
         for (int i = 0; i < [PaiXutakeOffTimeArray count]; i++)
         {
             NSMutableArray *otherObjectArray = [[NSMutableArray alloc]init];
@@ -322,7 +424,6 @@
         NSMutableArray *ToCodeArray = [[NSMutableArray alloc]init];
 
 
-
         for (int i = 0; i < [combinationPaiXuaAllArray count]; i++)
         {
             NSString * cityString = [[combinationPaiXuaAllArray objectAtIndex:i] objectAtIndex:12];
@@ -340,16 +441,16 @@
                 [ToCodeArray addObject:[[combinationPaiXuaAllArray objectAtIndex:i] objectAtIndex:3]];
             }
         }
-//        NSLog(@"=====ToNameArray=====%@",ToNameArray);
-//        NSLog(@"=====ToCodeArray=====%@",ToCodeArray);
-//        NSLog(@"=====FromNameArray=====%@",FromNameArray);
-//        NSLog(@"=====FromCodeArray=====%@",FromCodeArray);
-//        self.TripFromTimeArray = FromObjectArray;
-        
+        NSLog(@"=====ToNameArray=====%@",ToNameArray);
+        NSLog(@"=====ToCodeArray=====%@",ToCodeArray);
+        NSLog(@"=====FromNameArray=====%@",FromNameArray);
+        NSLog(@"=====FromCodeArray=====%@",FromCodeArray);
+        self.TripFromTimeArray = FromObjectArray;
         
         // 数据刷新
         [_ticketView  TripDataSource:FromObjectArray rigthTicketName:FromNameArray rigthTicketCode:FromCodeArray];
         [_BackticketView BackTripDataSource:ToObjectArray BackRigthTicketName:ToNameArray BackRigthTicketCode:ToCodeArray];
+     }
     }
     
     [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
@@ -363,17 +464,26 @@
     // 时间差匹配得出相应timeInteger传给时间按钮
     NSString * compareString = [watchTimeObject selectionTime:self.departFromTime];
     timeInteger = [compareString integerValue];
-    if (timeInteger > 0)
+    
+    if (timeInteger > 1)
     {
         timeInteger++;
     }
+    else if (timeInteger <= 0)
+    {
+        timeInteger = 0;
+    }
+    else if (timeInteger == 1)
+    {
+        timeInteger = 1;
+    }
     NSLog(@"====timeInteger===%d",timeInteger);
+    
 
     // 时间选择按钮
     _ButtonView = [[TimerButtonView alloc]initWithFrame:CGRectMake(0, 64, 320, 45)wacthTime:self.departFromTime shijianca:timeInteger];
     _ButtonView.delegate = self;
     [self.view addSubview:_ButtonView];
-    
     
     // 回程票
     _BackticketView = [[BackTripTicketView alloc]initWithFrame:CGRectMake(0, 110, self.view.frame.size.width, self.view.frame.size.height-110)];
@@ -436,10 +546,22 @@
     // 重新计时间
     NSString * compareString = [watchTimeObject selectionTime:self.returnToTime];
     timeInteger = [compareString integerValue];
-    if (timeInteger > 0)
+
+    if (timeInteger > 1)
     {
         timeInteger++;
     }
+    else if (timeInteger <= 0)
+    {
+        timeInteger = 0;
+    }
+    else if (timeInteger == 1)
+    {
+        timeInteger = 1;
+    }
+    NSLog(@"====timeInteger===%d",timeInteger);
+    
+
     [_ButtonView selectionDateTime:self.returnToTime  goTime:self.departFromTime  shijianca:timeInteger];
     
     
@@ -452,7 +574,8 @@
     _BackticketView.hidden = NO;
     // 控制是否推送页面
     PageSwitching = YES;
-    self.title= @"回程机票";
+    self.title= [NSString stringWithFormat:@"返程(%@-%@)",self.RoundArriveCity,self.RoundDepartCity];
+
 
 }
 #pragma mark ==== 第二次选票返回代理数据
@@ -516,7 +639,7 @@
     }
     [_ButtonView selectionDateTime:self.departFromTime  goTime:[watchTimeObject changeTime]  shijianca:timeInteger];
     _ticketView.hidden = NO;
-    self.title= @"行程机票";
+    self.title= [NSString stringWithFormat:@"去程(%@-%@)",self.RoundDepartCity,self.RoundArriveCity];
     [_ticketView ShowInterfaceTripTicketView];
     PageSwitching = NO;
 }

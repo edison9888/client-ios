@@ -15,7 +15,7 @@
     NSInteger timeInteger;
     BOOL TimeSwitch;
     BOOL PageSwitching;
-    BOOL AlertBoxBool;
+//    BOOL AlertBoxBool;
 }
 
 
@@ -55,6 +55,7 @@
 @property (retain,nonatomic) NSArray *dPortCodeArray;
 @property (retain,nonatomic) NSArray *aPortCodeArray;
 @property (retain,nonatomic) NSArray *airLineNameArray;
+@property (retain,nonatomic) NSArray  *dCityCodeArray ;
 
 
 // 行程传数据源

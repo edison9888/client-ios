@@ -80,13 +80,13 @@
 
 /*信息的驗證*/
 +(float)rand1:(int)max;
-+(BOOL)checkBankCard:(NSString*)bank;
-+(BOOL)checkIdentity:(NSString*)identity;
-+(BOOL)checkMobilePhone:(NSString*)mobilePhone;
-+(BOOL)checkInterNum:(NSString*)num;
-+(BOOL)checkName:(NSString*)name;
-+(BOOL)checkPassword:(NSString*)password;
-+(BOOL)checkEmail:(NSString*)email;
++(BOOL)checkBankCard:(NSString*)bank;//判断银行卡
++(BOOL)checkIdentity:(NSString*)identity;//判断身份证
++(BOOL)checkMobilePhone:(NSString*)mobilePhone;//判断电话号码
++(BOOL)checkInterNum:(NSString*)num;//判断数字
++(BOOL)checkName:(NSString*)name;//判断姓名
++(BOOL)checkPassword:(NSString*)password;//判断密码 特殊符号跟中文不通过
++(BOOL)checkEmail:(NSString*)email;//判断邮箱
 +(void)popToLogonVCByHTTPError:(UIViewController*)currentVC  feedOrLeft:(int)feedOrLeft;
 
 /*relateAgent  Agenttypeid*/

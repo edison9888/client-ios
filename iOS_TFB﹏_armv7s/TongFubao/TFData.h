@@ -16,6 +16,7 @@
 #define BOOS_CHANGE_MONEY_PEOPLE @"boos_is_change_money_people"
 #define PLANE_ADD_PEOPLE                @"plane_add_people"
 #define PAY_MONEY_BOOS_PUSH   /*支付不可编辑判断*/       @"pay_money_boos_push"
+#define AGENT_FUNRUN_FLAG        @"agent_funrun_flag"
 
 @interface TFData : NSObject
 
@@ -23,4 +24,10 @@
 
 +(NSMutableDictionary*)getTempData;
 
+/*数组的*/
++(NSMutableArray*)setarr:(NSMutableArray*)arr;
++(NSMutableArray*)getarr;
+
++(NSMutableDictionary*)setdic:(NSMutableDictionary*)dic;
++(NSMutableDictionary*)getdic;
 @end

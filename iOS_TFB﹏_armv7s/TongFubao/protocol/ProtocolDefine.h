@@ -37,7 +37,7 @@
 
 //#define SERVER_URL @"http://192.168.1.135/mobilepay/sever/androidapi.php"  //本地测试环境
 
-////#define SERVER_URL @"http://192.168.1.135/mobilepay/sever/androidapi.php"  //本地测试环境
+//#define SERVER_URL @"http://192.168.1.135/mobilepay/sever/androidapi.php"  //本地测试环境
 //
 ////#define SERVER_URL @"http://182.92.194.76/mobilepay/sever/getapi.php"       //iphone新接口
 //

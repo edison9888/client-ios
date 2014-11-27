@@ -23,7 +23,7 @@
     
     
 }
-@synthesize PassengerName,PassengerCardType,PassengerCardId,PassengerPersonIphone,selectionPersonIphone,unmberID;
+@synthesize PassengerName,PassengerCardType,PassengerCardId,PassengerPersonIphone,selectionPersonIphone,unmberID,PassengerBirthDay;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -59,7 +59,8 @@
     UITextField *textFieldName = [_textFieldArray objectAtIndex:0];
     UITextField *textFieldcarsty = [_textFieldArray objectAtIndex:1];
     UITextField *textFieldcarId = [_textFieldArray objectAtIndex:2];
-    
+    UITextField *textFieldbrithday = [_textFieldArray objectAtIndex:3];
+
     [textFieldName resignFirstResponder];
     [textFieldcarsty resignFirstResponder];
     [textFieldcarId resignFirstResponder];
@@ -67,8 +68,25 @@
     self.PassengerName = textFieldName.text;
     self.PassengerCardType = textFieldcarsty.text;
     self.PassengerCardId = textFieldcarId.text;
-    NSLog(@"=====unmberID====%@",self.unmberID);
-    if ([self.PassengerName length] >0 && [self.PassengerCardId length] > 0 && [self.PassengerCardType length] > 0)
+    self.PassengerBirthDay = textFieldbrithday.text;
+    
+    NSString *string ;
+    NSString *string1;
+    NSString *stringday;
+    int dayInt;
+    NSString *stringtime;
+    int timeInt;
+    if ([self.PassengerBirthDay length] == 10)
+    {
+    string = [self.PassengerBirthDay substringWithRange:NSMakeRange(4, 1)];
+    string1 = [self.PassengerBirthDay substringWithRange:NSMakeRange(7, 1)];
+    stringday = [self.PassengerBirthDay substringWithRange:NSMakeRange(5, 2)];
+    dayInt = [stringday intValue];
+    stringtime = [self.PassengerBirthDay substringWithRange:NSMakeRange(8, 2)];
+    timeInt = [stringtime intValue];
+    }
+    
+    if ([self.PassengerName length] >0 && [self.PassengerCardId length] > 0 && [self.PassengerCardType length] > 0 && [self.PassengerBirthDay length] == 10 && [string isEqualToString:@"-"] && [string1 isEqualToString:@"-"] && dayInt < 13 && timeInt < 32)
     {
         _activityView = [[PlayCustomActivityView alloc] initWithFrame:CGRectMake(0, 0, 130, 130)];
         _activityView.center = self.view.center;
@@ -78,15 +96,27 @@
         
         NSString* name = [NLUtils getNameForRequest:Notify_SavePassenger];
         REGISTER_NOTIFY_OBSERVER(self, GetSavePassengerNotify, name);
-        [[[NLProtocolRequest alloc]initWithRegister:YES]savePassengerName:self.PassengerName savePassengerCardType:self.unmberID savePassengerCardId:self.PassengerCardId savePassengerPhoneNumber:@"" savePassengerPassengerType:[NSString stringWithFormat:@"%d",self.PassengerType]];
+        [[[NLProtocolRequest alloc]initWithRegister:YES]savePassengerName:self.PassengerName savePassengerCardType:self.unmberID savePassengerCardId:self.PassengerCardId savePassengerPhoneNumber:@"" savePassengerPassengerType:[NSString stringWithFormat:@"%d",self.PassengerType] birthday:self.PassengerBirthDay];
     }
     else
     {
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:@"请填写完整的信息！" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:@"请正确填写信息！" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
         [alert show];
     }
-    
 }
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 100)
+    {
+        if (buttonIndex == 1)
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+}
+
 // 回调
 -(void)leftItemClick:(id)sender
 {
@@ -102,10 +132,17 @@
     if (error == RSP_NO_ERROR)
     {
         [self getApiAirticket:response];
+        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+        [_activityView removeFromSuperview];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！是否需要添加乘机人！" delegate:self cancelButtonTitle:@"添加乘机人" otherButtonTitles:@"退出", nil];
+        alert.tag = 100;
+        [alert show];
         
     }
     else if (error == RSP_TIMEOUT)
     {
+        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+        [_activityView removeFromSuperview];
         return ;
     }
     else
@@ -143,11 +180,7 @@
     {
         // 机票实际价格
         //        self.priceArray = [response.data find:@"msgbody/msgchild/price"];
-        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
-        [_activityView removeFromSuperview];
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！加载数据成功！" delegate:self cancelButtonTitle:@"退出添加乘机人" otherButtonTitles:nil, nil];
-        [alert show];
-        
+
         UITextField *textFieldName = [_textFieldArray objectAtIndex:0];
         textFieldName.text = nil;
         textFieldName.placeholder = @"请输入姓名";
@@ -159,6 +192,10 @@
         UITextField *textFieldcarId = [_textFieldArray objectAtIndex:2];
         textFieldcarId.text = nil;
         textFieldcarId.placeholder = @"请输入证件号";
+        
+        UITextField *textFieldBrithDay = [_textFieldArray objectAtIndex:3];
+        textFieldBrithDay.text = nil;
+        textFieldBrithDay.placeholder = @"请填写出生日期如：1999—08—03";
         
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(personMessage:) name:@"添加乘机人" object:nil];
@@ -180,19 +217,20 @@
     [self.view addSubview:_textView];
     
     _textFieldArray = [[NSMutableArray alloc]init];
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {
         UIImageView *lineAccorIamge = [[UIImageView alloc]initWithFrame:CGRectMake(0, 61+i*60, 320, 1)];
         lineAccorIamge.image = [UIImage imageNamed:@"line@2x.png"];
         [_textView addSubview:lineAccorIamge];
     }
     
-    NSArray *infoArray = @[@"请输入姓名",@"证件类型",@"请输入证件号"];
-    for (int j = 0; j < 3; j++)
+    NSArray *infoArray = @[@"请输入姓名",@"选择证件类型",@"请输入证件号",@"请填写出生日期如：1999—10—03"];
+    for (int j = 0; j < 4; j++)
     {
         UITextField *infoField = [[UITextField alloc]initWithFrame:CGRectMake(10, j*60, 300, 60)];
         infoField.placeholder = [infoArray objectAtIndex:j];
         infoField.delegate = self;
+        infoField.clearButtonMode=UITextFieldViewModeAlways;
         infoField.tag  = j;
         if (infoField.tag == 0)
         {
@@ -206,6 +244,12 @@
         {
             self.PassengerCardId = infoField.text;
         }
+        else if (infoField.tag == 3)
+        {
+            self.PassengerBirthDay = infoField.text;
+            NSLog(@"=====PassengerBirthDay====%@",self.PassengerBirthDay);
+        }
+
         [_textFieldArray addObject:infoField];
         [_textView addSubview:infoField];
     }
@@ -260,27 +304,28 @@
         _textView.frame = CGRectMake(0, 109, _textView.frame.size.width, _textView.frame.size.height);
     }];
 }
--(void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    if(textField.tag == 1)
-    {
-        [UIView animateWithDuration:0.3 animations:^{
-            _textView.frame = CGRectMake(0, 109-60, _textView.frame.size.width, _textView.frame.size.height);
-        }];
-    }
-    if(textField.tag == 2)
-    {
-        [UIView animateWithDuration:0.3 animations:^{
-            _textView.frame = CGRectMake(0, 109-120, _textView.frame.size.width, _textView.frame.size.height);
-        }];
-    }
-}
-
+//-(void)textFieldDidBeginEditing:(UITextField *)textField
+//{
+//    if(textField.tag == 1)
+//    {
+//        [UIView animateWithDuration:0.3 animations:^{
+//            _textView.frame = CGRectMake(0, 109-60, _textView.frame.size.width, _textView.frame.size.height);
+//        }];
+//    }
+//    if(textField.tag == 2)
+//    {
+//        [UIView animateWithDuration:0.3 animations:^{
+//            _textView.frame = CGRectMake(0, 109-120, _textView.frame.size.width, _textView.frame.size.height);
+//        }];
+//    }
+//}
+//
 -(void)typeButton
 {
     [[_textFieldArray objectAtIndex:0] resignFirstResponder];
     [[_textFieldArray objectAtIndex:1] resignFirstResponder];
     [[_textFieldArray objectAtIndex:2] resignFirstResponder];
+    [[_textFieldArray objectAtIndex:3] resignFirstResponder];
     _personView.hidden = NO;
 }
 
@@ -297,6 +342,17 @@
 {
     [super didReceiveMemoryWarning];
 }
+//+ (BOOL) validateIdentityCard: (NSString *)identityCard
+//{
+//    BOOL flag;
+//    if (identityCard.length <= 0) {
+//        flag = NO;
+//        return flag;
+//    }
+//    NSString *regex2 = @"^(\\d{14}|\\d{17})(\\d|[xX])$";
+//    NSPredicate *identityCardPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex2];
+//    return [identityCardPredicate evaluateWithObject:identityCard];
+//}
 
 /*
  #pragma mark - Navigation

@@ -121,6 +121,9 @@
     NSString *okbankname;
     NSString *okpeoplename;
     NSString *okbankCard;
+    
+    /*输入卡号的新功能跳转*/
+    NSString *bankTypeStr;
 }
 
 @property (weak, nonatomic) IBOutlet NLKeyboardAvoidingScrollView *scroller;
@@ -287,8 +290,15 @@
             }else{
                 /*成功显示*/
 //                [self viewToPayYiBaotoOK];
-                [self jumpToPayType];
-             
+                [self.view endEditing:YES];
+                if (bankTypeStr==nil && [BankType isEqualToString: @"3"])
+                {
+                    [self bankcardtype];
+                }else
+                {
+                      [self jumpToPayType];
+                }
+  
             }
         }
             break;
@@ -421,20 +431,27 @@
         }
         else if ([BankType isEqualToString:@"2"])
         {
-            /*刷卡的
-            flagToPay=YES;*/
+            /*刷卡的*/
+            flagToPay=YES;
             if (bkcardcvvStr.length==0) {
                 
-                /*16位的储蓄卡*/
+                /*16位的储蓄卡 修改新增字段*/
                 if ([bkcardtypeStr isEqualToString:@"bankcard"])
                 {
-                    
                     /*银联*/
                     [self QcoinMoneyRq];
                 }else{
-                    if (_TextFiledCared.text.length==16) {
+                    
+                    if (![bankTypeStr isEqualToString:@"bankcard"]) {
                         
-                        [self alertNotoBtn];
+//                        [self alertNotoBtn];
+                        if (_TextFiledCared.text.length >16) {
+                            /*储蓄卡*/
+                            [self QcoinMoneyRq];
+                        }else{
+                            /*刷卡易宝信用卡通道*/
+                            [self XYdefualtoPay];
+                        }
                     }
                     else
                     {
@@ -443,12 +460,11 @@
                     }
                     
                 }
-                
             }
             else
             {
                 /*刷卡后信用卡有数据返回则是否储蓄卡或信用卡*/
-                if (_TextFiledCared.text.length==16)
+                if (![bkcardtypeStr isEqualToString:@"bankcard"])
                 {
                     /*刷卡易宝信用卡通道*/
                     [self getApipayCardCheckStrYiBao];
@@ -486,10 +502,18 @@
                 {
                     
                     /*手写的状态*/
-                    if (_TextFiledCared.text.length==16)
+                    if (![bankTypeStr isEqualToString:@"bankcard"])
                     {
                         /*手输入判断类型*/
-                        [self alertNotoBtn];
+//                        [self alertNotoBtn];
+                        
+                        if (_TextFiledCared.text.length >16) {
+                            /*储蓄卡*/
+                            [self QcoinMoneyRq];
+                        }else if(bankTypeStr!=nil){
+                            
+                            [self XYdefualtoPay];
+                        }
                     }
                     else
                     {
@@ -825,7 +849,6 @@
         }
         else{
             
-            
             if (flagYZM==YES) {
                 
                 /*不刷卡的情况*/
@@ -856,6 +879,8 @@
     cardInfo.qNumber = PhoneNum;
     //刷卡器设备号
     cardInfo.paycardid = _payCardCheck;
+    
+    [self.view endEditing:YES];
     
     /*对应的数据填充替换*/
     planePay *pla= [[planePay alloc]init];
@@ -1085,6 +1110,8 @@
     
 #endif
     
+    [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
+
     //加一层 背景 防止整体向上滚的时候部分黑色
     UIView *bigV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 800)];
     bigV.backgroundColor = RGBACOLOR(239, 244, 245, 1.0);
@@ -1160,7 +1187,7 @@
     
     PayMoneyLable= [LableModel LableTile:[NSString stringWithFormat:@" %@",strRechamoney] TitleFrame:CGRectMake(118, 70-IOS7HEIGHT, 280, 30) TitleNum:1 titleColor:[UIColor colorWithRed:240/255.0 green:173/255.0 blue:78/255.0 alpha:1] BGColor:[UIColor clearColor] fontSize:17 boldSize:23];
     
-    PayMoney_Lable= [LableModel LableTile:[NSString stringWithFormat:@"%@元",PhoneGiveStr2] TitleFrame:CGRectMake(118, 101-IOS7HEIGHT, 280, 30) TitleNum:1 titleColor:[UIColor colorWithRed:238/255.0 green:162/255.0 blue:54/255.0 alpha:1] BGColor:[UIColor clearColor] fontSize:17 boldSize:23];
+    PayMoney_Lable= [LableModel LableTile:[NSString stringWithFormat:@"%@.00元",PhoneGiveStr2] TitleFrame:CGRectMake(118, 101-IOS7HEIGHT, 280, 30) TitleNum:1 titleColor:[UIColor colorWithRed:238/255.0 green:162/255.0 blue:54/255.0 alpha:1] BGColor:[UIColor clearColor] fontSize:17 boldSize:23];
     
     [_scroller addSubview:PhoneLable];
     [_scroller addSubview:PayMoneyLable];
@@ -1430,6 +1457,8 @@
 //            [self payCardCheck];
             /*刷卡验证是否有此默认信用卡*/
             [self ApipayCardCheck];
+            /*卡号类型判断*/
+            [self bankcardtype];
         }
     }
 }
@@ -1683,7 +1712,7 @@
         return;
     }
     
-    if (![result isEqualToString:@"cancel"]) {
+    if ([result isEqualToString:@"success"]) {
         flagNav= NO;
         [self ensureQQChargePayCardMoney];
     }
@@ -1883,8 +1912,42 @@
      completion:nil];
 }
 
+
+/*识别银行卡所属银行以及类型*/
+-(void)bankcardtype
+{
+    NSDictionary *dataDictionary = @{ @"bkcardno" : _TextFiledCared.text, };
+    
+    /**/
+    [LoadDataWithASI loadDataWithMsgbody:dataDictionary apiName:@"ApiAppInfo" apiNameFunc:@"checkBanckCardType" rolePath:@"//operation_response/msgbody" type:PublicCommon completionBlock:^(NSDictionary *data, NSError *error) {
+        NSLog(@"bkcardno %@",data);
+        
+        if ([BankType isEqualToString: @"3"]) {
+             [self jumpToPayType];
+        }
+        NSRange range = [data[@"result"] rangeOfString:@"succ"];
+        if (range.length <= 0)
+        {
+            [self showErrorInfo:data[@"message"] status:NLHUDState_Error];
+            [_hud hide:YES afterDelay:1.5];
+        }else
+        {
+            /*卡的类型*/
+            bankTypeStr = [[data valueForKey:@"bkcardtype"]length] > 2 ?[data valueForKey:@"bkcardtype"] : @" " ;
+        }
+        
+    }];
+    
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    /*输入判断的*/
+    if (_TextFiledCared.text.length >= 15) {
+        
+        [self bankcardtype];
+    }
+    
     //使视图回到原来的位置
     CGAffineTransform pTransform = CGAffineTransformMakeTranslation(0, 0);
     //使视图使用这个变换

@@ -96,7 +96,7 @@
     }
 }
 
-//网络请求图片，缓存到本地沙河中
+/*网络请求图片，缓存到本地沙盒中*/
 -(void)loadImage
 {
     //对路径进行编码
@@ -164,6 +164,7 @@
     //    NSLog(@"即将发送请求");
     return request;
 }
+
 //下载完成，将文件保存到沙河里面
 -(void)connectionDidFinishLoading:(NSURLConnection *)theConnection
 {

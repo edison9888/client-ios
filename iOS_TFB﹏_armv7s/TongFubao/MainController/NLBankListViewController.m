@@ -35,7 +35,6 @@ typedef enum
 @synthesize code = _code;
 @synthesize name = _name;
 
-
 - (id)initWithDictionary:(NSDictionary *)dictionary
 {
     //    LOG(@"bank ==  %@",dictionary);
@@ -73,6 +72,7 @@ typedef enum
 @property (nonatomic,strong)NSArray *dataHold;
 @property (nonatomic,assign)BOOL scrollTag;
 @property (nonatomic,assign)NLBankListState searchState;
+
 @property (nonatomic,strong)NLProgressHUD* myHUD;
 @property(nonatomic,strong)NSMutableArray* myArray;
 @property(nonatomic,strong)IBOutlet UITextField* myTextField;
@@ -94,6 +94,8 @@ typedef enum
 @synthesize titleLabel = _titleLabel;
 @synthesize myTextField;
 @synthesize payListBank;
+@synthesize BankListCCT;
+
 
 - (id)initWithDataList:(NSArray *)dataList
                  state:(NLBankListState)state
@@ -245,30 +247,31 @@ typedef enum
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    //if (self.bankIndex != indexPath.row)
+
+    UITableViewCell *oldCell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.bankIndex inSection:0]];
+    if ([oldCell accessoryType] == UITableViewCellAccessoryCheckmark)
     {
-        UITableViewCell *oldCell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.bankIndex inSection:0]];
-        if ([oldCell accessoryType] == UITableViewCellAccessoryCheckmark)
-        {
-            [oldCell setAccessoryType:UITableViewCellAccessoryNone];
-        }
-        self.bankIndex = indexPath.row;
-        UITableViewCell *newCell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-        if ([newCell accessoryType] == UITableViewCellAccessoryNone)
-        {
-            [newCell setAccessoryType:UITableViewCellAccessoryCheckmark];
-        }
-        if ([_delegate respondsToSelector:@selector(dataSearch:didSelectWithObject:withState:)])
-        {
-            //NLDataBase_bankListTable *node = [_data objectAtIndex:indexPath.row];
-            NSString* name = [[self.myArray objectAtIndex:indexPath.row] objectForKey:@"bankname"];
-            NSString *bankIDs = [[self.myArray objectAtIndex:indexPath.row] objectForKey:@"bankno"];
-            //NSString* name = node.myName;
-            //int bankID = [node.myID intValue];
-            [_delegate dataSearch:self didSelectWithObject:name withState:bankIDs];
-            
-            NSLog(@"bankIDs %@",bankIDs);
-        }
+        [oldCell setAccessoryType:UITableViewCellAccessoryNone];
+    }
+    self.bankIndex = indexPath.row;
+    UITableViewCell *newCell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+    if ([newCell accessoryType] == UITableViewCellAccessoryNone)
+    {
+        [newCell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    }
+    if ([_delegate respondsToSelector:@selector(dataSearch:didSelectWithObject:withState:andBankctt:)])
+    {
+        //NLDataBase_bankListTable *node = [_data objectAtIndex:indexPath.row];
+        NSString* name = [[self.myArray objectAtIndex:indexPath.row] objectForKey:@"bankname"];
+        NSString *bankIDs = [[self.myArray objectAtIndex:indexPath.row] objectForKey:@"bankno"];
+        NSString *bankctt = [[self.myArray objectAtIndex:indexPath.row] objectForKey:@"ctripbankctt"];
+        NSLog(@"=====bankctt====bank=====%@",bankctt);
+        
+        //NSString* name = node.myName;
+        //int bankID = [node.myID intValue];
+        [_delegate dataSearch:self didSelectWithObject:name withState:bankIDs andBankctt:bankctt];
+        
+        NSLog(@"bankIDs %@",bankIDs);
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -369,7 +372,16 @@ typedef enum
     {
         banktypeStr= @"yibao";
     }
-    NSLog(@"====payListBank=====%@",payListBank);
+    switch (self.BankListCCT)
+    {
+        case XCBankListctripctt:
+            banktypeStr = @"ctripctt";
+            break;
+        default:
+            break;
+    }
+    
+    NSLog(@"====banktypeStr=====%@",banktypeStr);
     NSString* name = [NLUtils getNameForRequest:Notify_readBankList];
     REGISTER_NOTIFY_OBSERVER(self, readBankListNotify, name);
     [[[NLProtocolRequest alloc] initWithRegister:YES]readBankListByPaging:self.myActivemobilesms msgstart:_msgstart msgdisplay:_msgdisplay querywhere:_querywhere banktype:banktypeStr  returnReadmode:payListBank];
@@ -387,6 +399,8 @@ typedef enum
     NSString* bankid = nil;
     NSString* bankno = nil;
     NSString* bankname = nil;
+    NSString* ctripbankctt = nil;
+
     for (NLProtocolData* data in arr)
     {
         /*NLProtocolData*/ d = [data find:@"bankid" index:0];
@@ -397,14 +411,19 @@ typedef enum
         
         d = [data find:@"bankname" index:0];
         bankname = d.value;
+        d = [data find:@"ctripbankctt" index:0];
+        ctripbankctt = d.value;
+        NSLog(@"=======ctripbankctt=====%@",ctripbankctt);
      
-        NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:bankid,@"bankno",bankname,@"bankname", nil];
+        NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:bankid,@"bankno",bankname,@"bankname",ctripbankctt,@"ctripbankctt", nil];
         [self.myArray addObject:dic];
     }
     if ([self.myArray count] > 0)
     {
         [self.contentView reloadData];
     }
+    NSLog(@"=======myArray=====%@",self.myArray);
+
 }
 
 -(void)readBankListNotify:(NSNotification*)notify

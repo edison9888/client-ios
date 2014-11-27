@@ -421,7 +421,7 @@ typedef enum
     [NLUtils setIspaypwd:_ispaypwd];
     [self showErrorInfo:NLLogOnInfoType_ProtocolSuccess detail:@"登录成功"];
      [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"PhoneNoFlag"];
-    NSMutableArray *array= [NSMutableArray array];
+   
     NLProtocolData* data = [response.data find:@"msgbody/result" index:0];
     NSString *result = data.value;
     NSRange range = [result rangeOfString:@"succ"];
@@ -434,14 +434,8 @@ typedef enum
     }
     else
     {
-        //手势密码没存
-        NSString *count= @"5";
-        [array addObject:@{@"passwordConfirmFieldDL": passwordConfirmFieldStr,@"phonetextfiledDL":_phonetextfiled.text,@"authoridDL":[response.data find:@"msgbody/authorid" index:0].value, @"countNum":count}];
-        [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"DLarray"];
-        [[NSUserDefaults standardUserDefaults]synchronize];
-        //手势判断次数 存本地
-        [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%d",5] forKey:KEY_RECORD_GESTURE_NUM];
-        [[NSUserDefaults standardUserDefaults]synchronize];
+        //本地储存数据 用于手势密码数据
+       
         
         /*用于第一次进入手势密码直接跳过的操作*/
         if ( [NLUtils getleader] == nil) {
@@ -457,6 +451,7 @@ typedef enum
                 [NLUtils presentModalViewController:self newViewController:new];
             }else
             {
+                [self usedefuallistGesture];
                 
                 NLAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
                 
@@ -474,6 +469,20 @@ typedef enum
         }
       
     }
+}
+
+-(void)usedefuallistGesture
+{
+    NSMutableArray *array= [NSMutableArray array];
+    NSString *count= @"5";
+    [array addObject:@{@"passwordConfirmFieldDL": passwordConfirmFieldStr,@"phonetextfiledDL":_phonetextfiled.text,@"countNum":count/**@"authoridDL":[response.data find:@"msgbody/authorid" index:0].value, **/}];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"DLarray"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
+    //手势判断次数 存本地
+    [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%d",5] forKey:KEY_RECORD_GESTURE_NUM];
+    [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
 //检查版本号

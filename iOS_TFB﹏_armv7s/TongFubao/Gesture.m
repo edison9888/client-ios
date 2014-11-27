@@ -59,29 +59,33 @@
     
     [NLUtils setPaypasswd:self.payPasswd];
     [NLUtils setLogonDate];
-    if (_changeFlage != YES)
+    
+    /*登陆界面 直接使用手势登陆*/
+    if (_changeFlage != YES && _loginFlage!=YES)
     {
         [NLUtils setRegisterMobile:[[DLArr valueForKey:@"phonetextfiledDL"] objectAtIndex:0]];
         [NLUtils setLogonPassword:[[DLArr valueForKey:@"passwordConfirmFieldDL"]objectAtIndex:0]];
         [NLUtils set_req_token:nil];
     }
-    
-    /*取上次的authorid*/
-     [NLUtils setAuthorid: [[DLArr valueForKey:@"authoridDL"]objectAtIndex:0]];
-    
+   
     NSString* name = [NLUtils getNameForRequest:Notify_ApiAuthorInfoV2GestureToHander];
     
     REGISTER_NOTIFY_OBSERVER(self, GestureNotifyOther, name);
     
-    if (_loginFlage==YES) {
-        
-        [[[NLProtocolRequest alloc] initWithRegister:YES]getApiAuthorInfoV2gesturepasswdTohander:gestureStr paypasswd:payStr mobile:_loginMobile];
-        [NLUtils setRegisterMobile:_loginMobile];
-        
-    }else
+    if (_changeFlage==YES)
     {
+        /*切换账户界面 使用手势密码登陆*/
+        [[[NLProtocolRequest alloc] initWithRegister:YES]getApiAuthorInfoV2gesturepasswdTohander:gestureStr paypasswd:payStr mobile:_loginMobile];
+        
+    }else if (_loginFlage==YES)
+    {
+        /*其他情况登陆 填写密码手机号的*/
         [[[NLProtocolRequest alloc] initWithRegister:YES]getApiAuthorInfoV2gesturepasswdTohander:gestureStr paypasswd:payStr mobile:[[DLArr valueForKey:@"phonetextfiledDL"] objectAtIndex:0]];
         [NLUtils setRegisterMobile:[[DLArr valueForKey:@"phonetextfiledDL"] objectAtIndex:0]];
+    }else
+    {
+        /*直接手势密码*/
+        [[[NLProtocolRequest alloc] initWithRegister:YES]getApiAuthorInfoV2gesturepasswdTohander:gestureStr paypasswd:payStr mobile:[NLUtils getRegisterMobile]];
     }
     
     //    [self showErrorInfo:@"请稍候" status:NLHUDState_None];
@@ -176,16 +180,11 @@
     {
         /*** madfrog add 6.20***/
         [NLUtils setAgentid:[response.data find:@"msgbody/agentid" index:0].value];
-    
         /*替换默认的authorid*/
         [NLUtils setAuthorid:[response.data find:@"msgbody/authorid" index:0].value];
         /*** madfrog add 6.20***/
-        
-        /*relateAgent字段*/
+        /*relateAgent字段 1绑定服务代理商的*/
         [NLUtils setRelateAgent:[response.data find:@"msgbody/relateAgent" index:0].value];
-        
-        /*relateAgent*/
-        
         /*agenttypeid字段 0普通/1正式/2虚拟 */
         [NLUtils setAgenttypeid:[response.data find:@"msgbody/agenttypeid" index:0].value];
         
@@ -289,8 +288,10 @@
         lablePeople.backgroundColor= [UIColor clearColor];
       
         if (_changeFlage == YES) {
+            
             lablePeople.text= [NLUtils getRegisterMobile];
         }else{
+            
             NSString *phoneStr = _loginFlage ? _loginMobile : mobile;
             lablePeople.text= phoneStr;
             [NLUtils setRegisterMobile:phoneStr];
@@ -404,6 +405,7 @@
     self.password= password;
     gestureStr= password;//当前设置的密码
     JumpType = @"finish";
+    /*登陆*/
     [self LoginViewIsGestureURL];
     [self updateInfoLabel];
 }

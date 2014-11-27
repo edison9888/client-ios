@@ -26,7 +26,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xha-SU-m01">
-                        <rect key="frame" x="80" y="10" width="200" height="21"/>
+                        <rect key="frame" x="80" y="10" width="180" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.36862745098039218" green="0.37254901960784315" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
@@ -39,22 +39,34 @@
                         <color key="textColor" red="0.69019607843137254" green="0.69411764705882351" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K1G-qY-9fC">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="324" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K1G-qY-9fC">
                         <rect key="frame" x="235" y="33" width="55" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.69019607843137254" green="0.69411764705882351" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SMS_payment.png" id="rz1-gr-e40">
-                        <rect key="frame" x="285" y="0.0" width="20" height="42"/>
+                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SMS_receivables.png" id="rz1-gr-e40">
+                        <rect key="frame" x="295" y="0.0" width="14" height="35"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收款" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VrZ-PA-eik">
-                        <rect key="frame" x="289" y="0.0" width="12" height="33"/>
+                        <rect key="frame" x="296" y="0.0" width="12" height="28"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SMS_payment.png" id="zFE-K0-XRE">
+                        <rect key="frame" x="274" y="0.0" width="14" height="35"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oTH-FI-ru3">
+                        <rect key="frame" x="275" y="0.0" width="12" height="28"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </label>
@@ -65,6 +77,8 @@
                 <outlet property="bankCard" destination="K1G-qY-9fC" id="uTi-cC-NaX"/>
                 <outlet property="bankLOGO" destination="Lif-Jh-6fQ" id="W3r-Y5-AcV"/>
                 <outlet property="name" destination="LiY-MH-QXb" id="uS5-Ir-Sy1"/>
+                <outlet property="payment" destination="oTH-FI-ru3" id="SKo-1m-HDD"/>
+                <outlet property="paymentImageView" destination="zFE-K0-XRE" id="1nj-sy-EPd"/>
                 <outlet property="receivablesPayment" destination="VrZ-PA-eik" id="Nn2-Y0-8yN"/>
                 <outlet property="receivablesPaymentImageView" destination="rz1-gr-e40" id="d1e-TR-siE"/>
                 <outlet property="tailNumber" destination="6xY-y4-shl" id="aXh-zT-RQ8"/>
@@ -73,5 +87,6 @@
     </objects>
     <resources>
         <image name="SMS_payment.png" width="22" height="39"/>
+        <image name="SMS_receivables.png" width="22" height="39"/>
     </resources>
 </document>

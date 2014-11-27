@@ -34,12 +34,13 @@
     BOOL flagAlert;
     BOOL flagSKQ;
     BOOL _enablePayCard;
-    BOOL         flagTY;
-    NSString* _resultPayCard;
     BOOL _enableCardImage;
+    BOOL flagTY;
+  
     NLProgressHUD* _hud;
-    VisaReader* _visaReader;
-    NSArray* _visaReaderArray;
+    VisaReader   * _visaReader;
+    NSArray      * _visaReaderArray;
+    NSString     * _resultPayCard;
     
     /*刷卡对比信息*/
     NSString * bkcardyxmonthStr;
@@ -76,9 +77,10 @@
     /*转账超时*/
     int _time;
     BOOL flagYZM;
-    
     BOOL myBankCard;
 }
+
+@property (nonatomic,strong) PayWidgetView *payView;
 
 @end
 
@@ -133,6 +135,13 @@
     self.navigationController.topViewController.title = @"付款";
     [self initValue];
     [self initVisaReader];
+    [self payMoreselectSQM];
+}
+
+/*信息*/
+-(void)payMoreselectSQM
+{
+    [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
     
     UITapGestureRecognizer *oneFingerTwoTaps = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                        action:@selector(oneFingerTwoTaps)];
@@ -141,35 +150,30 @@
     //[oneFingerTwoTaps setNumberOfTouchesRequired:1];
     [self.view addGestureRecognizer:oneFingerTwoTaps];
     
-    NSString *num =[NSString stringWithFormat:@"%f",_myButton.frame.origin.y+60];
-    [_textLable.layer setValue:num forKeyPath:@"frame.origin.y"];
+    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(keyboardWasHidden:) name:UIKeyboardWillHideNotification object:nil];
+    
+//    NSString *num =[NSString stringWithFormat:@"%f",_myButton.frame.origin.y+60];
+//    [_textLable.layer setValue:num forKeyPath:@"frame.origin.y"];
     
     /*交易类型*/
     paytype_check= [[[NSUserDefaults standardUserDefaults]objectForKey:BANK_PAYTYPE_CHECK] objectAtIndex:0];
+    
+    /*授权码按钮*/
+    _payView = [[PayWidgetView alloc]init];
+    _payView.view.backgroundColor = RGBACOLOR(245, 245, 245, 1.0);
+    _payView.view.frame = CGRectMake(0, 75, 320, 50);
+    [_myTableView addSubview:_payView.view];
 }
 
--(void)initVisaReader
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    //_visaReader = [[VisaReader alloc] initWithDelegate:self];
-    _visaReader = [VisaReader initWithDelegate:self];
-    [_visaReader createVisaReader];
-}
-
--(void)startVisaReader
-{
-    if (_visaReader)
-    {
-        [_visaReader resetVisaReader:YES];
+    if (1 == section) {
+        return 145.0f;
+    }else{
+        return 20.0f;
     }
 }
 
--(void)stopVisaReader
-{
-    if (_visaReader)
-    {
-        [_visaReader resetVisaReader:NO];
-    }
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -244,36 +248,6 @@
 
 #pragma mark - UITableViewDataSource
 
-#ifdef IOS_7
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 10.0f;
-}
-
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    CGRect rect = CGRectMake(0, 0, self.view.frame.size.width, 50);
-//    UIView* view = [[UIView alloc] initWithFrame:rect];
-//    [view setBackgroundColor:[UIColor clearColor]];
-//    rect.origin.x = 10;
-//    rect.origin.y = 5;
-//    rect.size.width = 300;
-//    rect.size.height = 20;
-//    UILabel* label = [[UILabel alloc] initWithFrame:rect];
-//    label.adjustsFontSizeToFitWidth = NO;
-//    label.backgroundColor=[UIColor clearColor];
-//    label.font=[UIFont systemFontOfSize:13.0f];
-//    label.textColor = [UIColor blackColor];
-//    if (0 == section)
-//    {
-//        label.text = @"付款银行账号信息";
-//    }
-//    [view addSubview:label];
-//    return view;
-//}
-
-#endif
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -306,7 +280,8 @@
     cell.myUprightBtn.hidden = YES;
     cell.mySelectedBtn.hidden = YES;
     cell.myContainer = self;
-    
+    cell.myTextField.delegate= self;
+
     [cell.myTextField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
     
     switch (indexPath.section)
@@ -320,7 +295,7 @@
                     cell.myHeaderLabel.text = @"收款额度";
                     cell.myContentLabel.hidden = NO;
                     cell.myContentLabel.textColor = [UIColor redColor];
-                    cell.myContentLabel.text = _couponmoney;
+                    cell.myContentLabel.text = [NSString stringWithFormat:@"%@元",_couponmoney];
                     cell.myContentLabel.textAlignment = NSTextAlignmentLeft;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -434,7 +409,6 @@
                 default:
                     break;
             }
-            
         default:
             break;
         }
@@ -466,7 +440,7 @@
 #pragma mark - NLBankLisDelegate
 
 - (void)dataSearch:(NLBankListViewController *)controller didSelectWithObject:(id)aObject
-         withState:(NSString *)state
+         withState:(NSString *)state andBankctt:(NSString *)bankctt
 {
     _fucardbank = (NSString*)aObject;
     
@@ -504,6 +478,33 @@
     }
 }
 
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    CGRect rect = CGRectMake(0, 0, self.view.frame.size.width, 30);
+    
+    UIView* view = [[UIView alloc] initWithFrame:rect];
+    [view setBackgroundColor:[UIColor clearColor]];
+    rect.origin.x = 5;
+    rect.origin.y = 115;
+    rect.size.width = 300;
+    rect.size.height = 20;
+    UILabel* label = [[UILabel alloc] initWithFrame:rect];
+    label.adjustsFontSizeToFitWidth = NO;
+    label.backgroundColor=[UIColor clearColor];
+    label.font=[UIFont systemFontOfSize:15];
+    label.textColor = [UIColor lightGrayColor];
+    if (1 == section)
+    {
+        label.text = @"付款账户信息";
+    }
+    [view addSubview:label];
+    return view;
+}
 
 -(void)showErrorInfo:(NSString*)detail status:(NLHUDState)status
 {
@@ -1337,6 +1338,37 @@
 {
     [_hud hide:YES];
     [NLUtils popToLogonVCByHTTPError:self feedOrLeft:1];
+}
+
+#pragma 刷卡器
+-(void)initVisaReader
+{
+    //_visaReader = [[VisaReader alloc] initWithDelegate:self];
+    _visaReader = [VisaReader initWithDelegate:self];
+    [_visaReader createVisaReader];
+}
+
+-(void)startVisaReader
+{
+    if (_visaReader)
+    {
+        [_visaReader resetVisaReader:YES];
+    }
+}
+
+-(void)stopVisaReader
+{
+    if (_visaReader)
+    {
+        [_visaReader resetVisaReader:NO];
+    }
+}
+
+-(void)keyboardWasHidden:(id)noti{
+ 
+    [UIView animateWithDuration:0.3 animations:^{
+         self.view.frame= CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    }];
 }
 
 -(void)showMainView

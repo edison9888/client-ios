@@ -311,7 +311,7 @@ static IQKeyboardManager *kbManager;
             break;
     }
 	
-    //  Getting it's superScrollView.
+    //
     UIScrollView *superScrollView = [_textFieldView superScrollView];
     
     //If there was a lastScrollView.
@@ -514,6 +514,7 @@ static IQKeyboardManager *kbManager;
     //Due to orientation callback we need to set it's original position.
     [UIView animateWithDuration:animationDuration delay:0 options:(animationCurve|UIViewAnimationOptionBeginFromCurrentState) animations:^{
         _textFieldView.frame = textFieldViewIntialFrame;
+        
     } completion:^(BOOL finished) {
 
     }];
@@ -529,17 +530,21 @@ static IQKeyboardManager *kbManager;
         animationDuration = [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     }
 	
-    
+    /*文字textfiled位置的显示*/
     [UIView animateWithDuration:animationDuration delay:0 options:(animationCurve|UIViewAnimationOptionBeginFromCurrentState) animations:^{
         lastScrollView.contentOffset = startingContentOffset;
+        
     } completion:^(BOOL finished) {
-
+       
     }];
     
     lastScrollView = nil;
     kbSize = CGSizeZero;
     startingContentOffset = CGPointZero;
     //  Setting rootViewController frame to it's original position.
+    /*修改uiscroller问题
+     lastScrollView.contentOffset = CGPointMake(lastScrollView.contentOffset.x, startingContentOffset.y+169);*/
+    
     [self setRootViewFrame:topViewBeginRect];
 }
 

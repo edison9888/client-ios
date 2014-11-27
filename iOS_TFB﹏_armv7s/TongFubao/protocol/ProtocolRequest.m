@@ -60,7 +60,7 @@
     [[self actions] addObject:action];
     NSData* data=[ProtocolParser reqToXml:a];
     //    NSData* dataA=[ProtocolParser ];
-    NLLogNoLocation(@"reqToXml=%s", [data bytes]);
+    NLLogNoLocation(@"＝＝＝＝＝＝＝＝＝＝reqToXml=%s", [data bytes]);
     return [self startRequestForData:data];
 }
 

@@ -21,6 +21,8 @@
 
 @property (retain,nonatomic) id<AddContactPersondelegate>delegate;
 @property (retain,nonatomic) NSMutableArray *CellDateArray;
+@property (retain,nonatomic) NSMutableArray *CellButtonArray;
+
 @property (assign,nonatomic) NSInteger teger;
 @property (retain,nonatomic) NSArray *ticketArray;
 

@@ -75,7 +75,7 @@
 
 //开户银行的代理方法
 - (void)dataSearch:(NLBankListViewController *)controller didSelectWithObject:(id)aObject
-         withState:(NSString *)state{
+         withState:(NSString *)state andBankctt:(NSString *)bankctt{
     
     if (self.state2 == 1) {
         self.xy_bankCode = (NSString *)state;
@@ -103,12 +103,15 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     NSLog(@"即将离开界面 键盘已收起");
-//    for (int i=0; i<4; i++) {
-//        [textFields[i] resignFirstResponder];
-//    }
+    for (int i=0; i<6; i++) {
+        [creditTextField[i] resignFirstResponder];
+    }
+    for (int c=0; c<4; c++) {
+        [theSavingsCardTextField[c] resignFirstResponder];
+    }
 //    creditTextField[6];//信用卡输入框
 //    theSavingsCardTextField[4];//储蓄卡输入框
-    [self.view endEditing:YES];
+
     [super viewWillDisappear:animated];
 }
 
@@ -245,6 +248,7 @@
         creditTextField[i].delegate = self;
         creditTextField[i].backgroundColor = [UIColor clearColor];
         creditTextField[i].tag = 8010+i;
+        [creditTextField[i] setFont:[UIFont fontWithName:nil size:16]];
         [self.creditView addSubview:creditTextField[i]];
         
         
@@ -281,7 +285,7 @@
         
         switch (creditTextField[i].tag) {
             case 8010:
-                creditTextField[0].placeholder = @"请选择银行";
+                creditTextField[0].placeholder = @"点击选择开户银行";
                 
                 [self jumpCreditButton];//选择开户银行
                 ;
@@ -364,9 +368,9 @@
 #pragma mark - 添加 信用卡 背后CCV三位数
 -(void)addCreditCCV:(UITextField *)textField{
     
-    if ([textField.text length]>3) {
-        textField.text=[textField.text substringToIndex:3];
-        self.xy_ccvString = [ self.xy_ccvString substringWithRange:NSMakeRange(0,3)];
+    if ([textField.text length]>4) {
+        textField.text=[textField.text substringToIndex:4];
+        self.xy_ccvString = [ self.xy_ccvString substringWithRange:NSMakeRange(0,4)];
         NSLog(@"截取到的CCV验证码 :%@",self.xy_ccvString);
     }else{
         self.xy_ccvString = [NSString stringWithFormat:@"%@",textField.text];
@@ -594,7 +598,7 @@
         if ([NLUtils checkBankCard:self.xy_creditCardString] == YES){
             
             //CCV验证码
-            if (self.xy_ccvString.length == 3){
+            if (self.xy_ccvString.length == 3 || self.xy_ccvString.length == 4){
                 
                 //预留手机号
                 if ([NLUtils checkMobilePhone:self.xy_phoneString] == YES){
@@ -609,33 +613,32 @@
                             [self creditCardToSaveNetworkRequest];
                             
                         }else{
-                            UIAlertView *alertView6 = [[UIAlertView alloc]initWithTitle:@"提示" message:@"身份证号码有误 !" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
-                            [alertView6 show];
+
+                            [self showErrorInfo:@"请确认您输入的身份证号码是否正确" status:NLHUDState_Error];
                         }
                         
                     }else{
-                        UIAlertView *alertView5 = [[UIAlertView alloc]initWithTitle:@"提示" message:@"姓名不合法 !" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
-                        [alertView5 show];
+
+                        [self showErrorInfo:@"请确认您输入的姓名是否正确" status:NLHUDState_Error];
                     }
                     
                 }else{
-                    UIAlertView *alertView4 = [[UIAlertView alloc]initWithTitle:@"提示" message:@"手机号码有误 !" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
-                    [alertView4 show];
+   
+                    [self showErrorInfo:@"请确认您输入的手机号码是否正确" status:NLHUDState_Error];
                 }
                 
             }else{
-                UIAlertView *alertView3 = [[UIAlertView alloc]initWithTitle:@"提示" message:@"CCV验证码有误 !" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
-                [alertView3 show];
-
+                
+                [self showErrorInfo:@"请确认您输入的CCV验证码是否正确" status:NLHUDState_Error];
             }
             
         }else{
-            UIAlertView *alertView2 = [[UIAlertView alloc]initWithTitle:@"提示" message:@"信用卡号有误 !" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
-            [alertView2 show];
+
+            [self showErrorInfo:@"请确认您输入的信用卡号是否正确" status:NLHUDState_Error];
         }
     }else{
-        UIAlertView *alertView1 = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请完善资料填写 !" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
-        [alertView1 show];
+        
+        [self showErrorInfo:@"请完善资料填写" status:NLHUDState_Error];
     }
     
 }
@@ -656,7 +659,7 @@
                                                                           bkcardcvv:creditTextField[2].text
                                                                        bkcardidcard:creditTextField[5].text
                                                                      bkcardcardtype:@"creditcard"
-                                                                    bkcardisdefault:@"0"
+                                                                    bkcardisdefault:@"999"
                                                              bkcardisdefaultPayment:@"1"];
 
 }
@@ -684,6 +687,7 @@
         theSavingsCardTextField[i].delegate = self;
         theSavingsCardTextField[i].backgroundColor = [UIColor clearColor];
         theSavingsCardTextField[i].tag = 8030+i;
+        [theSavingsCardTextField[i] setFont:[UIFont fontWithName:nil size:16]];
         [self.theSavingsCardView addSubview:theSavingsCardTextField[i]];
         
         
@@ -714,7 +718,7 @@
         
         switch (theSavingsCardTextField[i].tag) {
             case 8030:
-                theSavingsCardTextField[0].placeholder = @"请选择银行";
+                theSavingsCardTextField[0].placeholder = @"点击选择开户银行";
                 
                 [self jumpTheSavingsCardButton];//选择开户银行
                 ;
@@ -842,23 +846,24 @@
                     [self savingsCardsStoreNetworkRequest];
                     
                 }else{
-                    UIAlertView *alertView4 = [[UIAlertView alloc]initWithTitle:@"提示" message:@"手机号码有误 !" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
-                    [alertView4 show];
+
+                    [self showErrorInfo:@"请确认您输入的手机号码是否正确" status:NLHUDState_Error];
                 }
                 
             }else{
-                UIAlertView *alertView3 = [[UIAlertView alloc]initWithTitle:@"提示" message:@"姓名不合法 !" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
-                [alertView3 show];
+
+                [self showErrorInfo:@"请确认您输入的姓名是否正确" status:NLHUDState_Error];
             }
             
         }else{
-            UIAlertView *alertView2 = [[UIAlertView alloc]initWithTitle:@"提示" message:@"银行卡号有误 !" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
-            [alertView2 show];
+            
+            [self showErrorInfo:@"请确认您输入的银行卡号是否正确" status:NLHUDState_Error];
         }
         
     }else{
-        UIAlertView *alertView1 = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请完善资料填写" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
-        [alertView1 show];
+
+        [self showErrorInfo:@"请完善资料填写" status:NLHUDState_Error];
+        
     }
     
     
@@ -880,7 +885,7 @@
                                                                           bkcardcvv:@""
                                                                        bkcardidcard:@""
                                                                      bkcardcardtype:@"bankcard"
-                                                                    bkcardisdefault:@"0"
+                                                                    bkcardisdefault:@"999"
                                                              bkcardisdefaultPayment:@"1"];
     
     

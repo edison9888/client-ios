@@ -75,8 +75,18 @@
 @dynamic zooming;
 @dynamic bouncesZoom;
 
+static RATreeView *mView = nil;
 
 #pragma mark Initializing a TreeView Object
+
++ (id)singleton:(CGRect)frame
+{
+    if (!mView)
+    {
+        mView = [[RATreeView alloc]initWithFrame:frame];
+    }
+    return mView;
+}
 
 - (id)init
 {
@@ -90,7 +100,7 @@
 
 - (id)initWithFrame:(CGRect)frame style:(RATreeViewStyle)style
 {
-  self = [super initWithFrame:frame];
+  self = [super initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
   if (self) {
     [self commonInitWithFrame:frame style:style];
   }

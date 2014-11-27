@@ -18,8 +18,8 @@
     if (self) {
         
         // 机票查询
-        self.nameTicket = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, 150, 20)];
-        self.nameTicket.font = [UIFont systemFontOfSize:16.0];
+        self.nameTicket = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, 180, 20)];
+        self.nameTicket.font = [UIFont systemFontOfSize:19.0];
         self.nameTicket.textColor = [UIColor grayColor];
         [self addSubview:self.nameTicket];
         
@@ -67,12 +67,12 @@
         
         // 历史详情
         self.historTitleLable = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, 100, 40)];
-        self.historTitleLable.font = [UIFont systemFontOfSize:20];
-        self.historTitleLable.textColor = RGBACOLOR(19, 193, 245, 1);
+        self.historTitleLable.font = [UIFont systemFontOfSize:16];
+        self.historTitleLable.textColor = [UIColor grayColor];
         [self addSubview:self.historTitleLable];
         
-        self.historTimeLable = [[UILabel alloc]initWithFrame:CGRectMake(200, 10, 150, 40)];
-        self.historTimeLable.font = [UIFont systemFontOfSize:16];
+        self.historTimeLable = [[UILabel alloc]initWithFrame:CGRectMake(170, 10, 150, 40)];
+        self.historTimeLable.font = [UIFont systemFontOfSize:13];
         self.historTimeLable.textColor = [UIColor grayColor];
         [self addSubview:self.historTimeLable];
         

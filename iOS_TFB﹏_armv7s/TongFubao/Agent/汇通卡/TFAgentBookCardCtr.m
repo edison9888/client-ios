@@ -15,6 +15,8 @@
 #import "DDXML.h"
 #import "DDXMLElementAdditions.h"
 
+#import "XIAOYU_TheControlPackage.h"
+
 @interface TFAgentBookCardCtr ()
 {
     NLProgressHUD* _hud;
@@ -57,6 +59,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.title = @"汇通卡订购";
+    
     dataArr = [NSMutableArray arrayWithCapacity:10];
     
     _msgstart = @"0";
@@ -72,7 +77,13 @@
     [self getInfo:@"0" :@"10"];
     
     _numTextField.delegate = self;
+    
+    
+    [self leftBarButtonBack];//返回按钮
+
 }
+
+
 
 - (void)viewWillAppear:(BOOL)animated
 {

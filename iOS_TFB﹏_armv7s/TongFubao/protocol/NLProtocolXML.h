@@ -502,7 +502,8 @@
 - (NLProtocolData*)getDepartCityCode:(NSString*)newDepartCityCode arriveCityCode:(NSString*)newArriveCityCode departTime:(NSString*)newdepartTime returnTime:(NSString*)newReturnDate searchType:(NSString*)newSearchType fligth:(NSString *)newFligth returnFlight:(NSString *)newreturnFlight;
 
 // 添加乘机人
-- (NLProtocolData*)getSavePassengerNameXML:(NSString*)newSavePassengerName SavePassengerCardType:(NSString*)newSavePassengerCardType SavePassengerCardId:(NSString*)newSavePassengerCardId phoneNumber:(NSString*)newPhoneNumber passengerType:(NSString *)newPassengerType;
+- (NLProtocolData*)getSavePassengerNameXML:(NSString*)newSavePassengerName SavePassengerCardType:(NSString*)newSavePassengerCardType SavePassengerCardId:(NSString*)newSavePassengerCardId phoneNumber:(NSString*)newPhoneNumber passengerType:(NSString*)newPassengerType birthdayXML:(NSString *)newBirthDay;
+
 
 // 读取乘机人信息
 - (NLProtocolData*)getPlayPassengerInfo:(NSString*)newPlayPassengerInfo;
@@ -511,7 +512,7 @@
 - (NLProtocolData *)getdeletcetionPassengerIdXML:(NSString *)newPassengerIdXML  deletcetionPassengerTypeXML:(NSString *)newdeletcetionPassengerXML;
 
 // 确认支付
--(NLProtocolData *)TicketBillIdXML:(NSString *)newTicketBillId  backTicketIdXML:(NSString *)newBackTicketBillId  styGoBack:(NSString *)newStyGoBsack perSonIdArrayXML:(NSMutableArray *)newperSonIdArrayXML ContactIdArrayXML:(NSMutableArray *)newContactIdArray   payinfoCardInfoArrayXML:(NSMutableArray *)newpayinfoCardInfoArray;
+-(NLProtocolData *)TicketBillIdXML:(NSString *)newTicketBillId  backTicketIdXML:(NSString *)newBackTicketBillId  styGoBack:(NSString *)newStyGoBsack perSonIdArrayXML:(NSMutableArray *)newperSonIdArrayXML ContactIdArrayXML:(NSMutableArray *)newContactIdArray   payinfoCardInfoArrayXML:(NSMutableArray *)newpayinfoCardInfoArray ValidityXML:(NSString *)newValidityXML AmountXML:(NSString *)newAmountXML;
 
 // 验证码
 - (NLProtocolData *)getApiPayverifyXML:(NSString *)newApiPayverify OrderIdXML:(NSString*)newOrderId;

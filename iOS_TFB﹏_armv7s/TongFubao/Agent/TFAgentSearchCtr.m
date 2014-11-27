@@ -10,6 +10,7 @@
 #import "NLUtils.h"
 #import "NLProtocolRegister.h"
 #import "SJTDatePickerView.h"
+#import "XIAOYU_TheControlPackage.h"
 
 @interface TFAgentSearchCtr ()
 
@@ -39,9 +40,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.title = @"查询历史收益";
+    
+    [self leftBarButtonBack];//返回按钮
 
+    
     [self UIInit];
+
 }
+
 
 
 -(void)UIInit
@@ -157,7 +165,7 @@
             NSString *searchDay = [dateFormatter stringFromDate:date];
             dateFormatter.dateFormat = @"yyyy年MM月dd日";
             _searchByDay.recordTime = [dateFormatter stringFromDate:date];
-            [_searchByDay searchByTime:searchDay];
+            [_searchByDay searchByTime:searchDay andTime:_searchByDay.recordTime];
         }
     }
     else if (page == 2)
@@ -170,7 +178,7 @@
             NSString *searchMonth = [dateFormatter stringFromDate:date];
             dateFormatter.dateFormat = @"yyyy年MM月";
             _searchByMonth.recordTime = [dateFormatter stringFromDate:date];
-            [_searchByMonth searchByTime:searchMonth];
+            [_searchByMonth searchByTime:searchMonth andTime:_searchByMonth.recordTime];
         }
     }
     else
@@ -183,7 +191,8 @@
             NSString *searchYear = [dateFormatter stringFromDate:date];
             dateFormatter.dateFormat = @"yyyy年";
             _searchByYear.recordTime = [dateFormatter stringFromDate:date];
-            [_searchByYear searchByTime:searchYear];
+            /*传值去替换文字显示*/
+            [_searchByYear searchByTime:searchYear andTime:_searchByYear.recordTime];
         }
     }
 }
@@ -203,6 +212,7 @@
     //滚动再读取当前月，年数据
     if (tag == 0)
     {
+        [_searchByDay clickType];
         _searchByDay.isCurrent = YES;
         _searchByMonth.isCurrent = NO;
         _searchByYear.isCurrent = NO;

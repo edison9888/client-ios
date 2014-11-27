@@ -129,7 +129,8 @@
     ctrH = [NLUtils getCtrHeight];
     scrollH =IOS7_OR_LATER==YES?(ctrH-100-64):(ctrH-100);
     
-    [self addRightButtonItemWithImage:[UIImage imageNamed:@"history"]];
+//    [self addRightButtonItemWithImage:[UIImage imageNamed:@"history"]];
+    [self addRightButtonItemWithTitle:@"历史记录"];
    
     
     //遮罩层

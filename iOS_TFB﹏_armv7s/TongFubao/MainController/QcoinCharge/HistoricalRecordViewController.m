@@ -15,6 +15,7 @@
 @interface HistoricalRecordViewController ()
 {
     PlayCustomActivityView *_activityView;
+    NSDictionary *dictionary;
 }
 
 @end
@@ -36,11 +37,13 @@
     [super viewDidLoad];
     self.OrderdAllArray = [[NSMutableArray alloc]init];
     self.OrderdSet = [[NSMutableSet alloc]init];
+    dictionary = @{@"W":@"未处理",@"P":@"处理中",@"S":@"已成交",@"C":@"已取消",@"R":@"全部退票",@"T":@"部分退票",@"U":@"未提交"};
     // 控件
     [self allViewControl];
     // 网络请求
     [self nextWork];
     [self navigationView];
+    
 }
 
 -(void)nextWork
@@ -69,18 +72,34 @@
     }
     else if (error == RSP_TIMEOUT)
     {
-        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
-        [_activityView removeFromSuperview];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
 
-        return ;
     }
-    else
+    else if (error == RSP_CANCEL)
     {
-        NSString *string = response.detail;
-        NSLog(@"===string====%@",string);
-        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
-        [_activityView removeFromSuperview];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+        
     }
+    else if (error == RSP_HAS_EXIST)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    else if (error == RSP_XML_RETCODE_FAILURE)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    NSString *string = response.detail;
+    NSLog(@"===string====%@",string);
+    [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+    [_activityView removeFromSuperview];
+
+
 }
 - (void)getDataOrderHistory:(NLProtocolResponse *)response
 {
@@ -99,6 +118,7 @@
     {
         
         
+        
         NSMutableArray *OrderdepartCityArray= [[NSMutableArray alloc]init];
         NSMutableArray *OrderdarriveCityArray = [[NSMutableArray alloc]init];
         NSMutableArray *OrderdcreateOrderTimeArray = [[NSMutableArray alloc]init];
@@ -107,9 +127,13 @@
         NSMutableArray *OrderdcraftTypeArray = [[NSMutableArray alloc]init];
         NSMutableArray *OrderdtotalPriceArray = [[NSMutableArray alloc]init];
         NSMutableArray *OrderdstatusArray = [[NSMutableArray alloc]init];
-
         // 机票实际价格
         NSArray *departCityArray = [response.data find:@"msgbody/msgchild/departCity"];
+        
+        if ([departCityArray count] > 0)
+        {
+            
+
         for (NLProtocolData *departCityData  in departCityArray)
         {
             [OrderdepartCityArray addObject:departCityData.value];
@@ -150,10 +174,19 @@
             [OrderdtotalPriceArray addObject:totalPriceData.value];
         }
 
-        NSArray *statusCityArray = [response.data find:@"msgbody/msgchild/status"];
+        NSArray *statusCityArray = [response.data find:@"msgbody/msgchild/orderProcess"];
         for (NLProtocolData *statusData  in statusCityArray)
         {
-            [OrderdstatusArray addObject:statusData.value];
+            NSString *dic;
+            NSLog(@"======statusData=====%@",statusData.value);
+            if (statusData.value == nil) {
+                dic =@"未处理";
+            }else{
+                dic = [dictionary objectForKey:statusData.value];
+                NSLog(@"======statusData=====%@",dic);
+             }
+
+            [OrderdstatusArray addObject:dic];
         }
         
         
@@ -181,9 +214,10 @@
         self.historicalTableView.tableFooterView = self.buttonView;
     }
     [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+    
     [_activityView removeFromSuperview];
-
     [self.historicalTableView reloadData];
+    }
     
 }
 
@@ -239,14 +273,17 @@
     backviewcell.backgroundColor=RGBACOLOR(165, 238, 255, 1);
     cell.selectedBackgroundView = backviewcell;
     
+    if ([self.OrderdAllArray count] > 0)
+    {
     NSString *string =[[self.OrderdAllArray objectAtIndex:indexPath.row] objectAtIndex:0];
     NSString *string1 =[[self.OrderdAllArray objectAtIndex:indexPath.row] objectAtIndex:1];
     NSLog(@"=====%@=====%@===",string,string1);
     
-    NSString *fromTime = [[[self.OrderdAllArray objectAtIndex:indexPath.row]objectAtIndex:2] substringToIndex:9];
+    NSString *fromTime = [[[self.OrderdAllArray objectAtIndex:indexPath.row]objectAtIndex:2] substringToIndex:10];
 
     [cell addNameLable:[NSString stringWithFormat:@"%@-%@",[[self.OrderdAllArray objectAtIndex:indexPath.row] objectAtIndex:0],[[self.OrderdAllArray objectAtIndex:indexPath.row]objectAtIndex:1]] moneyLable:[NSString stringWithFormat:@"￥%@",[[self.OrderdAllArray objectAtIndex:indexPath.row]objectAtIndex:6]] wacthTimeLable:fromTime];
 
+    }
     return cell;
     
 }

@@ -53,7 +53,7 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.leftBarButtonItem = [self leftBarButtonItem];
     
-    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height+50)];
+    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height+10)];
     
     self.lconImageView.image = [UIImage imageNamed:@"SMS_success"];
     
@@ -61,15 +61,77 @@
     
     self.sms_theOpeningBank.text = [NSString stringWithFormat:@"%@",self.theOpeningBank];
     
-    NSString *phone1 = [self.bankAccount substringToIndex:4];
+
     
+    if(self.bankAccount.length == 14){
+        NSString *phone1 = [self.bankAccount substringToIndex:6];
+        NSString *phone2 = [self.bankAccount substringFromIndex:9];
+        NSString *phone3 = [NSString stringWithFormat:@"%@%@%@",phone1,@"****",phone2];
+        self.sms_bankAccount.text = [NSString stringWithFormat:@"%@",phone3];
+        
+    }else if (self.bankAccount.length == 15) {
+        NSString *phone1 = [self.bankAccount substringToIndex:6];
+        NSString *phone2 = [self.bankAccount substringFromIndex:10];
+        NSString *phone3 = [NSString stringWithFormat:@"%@%@%@",phone1,@"****",phone2];
+        self.sms_bankAccount.text = [NSString stringWithFormat:@"%@",phone3];
+        
+    }else if(self.bankAccount.length == 16){
+        NSString *phone1 = [self.bankAccount substringToIndex:6];
+        NSString *phone2 = [self.bankAccount substringFromIndex:11];
+        NSString *phone3 = [NSString stringWithFormat:@"%@%@%@",phone1,@"****",phone2];
+        self.sms_bankAccount.text = [NSString stringWithFormat:@"%@",phone3];
+        
+    }else if(self.bankAccount.length == 17){
+        NSString *phone1 = [self.bankAccount substringToIndex:6];
+        NSString *phone2 = [self.bankAccount substringFromIndex:12];
+        NSString *phone3 = [NSString stringWithFormat:@"%@%@%@",phone1,@"****",phone2];
+        self.sms_bankAccount.text = [NSString stringWithFormat:@"%@",phone3];
     
+    }else if(self.bankAccount.length == 18){
+        NSString *phone1 = [self.bankAccount substringToIndex:6];
+        NSString *phone2 = [self.bankAccount substringFromIndex:13];
+        NSString *phone3 = [NSString stringWithFormat:@"%@%@%@",phone1,@"****",phone2];
+        self.sms_bankAccount.text = [NSString stringWithFormat:@"%@",phone3];
     
-    NSString *phone2 = [self.bankAccount substringFromIndex:12];
-    NSString *phone3 = [NSString stringWithFormat:@"%@%@%@",phone1,@"****",phone2];
+    }else if(self.bankAccount.length == 19){
+        NSString *phone1 = [self.bankAccount substringToIndex:6];
+        NSString *phone2 = [self.bankAccount substringFromIndex:14];
+        NSString *phone3 = [NSString stringWithFormat:@"%@%@%@",phone1,@"****",phone2];
+        self.sms_bankAccount.text = [NSString stringWithFormat:@"%@",phone3];
     
-    self.sms_bankAccount.text = [NSString stringWithFormat:@"%@",phone3];
+    }else if(self.bankAccount.length == 20){
+        NSString *phone1 = [self.bankAccount substringToIndex:6];
+        NSString *phone2 = [self.bankAccount substringFromIndex:15];
+        NSString *phone3 = [NSString stringWithFormat:@"%@%@%@",phone1,@"****",phone2];
+        self.sms_bankAccount.text = [NSString stringWithFormat:@"%@",phone3];
     
+    }else if(self.bankAccount.length == 21){
+        NSString *phone1 = [self.bankAccount substringToIndex:6];
+        NSString *phone2 = [self.bankAccount substringFromIndex:16];
+        NSString *phone3 = [NSString stringWithFormat:@"%@%@%@",phone1,@"****",phone2];
+        self.sms_bankAccount.text = [NSString stringWithFormat:@"%@",phone3];
+    
+    }else if(self.bankAccount.length == 22){
+        NSString *phone1 = [self.bankAccount substringToIndex:6];
+        NSString *phone2 = [self.bankAccount substringFromIndex:17];
+        NSString *phone3 = [NSString stringWithFormat:@"%@%@%@",phone1,@"****",phone2];
+        self.sms_bankAccount.text = [NSString stringWithFormat:@"%@",phone3];
+    
+    }else if(self.bankAccount.length == 23){
+        NSString *phone1 = [self.bankAccount substringToIndex:6];
+        NSString *phone2 = [self.bankAccount substringFromIndex:18];
+        NSString *phone3 = [NSString stringWithFormat:@"%@%@%@",phone1,@"****",phone2];
+        self.sms_bankAccount.text = [NSString stringWithFormat:@"%@",phone3];
+    
+    }else if(self.bankAccount.length == 24){
+        NSString *phone1 = [self.bankAccount substringToIndex:6];
+        NSString *phone2 = [self.bankAccount substringFromIndex:19];
+        NSString *phone3 = [NSString stringWithFormat:@"%@%@%@",phone1,@"****",phone2];
+        self.sms_bankAccount.text = [NSString stringWithFormat:@"%@",phone3];
+    
+    }else{
+        self.sms_bankAccount.text = [NSString stringWithFormat:@"%@",self.bankAccount];
+    }
     
 
     
@@ -79,20 +141,29 @@
 
 -(void)promptLabel{
 
-    UILabel *label1 = [[UILabel alloc]initWithFrame:CGRectMake(35, 84, 145, 21)];
+    UILabel *label1 = [[UILabel alloc]initWithFrame:CGRectMake(45, 84, 140, 21)];
     label1.text = @"您已成功向手机号码";
+    [label1 setFont:[UIFont fontWithName:nil size:15]];
     label1.textColor = RGBACOLOR(93, 94, 95, 1);
-    [label1 setFont:[UIFont fontWithName:nil size:16]];
+
     
-    UILabel *label2 = [[UILabel alloc]initWithFrame:CGRectMake(35+label1.frame.size.width, 84, 110, 21)];
+    UILabel *label2 = [[UILabel alloc]initWithFrame:CGRectMake(41+label1.frame.size.width, 84, 95, 21)];
     label2.text = self.telephone;
+    [label2 setFont:[UIFont fontWithName:nil size:15]];
     label2.textColor = RGBACOLOR(93, 94, 95, 1);
-    [label2 setFont:[UIFont fontWithName:nil size:16]];
     
-    UILabel *label3 = [[UILabel alloc]initWithFrame:CGRectMake(35, 105, 80, 21)];
-    label3.text = @"发起金额为";
+    
+    UILabel *label8 = [[UILabel alloc]initWithFrame:CGRectMake(40+label1.frame.size.width+label2.frame.size.width, 84, 35, 21)];
+    label8.text = @"发起";
+    [label8 setFont:[UIFont fontWithName:nil size:15]];
+    label8.textColor = RGBACOLOR(93, 94, 95, 1);
+    
+    
+    UILabel *label3 = [[UILabel alloc]initWithFrame:CGRectMake(15, 105, 47, 21)];
+    label3.text = @"金额为";
+    [label3 setFont:[UIFont fontWithName:nil size:15]];
     label3.textColor = RGBACOLOR(93, 94, 95, 1);
-    [label3 setFont:[UIFont fontWithName:nil size:16]];
+
     
     
     
@@ -106,33 +177,42 @@
       string  = [string stringByAppendingFormat:@"%@%@",self.amountOfMoney,@".00"];
     }
     
-    CGSize size=[string sizeWithFont:[UIFont systemFontOfSize:16] constrainedToSize:CGSizeMake(290, 10000)];
-    UILabel * label4 = [[UILabel alloc]initWithFrame:CGRectMake(35+label3.frame.size.width,105 ,size.width ,size.height )];
-    label4.font = [UIFont systemFontOfSize:16];
-//    label4.textColor = [UIColor brownColor];
-    label4.textColor = RGBACOLOR(229, 158, 53, 1);
+    UILabel * label4 = [[UILabel alloc]initWithFrame:CGRectMake(13+label3.frame.size.width,105 ,77 ,21)];
+    label4.font = [UIFont systemFontOfSize:15];
     label4.text = string;
-    label4.textAlignment = NSTextAlignmentLeft;
-    //自动换行
-    label4.lineBreakMode = NSLineBreakByWordWrapping;
-    label4.numberOfLines = 0;
+    label4.textAlignment = NSTextAlignmentCenter;
+    label4.textColor = RGBACOLOR(229, 158, 53, 1);
     
     
-    UILabel *label5 = [[UILabel alloc]initWithFrame:CGRectMake(37+label3.frame.size.width+label4.frame.size.width, 105, 100, 21)];
+    UILabel *label5 = [[UILabel alloc]initWithFrame:CGRectMake(24+label3.frame.size.width+70, 105, 90, 21)];
     label5.text = @"的短信收款，";
+    [label5 setFont:[UIFont fontWithName:nil size:15]];
     label5.textColor = RGBACOLOR(93, 94, 95, 1);
-    [label5 setFont:[UIFont fontWithName:nil size:16]];
     
     
-    UILabel *label6 = [[UILabel alloc]initWithFrame:CGRectMake(35, 126, 260, 21)];
-    label6.text = @"对方成功付款后1个工作日内，该笔";
+    UILabel *label9 = [[UILabel alloc]initWithFrame:CGRectMake(23+label3.frame.size.width+70+label5.frame.size.width, 105, 79, 21)];
+    label9.text = @"对方成功付";
+    [label9 setFont:[UIFont fontWithName:nil size:15]];
+    label9.textColor = RGBACOLOR(93, 94, 95, 1);
+    
+    
+    UILabel *label6 = [[UILabel alloc]initWithFrame:CGRectMake(15, 126, 130, 21)];
+    label6.text = @"款后1个工作日内，";
+    [label6 setFont:[UIFont fontWithName:nil size:15]];
     label6.textColor = RGBACOLOR(93, 94, 95, 1);
-    [label6 setFont:[UIFont fontWithName:nil size:16]];
     
-    UILabel *label7 = [[UILabel alloc]initWithFrame:CGRectMake(35, 148, 260, 21)];
-    label7.text = @"款项将转入您以下指定的银行账户：";
+    
+    UILabel *label10 = [[UILabel alloc]initWithFrame:CGRectMake(10+label6.frame.size.width, 126, 170, 21)];
+    label10.text = @"该笔款项将转入您以下指";
+    [label10 setFont:[UIFont fontWithName:nil size:15]];
+    label10.textColor = RGBACOLOR(93, 94, 95, 1);
+    
+    
+    UILabel *label7 = [[UILabel alloc]initWithFrame:CGRectMake(15, 148, 105, 21)];
+    label7.text = @"定的银行账户：";
+    [label7 setFont:[UIFont fontWithName:nil size:15]];
     label7.textColor = RGBACOLOR(93, 94, 95, 1);
-    [label7 setFont:[UIFont fontWithName:nil size:16]];
+    
     
     [self.scrollView addSubview:label1];
     [self.scrollView addSubview:label2];
@@ -141,6 +221,9 @@
     [self.scrollView addSubview:label5];
     [self.scrollView addSubview:label6];
     [self.scrollView addSubview:label7];
+    [self.scrollView addSubview:label8];
+    [self.scrollView addSubview:label9];
+    [self.scrollView addSubview:label10];
     
 }
 

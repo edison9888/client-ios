@@ -4802,19 +4802,23 @@ static NLProtocolXML* gProtocolXML = nil;
                                                    attr:nil
                                                attrName:nil
                                               valueType:NLProtocolDataValueNoCData]];
+    NSLog(@"=========pd===============%@",pd);
     return pd;
 }
 
 
 
 // 添加乘机人
-- (NLProtocolData*)getSavePassengerNameXML:(NSString*)newSavePassengerName SavePassengerCardType:(NSString*)newSavePassengerCardType SavePassengerCardId:(NSString*)newSavePassengerCardId phoneNumber:(NSString*)newPhoneNumber passengerType:(NSString*)newPassengerType
+- (NLProtocolData*)getSavePassengerNameXML:(NSString*)newSavePassengerName SavePassengerCardType:(NSString*)newSavePassengerCardType SavePassengerCardId:(NSString*)newSavePassengerCardId phoneNumber:(NSString*)newPhoneNumber passengerType:(NSString*)newPassengerType birthdayXML:(NSString *)newBirthDay
 {
     NLProtocolData *pd= [[NLProtocolData alloc]initValue:nil forKey:@"operation_request" attr:nil attrName:nil valueType:NLProtocolDataValueNoCData];
     
     //operation_request/msgheader
     NLProtocolData *hearder= [self defaultMsgheader];
     [pd addChild:hearder];
+    
+    
+    
     
     [hearder addChild:[self defaultChannelinfo:YES api_name_func:@"savePassenger" api_name:@"ApiAirticket"]];
     
@@ -4853,7 +4857,13 @@ static NLProtocolXML* gProtocolXML = nil;
                                                    attr:nil
                                                attrName:nil
                                               valueType:NLProtocolDataValueNoCData]];
-    return pd;
+    
+    [msgbody addChild:[[NLProtocolData alloc] initValue:newBirthDay
+                                                 forKey:@"birthDay"
+                                                   attr:nil
+                                               attrName:nil
+                                              valueType:NLProtocolDataValueNoCData]];
+        return pd;
 }
 // 读取乘机人信息
 - (NLProtocolData*)getPlayPassengerInfo:(NSString*)newPlayPassengerInfo
@@ -4903,7 +4913,7 @@ static NLProtocolXML* gProtocolXML = nil;
  </operation_response>
  */
 // 确定支付
--(NLProtocolData *)TicketBillIdXML:(NSString *)newTicketBillId  backTicketIdXML:(NSString *)newBackTicketBillId  styGoBack:(NSString *)newStyGoBsack perSonIdArrayXML:(NSMutableArray *)newperSonIdArrayXML ContactIdArrayXML:(NSMutableArray *)newContactIdArray   payinfoCardInfoArrayXML:(NSMutableArray *)newpayinfoCardInfoArray;
+-(NLProtocolData *)TicketBillIdXML:(NSString *)newTicketBillId  backTicketIdXML:(NSString *)newBackTicketBillId  styGoBack:(NSString *)newStyGoBsack perSonIdArrayXML:(NSMutableArray *)newperSonIdArrayXML ContactIdArrayXML:(NSMutableArray *)newContactIdArray   payinfoCardInfoArrayXML:(NSMutableArray *)newpayinfoCardInfoArray  ValidityXML:(NSString *)newValidityXML AmountXML:(NSString *)newAmountXML;
 {
     NLProtocolData *pd= [[NLProtocolData alloc]initValue:nil forKey:@"operation_request" attr:nil attrName:nil valueType:NLProtocolDataValueNoCData];
     
@@ -4920,18 +4930,28 @@ static NLProtocolXML* gProtocolXML = nil;
                                                                     attrName:nil
                                                                    valueType:NLProtocolDataValueNoCData]];
     
+    [msgbody addChild:[[NLProtocolData alloc] initValue:newAmountXML
+                                                    forKey:@"amount"
+                                                      attr:nil
+                                                  attrName:nil
+                                                 valueType:NLProtocolDataValueNoCData]];
+
+    
     //operation_request/msgbody
-     NLProtocolData* ticketList =  [msgbody addChild:[[NLProtocolData alloc] initValue:nil
-                                                                           forKey:@"ticketList"
-                                                                             attr:nil
-                                                                         attrName:nil
-                                                                        valueType:NLProtocolDataValueNoCData]];
+    NLProtocolData* ticketList =  [msgbody addChild:[[NLProtocolData alloc] initValue:nil
+                                                                               forKey:@"ticketList"
+                                                                                 attr:nil
+                                                                             attrName:nil
+                                                                            valueType:NLProtocolDataValueNoCData]];
     
     [ticketList addChild:[[NLProtocolData alloc] initValue:newTicketBillId
-                                                      forKey:@"ticketId"
-                                                        attr:nil
-                                                    attrName:nil
-                                                   valueType:NLProtocolDataValueNoCData]];
+                                                    forKey:@"ticketId"
+                                                      attr:nil
+                                                  attrName:nil
+                                                 valueType:NLProtocolDataValueNoCData]];
+    
+    
+    
     if ([newStyGoBsack isEqualToString:@"D"])
     {
         [ticketList addChild:[[NLProtocolData alloc] initValue:newBackTicketBillId
@@ -4940,86 +4960,108 @@ static NLProtocolXML* gProtocolXML = nil;
                                                       attrName:nil
                                                      valueType:NLProtocolDataValueNoCData]];
     }
-    
     // 乘机人
-   NLProtocolData* passengerList =  [msgbody addChild:[[NLProtocolData alloc] initValue:nil
-                                                     forKey:@"passengerList"
-                                                       attr:nil
-                                                   attrName:nil
-                                                  valueType:NLProtocolDataValueNoCData]];
+    NLProtocolData* passengerList =  [msgbody addChild:[[NLProtocolData alloc] initValue:nil
+                                                                                  forKey:@"passengerList"
+                                                                                    attr:nil
+                                                                                attrName:nil
+                                                                               valueType:NLProtocolDataValueNoCData]];
+    NSMutableArray *passengerIdArray = [[NSMutableArray alloc]init];
     for (int i = 0; i < [newperSonIdArrayXML count]; i++)
     {
-        NSString *passengerId = [NSString stringWithFormat:@"passengerId%d",i];        
-        [passengerList addChild:[[NLProtocolData alloc] initValue:[newperSonIdArrayXML objectAtIndex:i]
-                                                                forKey:passengerId                                                                  attr:nil
-                                                              attrName:nil
-                                                             valueType:NLProtocolDataValueNoCData]];
+        NSString *passenger = [NSString stringWithFormat:@"%@",[newperSonIdArrayXML objectAtIndex:i]];
+        [passengerIdArray addObject:passenger];
+        //        [passengerList addChild:[[NLProtocolData alloc] initValue:[newperSonIdArrayXML objectAtIndex:i] forKey:passengerId  attr:nil    attrName:nil                                        valueType:NLProtocolDataValueNoCData]];
     }
-
+    NSString *passengerId = [passengerIdArray componentsJoinedByString:@","];
+    [passengerList addChild:[[NLProtocolData alloc] initValue:passengerId
+                                                       forKey:@"passengerId"                                                              attr:nil
+                                                     attrName:nil
+                                                    valueType:NLProtocolDataValueNoCData]];
+    
+    
     
     // 联系人
     NLProtocolData* contacterList =  [msgbody addChild:[[NLProtocolData alloc] initValue:nil
-                                                                                 forKey:@"contacterList"
-                                                                                   attr:nil
-                                                                               attrName:nil
-                                                                              valueType:NLProtocolDataValueNoCData]];
+                                                                                  forKey:@"contacterList"
+                                                                                    attr:nil
+                                                                                attrName:nil
+                                                                               valueType:NLProtocolDataValueNoCData]];
     
-    for (int j = 0 ; j < [newContactIdArray count]; j++) {
-        NSString *contacterId = [NSString stringWithFormat:@"contacterId%d",j];
-         [contacterList addChild:[[NLProtocolData alloc] initValue:[newContactIdArray objectAtIndex:j]
-                                                                forKey:contacterId                                                                  attr:nil
-                                                              attrName:nil
-                                                             valueType:NLProtocolDataValueNoCData]];
-        
+    NSMutableArray *contacterIdArray = [[NSMutableArray alloc]init];
+    for (int j = 0 ; j < [newContactIdArray count]; j++)
+    {
+        NSString *contacterId = [NSString stringWithFormat:@"%@",[newContactIdArray objectAtIndex:j]];
+        [contacterIdArray addObject:contacterId];
     }
-
+    NSString *contacterIdALL = [contacterIdArray componentsJoinedByString:@","];
+    [contacterList addChild:[[NLProtocolData alloc] initValue:contacterIdALL                                                    forKey:@"contacterId" attr:nil attrName:nil  valueType:NLProtocolDataValueNoCData]];
     
-    NLProtocolData* payinfo =  [msgbody addChild:[[NLProtocolData alloc] initValue:nil
-                                                                             forKey:@"payinfo"
-                                                                               attr:nil
-                                                                           attrName:nil
-                                                                          valueType:NLProtocolDataValueNoCData]];
+    
+    
+    NLProtocolData* payinfo =  [msgbody addChild:[[NLProtocolData alloc] initValue:nil forKey:@"payinfo" attr:nil attrName:nil  valueType:NLProtocolDataValueNoCData]];
     
     [payinfo addChild:[[NLProtocolData alloc] initValue:[newpayinfoCardInfoArray objectAtIndex:0]
-                                                        forKey:@"cardNumber"
-                                                          attr:nil
-                                                      attrName:nil
-                                                     valueType:NLProtocolDataValueNoCData]];
+                                                 forKey:@"cardNumber"
+                                                   attr:nil
+                                               attrName:nil
+                                              valueType:NLProtocolDataValueNoCData]];
     
     [payinfo addChild:[[NLProtocolData alloc] initValue:[newpayinfoCardInfoArray objectAtIndex:1]
-                                                        forKey:@"cardValidity"
-                                                          attr:nil
-                                                      attrName:nil
-                                                     valueType:NLProtocolDataValueNoCData]];
+                                                 forKey:@"cardValidity"
+                                                   attr:nil
+                                               attrName:nil
+                                              valueType:NLProtocolDataValueNoCData]];
     
     [payinfo addChild:[[NLProtocolData alloc] initValue:[newpayinfoCardInfoArray objectAtIndex:2]
-                                                        forKey:@"cardCVV2No"
-                                                          attr:nil
-                                                      attrName:nil
-                                                     valueType:NLProtocolDataValueNoCData]];
+                                                 forKey:@"cardCVV2No"
+                                                   attr:nil
+                                               attrName:nil
+                                              valueType:NLProtocolDataValueNoCData]];
     
     [payinfo addChild:[[NLProtocolData alloc] initValue:[newpayinfoCardInfoArray objectAtIndex:3]
-                                                        forKey:@"cardHolder"
-                                                          attr:nil
-                                                      attrName:nil
-                                                     valueType:NLProtocolDataValueNoCData]];
+                                                 forKey:@"cardHolder"
+                                                   attr:nil
+                                               attrName:nil
+                                              valueType:NLProtocolDataValueNoCData]];
     
     [payinfo addChild:[[NLProtocolData alloc] initValue:@"信用卡"
-                                                        forKey:@"cardHolderIdCardType"
-                                                          attr:nil
-                                                      attrName:nil
-                                                     valueType:NLProtocolDataValueNoCData]];
+                                                 forKey:@"cardHolderIdCardType"
+                                                   attr:nil
+                                               attrName:nil
+                                              valueType:NLProtocolDataValueNoCData]];
     
     [payinfo addChild:[[NLProtocolData alloc] initValue:[newpayinfoCardInfoArray objectAtIndex:5]
-                                                        forKey:@"cardHolderIdCardNumber"
-                                                          attr:nil
-                                                      attrName:nil
-                                                     valueType:NLProtocolDataValueNoCData]];
+                                                 forKey:@"cardHolderIdCardNumber"
+                                                   attr:nil
+                                               attrName:nil
+                                              valueType:NLProtocolDataValueNoCData]];
     
+    [payinfo addChild:[[NLProtocolData alloc] initValue:[newpayinfoCardInfoArray objectAtIndex:6]
+                                                 forKey:@"phoneNumber"
+                                                   attr:nil
+                                               attrName:nil
+                                              valueType:NLProtocolDataValueNoCData]];
+    
+    [payinfo addChild:[[NLProtocolData alloc] initValue:[newpayinfoCardInfoArray objectAtIndex:8]
+                                                 forKey:@"bankCct"
+                                                   attr:nil
+                                               attrName:nil
+                                              valueType:NLProtocolDataValueNoCData]];
+    
+    
+    [payinfo addChild:[[NLProtocolData alloc] initValue:newValidityXML
+                                                    forKey:@"validity"
+                                                      attr:nil
+                                                  attrName:nil
+                                                 valueType:NLProtocolDataValueNoCData]];
+    
+
+    
+    NSLog(@"======pd=========%@",pd);
     
     return pd;
 }
-
 
 // 删除乘机人信息
 - (NLProtocolData *)getdeletcetionPassengerIdXML:(NSString *)newPassengerIdXML  deletcetionPassengerTypeXML:(NSString *)newdeletcetionPassengerXML
@@ -5051,7 +5093,7 @@ static NLProtocolXML* gProtocolXML = nil;
                                                attrName:nil
                                               valueType:NLProtocolDataValueNoCData]];
 
-
+    
     return pd;
 }
 
@@ -5084,6 +5126,7 @@ static NLProtocolXML* gProtocolXML = nil;
                                                    attr:nil
                                                attrName:nil
                                               valueType:NLProtocolDataValueNoCData]];
+    NSLog(@"=========pd=========%@",pd);
     
     return pd;
 
@@ -6791,13 +6834,13 @@ static NLProtocolXML* gProtocolXML = nil;
                                                                    valueType:NLProtocolDataValueNoCData]];
     
     [msgbody addChild:[[NLProtocolData alloc] initValue:bkcardid
-                                                 forKey:@"bkcardid"
+                                                 forKey:@"bkcardfudefaul"
                                                    attr:nil
                                                attrName:nil
                                               valueType:NLProtocolDataValueNoCData]];
     
     [msgbody addChild:[[NLProtocolData alloc] initValue:bkcardisdefault
-                                                 forKey:@"bkcardisdefault"
+                                                 forKey:@"bkcardfudefault"
                                                    attr:nil
                                                attrName:nil
                                               valueType:NLProtocolDataValueNoCData]];

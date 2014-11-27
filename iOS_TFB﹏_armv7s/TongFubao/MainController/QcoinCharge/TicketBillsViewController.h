@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface TicketBillsViewController : UIViewController<BankPayListDelegate,VisaReaderDelegate,UIAlertViewDelegate>
+{
+    BOOL SHUAKA ;
+}
 
 @property(retain,nonatomic)NSMutableArray *allPriceBillsArray;
 @property(retain,nonatomic)NSString *textString;
@@ -43,7 +46,6 @@
 
 @property(retain,nonatomic)NSMutableArray *goTicketArray;
 @property(retain,nonatomic)NSMutableArray *backTicketArray;
-
 
 
 

@@ -26,6 +26,10 @@ static NSInteger anotherTimers;
  aUILabel.text= [MobClick getConfigParams:@"tongzhi"];
  aUILabel.textColor = [UIColor whiteColor];
  [self.view addSubview:aUILabel];
+
+ //如view2 大小添加父视图且超出view1 可设置部分隐藏
+ imageView.clipsToBounds = YES;
+
  */
 
 @implementation PaomaLabel

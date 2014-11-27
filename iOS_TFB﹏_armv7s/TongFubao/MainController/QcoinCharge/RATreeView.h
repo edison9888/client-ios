@@ -210,6 +210,8 @@ typedef enum RATreeViewRowAnimation {
 @property (nonatomic) BOOL showsVerticalScrollIndicator;
 - (void)flashScrollIndicators;
 
++ (id)singleton:(CGRect)frame;
+
 //Zooming and Panning
 @property (strong, nonatomic, readonly) UIPanGestureRecognizer *panGestureRecognizer;
 @property (strong, nonatomic, readonly) UIPinchGestureRecognizer *pinchGestureRecognizer;

@@ -122,9 +122,10 @@ typedef enum
     
     // Do any additional setup after loading the view from its nib.
     self.navigationController.topViewController.title = @"还信用卡";
+    [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
     [self initValue];
     [self initVisaReader];
-    UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"还款历史"
+    UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"历史记录"
                                                                       style:UIBarButtonItemStyleBordered
                                                                      target:self
                                                                      action:@selector(historyRecord)];
@@ -452,7 +453,7 @@ typedef enum
 
 #pragma mark - NLBankListDelegate
 - (void)dataSearch:(NLBankListViewController *)controller didSelectWithObject:(id)aObject
-         withState:(NSString *)state
+         withState:(NSString *)state andBankctt:(NSString *)bankctt
 {
     _shoucardbank = (NSString*)aObject;
     

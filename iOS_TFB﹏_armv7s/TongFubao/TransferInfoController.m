@@ -103,6 +103,8 @@
     
 #endif
     
+    [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
     //获取当前屏幕size
@@ -354,7 +356,7 @@
 }
 
 #pragma mark - NLBankLisDelegate
-- (void)dataSearch:(NLBankListViewController *)controller didSelectWithObject:(id)aObject withState:(NSString *)state
+- (void)dataSearch:(NLBankListViewController *)controller didSelectWithObject:(id)aObject withState:(NSString *)state andBankctt:(NSString *)bankctt
 {
     infoView[1].infoText.text = (NSString *)aObject;
     bankID = state;

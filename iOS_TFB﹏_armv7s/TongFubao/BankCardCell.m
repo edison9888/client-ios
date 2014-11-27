@@ -102,7 +102,7 @@
         [_defaultCard setTitle:@"支付" forState:UIControlStateNormal];
         [_defaultCard setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 //        [_defaultCard setTitleColor:RGBACOLOR(0, 194, 240, 1) forState:UIControlStateNormal];
-        [_defaultCard setBackgroundImage:[UIImage imageNamed:@"SMS_receivables@2x"] forState:UIControlStateNormal];
+        [_defaultCard setBackgroundImage:[UIImage imageNamed:@"SMS_payment@2x"] forState:UIControlStateNormal];
         _defaultCard.titleLabel.lineBreakMode = 0;
         _defaultCard.titleLabel.font = [UIFont fontWithName:nil size:9];
         [_defaultCard.titleLabel setTextAlignment:NSTextAlignmentCenter];
@@ -114,7 +114,7 @@
         [_receivables setTitle:@"收款" forState:UIControlStateNormal];
         [_receivables setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 //        [_receivables setTitleColor:RGBACOLOR(0, 194, 240, 1) forState:UIControlStateNormal];
-        [_receivables setBackgroundImage:[UIImage imageNamed:@"SMS_payment@2x"] forState:UIControlStateNormal];
+        [_receivables setBackgroundImage:[UIImage imageNamed:@"SMS_receivables@2x"] forState:UIControlStateNormal];
         _receivables.titleLabel.lineBreakMode = 0;
         _receivables.titleLabel.font = [UIFont fontWithName:nil size:9];
         [_receivables.titleLabel setTextAlignment:NSTextAlignmentCenter];

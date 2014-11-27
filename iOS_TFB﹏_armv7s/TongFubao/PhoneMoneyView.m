@@ -321,7 +321,7 @@
              select = basebtn;
             _MoreLittleMoney.textColor= [UIColor redColor];
             PhoneMoneyStrMore= [PhoneMoneyMoreArray objectAtIndex:i];
-            _MoreLittleMoney.text= [NSString stringWithFormat:@"实际支付金额: %@",PhoneMoneyStrMore];
+            _MoreLittleMoney.text= [NSString stringWithFormat:@"实际支付金额: %@元",PhoneMoneyStrMore];
              PhoneMoneyStr = basebtn.titleLabel.text;
         }
         [_btnScrollView addSubview:basebtn];
@@ -347,7 +347,7 @@
     
     _BtnPhoneMoneyOn.titleLabel.textColor= [UIColor whiteColor];
     [_BtnPhoneMoneyOn setBackgroundImage:[UIImage imageNamed:@"change_btn_press"] forState:UIControlStateNormal];
-    [_BtnPhoneMoneyOn setTitle:@"立即充值" forState:UIControlStateNormal];
+    [_BtnPhoneMoneyOn setTitle:@"充值" forState:UIControlStateNormal];
     [_BtnPhoneMoneyOn addTarget:self action:@selector(PhonePay:) forControlEvents:UIControlEventTouchUpInside];
     
     _TextBtnLable.frame= CGRectMake(16, 330, 200, 20);
@@ -374,7 +374,7 @@
     int Num;
     Num= btn.tag-200;
     PhoneMoneyStrMore =[PhoneMoneyMoreArray objectAtIndex:Num];
-    _MoreLittleMoney.text= [NSString stringWithFormat:@"实际支付金额: %@",PhoneMoneyStrMore];
+    _MoreLittleMoney.text= [NSString stringWithFormat:@"实际支付金额: %@元",PhoneMoneyStrMore];
 }
 
 #pragma 支付
@@ -387,6 +387,7 @@
 - (void)shake{
     
     BOOL result = [NLUtils checkMobilePhone:_PhoneNum.text];
+
     
     if (!result){
         [_hud hide:YES afterDelay:1];
@@ -584,7 +585,7 @@
                 [[NSUserDefaults standardUserDefaults]setObject:array forKey:@"dict_array"];
                 [[NSUserDefaults standardUserDefaults]synchronize];
             }
-            _Address.text= [NSString stringWithFormat:@"号码归属地：%@",[[[NSUserDefaults standardUserDefaults]objectForKey:@"dict_array"]valueForKey:@"att" ]];
+            _Address.text= [[NSString stringWithFormat:@"号码归属地：%@",[[[NSUserDefaults standardUserDefaults]objectForKey:@"dict_array"]valueForKey:@"ctype" ]] stringByReplacingOccurrencesOfString:@"中国" withString:@""];
             /*区域*/
 //            _Operator.text= [[[NSUserDefaults standardUserDefaults]objectForKey:@"dict_array"]valueForKey:@"ctype" ];
         });

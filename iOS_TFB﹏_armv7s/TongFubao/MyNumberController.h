@@ -5,6 +5,7 @@
 //  Created by Delpan on 14/10/27.
 //  Copyright (c) 2014年 MD313. All rights reserved.
 //
+//  绑定授权码
 
 #import <UIKit/UIKit.h>
 

@@ -39,7 +39,7 @@
         self.title = @"收款历史";
         
         [self showErrorInfo:@"请稍后" status:NLHUDState_None];
-        [_hud hide:YES afterDelay:2];
+//        [_hud hide:YES afterDelay:2];
     }
     return self;
 }
@@ -69,7 +69,7 @@
     [LoadDataWithASI loadDataWithMsgbody:dataDictionary apiName:@"ApiSMSReceiptInfo" apiNameFunc:@"readSMSReceiptList" rolePath:@"//operation_response/msgbody/msgchild" type:PublicList completionBlock:^( id data, NSError *error)
      {
          
-         
+         [_hud hide:YES];
          
          if ([[data valueForKey:@"money"] objectAtIndex:0] == nil)
          {
@@ -189,7 +189,7 @@
         cell.phone.text = phone3;
         
         //交易日期
-        NSString *transactionState = [mode.historyDate substringWithRange:NSMakeRange(0, 10)];
+        NSString *transactionState = [mode.historyDate substringWithRange:NSMakeRange(0, 16)];
         cell.transactionDtae.text = transactionState;
         
         //金额
@@ -200,6 +200,16 @@
         cell.transactionState.text = [NSString stringWithFormat:@"%@",mode.historyState];
     
     return cell;
+}
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    SMSMode *mode = [SMSMode useWithDictionary:[smsArray objectAtIndex:indexPath.row]];
+    
+    [self.delegate agent:self paymentHistoryPhone:mode.historyPhone];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

@@ -20,7 +20,7 @@
 
 @implementation AddContactPersonViewController
 
-@synthesize CellDateArray,teger,ticketArray;
+@synthesize CellDateArray,teger,ticketArray,CellButtonArray;
 
 
 
@@ -36,6 +36,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.CellButtonArray = [[NSMutableArray alloc]init];
     // 导航
     [self navigationView];
     [self allControllerView];
@@ -44,14 +45,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(message:) name:@"添加联系人" object:nil];
     
 }
-//-(void)viewDidAppear:(BOOL)animated
-//{
-//    self.CellDateArray  = [[NSMutableArray alloc]init];
-//    [self DownloadOnlineContacts];
-//}
 #pragma mark --- 通知
 -(void)message:(NSNotification*)aNotification
 {
+    [self.CellButtonArray removeAllObjects];
     [self DownloadOnlineContacts];
 }
 
@@ -70,7 +67,8 @@
     
 }
 
--(void)navigationView{
+-(void)navigationView
+{
     [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
     self.title= @"选择联系人";
     [self addRightButtonItemWithTitle:@"编辑"];
@@ -90,10 +88,12 @@
     
     if (_historicalTableView.editing == NO)
     {
+        [self addRightButtonItemWithTitle:@"删除"];
         [_historicalTableView setEditing:YES animated:YES ];
     }
     else
     {
+        [self addRightButtonItemWithTitle:@"编辑"];
         [_historicalTableView setEditing:NO animated:YES ];
     }
 }
@@ -119,8 +119,8 @@
         [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
         [_activityView removeFromSuperview];
         
-//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！加载数据失败！" delegate:self cancelButtonTitle:@"请重新加载" otherButtonTitles:@"退出", nil];
-//        [alert show];
+        //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！加载数据失败！" delegate:self cancelButtonTitle:@"请重新加载" otherButtonTitles:@"退出", nil];
+        //        [alert show];
     }
 }
 //-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -277,7 +277,9 @@
     [_activityView setTipsText:@"正在删除数据..."];
     [_activityView starActivity];
     [self.view addSubview:_activityView];
-    
+    [self.CellButtonArray removeObjectAtIndex:indexPathId];
+    [[self.CellDateArray objectAtIndex:indexPathId] removeObjectAtIndex:3];
+
     
     NSString* name = [NLUtils getNameForRequest:Notify_deletePassenger];
     REGISTER_NOTIFY_OBSERVER(self, GetdeletePassengerNotify, name);
@@ -345,12 +347,12 @@
 -(TicketCustomTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *indefault = @"cell";
-    TicketCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:indefault];
-    if (!cell)
-    {
-        cell = [[TicketCustomTableViewCell alloc]initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:indefault];
-    }
-    
+//    TicketCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:indefault];
+//    if (!cell)
+//    {
+         TicketCustomTableViewCell *cell  = [[TicketCustomTableViewCell alloc]initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:indefault];
+//    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSArray *arraycell=[cell.contentView subviews];
     for (UILabel *coview in arraycell)
     {
@@ -362,7 +364,7 @@
     }
     
     UIButton *selectionBotton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    selectionBotton.frame =  CGRectMake(280, 5, 40, 40);
+    selectionBotton.frame =  CGRectMake(280, 10, 30, 30);
     selectionBotton.tag =indexPath.row;
     NSString * Stdey = [[self.CellDateArray objectAtIndex:indexPath.row] objectAtIndex:3];
     
@@ -375,8 +377,11 @@
         [selectionBotton setImage:[UIImage imageNamed:@"9@2x.png"] forState:(UIControlStateNormal)];
     }
     selectionBotton.selected = YES;
+    selectionBotton.enabled = NO;
     selectionBotton.tag = indexPath.row;
-    [selectionBotton addTarget:self action:@selector(btnclick:event:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.CellButtonArray addObject:selectionBotton];
+    NSLog(@"========indexPath======%@",self.CellButtonArray);
+//    [selectionBotton addTarget:self action:@selector(btnclick:event:) forControlEvents:(UIControlEventTouchUpInside)];
     cell. accessoryView = selectionBotton;
     cell.textLabel.text =[[self.CellDateArray objectAtIndex:indexPath.row] objectAtIndex:1];
     
@@ -390,15 +395,16 @@
     return cell;
 }
 
-
-#pragma mark-单选中按钮状态
--(void)btnclick:(UIButton *)sender event:(id)event1
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSSet *touches =[event1 allTouches];
-    UITouch *touch =[touches anyObject];
-    CGPoint currentTouchPosition = [touch locationInView:_historicalTableView];
-    NSIndexPath *indexPath= [_historicalTableView indexPathForRowAtPoint:currentTouchPosition];
-    if (indexPath!= nil)
+    NSLog(@"========indexPath======%ld",(long)indexPath.row);
+    UIButton *button = [self.CellButtonArray objectAtIndex:indexPath.row];
+    [button addTarget:self action:@selector(btnclick:indexPath:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self buttonID:button newIndexPath:indexPath];
+}
+-(void)buttonID:(UIButton *)sender newIndexPath:(NSIndexPath*)senderIndex
+{
+    if (senderIndex!= nil)
     {
         if (sender.selected == YES)
         {
@@ -415,8 +421,34 @@
             sender.selected = YES;
         }
     }
-    
 }
+//
+//#pragma mark-单选中按钮状态
+//-(void)btnclick:(UIButton *)sender event:(id)event1
+//{
+//    NSSet *touches =[event1 allTouches];
+//    UITouch *touch =[touches anyObject];
+//    CGPoint currentTouchPosition = [touch locationInView:_historicalTableView];
+//    NSIndexPath *indexPath= [_historicalTableView indexPathForRowAtPoint:currentTouchPosition];
+//    if (indexPath!= nil)
+//    {
+//        if (sender.selected == YES)
+//        {
+//            [sender setImage:[UIImage imageNamed:@"9@2x.png"] forState:(UIControlStateNormal)];
+//            [[self.CellDateArray objectAtIndex:sender.tag] removeObjectAtIndex:3];
+//            [[self.CellDateArray objectAtIndex:sender.tag] addObject:@"b"];
+//            sender.selected = NO;
+//        }
+//        else
+//        {
+//            [sender setImage:[UIImage imageNamed:@"91@2x.png"] forState:(UIControlStateNormal)];
+//            [[self.CellDateArray objectAtIndex:sender.tag] removeObjectAtIndex:3];
+//            [[self.CellDateArray objectAtIndex:sender.tag] addObject:@"a"];
+//            sender.selected = YES;
+//        }
+//    }
+//    
+//}
 
 -(void)addClik
 {
@@ -468,39 +500,4 @@
  */
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

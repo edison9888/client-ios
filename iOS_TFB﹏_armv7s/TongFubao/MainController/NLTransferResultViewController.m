@@ -61,6 +61,8 @@
 {
 //     [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
     
+    [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
+    
     self.navigationItem.hidesBackButton = self.buyType? NO : YES;
     
     if (1 == self.myType)
@@ -97,19 +99,18 @@
 {
     if (sender.tag==1)
     {
-        [self dismissModalViewControllerAnimated:YES];
-    }
-    else
-    {
         NLAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
         [delegate backToMain];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"renovateData" object:nil];
     }
+    else
+    {
+      [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - UITableViewDataSource
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 10.0f;

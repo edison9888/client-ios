@@ -14,6 +14,11 @@ typedef enum
     BankListStateBank = 0,
 } NLBankListState;
 
+typedef enum
+{
+    XCBankListctripctt = 10,
+}NLBankListCtt;
+
 @class NLBankListViewController;
 
 @interface Bank : NSObject //银行选择的页面
@@ -29,7 +34,7 @@ typedef enum
 @protocol NLBankLisDelegate <NSObject>
 
 - (void)dataSearch:(NLBankListViewController *)controller didSelectWithObject:(id)aObject
-         withState:(NSString *)state;
+         withState:(NSString *)state andBankctt:(NSString *)bankctt;
 
 - (void)dataSearchDidCanceled:(NLBankListViewController *)controller
                     withState:(int)state;
@@ -44,5 +49,6 @@ typedef enum
 @property (nonatomic,assign) BOOL banKtype;
 // kin
 @property (nonatomic,retain) NSString *payListBank;
+@property (nonatomic,assign) NLBankListCtt BankListCCT;
 
 @end

@@ -24,9 +24,12 @@
     MJRefreshHeaderView *_header;
     BOOL _shouldFree;
 }
-
+@property (weak, nonatomic) IBOutlet UILabel *moneylb;
+@property (weak, nonatomic) IBOutlet UILabel *datalb;
+@property (weak, nonatomic) IBOutlet UILabel *phonelb;
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (nonatomic,strong) NSMutableArray* myArray;
+@property (weak, nonatomic) IBOutlet UIView *viewA;
 
 @end
 
@@ -66,7 +69,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.navigationController.topViewController.title = @"历史详情";
+
+    self.navigationController.topViewController.title = @"历史记录";
+    [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
     self.myArray = [NSMutableArray arrayWithCapacity:1];
     _msgstart = @"0";
     _msgdisplay = @"10";
@@ -74,14 +79,17 @@
     [self setExtraCellLineHidden:self.myTableView];
     
     [self performSelector:@selector(protocalRequest) withObject:nil afterDelay:0.1];
+   
+    _phonelb.text= _myChargeHistoryType == MobileChargeType ? @"手机号码" : @"QQ号码";
 }
 
 - (void)setExtraCellLineHidden: (UITableView *)tableView
 {
     UIView *view = [[UIView alloc]init];
     view.backgroundColor = [UIColor clearColor];
+  
     [tableView setTableFooterView:view];
-    [tableView setTableHeaderView:view];
+    [tableView setTableHeaderView:_viewA];
 }
 
 -(void)initMJRefresh
@@ -223,6 +231,7 @@
         [_hud hide:YES];
         [_header endRefreshing];
         [_footer endRefreshing];
+        [_viewA setHidden:YES];
         NSString *detail = response.detail;
         if (!detail || detail.length <= 0)
         {
@@ -783,9 +792,11 @@
 
     switch (self.myChargeHistoryType) {
         case MobileChargeType:
+            _viewA.hidden= NO;
             [historyCell setData:dict];
             break;
         case QCoinChargeType:
+            _viewA.hidden= NO;
             [historyCell setQcoinData:dict];
             break;
         case buySKQType:
@@ -813,15 +824,7 @@
     MobileReChangeDetailCtr *mobileReChangeDetailCtr = [[MobileReChangeDetailCtr alloc]initWithNibName:@"MobileReChangeDetailCtr" bundle:nil];
     [mobileReChangeDetailCtr setData:dict];
     mobileReChangeDetailCtr.myChargeHistoryType = self.myChargeHistoryType;
-    
-    if (self.myChargeHistoryType == buySKQType) {
-         mobileReChangeDetailCtr.title = @"购买详情";
-    }else if(self.myChargeHistoryType == WaterEleType){
-         mobileReChangeDetailCtr.title = @"缴费详情";
-    }else{
-         mobileReChangeDetailCtr.title = @"充值详情";
-    }
-   
+    mobileReChangeDetailCtr.title = @"交易详情";
     [self.navigationController pushViewController:mobileReChangeDetailCtr animated:YES];
 }
 

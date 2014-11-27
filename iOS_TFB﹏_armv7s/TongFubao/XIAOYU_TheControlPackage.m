@@ -20,7 +20,7 @@
     
     UIButton *btn = [[UIButton alloc]initWithFrame:frame];
     [btn setTitle:title forState:UIControlStateNormal];
-    [btn.titleLabel setFont:[UIFont systemFontOfSize: 16.0]];
+    [btn.titleLabel setFont:[UIFont systemFontOfSize: 15.0]];
     [btn setBackgroundImage:backgroundImage forState:UIControlStateNormal];
     [btn setBackgroundImage:backgroundImageHighlighted forState:UIControlStateHighlighted];
     [btn addTarget:self action:@selector(tapRightButtonItem:) forControlEvents:UIControlEventTouchUpInside];
@@ -93,12 +93,13 @@
     backButton.frame = CGRectMake(0, 0, 55, 28);
     
     [backButton addTarget:self action:@selector(tapBack:) forControlEvents:UIControlEventTouchUpInside];
+    /*
     [[backButton titleLabel] setFont:[UIFont boldSystemFontOfSize:16]];
     [backButton setTitle:@" 返回" forState:UIControlStateNormal];
-    [backButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    [backButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
+    [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     [backButton.titleLabel setTextAlignment:NSTextAlignmentRight];
-    
+    */
     [backButton addSubview:imageView];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];

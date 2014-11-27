@@ -41,6 +41,8 @@
 @property (nonatomic,strong) UIImageView *deltaImgView; //倒三角图标
 
 @property(nonatomic, assign) NSInteger numberweek;
+
+@property (nonatomic,strong) PayWidgetView *payView;
 @end
 
 @implementation planeMain
@@ -75,8 +77,14 @@
 
 -(void)mainview
 {
-    self.view.backgroundColor = RGBACOLOR(245, 245, 245, 1.0);
-   
+
+
+    /*授权码按钮*/
+    _payView = [[PayWidgetView alloc]init];
+    _payView.view.backgroundColor = RGBACOLOR(245, 245, 245, 1.0);
+    _payView.view.frame = CGRectMake(0, 350, 320, 110);
+    [self.view addSubview:_payView.view];
+
     /*默认单程*/
     [_onClick setFrame:CGRectMake(self.onClick.frame.origin.x, self.onClick.frame.origin.y-60, self.onClick.frame.size.width, self.onClick.frame.size.height)];
     

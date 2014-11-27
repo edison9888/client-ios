@@ -56,6 +56,13 @@
 #define MARKWithLocation
 #endif
 
+#undef	SHOW_ERROR
+#define SHOW_ERROR( __error, status  ) \
++ (BOOL)isContainable {  [_hud hide:YES];_hud = [[NLProgressHUD alloc] initWithParentView: self.view];switch (status){case NLHUDState_Error:{_hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"unCheckmark.png"]] ;_hud.mode = MBProgressHUDModeCustomView;_hud.detailsLabelText = (__error);[_hud show:YES];[_hud hide:YES afterDelay:2];}break;case NLHUDState_NoError:{_hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark.png"]] ;_hud.mode = MBProgressHUDModeCustomView;_hud.labelText = (__error);[_hud show:YES];[_hud hide:YES afterDelay:2];}break;case NLHUDState_None:{_hud.labelText = error;[_hud show:YES];}break;default:break;}return; } \
+- (BOOL)isContainable { return __flag; }
+
+
+
 @interface _cow : NSObject
 
 +(NSString *)formatCardNumber:(NSString *)cardNumber;

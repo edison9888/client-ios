@@ -10,6 +10,8 @@
 
 static TFData *dataManage = nil;
 static NSMutableDictionary  *tempData;
+static NSMutableArray       *arrData;
+static NSMutableDictionary  *dicData;
 
 @implementation TFData
 
@@ -40,6 +42,39 @@ static NSMutableDictionary  *tempData;
     }
     return tempData;
     
+}
+
+/*存个值 懒得写那么多代码*/
++(NSMutableArray*)setarr:(NSMutableArray*)arr
+{
+    if (!arrData) {
+        arrData= [NSMutableArray array];
+    }
+    arrData= arr;
+    NSLog(@"dictData 存一存%@",arrData);
+    return arrData;
+}
+
++(NSMutableArray*)getarr
+{
+    NSLog(@"dictData 取一取%@",arrData);
+    return arrData;
+}
+
++(NSMutableDictionary*)setdic:(NSMutableDictionary*)dic
+{
+    if (!dicData) {
+        dicData= [[NSMutableDictionary alloc]init];
+    }
+    dicData= dic;
+    NSLog(@"dictData 存一存%@",dicData);
+    return dicData;
+}
+
++(NSMutableDictionary*)getdic
+{
+    NSLog(@"dicData 取一取%@",dicData);
+    return dicData;
 }
 
 @end

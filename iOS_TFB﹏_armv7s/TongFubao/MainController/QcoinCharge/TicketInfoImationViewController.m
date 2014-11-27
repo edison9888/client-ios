@@ -65,7 +65,7 @@
         NSString *dateTo = [self.self.TicketArriveTimeTo substringWithRange:NSMakeRange(0, 10)];
         NSString *timeTo = [self.self.TicketArriveTimeTo substringWithRange:NSMakeRange(11, 5)];
         //  封装数据
-        self.infoArray = [[NSMutableArray alloc]initWithObjects:dateFrom,dateTo,timeFrom,timeTo,TicketArrivePlay,TicketInfoDepartCtity,TicketInfoArriveCity,TicketDepartPlay,playName,TicketFlihtCity,classTicket,[NSString stringWithFormat:@"￥%@", priceTicket],[NSString stringWithFormat:@"￥%@", taxTicket], [NSString stringWithFormat:@"￥%@",oilFeeTicket],nil];
+        self.infoArray = [[NSMutableArray alloc]initWithObjects:dateFrom,dateTo,timeFrom,timeTo,TicketDepartPlay,TicketInfoDepartCtity,TicketInfoArriveCity,TicketArrivePlay,playName,TicketFlihtCity,classTicket,[NSString stringWithFormat:@"￥%@", priceTicket],[NSString stringWithFormat:@"￥%@", taxTicket], [NSString stringWithFormat:@"￥%@",oilFeeTicket],nil];
         //  总价格
         self.AllPriceArray = [[NSMutableArray alloc]initWithObjects:self.priceTicket,self.oilFeeTicket,self.taxTicket,self.standardPriceChirldTicket,self.oilFeeChirldTicket,self.taxForTicket,self.standardPricebadyTicket,self.oilFeeForBabyTicket,self.taxForBabyTicket,nil];
         NSLog(@"=====self.AllPriceArray=====%@",self.AllPriceArray);

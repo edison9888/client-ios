@@ -428,11 +428,15 @@
     }];
 }
 */
+
+/*
+ */
 -(void)viewInPush
 {
     payMoneyPeopleMore *pay= [[payMoneyPeopleMore alloc]init];
     pay.TimerStr= TimeButton[1].titleLabel.text;
     [self.navigationController pushViewController:pay animated:YES];
+    
 }
 
 

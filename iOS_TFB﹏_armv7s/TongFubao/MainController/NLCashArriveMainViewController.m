@@ -96,7 +96,7 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationController.topViewController.title = @"商户收款";
     [self initValue];
-    UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"收款历史"
+    UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"历史记录"
                                                                       style:UIBarButtonItemStyleBordered target:self
                                                                      action:@selector(buyHistory)];
 	self.navigationItem.rightBarButtonItem = anotherButton;
@@ -442,8 +442,8 @@
             cell.myTextField.hidden = NO;
             cell.myTextField.delegate = self;
             cell.myTextField.placeholder = @"请输入收款金额";
-            [cell.myTextField setFrame:CGRectMake(120, cell.myTextField.frame.origin.y, 140, cell.myTextField.frame.size.height)];
-            cell.myTextField.textAlignment = NSTextAlignmentCenter;
+            [cell.myTextField setFrame:CGRectMake(113, cell.myTextField.frame.origin.y, 140, cell.myTextField.frame.size.height)];
+            cell.myTextField.textAlignment = NSTextAlignmentLeft;
             cell.myTextField.backgroundColor = [UIColor clearColor];
             cell.myTextField.keyboardType = UIKeyboardTypeNumberPad;
             [cell.myTextField becomeFirstResponder];

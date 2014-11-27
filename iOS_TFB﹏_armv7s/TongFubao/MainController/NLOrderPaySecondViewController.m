@@ -302,7 +302,7 @@
 #pragma mark - NLBankLisDelegate
 
 - (void)dataSearch:(NLBankListViewController *)controller didSelectWithObject:(id)aObject
-         withState:(int)state
+         withState:(int)state 
 {
     _bankname = (NSString*)aObject;
 

@@ -20,6 +20,7 @@
 @property (retain,nonatomic) id<AddPassengersViewdelegate>delegate;
 @property (retain,nonatomic) NSArray *ticketArray;
 @property (assign,nonatomic) NSInteger teger;
+@property (retain,nonatomic) NSMutableArray *CellButtonArray;
 
 -(void)InternetDownloads;
 

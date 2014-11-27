@@ -373,7 +373,7 @@
 #pragma mark - DataSearchDelegate
 
 - (void)dataSearch:(NLBankListViewController *)controller didSelectWithObject:(id)aObject
-         withState:(int)state
+         withState:(int)state andBankctt:(NSString *)bankctt
 {
     _bankname = (NSString*)aObject;
     _bankid = [NSString stringWithFormat:@"%d",state];

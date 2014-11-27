@@ -75,29 +75,46 @@
 {
     NLProtocolResponse *response = (NLProtocolResponse *)senderFication.object;
     int error = response.errcode;
+    NSString *string = response.detail;
+    NSLog(@"===string====%@",string);
     
     if (error == RSP_NO_ERROR)
     {
         [self getDataWithAirline:response];
-        
     }
-    else if (error == RSP_TIMEOUT)
+    else if (error == RSP_CANCEL)
     {
-        [activityView performSelector:@selector(endActivity) withObject:activityView afterDelay:0.7];
-        [activityView removeFromSuperview];
-        return ;
-    }
-    else
-    {
-        NSString *string = response.detail;
-        NSLog(@"===string====%@",string);
-        [activityView performSelector:@selector(endActivity) withObject:activityView afterDelay:0.7];
-        [activityView removeFromSuperview];
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！本日期没有航班" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
         [alert show];
         
+    }
+    else if (error == RSP_HAS_EXIST)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
         
     }
+    else if (error == RSP_XML_RETTYPE_FAILURE)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    else if (error == RSP_XML_RESULT_FAILURE)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    else if (error == RSP_XML_RETCODE_FAILURE)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    [activityView performSelector:@selector(endActivity) withObject:activityView afterDelay:0.7];
+    [activityView removeFromSuperview];
+
 }
 - (void)getDataWithAirline:(NLProtocolResponse *)response
 {
@@ -113,6 +130,9 @@
         NSLog(@"errorData = %@",errorData);
         [activityView performSelector:@selector(endActivity) withObject:activityView afterDelay:0.7];
         [activityView removeFromSuperview];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！本日期没有航班" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+
     }
     else
     {
@@ -195,7 +215,7 @@
 -(void)navigationView
 {
     [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
-    self.title= @"舱位选择";
+    self.title= [NSString stringWithFormat:@"舱位(%@-%@)",self.ShippingCtity,self.ShippingarriveCity];
 }
 -(void)allControllerView
 {

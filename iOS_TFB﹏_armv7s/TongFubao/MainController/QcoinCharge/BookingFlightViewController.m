@@ -95,32 +95,46 @@
     }
     else if (error == RSP_TIMEOUT)
     {
-        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
-        [_activityView removeFromSuperview];
         [self.self.PaiXuaAllArray removeAllObjects];
         [self.BookingTableView reloadData];
 
-        return ;
+    }
+    else if (error == RSP_TIMEOUT)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    else if (error == RSP_CANCEL)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    else if (error == RSP_HAS_EXIST)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    else if (error == RSP_XML_RETCODE_FAILURE)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+        
     }
     else
     {
-        // 没有数据
-        NSString *string = response.detail;
-        NSLog(@"=======string=======%@",string);
-        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
-        [_activityView removeFromSuperview];
+        
         [self.PaiXuaAllArray removeAllObjects];
         [self.BookingTableView reloadData];
         
-        if (AlertBoxBool == YES)
-        {
-            NSLog(@"=======NO=======");
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲!本日期没有航班!" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
-            [alert show];
-
-            AlertBoxBool = NO;
-        }
     }
+
+    NSString *string = response.detail;
+    NSLog(@"===string====%@",string);
+    [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+    [_activityView removeFromSuperview];
 }
 
 - (void)getDataWithAirline:(NLProtocolResponse *)response
@@ -481,7 +495,7 @@
 -(void)navigationView
 {
     [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
-    self.title= @"单程查询";
+    self.title= [NSString stringWithFormat:@"去程(%@-%@)",self.BookingDepartCity,self.BookingArriveCity];
 //    [self addRightButtonItemWithTitle:@"重筛选"];
 }
 #pragma mark ---//选择时间按钮重新建立按钮
@@ -505,15 +519,26 @@
 #pragma mark ---所有的控件
 -(void)allControllerView
 {
-    NSLog(@"====self.departDate===%@",self.departDate);
+//    NSLog(@"====self.departDate===%@",self.departDate);
     // 时间差匹配得出相应timeInteger传给时间按钮
     NSString * compareString = [watchTimeObject selectionTime:self.departDate];
+//    NSLog(@"====compareString===%@",compareString);
     timeInteger = [compareString integerValue];
-    if (timeInteger > 0)
+//    NSLog(@"====timeInteger===%d",timeInteger);
+
+    if (timeInteger > 1)
     {
         timeInteger++;
     }
-    NSLog(@"====timeInteger===%d",timeInteger);
+    else if (timeInteger <= 0)
+    {
+        timeInteger = 0;
+    }
+    else if (timeInteger == 1)
+    {
+        timeInteger = 1;
+    }
+//    NSLog(@"====timeInteger===%d",timeInteger);
 
     // 时间选择按钮
     TimerButtonView *ButtonView =[[TimerButtonView alloc]initWithFrame:CGRectMake(0, 64, 320, 45)wacthTime:self.departDate shijianca:timeInteger];
@@ -695,6 +720,8 @@
     shippingSpaceView.ShippingCtity = self.BookingDepartCity;
     // 到达城市
     shippingSpaceView.ShippingarriveCity = self.BookingArriveCity;
+    NSLog(@"==shipDepartCity==%@===shipArriveCity=%@",dPortNameData,aPortNameData);
+
     // 起飞城市id
     shippingSpaceView.ShippingFromCtityId = self.cityIDFromBookin;
     // 到达城市id

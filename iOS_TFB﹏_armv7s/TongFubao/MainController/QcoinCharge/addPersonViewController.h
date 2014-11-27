@@ -22,6 +22,7 @@
 @property(nonatomic,retain)NSString *PassengerCardType;
 @property(nonatomic,retain)NSString *PassengerCardId;
 @property(nonatomic,assign)NSInteger PassengerType;
+@property(nonatomic,retain)NSString * PassengerBirthDay;
 @property(nonatomic,retain)NSMutableArray *PassengerPersonIphone;
 @property(nonatomic,retain)NSMutableArray *selectionPersonIphone;
 //@property(nonatomic,retain)id<addPersonViewDelegate>delegate;

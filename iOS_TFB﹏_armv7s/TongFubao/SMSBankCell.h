@@ -24,8 +24,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *name;//用户名称
 @property (weak, nonatomic) IBOutlet UILabel *tailNumber;//银行尾号
 @property (weak, nonatomic) IBOutlet UILabel *bankCard;//银行卡类型
-@property (weak, nonatomic) IBOutlet UILabel *receivablesPayment;//收款/支付
-@property (weak, nonatomic) IBOutlet UIImageView *receivablesPaymentImageView;//收款/支付背景颜色
+@property (weak, nonatomic) IBOutlet UILabel *receivablesPayment;//收款
+@property (weak, nonatomic) IBOutlet UIImageView *receivablesPaymentImageView;//收款背景颜色
+
+@property (weak, nonatomic) IBOutlet UILabel *payment;//支付
+@property (weak, nonatomic) IBOutlet UIImageView *paymentImageView;//支付背景颜色
+
 
 
 

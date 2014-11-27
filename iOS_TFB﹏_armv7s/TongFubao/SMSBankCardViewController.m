@@ -334,7 +334,7 @@
     //银行logo
     NLProtocolData *bkcardbanklogoData = bkcardbanklogos[indexPath.row];
     //支付卡类型
-//    NLProtocolData *bkcardisdefaultData = bkcardisdefaults[indexPath.row];
+    NLProtocolData *bkcardisdefaultData = bkcardisdefaults[indexPath.row];
     //收款卡类型
     NLProtocolData *bkcardisdefaultpaymentsData = bkcardisdefaultpaymentData[indexPath.row];
     NSLog(@"支付卡数组:%d  通付卡数组%d",bkcardisdefaults.count,bkcardisdefaultpaymentData.count);
@@ -345,6 +345,10 @@
     
     cell.receivablesPayment.alpha = [bkcardisdefaultpaymentsData.value isEqualToString:@"1"]? 1 : 0;//默认收款
     cell.receivablesPaymentImageView.alpha = [bkcardisdefaultpaymentsData.value isEqualToString:@"1"]? 1 : 0;//默认收款
+    
+    cell.payment.alpha = [bkcardisdefaultData.value isEqualToString:@"1"]? 1 : 0;//默认支付
+    cell.paymentImageView.alpha = [bkcardisdefaultData.value isEqualToString:@"1"]? 1 : 0;//默认支付
+    
 
     cell.bankLOGO.image = [UIImage imageNamed:bkcardbanklogoData.value];//银行LOGO
     cell.tailNumber.text = [NSString stringWithFormat:@"尾号:%@",cardNumbe];//尾号
@@ -401,9 +405,10 @@
 //    [self.delegate agent:self BankName:bankNameData.value AccountName:bkcardbankmanData.value TailNumber:bkcardnoData.value Category:cardType BankLogo:[UIImage imageNamed:bkcardbanklogoData.value] Bankphone:bkcardbankphonesData.value];
 
     
-    if ([bkcardcardtype.value isEqualToString:@"信用卡"] && ([bankNameData.value isEqualToString:@"中国银行"] || [bankNameData.value isEqualToString:@"中国工商银行"] || [bankNameData.value isEqualToString:@"中国建设银行"] || [bankNameData.value isEqualToString:@"中国农业银行"] || [bankNameData.value isEqualToString:@"中国邮政储蓄银行"] || [bankNameData.value isEqualToString:@"中国交通银行"])) {
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"以下银行的信用卡不能作为收款卡" message:@"中国银行,中国工商银行,中国建设银行,中国农业银行,中国邮政储蓄银行,交通银行" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
-        [alertView show];
+    if ([bkcardcardtype.value isEqualToString:@"信用卡"] && ([bankNameData.value isEqualToString:@"中国银行"] || [bankNameData.value isEqualToString:@"中国工商银行"] || [bankNameData.value isEqualToString:@"中国建设银行"] || [bankNameData.value isEqualToString:@"中国农业银行"] || [bankNameData.value isEqualToString:@"光大银行"] || [bankNameData.value isEqualToString:@"中国交通银行"])) {
+
+        [self showErrorInfo:@"目前暂不支持以下六家银行的信用卡作为默认收款卡：中国银行,中国建设银行,中国工商银行,中国农业银行,交通银行,光大银行" status:NLHUDState_Error];
+        
     }else{
     
     //设置选中卡为默认收款卡 信用卡与储蓄卡共用此接口
@@ -420,7 +425,7 @@
                                                                                bkcardcvv:bkcardcvvsDatas
                                                                             bkcardidcard:bkcardidcardsDatas
                                                                           bkcardcardtype:bkcardcardtype.value
-                                                                         bkcardisdefault:@""
+                                                                         bkcardisdefault:@"999"
                                                                   bkcardisdefaultPayment:@"1"];
         
         NSLog(@"\n传的参数 :\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@",bkcardidsData.value,bkcardbankidsData.value,bankNameData.value,bkcardnoData.value,bkcardbankmanData.value,bkcardbankphonesData.value,bkcardyxmonthsDatas,bkcardyxyearsDatas,bkcardcvvsDatas,bkcardidcardsDatas,bkcardcardtype.value);

@@ -143,6 +143,7 @@ IQ_LoadCategory(IQUIViewToolbar)
     [items addObject:nilButton];
     
     //  Create a done button to show on keyboard to resign it. Adding a selector to resign it.
+    /*完成修改 UIScrollerView问题*/
     UIBarButtonItem *doneButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:target action:action];
     [items addObject:doneButton];
     

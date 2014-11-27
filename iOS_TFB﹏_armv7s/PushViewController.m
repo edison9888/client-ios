@@ -21,6 +21,7 @@
 #import "ImpowerController.h"
 
 #import "SMSreceiptViewController.h"
+#import "TFNewVersionAgentMainCtr.h"//待删
 
 /*區分點擊通道的mnuno*/
 static  NSString       *MNUNOISONE[9];
@@ -937,13 +938,15 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
     switch (sender.tag) {
         case 21:
         {
+            /*
             PaySKQ *vc= [[PaySKQ alloc]init];
             [NLUtils presentModalViewController:self newViewController:vc];
-            
-            /*刷卡器授权码
+            */
+             
+            /*刷卡器授权码*/
             ImpowerController *impowerView = [[ImpowerController alloc] init];
             UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:impowerView];
-            [self presentViewController:navigation animated:YES completion:nil];*/
+            [self presentViewController:navigation animated:YES completion:nil];
         }
             break;
         case 22:
@@ -1082,11 +1085,11 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
     
     if ([sender.titleLabel.text isEqualToString:@"还信用卡"] && [self isUserRegister:NLPushViewType_CreditCardPayments]) {
         
-//        NLCreditCardPaymentsViewController *vc= [[NLCreditCardPaymentsViewController alloc]init];
-//        [NLUtils presentModalViewController:self newViewController:vc];
-        //发工资 text
-        SingPayMoney *vc= [[SingPayMoney alloc]init];
+        NLCreditCardPaymentsViewController *vc= [[NLCreditCardPaymentsViewController alloc]init];
         [NLUtils presentModalViewController:self newViewController:vc];
+        //发工资 text
+//        SingPayMoney *vc= [[SingPayMoney alloc]init];
+//        [NLUtils presentModalViewController:self newViewController:vc];
         
 //        NLhhzTestViewController *vc= [[NLhhzTestViewController alloc]init];
 //        [NLUtils presentModalViewController:self newViewController:vc];
@@ -1102,8 +1105,11 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
     else if
         ([sender.titleLabel.text isEqualToString:@"Q币充值"] && [self isUserRegister:NLPushViewType_QCoinCharge]){
   
-            QCoinView *vc= [[QCoinView alloc]init];
+//            QCoinView *vc= [[QCoinView alloc]init];
+//            [NLUtils presentModalViewController:self newViewController:vc];
+            TFNewVersionAgentMainCtr *vc = [[TFNewVersionAgentMainCtr alloc]init];
             [NLUtils presentModalViewController:self newViewController:vc];
+            
        
         }
     else if
@@ -1131,22 +1137,21 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
         }
     else if
         ([sender.titleLabel.text isEqualToString:@"机票预订"]){
-            /**/
+            
             AirTicketViewController *airTicketView = [[AirTicketViewController alloc]init];
             [NLUtils presentModalViewController:self newViewController:airTicketView];
         
-            planeMain *pla= [[planeMain alloc]init];
-            [NLUtils presentModalViewController:self newViewController:pla];
-       
-//            NSURL *URL = [NSURL URLWithString:@"http://u.ctrip.com/union/CtripRedirect.aspx?TypeID=615&sid=451200&allianceid=20230&ouid="];
-//            SVWebViewController *webViewController = [[SVWebViewController alloc] initWithURL:URL];
-//           [NLUtils presentModalViewController:self newViewController:webViewController];
-         
+//            NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://u.ctrip.com/union/CtripRedirect.aspx?TypeID=615&sid=451200&allianceid=20230&ouid=%@",[NLUtils getRegisterMobile]]];
+//            planeMain *pla= [[planeMain alloc]init];
+//            [NLUtils presentModalViewController:self newViewController:pla];
         }
     else if
         ([sender.titleLabel.text isEqualToString:@"火车票预订"]){
         
-            NSURL *URL = [NSURL URLWithString:@"http://u.ctrip.com/union/CtripRedirect.aspx?TypeID=2&sid=451200&allianceid=20230&OUID=&jumpUrl=http://m.ctrip.com/webapp/train/"];
+//            planeMain *pla= [[planeMain alloc]init];
+//            [NLUtils presentModalViewController:self newViewController:pla];
+            
+            NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://u.ctrip.com/union/CtripRedirect.aspx?TypeID=2&sid=451200&allianceid=20230&OUID=%@&jumpUrl=http://m.ctrip.com/webapp/train/" ,[NLUtils getRegisterMobile]]];
             SVWebViewController *webViewController = [[SVWebViewController alloc] initWithURL:URL];
             [NLUtils presentModalViewController:self newViewController:webViewController];
            
@@ -1215,7 +1220,6 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
             NLBalanceQueryViewController *vc= [[NLBalanceQueryViewController alloc]init];
             [NLUtils presentModalViewController:self newViewController:vc];
         }
-    /*不知道你啥名字*/
     else if
         ([sender.titleLabel.text isEqualToString:@"现金抵用券"] && [self isUserRegister:NLPushViewType_CashArriveMain]){
             

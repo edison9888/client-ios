@@ -130,7 +130,11 @@
     if (_gesturFlag==YES)
     {
         [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
+    }else
+    {
+        [self.navigationController popViewControllerAnimated:YES];
     }
+
 }
 
 

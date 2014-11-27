@@ -888,7 +888,6 @@
 
 -(void)viewisOn:(UIButton*)sender
 {
-    
     [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         if ([UIScreen mainScreen].bounds.size.height!=568) {
             rightbg.frame= CGRectMake(120, 432, 201, 40.5);

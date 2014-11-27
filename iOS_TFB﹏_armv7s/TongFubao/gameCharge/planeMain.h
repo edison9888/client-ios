@@ -14,4 +14,5 @@
 
 -(id)initWithInfor:(NSDictionary*)infor;
 
+- (void)combineChanges:(void (^)(void))changes;
 @end

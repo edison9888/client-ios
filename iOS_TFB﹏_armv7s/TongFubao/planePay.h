@@ -105,8 +105,6 @@ typedef enum {
 @property (retain,nonatomic) NSString *PayCarTextString;
 // 总价钱
 @property (assign,nonatomic) int PayPriceOilTax;
-// 标识
-//@property (assign,nonatomic) BOOL TICKETSTY;
 
 // 订单号
 @property(retain,nonatomic)NSString *OrderId;
@@ -119,5 +117,10 @@ typedef enum {
 @property (nonatomic, copy) NSString *fucardbank;
 //所属银行
 @property (nonatomic, copy) NSString *bankID;
+@property (nonatomic, assign) int planePayCTT;
+@property (nonatomic, copy) NSString *Bankctt;
+
+
+
 
 @end

@@ -53,6 +53,7 @@
 #import "AddressCell.h"
 #import "CustomTable.h"
 #import "HeadView.h"
+#import "BlockUI.h"
 #import "NLTressTableList.h"
 #import "NLHistoricalAccountCell.h"
 #import "MobileRechangeHistoryCtr.h"
@@ -65,6 +66,8 @@
 #import "LoadDataWithASI.h"
 #import "IQKeyBoardManager.h"
 #import "TransferInfoView.h"
+#import "PayWidgetView.h"
+//#import "NLModel.h"
 
 //版本
 #define IOSVERSion ([[[UIDevice currentDevice] systemVersion] floatValue])

@@ -276,6 +276,7 @@
 		24A3D127194D1FAB00519F60 /* FirstPhonePay.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A3D125194D1FAB00519F60 /* FirstPhonePay.m */; };
 		24A809741A1C3B4000542519 /* PaomaLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A809731A1C3B4000542519 /* PaomaLabel.m */; };
 		24A809771A1C3B7000542519 /* UITextField+Shake.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A809761A1C3B7000542519 /* UITextField+Shake.m */; };
+		24A809801A1C6D6800542519 /* NLModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A8097F1A1C6D6800542519 /* NLModel.m */; };
 		24AA4F4119065F5000EDD3D7 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AA4F4019065F5000EDD3D7 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		24AA4F4A190675A300EDD3D7 /* btnBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 24AA4F49190675A300EDD3D7 /* btnBack.png */; };
 		24AD3F47192F202700A8F763 /* gesture_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 24AD3F42192F202700A8F763 /* gesture_background.png */; };
@@ -291,9 +292,15 @@
 		24B2CA2F191B69A900CCEFCE /* keyicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B2CA2E191B69A900CCEFCE /* keyicon@2x.png */; };
 		24B2CA31191B786500CCEFCE /* delu.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B2CA30191B786500CCEFCE /* delu.png */; };
 		24B2CA33191B7B6F00CCEFCE /* bg_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B2CA32191B7B6F00CCEFCE /* bg_1.png */; };
+		24B36BED1A1EECB8001F8E5C /* BUIControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B36BE91A1EECB8001F8E5C /* BUIControl.m */; };
+		24B36BEE1A1EECB8001F8E5C /* BUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B36BEB1A1EECB8001F8E5C /* BUIView.m */; };
+		24B36BF31A1F29AC001F8E5C /* AgentNew.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B36BF11A1F29AB001F8E5C /* AgentNew.m */; };
+		24B36BF41A1F29AD001F8E5C /* AgentNew.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24B36BF21A1F29AB001F8E5C /* AgentNew.xib */; };
 		24B660861910AC4B00E57DD5 /* HPReorderTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B660851910AC4A00E57DD5 /* HPReorderTableView.m */; };
 		24B660881910C39100E57DD5 /* successfulBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B660871910C39100E57DD5 /* successfulBG.png */; };
 		24B6608A1910C3D600E57DD5 /* click.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B660891910C3D600E57DD5 /* click.png */; };
+		24B66AAB1A22E324001CCC3C /* PayWidgetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B66AA91A22E323001CCC3C /* PayWidgetView.m */; };
+		24B66AAC1A22E324001CCC3C /* PayWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24B66AAA1A22E324001CCC3C /* PayWidgetView.xib */; };
 		24B81F071920D14200999E6C /* Default-568h@2x1.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B81F061920D14200999E6C /* Default-568h@2x1.png */; };
 		24BAC4A4190F39BE00092946 /* PhoneMoneyToOK.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BAC4A2190F39BE00092946 /* PhoneMoneyToOK.m */; };
 		24BAC4A5190F39BE00092946 /* PhoneMoneyToOK.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24BAC4A3190F39BE00092946 /* PhoneMoneyToOK.xib */; };
@@ -345,6 +352,7 @@
 		24C7B48B1922FBC700599ADD /* TFAdress.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C7B48A1922FBC700599ADD /* TFAdress.m */; };
 		24C7B48F19231DB400599ADD /* AddressPAY.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C7B48D19231DB400599ADD /* AddressPAY.m */; };
 		24C7B49019231DB400599ADD /* AddressPAY.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24C7B48E19231DB400599ADD /* AddressPAY.xib */; };
+		24C888FE1A244CAB00322B7E /* splash@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 24C888FD1A244CAB00322B7E /* splash@2x.jpg */; };
 		24C8E41319B83CE300F75A52 /* NLhhzTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C8E41019B83CE300F75A52 /* NLhhzTestViewController.m */; };
 		24C8E41419B83CE300F75A52 /* NLpublic.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C8E41219B83CE300F75A52 /* NLpublic.m */; };
 		24C8E41619B83EE200F75A52 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 24C8E41519B83EE200F75A52 /* libz.1.2.5.dylib */; };
@@ -1388,7 +1396,22 @@
 		A693061F1946D1DF0004BBED /* input_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A693061E1946D1DF0004BBED /* input_bg@2x.png */; };
 		A693E3C919C6C56C007BE726 /* TFAgentBookCardCtr.m in Sources */ = {isa = PBXBuildFile; fileRef = A693E3C619C6C56C007BE726 /* TFAgentBookCardCtr.m */; };
 		A693E3CA19C6C56C007BE726 /* TFAgentOrderOfPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = A693E3C819C6C56C007BE726 /* TFAgentOrderOfPayment.m */; };
+		A694A63E1A25AECE003E0232 /* TFNewVersionAgentMainCtr.m in Sources */ = {isa = PBXBuildFile; fileRef = A694A63D1A25AECE003E0232 /* TFNewVersionAgentMainCtr.m */; };
+		A694A64B1A25B351003E0232 /* ACDistributionRecordsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A694A6421A25B351003E0232 /* ACDistributionRecordsCell.xib */; };
+		A694A64C1A25B351003E0232 /* ACDistributionRecordsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A694A6441A25B351003E0232 /* ACDistributionRecordsCell.m */; };
+		A694A64D1A25B351003E0232 /* ACAssignmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A694A6451A25B351003E0232 /* ACAssignmentCell.xib */; };
+		A694A64E1A25B351003E0232 /* ACAssignmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A694A6471A25B351003E0232 /* ACAssignmentCell.m */; };
+		A694A64F1A25B351003E0232 /* ACTwoAgentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A694A6481A25B351003E0232 /* ACTwoAgentsCell.xib */; };
+		A694A6501A25B351003E0232 /* ACTwoAgentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A694A64A1A25B351003E0232 /* ACTwoAgentsCell.m */; };
+		A694A6591A25B3B6003E0232 /* ACMoreModulesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A694A6511A25B3B6003E0232 /* ACMoreModulesViewController.m */; };
+		A694A65A1A25B3B6003E0232 /* ACTwoAgentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A694A6521A25B3B6003E0232 /* ACTwoAgentsViewController.m */; };
+		A694A65B1A25B3B6003E0232 /* ACAuthorizationCodeAssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A694A6531A25B3B6003E0232 /* ACAuthorizationCodeAssignmentViewController.m */; };
+		A694A65C1A25B3B6003E0232 /* ACDistributionRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A694A6551A25B3B6003E0232 /* ACDistributionRecordsViewController.m */; };
+		A6960B631A1EDF750011CF39 /* ACImmediatelyBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = A6960B621A1EDF750011CF39 /* ACImmediatelyBinding.m */; };
+		A6960B671A1EEA870011CF39 /* AC_InputBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6960B661A1EEA870011CF39 /* AC_InputBox@2x.png */; };
 		A698154C1A1AE84B00EE2201 /* SMSPaymentHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A698154B1A1AE84B00EE2201 /* SMSPaymentHistoryTableViewController.m */; };
+		A69EC45A1A1DC4AD004A8CBE /* AC_BaseMap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69EC4591A1DC4AD004A8CBE /* AC_BaseMap@2x.png */; };
+		A69EC45E1A1DEC4D004A8CBE /* ACMyAuthorizationCode.m in Sources */ = {isa = PBXBuildFile; fileRef = A69EC45D1A1DEC4D004A8CBE /* ACMyAuthorizationCode.m */; };
 		A6A3820D1918B64300266B1A /* QcoinMoneyGive.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A3820B1918B64300266B1A /* QcoinMoneyGive.m */; };
 		A6A3820E1918B64300266B1A /* QcoinMoneyGive.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A3820C1918B64300266B1A /* QcoinMoneyGive.xib */; };
 		A6AA4FB9190D1A0A00B6F0BF /* MobileRechangeHistoryCtr.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AA4FB7190D1A0A00B6F0BF /* MobileRechangeHistoryCtr.m */; };
@@ -1829,6 +1852,8 @@
 		24A809731A1C3B4000542519 /* PaomaLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaomaLabel.m; sourceTree = "<group>"; };
 		24A809751A1C3B7000542519 /* UITextField+Shake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Shake.h"; sourceTree = "<group>"; };
 		24A809761A1C3B7000542519 /* UITextField+Shake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Shake.m"; sourceTree = "<group>"; };
+		24A8097E1A1C6D6800542519 /* NLModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NLModel.h; path = Utils/NLModel.h; sourceTree = "<group>"; };
+		24A8097F1A1C6D6800542519 /* NLModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NLModel.m; path = Utils/NLModel.m; sourceTree = "<group>"; };
 		24AA4F3F19065F5000EDD3D7 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		24AA4F4019065F5000EDD3D7 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		24AA4F49190675A300EDD3D7 /* btnBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnBack.png; sourceTree = "<group>"; };
@@ -1846,10 +1871,21 @@
 		24B2CA2E191B69A900CCEFCE /* keyicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyicon@2x.png"; sourceTree = "<group>"; };
 		24B2CA30191B786500CCEFCE /* delu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delu.png; sourceTree = "<group>"; };
 		24B2CA32191B7B6F00CCEFCE /* bg_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_1.png; sourceTree = "<group>"; };
+		24B36BE81A1EECB8001F8E5C /* BUIControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUIControl.h; sourceTree = "<group>"; };
+		24B36BE91A1EECB8001F8E5C /* BUIControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUIControl.m; sourceTree = "<group>"; };
+		24B36BEA1A1EECB8001F8E5C /* BUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUIView.h; sourceTree = "<group>"; };
+		24B36BEB1A1EECB8001F8E5C /* BUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUIView.m; sourceTree = "<group>"; };
+		24B36BEC1A1EECB8001F8E5C /* BlockUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockUI.h; sourceTree = "<group>"; };
+		24B36BF01A1F29AB001F8E5C /* AgentNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentNew.h; sourceTree = "<group>"; };
+		24B36BF11A1F29AB001F8E5C /* AgentNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentNew.m; sourceTree = "<group>"; };
+		24B36BF21A1F29AB001F8E5C /* AgentNew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AgentNew.xib; sourceTree = "<group>"; };
 		24B660841910AC4A00E57DD5 /* HPReorderTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPReorderTableView.h; sourceTree = "<group>"; };
 		24B660851910AC4A00E57DD5 /* HPReorderTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPReorderTableView.m; sourceTree = "<group>"; };
 		24B660871910C39100E57DD5 /* successfulBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = successfulBG.png; sourceTree = "<group>"; };
 		24B660891910C3D600E57DD5 /* click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = click.png; sourceTree = "<group>"; };
+		24B66AA81A22E323001CCC3C /* PayWidgetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PayWidgetView.h; path = ../PayWidgetView.h; sourceTree = "<group>"; };
+		24B66AA91A22E323001CCC3C /* PayWidgetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PayWidgetView.m; path = ../PayWidgetView.m; sourceTree = "<group>"; };
+		24B66AAA1A22E324001CCC3C /* PayWidgetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PayWidgetView.xib; path = ../PayWidgetView.xib; sourceTree = "<group>"; };
 		24B81F061920D14200999E6C /* Default-568h@2x1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x1.png"; sourceTree = "<group>"; };
 		24BAC4A1190F39BE00092946 /* PhoneMoneyToOK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneMoneyToOK.h; sourceTree = "<group>"; };
 		24BAC4A2190F39BE00092946 /* PhoneMoneyToOK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneMoneyToOK.m; sourceTree = "<group>"; };
@@ -1932,6 +1968,7 @@
 		24C7B48C19231DB400599ADD /* AddressPAY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressPAY.h; sourceTree = "<group>"; };
 		24C7B48D19231DB400599ADD /* AddressPAY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressPAY.m; sourceTree = "<group>"; };
 		24C7B48E19231DB400599ADD /* AddressPAY.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressPAY.xib; sourceTree = "<group>"; };
+		24C888FD1A244CAB00322B7E /* splash@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "splash@2x.jpg"; sourceTree = "<group>"; };
 		24C8E40F19B83CE300F75A52 /* NLhhzTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLhhzTestViewController.h; sourceTree = "<group>"; };
 		24C8E41019B83CE300F75A52 /* NLhhzTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLhhzTestViewController.m; sourceTree = "<group>"; };
 		24C8E41119B83CE300F75A52 /* NLpublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLpublic.h; sourceTree = "<group>"; };
@@ -3232,8 +3269,33 @@
 		A693E3C619C6C56C007BE726 /* TFAgentBookCardCtr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFAgentBookCardCtr.m; sourceTree = "<group>"; };
 		A693E3C719C6C56C007BE726 /* TFAgentOrderOfPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFAgentOrderOfPayment.h; sourceTree = "<group>"; };
 		A693E3C819C6C56C007BE726 /* TFAgentOrderOfPayment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFAgentOrderOfPayment.m; sourceTree = "<group>"; };
+		A694A63C1A25AECE003E0232 /* TFNewVersionAgentMainCtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFNewVersionAgentMainCtr.h; sourceTree = "<group>"; };
+		A694A63D1A25AECE003E0232 /* TFNewVersionAgentMainCtr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFNewVersionAgentMainCtr.m; sourceTree = "<group>"; };
+		A694A6421A25B351003E0232 /* ACDistributionRecordsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACDistributionRecordsCell.xib; sourceTree = "<group>"; };
+		A694A6431A25B351003E0232 /* ACDistributionRecordsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDistributionRecordsCell.h; sourceTree = "<group>"; };
+		A694A6441A25B351003E0232 /* ACDistributionRecordsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACDistributionRecordsCell.m; sourceTree = "<group>"; };
+		A694A6451A25B351003E0232 /* ACAssignmentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACAssignmentCell.xib; sourceTree = "<group>"; };
+		A694A6461A25B351003E0232 /* ACAssignmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAssignmentCell.h; sourceTree = "<group>"; };
+		A694A6471A25B351003E0232 /* ACAssignmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAssignmentCell.m; sourceTree = "<group>"; };
+		A694A6481A25B351003E0232 /* ACTwoAgentsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACTwoAgentsCell.xib; sourceTree = "<group>"; };
+		A694A6491A25B351003E0232 /* ACTwoAgentsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTwoAgentsCell.h; sourceTree = "<group>"; };
+		A694A64A1A25B351003E0232 /* ACTwoAgentsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACTwoAgentsCell.m; sourceTree = "<group>"; };
+		A694A6511A25B3B6003E0232 /* ACMoreModulesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACMoreModulesViewController.m; sourceTree = "<group>"; };
+		A694A6521A25B3B6003E0232 /* ACTwoAgentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACTwoAgentsViewController.m; sourceTree = "<group>"; };
+		A694A6531A25B3B6003E0232 /* ACAuthorizationCodeAssignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAuthorizationCodeAssignmentViewController.m; sourceTree = "<group>"; };
+		A694A6541A25B3B6003E0232 /* ACMoreModulesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMoreModulesViewController.h; sourceTree = "<group>"; };
+		A694A6551A25B3B6003E0232 /* ACDistributionRecordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACDistributionRecordsViewController.m; sourceTree = "<group>"; };
+		A694A6561A25B3B6003E0232 /* ACDistributionRecordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDistributionRecordsViewController.h; sourceTree = "<group>"; };
+		A694A6571A25B3B6003E0232 /* ACAuthorizationCodeAssignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAuthorizationCodeAssignmentViewController.h; sourceTree = "<group>"; };
+		A694A6581A25B3B6003E0232 /* ACTwoAgentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTwoAgentsViewController.h; sourceTree = "<group>"; };
+		A6960B611A1EDF750011CF39 /* ACImmediatelyBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACImmediatelyBinding.h; sourceTree = "<group>"; };
+		A6960B621A1EDF750011CF39 /* ACImmediatelyBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACImmediatelyBinding.m; sourceTree = "<group>"; };
+		A6960B661A1EEA870011CF39 /* AC_InputBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AC_InputBox@2x.png"; path = "AuthorizationCodeImage/AC_InputBox@2x.png"; sourceTree = "<group>"; };
 		A698154A1A1AE84B00EE2201 /* SMSPaymentHistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSPaymentHistoryTableViewController.h; sourceTree = "<group>"; };
 		A698154B1A1AE84B00EE2201 /* SMSPaymentHistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSPaymentHistoryTableViewController.m; sourceTree = "<group>"; };
+		A69EC4591A1DC4AD004A8CBE /* AC_BaseMap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AC_BaseMap@2x.png"; path = "AuthorizationCodeImage/AC_BaseMap@2x.png"; sourceTree = "<group>"; };
+		A69EC45C1A1DEC4D004A8CBE /* ACMyAuthorizationCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACMyAuthorizationCode.h; sourceTree = "<group>"; };
+		A69EC45D1A1DEC4D004A8CBE /* ACMyAuthorizationCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACMyAuthorizationCode.m; sourceTree = "<group>"; };
 		A6A3820A1918B64300266B1A /* QcoinMoneyGive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QcoinMoneyGive.h; path = MainController/QcoinCharge/QcoinMoneyGive.h; sourceTree = "<group>"; };
 		A6A3820B1918B64300266B1A /* QcoinMoneyGive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QcoinMoneyGive.m; path = MainController/QcoinCharge/QcoinMoneyGive.m; sourceTree = "<group>"; };
 		A6A3820C1918B64300266B1A /* QcoinMoneyGive.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = QcoinMoneyGive.xib; path = MainController/QcoinCharge/QcoinMoneyGive.xib; sourceTree = "<group>"; };
@@ -3613,6 +3675,9 @@
 				32E3260E19F77AE000D36643 /* ImpowerController.h */,
 				32E3260F19F77AE000D36643 /* ImpowerController.m */,
 				32E3261019F77AE000D36643 /* ImpowerController.xib */,
+				A69EC45B1A1DEB6E004A8CBE /* MyAuthorizationCode */,
+				A6960B601A1EDF3B0011CF39 /* ImmediatelyBinding */,
+				A6960B681A1EFFFD0011CF39 /* PurchaseALicenseCode */,
 				324912C51A00BD4F00204D51 /* MyNumberController.h */,
 				324912C61A00BD4F00204D51 /* MyNumberController.m */,
 				321DA03D19FA3C3900EBD79E /* ImpowerPayController.h */,
@@ -3990,6 +4055,8 @@
 		248645471A0B08C000535BF1 /* listModel */ = {
 			isa = PBXGroup;
 			children = (
+				24A8097E1A1C6D6800542519 /* NLModel.h */,
+				24A8097F1A1C6D6800542519 /* NLModel.m */,
 				2411EEFB19736C3D00C415F8 /* Person.h */,
 				2411EEFC19736C3D00C415F8 /* Person.m */,
 				32EFD8E51994F1BA00FF3B19 /* CardInfo.h */,
@@ -4221,7 +4288,7 @@
 			name = "代理商收益";
 			sourceTree = "<group>";
 		};
-		24A809711A1C3AFB00542519 /* tf */ = {
+		24A809711A1C3AFB00542519 /* pamadenglable */ = {
 			isa = PBXGroup;
 			children = (
 				24A809721A1C3B4000542519 /* PaomaLabel.h */,
@@ -4229,7 +4296,7 @@
 				24A809751A1C3B7000542519 /* UITextField+Shake.h */,
 				24A809761A1C3B7000542519 /* UITextField+Shake.m */,
 			);
-			name = tf;
+			name = pamadenglable;
 			sourceTree = "<group>";
 		};
 		24AD3F41192F1FE800A8F763 /* view */ = {
@@ -4381,6 +4448,36 @@
 			name = MoreView;
 			sourceTree = "<group>";
 		};
+		24B36BE71A1EEC88001F8E5C /* blockView */ = {
+			isa = PBXGroup;
+			children = (
+				24B36BE81A1EECB8001F8E5C /* BUIControl.h */,
+				24B36BE91A1EECB8001F8E5C /* BUIControl.m */,
+				24B36BEA1A1EECB8001F8E5C /* BUIView.h */,
+				24B36BEB1A1EECB8001F8E5C /* BUIView.m */,
+				24B36BEC1A1EECB8001F8E5C /* BlockUI.h */,
+			);
+			name = blockView;
+			sourceTree = "<group>";
+		};
+		24B36BEF1A1F2863001F8E5C /* 新版代理商界面 */ = {
+			isa = PBXGroup;
+			children = (
+				24B36BF01A1F29AB001F8E5C /* AgentNew.h */,
+				24B36BF11A1F29AB001F8E5C /* AgentNew.m */,
+				24B36BF21A1F29AB001F8E5C /* AgentNew.xib */,
+			);
+			name = "新版代理商界面";
+			sourceTree = "<group>";
+		};
+		24B66AA71A22CE40001CCC3C /* 另外一种节点展开显示 */ = {
+			isa = PBXGroup;
+			children = (
+				24BC1A8A1964EAD900653560 /* RATressView */,
+			);
+			name = "另外一种节点展开显示";
+			sourceTree = "<group>";
+		};
 		24BAF6E619FC9211002C2206 /* oldLogin */ = {
 			isa = PBXGroup;
 			children = (
@@ -4421,6 +4518,7 @@
 				24BC1A9E1964EAEA00653560 /* RATreeNodeInfo+Private.m */,
 			);
 			name = RATressView;
+			path = MainController/QcoinCharge;
 			sourceTree = "<group>";
 		};
 		24BC3371196BE20D00CD534B /* MainBtn */ = {
@@ -4732,7 +4830,7 @@
 			name = Wallet;
 			sourceTree = "<group>";
 		};
-		24DA26701A19DDBE00727EEA /* 二级节点展开 */ = {
+		24DA26701A19DDBE00727EEA /* 代理商收益分润 二级节点展开 */ = {
 			isa = PBXGroup;
 			children = (
 				24DA266B1A19DDBA00727EEA /* MainViewController.h */,
@@ -4745,12 +4843,13 @@
 				24E529911A1999D900A85023 /* agentEarningsCell.m */,
 				24E529921A1999D900A85023 /* agentEarningsCell.xib */,
 			);
-			name = "二级节点展开";
+			name = "代理商收益分润 二级节点展开";
 			sourceTree = "<group>";
 		};
 		24DC317819A18F4300DFF28D /* ToPayYiBao */ = {
 			isa = PBXGroup;
 			children = (
+				24E5E77C1A22FAFF007359C5 /* 授权码 */,
 				249EE33A19BEFD1000D623F4 /* 商户收款 */,
 				2418124B19D0120F00AF61AE /* 转账 */,
 				2418124C19D0122800AF61AE /* 话费和Q币 */,
@@ -4870,6 +4969,16 @@
 				44F9D71517BE04A5007C63B8 /* NLProtocolNotify.m */,
 			);
 			name = "Url Setter";
+			sourceTree = "<group>";
+		};
+		24E5E77C1A22FAFF007359C5 /* 授权码 */ = {
+			isa = PBXGroup;
+			children = (
+				24B66AA81A22E323001CCC3C /* PayWidgetView.h */,
+				24B66AA91A22E323001CCC3C /* PayWidgetView.m */,
+				24B66AAA1A22E324001CCC3C /* PayWidgetView.xib */,
+			);
+			name = "授权码";
 			sourceTree = "<group>";
 		};
 		24E5F76019949C8100928391 /* bankImage */ = {
@@ -5228,7 +5337,8 @@
 		24F4A45719B950C00095146D /* ToMoreCell */ = {
 			isa = PBXGroup;
 			children = (
-				24DA26701A19DDBE00727EEA /* 二级节点展开 */,
+				24B66AA71A22CE40001CCC3C /* 另外一种节点展开显示 */,
+				24DA26701A19DDBE00727EEA /* 代理商收益分润 二级节点展开 */,
 				24ED789E19CBCE2A00998E02 /* BossPayMoneyCell.h */,
 				24ED789F19CBCE2A00998E02 /* BossPayMoneyCell.m */,
 				24ED78A019CBCE2A00998E02 /* BossPayMoneyCell.xib */,
@@ -5474,6 +5584,7 @@
 		32EA13571980CFA40068A0B6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				24B36BEF1A1F2863001F8E5C /* 新版代理商界面 */,
 				24A809701A1C33F000542519 /* 代理商收益 */,
 				A693E3C419C6C56C007BE726 /* 汇通卡 */,
 				24BEB39719B6B94E00B773D4 /* ApplyAgentViewControllerNew.h */,
@@ -5483,6 +5594,7 @@
 				321A5E0B197F7DA700BD7E88 /* ApplyAgentViewController.m */,
 				321461A319879491004CC401 /* ApplyOrTestViewController.h */,
 				321461A419879491004CC401 /* ApplyOrTestViewController.m */,
+				A694A63F1A25B2A1003E0232 /* NewVersion */,
 				A6BD54E4191B8167008448BC /* TFAgentMainCtr.h */,
 				A6BD54E5191B8167008448BC /* TFAgentMainCtr.m */,
 				A6BD54E6191B8167008448BC /* TFAgentMainCtr.xib */,
@@ -5508,7 +5620,7 @@
 		32EE7BAB199C4A5100A095D1 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				24A809711A1C3AFB00542519 /* tf */,
+				24A809711A1C3AFB00542519 /* pamadenglable */,
 				249FE39E19EE55AF00274AD5 /* PinYin4Objc */,
 				24C8E3A019B83CBB00F75A52 /* ASI&AFN */,
 				24903F0819B5BBE300768112 /* Touchcell&Table */,
@@ -5547,6 +5659,7 @@
 		32EE7BAD199C4A6400A095D1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				24B36BE71A1EEC88001F8E5C /* blockView */,
 				248645471A0B08C000535BF1 /* listModel */,
 				248645461A0B088200535BF1 /* imageData */,
 			);
@@ -5571,7 +5684,6 @@
 		32F769011974BA7600069BDB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				3FF1B7C8199DBD98009112F7 /* AriTicket */,
 				3F314F7D19C6DEF100DC6169 /* imagePlay */,
 				3FF1B7A9199DBD3B009112F7 /* ImageCity */,
 				24C1FCA0197F4FD00034D334 /* base */,
@@ -5601,7 +5713,6 @@
 		32F769021974BA8900069BDB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				24BC1A8A1964EAD900653560 /* RATressView */,
 				241238E219629DF40015E09D /* webview */,
 			);
 			name = View;
@@ -5837,6 +5948,7 @@
 				3F03137419A19F5B00AD8DAA /* 机票查询 */,
 			);
 			name = AriTicket;
+			path = MainController/QcoinCharge;
 			sourceTree = "<group>";
 		};
 		3FFC14D019A4A2EB00C58DA0 /* 添加乘机人 */ = {
@@ -6012,6 +6124,8 @@
 		44B4961C17A9FDBA009DB82D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A69302971A132A5500C3C864 /* SMSImage */,
+				A69EC4581A1DC39F004A8CBE /* AuthorizationCodeImage */,
 				32BB990E1A00E57A00A0E212 /* icon_tfbcard.png */,
 				32F15AD619D7E72A006CDEBA /* back@2x.png */,
 				32E6FFA119D7BF8C00BF7588 /* 转账汇款非功能界面-02.png */,
@@ -6119,6 +6233,7 @@
 		44B4961E17A9FE38009DB82D /* MainController */ = {
 			isa = PBXGroup;
 			children = (
+				3FF1B7C8199DBD98009112F7 /* AriTicket */,
 				A693028C1A13293700C3C864 /* SMSReceipt */,
 				3F35D65519FF311E003643DE /* SavingsCard */,
 				2475A1A219BEC4D600CBBD53 /* peopleLevel */,
@@ -6153,6 +6268,7 @@
 		44B4961F17A9FE4C009DB82D /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				24C888FD1A244CAB00322B7E /* splash@2x.jpg */,
 				4482524C17AB4AAB000B1170 /* NLAppDelegate.h */,
 				4482524D17AB4AAB000B1170 /* NLAppDelegate.m */,
 				243C3E371981EE28001D6836 /* lockerMain */,
@@ -6564,7 +6680,6 @@
 				A69303321A132C5700C3C864 /* SunSliderView */,
 				A69302FD1A132B1F00C3C864 /* SSCheckBox */,
 				A693036A1A132F4700C3C864 /* WasteClass */,
-				A69302971A132A5500C3C864 /* SMSImage */,
 			);
 			name = SMSReceipt;
 			sourceTree = "<group>";
@@ -6786,6 +6901,88 @@
 			path = "汇通卡";
 			sourceTree = "<group>";
 		};
+		A694A63F1A25B2A1003E0232 /* NewVersion */ = {
+			isa = PBXGroup;
+			children = (
+				A694A63C1A25AECE003E0232 /* TFNewVersionAgentMainCtr.h */,
+				A694A63D1A25AECE003E0232 /* TFNewVersionAgentMainCtr.m */,
+				A694A65F1A25B43D003E0232 /* AuthorizationCodeAssignment */,
+				A694A65E1A25B42A003E0232 /* DistributionRecords */,
+				A694A6401A25B2E7003E0232 /* TwoAgents */,
+				A694A65D1A25B403003E0232 /* MoreModules */,
+				A694A6411A25B2FD003E0232 /* Cell */,
+			);
+			name = NewVersion;
+			sourceTree = "<group>";
+		};
+		A694A6401A25B2E7003E0232 /* TwoAgents */ = {
+			isa = PBXGroup;
+			children = (
+				A694A6581A25B3B6003E0232 /* ACTwoAgentsViewController.h */,
+				A694A6521A25B3B6003E0232 /* ACTwoAgentsViewController.m */,
+			);
+			name = TwoAgents;
+			sourceTree = "<group>";
+		};
+		A694A6411A25B2FD003E0232 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A694A6421A25B351003E0232 /* ACDistributionRecordsCell.xib */,
+				A694A6431A25B351003E0232 /* ACDistributionRecordsCell.h */,
+				A694A6441A25B351003E0232 /* ACDistributionRecordsCell.m */,
+				A694A6451A25B351003E0232 /* ACAssignmentCell.xib */,
+				A694A6461A25B351003E0232 /* ACAssignmentCell.h */,
+				A694A6471A25B351003E0232 /* ACAssignmentCell.m */,
+				A694A6481A25B351003E0232 /* ACTwoAgentsCell.xib */,
+				A694A6491A25B351003E0232 /* ACTwoAgentsCell.h */,
+				A694A64A1A25B351003E0232 /* ACTwoAgentsCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		A694A65D1A25B403003E0232 /* MoreModules */ = {
+			isa = PBXGroup;
+			children = (
+				A694A6541A25B3B6003E0232 /* ACMoreModulesViewController.h */,
+				A694A6511A25B3B6003E0232 /* ACMoreModulesViewController.m */,
+			);
+			name = MoreModules;
+			sourceTree = "<group>";
+		};
+		A694A65E1A25B42A003E0232 /* DistributionRecords */ = {
+			isa = PBXGroup;
+			children = (
+				A694A6561A25B3B6003E0232 /* ACDistributionRecordsViewController.h */,
+				A694A6551A25B3B6003E0232 /* ACDistributionRecordsViewController.m */,
+			);
+			name = DistributionRecords;
+			sourceTree = "<group>";
+		};
+		A694A65F1A25B43D003E0232 /* AuthorizationCodeAssignment */ = {
+			isa = PBXGroup;
+			children = (
+				A694A6571A25B3B6003E0232 /* ACAuthorizationCodeAssignmentViewController.h */,
+				A694A6531A25B3B6003E0232 /* ACAuthorizationCodeAssignmentViewController.m */,
+			);
+			name = AuthorizationCodeAssignment;
+			sourceTree = "<group>";
+		};
+		A6960B601A1EDF3B0011CF39 /* ImmediatelyBinding */ = {
+			isa = PBXGroup;
+			children = (
+				A6960B611A1EDF750011CF39 /* ACImmediatelyBinding.h */,
+				A6960B621A1EDF750011CF39 /* ACImmediatelyBinding.m */,
+			);
+			name = ImmediatelyBinding;
+			sourceTree = "<group>";
+		};
+		A6960B681A1EFFFD0011CF39 /* PurchaseALicenseCode */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = PurchaseALicenseCode;
+			sourceTree = "<group>";
+		};
 		A69B29FA1941BFB8000FC3B9 /* gameCharge */ = {
 			isa = PBXGroup;
 			children = (
@@ -6804,6 +7001,24 @@
 				A693061719469AA40004BBED /* GameChargeBill.mm */,
 			);
 			path = gameCharge;
+			sourceTree = "<group>";
+		};
+		A69EC4581A1DC39F004A8CBE /* AuthorizationCodeImage */ = {
+			isa = PBXGroup;
+			children = (
+				A69EC4591A1DC4AD004A8CBE /* AC_BaseMap@2x.png */,
+				A6960B661A1EEA870011CF39 /* AC_InputBox@2x.png */,
+			);
+			name = AuthorizationCodeImage;
+			sourceTree = "<group>";
+		};
+		A69EC45B1A1DEB6E004A8CBE /* MyAuthorizationCode */ = {
+			isa = PBXGroup;
+			children = (
+				A69EC45C1A1DEC4D004A8CBE /* ACMyAuthorizationCode.h */,
+				A69EC45D1A1DEC4D004A8CBE /* ACMyAuthorizationCode.m */,
+			);
+			name = MyAuthorizationCode;
 			sourceTree = "<group>";
 		};
 		A6BD54CD191B6885008448BC /* ManageObject */ = {
@@ -6997,6 +7212,7 @@
 				A66A3AA4193C7D74001E5B63 /* water_elec_change_btn_press@2x.png in Resources */,
 				243476B519D1018E006F69B1 /* blue_button_nor@2x.png in Resources */,
 				4482528817AB4CF6000B1170 /* transferRemittance@2x.png in Resources */,
+				A694A64B1A25B351003E0232 /* ACDistributionRecordsCell.xib in Resources */,
 				24E5F78F19949C9500928391 /* 银行商标-21.png in Resources */,
 				A693032D1A132C3600C3C864 /* cb_green_on@2x.png in Resources */,
 				A6C9A8751A19F6A700125D70 /* bank2.png in Resources */,
@@ -7028,6 +7244,7 @@
 				24EF86BA197E4A8200F7D849 /* mobilerecharge_normal@2x.png in Resources */,
 				24EF8664197E4A8200F7D849 /* bbb_selected@2x.png in Resources */,
 				24F850CC1A107F62007331F5 /* user_info_image.png in Resources */,
+				A69EC45A1A1DC4AD004A8CBE /* AC_BaseMap@2x.png in Resources */,
 				321DA04119FA3C3900EBD79E /* ImpowerPayController.xib in Resources */,
 				448252A017AB9AC4000B1170 /* addUsersPhoto@2x.png in Resources */,
 				24E71FEC19D2609400E5CA3D /* InfoPlist.strings in Resources */,
@@ -7192,6 +7409,7 @@
 				2448DFF2197CDB0F004F9DAA /* text2@2x.png in Resources */,
 				442B202B17B23BAA004CFCAC /* NLUsersInforSettingsCell.xib in Resources */,
 				3F314FB119C6DEF100DC6169 /* BG2green@2x.png in Resources */,
+				24B36BF41A1F29AD001F8E5C /* AgentNew.xib in Resources */,
 				24CF0EA519851D6E00041519 /* TabAllView.xib in Resources */,
 				A66A3AA0193B13D4001E5B63 /* water_rent_uesless@2x.png in Resources */,
 				2410219D198652BF0085965E /* icon_bank_main.png in Resources */,
@@ -7408,6 +7626,7 @@
 				24CAA3A919D41FA800B7E3FA /* line1_pla@2x.png in Resources */,
 				44E41B7417C76538004532A1 /* NLRegisterSecondViewController.xib in Resources */,
 				3F2F8A3E19CC1B3D00DC2B14 /* arrow2@2x.png in Resources */,
+				24B66AAC1A22E324001CCC3C /* PayWidgetView.xib in Resources */,
 				A6026C7919237168002894F0 /* dashed_line@2x.png in Resources */,
 				32F53C4619986FC300573174 /* 深圳发展银行.png in Resources */,
 				24E4A5E319ECD30600806616 /* icon_salarypay.png in Resources */,
@@ -7463,6 +7682,7 @@
 				44B4DBC117CC7FC000A1CCC2 /* NLHelpCenterViewController.xib in Resources */,
 				241021C0198654020085965E /* icon_update_main.png in Resources */,
 				3F314FB319C6DEF100DC6169 /* BG2white1@2x.png in Resources */,
+				A694A64F1A25B351003E0232 /* ACTwoAgentsCell.xib in Resources */,
 				24EAE936198F84A90077F0E1 /* tfbpayIndex02.jpg in Resources */,
 				A693033A1A132CBC00C3C864 /* icon_rightarrow.png in Resources */,
 				44F1911117CDF9EB00F1404F /* NLBigImageViewController.xib in Resources */,
@@ -7612,6 +7832,7 @@
 				24EF868A197E4A8200F7D849 /* family_selected@2x.png in Resources */,
 				241238DA196243990015E09D /* right_arrow.png in Resources */,
 				24C7A682192B47AA0083A5FA /* jiahao.png in Resources */,
+				24C888FE1A244CAB00322B7E /* splash@2x.jpg in Resources */,
 				24EF8692197E4A8200F7D849 /* game_selected@2x.png in Resources */,
 				24EAE8F2198F527F0077F0E1 /* icon~iphone.png in Resources */,
 				44E52F6E17F3C5D800202340 /* NLResultOrderQueryViewController.xib in Resources */,
@@ -7639,6 +7860,7 @@
 				44F2429A180503B100FE518B /* NLCreditCardSecondViewController.xib in Resources */,
 				2448DFF0197CDB0F004F9DAA /* right_t_selected_button@2x.png in Resources */,
 				A69302B21A132A9F00C3C864 /* SMS_input@2x.png in Resources */,
+				A694A64D1A25B351003E0232 /* ACAssignmentCell.xib in Resources */,
 				44F2429F18055F3300FE518B /* NLTransferSecondViewController.xib in Resources */,
 				32F53C5219986FC300573174 /* bank16.png in Resources */,
 				A679EC44193315290005A8A5 /* main_more_press@2x.png in Resources */,
@@ -7651,6 +7873,7 @@
 				244D2E78193F013D009992E0 /* gray@2x.png in Resources */,
 				24EAE92F198F69570077F0E1 /* images-1.png in Resources */,
 				2487816B19F8ED230087BFB9 /* newor_btn@2x.png in Resources */,
+				A6960B671A1EEA870011CF39 /* AC_InputBox@2x.png in Resources */,
 				A693031D1A132C3600C3C864 /* cb_click_on@2x.png in Resources */,
 				24E5F78C19949C9500928391 /* 银行商标-18.png in Resources */,
 				44DA355C1806A0DC0057C021 /* NLReturnSecondViewController.xib in Resources */,
@@ -7877,6 +8100,7 @@
 				24E95E8819EB84F9009A32DF /* PersonView.m in Sources */,
 				24E95E9F19EB972A009A32DF /* GoShippingSpaceView.m in Sources */,
 				2414A1FA19C03F5F008A8F63 /* AFSecurityPolicy.m in Sources */,
+				24A809801A1C6D6800542519 /* NLModel.m in Sources */,
 				4482529017AB55A3000B1170 /* LeftControllerCell.m in Sources */,
 				4482529C17AB98CB000B1170 /* NLUserInforSettingsCell.m in Sources */,
 				24303A1719F7A96F00863F95 /* NLLoginView.m in Sources */,
@@ -7948,6 +8172,7 @@
 				A68B8AE71945B78F00D667F4 /* GameMoneyChoiceCtr.m in Sources */,
 				2494E8F91991C7F300944DFF /* SDImageCache.m in Sources */,
 				44F491B417B4F3A00055D9AB /* NLRechargeDepositCardSecondViewController.mm in Sources */,
+				24B36BEE1A1EECB8001F8E5C /* BUIView.m in Sources */,
 				24E71FDB19D25CE900E5CA3D /* IQSegmentedNextPrevious.m in Sources */,
 				24C953A619343FD0000C2ABC /* NewLoginView.m in Sources */,
 				24BC1AA41964EAEA00653560 /* RATreeView+UIScrollView.m in Sources */,
@@ -7960,6 +8185,7 @@
 				44F305B017B883C600BF44D7 /* NLBuyCouponsViewController.m in Sources */,
 				44F305B917B8890E00BF44D7 /* NLCashCouponsViewController.m in Sources */,
 				2494E9031991C7F300944DFF /* UIImage+MultiFormat.m in Sources */,
+				A694A64C1A25B351003E0232 /* ACDistributionRecordsCell.m in Sources */,
 				44F305BE17B88D0A00BF44D7 /* NLMyCouponsMainViewController.m in Sources */,
 				32159D7B19B6B00E00C71F9B /* HotelPhotoController.m in Sources */,
 				24F4A45C19B951D10095146D /* NLTressTableList.m in Sources */,
@@ -7977,6 +8203,7 @@
 				2444711A19E670550034A542 /* payMoneyReturn.m in Sources */,
 				44DDE04C17BC822300084E3E /* HeadInfo.m in Sources */,
 				241238B0196155440015E09D /* planeMain.m in Sources */,
+				A6960B631A1EDF750011CF39 /* ACImmediatelyBinding.m in Sources */,
 				24A3088019206B1B0073DDD4 /* MJPasswordView.m in Sources */,
 				32008C3819A35B4100D367D8 /* ImageCache.xcdatamodeld in Sources */,
 				44DDE05117BC822300084E3E /* ProtocolParser.m in Sources */,
@@ -7991,6 +8218,7 @@
 				A6BD54E7191B8167008448BC /* TFAgentMainCtr.m in Sources */,
 				44F9D71317BDC487007C63B8 /* NLProtocolXML.m in Sources */,
 				24E95E7519EB8273009A32DF /* TicketCustomTableViewCell.m in Sources */,
+				A694A64E1A25B351003E0232 /* ACAssignmentCell.m in Sources */,
 				3F1C8E7919A3469A00716D16 /* RecordDetailsViewController.m in Sources */,
 				A69303731A132F8300C3C864 /* SMSTheSavingsCardViewController.m in Sources */,
 				A69303611A132EC300C3C864 /* SMSChooseABankTableViewController.m in Sources */,
@@ -8047,6 +8275,7 @@
 				44ED785717CB3D8500B330E3 /* NLLogonPWManagerViewController.m in Sources */,
 				44ED785917CB3D8500B330E3 /* NLPassWordManagerViewController.m in Sources */,
 				24BC1AA71964EAEA00653560 /* RATreeNodeInfo.m in Sources */,
+				24B36BF31A1F29AC001F8E5C /* AgentNew.m in Sources */,
 				A61862561936308500F8BAEC /* WaterElec.m in Sources */,
 				A601E877192EF62A00D3F371 /* TFMainViewCtr.m in Sources */,
 				A65AFBB5194EEF2D003AE69A /* TFAgentSearchByType.m in Sources */,
@@ -8080,6 +8309,7 @@
 				24BC1AA61964EAEA00653560 /* RATreeNodeCollectionController.m in Sources */,
 				24EAE920198F64210077F0E1 /* ShareAppView.m in Sources */,
 				24E71FD719D25CE900E5CA3D /* IQKeyboardManager.m in Sources */,
+				A69EC45E1A1DEC4D004A8CBE /* ACMyAuthorizationCode.m in Sources */,
 				24BC1AA31964EAEA00653560 /* RATreeView+Enums.m in Sources */,
 				24FD2BB719AB3729006469C6 /* NLCashMorePay.m in Sources */,
 				320DF89B19A7223C007DA412 /* HotelHostCell.m in Sources */,
@@ -8216,6 +8446,7 @@
 				24D916CD192B3394007EC1BD /* AddressCell.m in Sources */,
 				2494E9151991C82A00944DFF /* MJPhotoBrowser.m in Sources */,
 				A69303011A132BCC00C3C864 /* SSCheckBoxView.m in Sources */,
+				24B36BED1A1EECB8001F8E5C /* BUIControl.m in Sources */,
 				24303A0B19F7795100863F95 /* NewfirstView.m in Sources */,
 				A64752BB19500BF1007637B4 /* SJTDatePickerView.m in Sources */,
 				44F708BC17F95D31002AE198 /* NLSlideBroadsideController.m in Sources */,
@@ -8234,7 +8465,10 @@
 				44F708BF17F95D31002AE198 /* MBRoundProgressView.m in Sources */,
 				2462957A19079A5A00831840 /* QRadioButton.m in Sources */,
 				241238CB19615C220015E09D /* ChineseCalendarDB.cpp in Sources */,
+				A694A6501A25B351003E0232 /* ACTwoAgentsCell.m in Sources */,
+				A694A65B1A25B3B6003E0232 /* ACAuthorizationCodeAssignmentViewController.m in Sources */,
 				32F8C29A199B08A100C22A72 /* QCoinPayController.m in Sources */,
+				24B66AAB1A22E324001CCC3C /* PayWidgetView.m in Sources */,
 				A6E2FFAB1925A1D8005C28DD /* TFAgentAddgoodsCtr.m in Sources */,
 				44F708C017F95D31002AE198 /* NLProgressAlertView.m in Sources */,
 				24903F0219B5776000768112 /* GLMoveToTrashDemoController.m in Sources */,
@@ -8243,6 +8477,7 @@
 				24EEEE5E1917AD1B00EB02AE /* NewPhoneIsOn.m in Sources */,
 				32F703E019B446C000200CB2 /* HotelAreaSiftTable.m in Sources */,
 				321931F91995CE6E0076C1D1 /* CardInfoView.m in Sources */,
+				A694A65A1A25B3B6003E0232 /* ACTwoAgentsViewController.m in Sources */,
 				24A3088219206B1B0073DDD4 /* MJPathLayer.m in Sources */,
 				24BD7CE41908C8E800192ACB /* EmitterView.m in Sources */,
 				2414A1F619C03F5F008A8F63 /* AFHTTPRequestOperation.m in Sources */,
@@ -8277,6 +8512,7 @@
 				24903F0319B5776000768112 /* GLBucket.m in Sources */,
 				24BC1AA81964EAEA00653560 /* RATreeNodeInfo+Private.m in Sources */,
 				3FF1B7D1199DC58E009112F7 /* ButtonView.m in Sources */,
+				A694A6591A25B3B6003E0232 /* ACMoreModulesViewController.m in Sources */,
 				2494E8F71991C7F300944DFF /* MKAnnotationView+WebCache.m in Sources */,
 				A69303721A132F8300C3C864 /* SMSNewBankCardViewController.m in Sources */,
 				2401EB4B19C042DC00C82B45 /* DDXMLElement.m in Sources */,
@@ -8314,7 +8550,9 @@
 				44BA20F4187163E900155F09 /* NLHistoricalAccountCell.m in Sources */,
 				2414A1B119C03ED6008A8F63 /* ASIInputStream.m in Sources */,
 				2494E9171991C82A00944DFF /* MJPhotoProgressView.m in Sources */,
+				A694A65C1A25B3B6003E0232 /* ACDistributionRecordsViewController.m in Sources */,
 				501D8BD81872C4EE004EC93B /* NLSpeUserInforSettingsCell.m in Sources */,
+				A694A63E1A25AECE003E0232 /* TFNewVersionAgentMainCtr.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8360,8 +8598,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: GuangZhou DianDuo Software Technology Co.,Ltd (967UFS6SL4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: MO XING (9D44C6L83U)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: MO XING (9D44C6L83U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: GuangZhou DianDuo Software Technology Co.,Ltd (967UFS6SL4)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -8379,7 +8617,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C83C3EDF-D831-42FB-928D-B6BF754C81CA";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F0E14699-F4AA-4E12-8469-7F10D22B2E5B";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s";
 			};
@@ -8396,8 +8634,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: GuangZhou DianDuo Software Technology Co.,Ltd (967UFS6SL4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: MO XING (9D44C6L83U)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: MO XING (9D44C6L83U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: GuangZhou DianDuo Software Technology Co.,Ltd (967UFS6SL4)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -8409,7 +8647,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C83C3EDF-D831-42FB-928D-B6BF754C81CA";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F0E14699-F4AA-4E12-8469-7F10D22B2E5B";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s";
@@ -8425,8 +8663,8 @@
 				CLANG_DEBUG_INFORMATION_LEVEL = default;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TongFubao/TongFubao.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: GuangZhou DianDuo Software Technology Co.,Ltd (967UFS6SL4)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: MO XING (9D44C6L83U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					/usr/lib/libxml2.dylib,
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -8458,7 +8696,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "14059A89-822B-4299-BB70-6FA7A9461A02";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -8477,8 +8715,8 @@
 				CLANG_DEBUG_INFORMATION_LEVEL = default;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TongFubao/TongFubao.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: GuangZhou DianDuo Software Technology Co.,Ltd (967UFS6SL4)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: MO XING (9D44C6L83U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					/usr/lib/libxml2.dylib,
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -8508,8 +8746,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CA02DEC2-CD6C-4663-9C27-B3926490EE11";
+				PROVISIONING_PROFILE = "CA02DEC2-CD6C-4663-9C27-B3926490EE11";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "14059A89-822B-4299-BB70-6FA7A9461A02";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = 1;

@@ -8,7 +8,7 @@
 
 #import "SMSreceiptViewController.h"
 #import "NLAppDelegate.h"
-
+#import "PaomaLabel.h"
 #import "SMSTradingNoticeViewController.h"
 #import "SMSPaymentHistoryTableViewController.h"
 #import "SMSBankCardViewController.h"
@@ -22,10 +22,10 @@
 #import "SSCheckBoxView.h"
 #import "XIAOYU_TheControlPackage.h"
 
-@interface SMSreceiptViewController ()<UIAlertViewDelegate,UITextFieldDelegate,ABPeoplePickerNavigationControllerDelegate,BankCardDelegate,addBankCardDelegate>{
+@interface SMSreceiptViewController ()<UIAlertViewDelegate,UITextFieldDelegate,ABPeoplePickerNavigationControllerDelegate,BankCardDelegate,addBankCardDelegate,paymentHistoryDelegate>{
 
     NLProgressHUD *_hud;
-    
+    PaomaLabel *aUILabel;
     UITextField *textFields[4];
 }
 
@@ -62,6 +62,16 @@
 -(void)tapleftBarButtonItemBack{
     [self.navigationController dismissModalViewControllerAnimated:YES];
 }
+
+
+#pragma mark - 收款历史记录 协议代理方法
+-(void)agent:(SMSPaymentHistoryTableViewController *)vc paymentHistoryPhone:(NSString *)phone{
+    
+    NSLog(@"收款历史记录 %@",phone);
+    self.phoneString = phone;
+    textFields[0].text = [NSString stringWithFormat:@"%@",phone];
+}
+
 
 
 #pragma mark - 新增银行卡 协议代理方法
@@ -338,16 +348,33 @@
     
     self.scrollView.backgroundColor = RGBACOLOR(246, 250, 252, 1);
     
+ 
+    [self paoMaDing];//跑马灯效果
+    
+    
+
 }
 
+
+#pragma mark - 跑马灯效果
+-(void)paoMaDing{
+    
+    aUILabel= [[PaomaLabel alloc]init];
+    [aUILabel setFrame:CGRectMake(0, 11, textFields[1].frame.size.width, 21)];
+    aUILabel.font = [UIFont fontWithName:nil size:16];
+    aUILabel.text= @"          限单笔5,000.00，日累计20,000.00";
+    aUILabel.textColor= RGBACOLOR(189, 189, 196, 1);
+    aUILabel.userInteractionEnabled = YES;
+    [textFields[1] addSubview:aUILabel];
+    
+}
 
 
 #pragma mark - 收款历史
 -(void)PaymentHistoryButtonItem{
     
     [self rightButtonItemWithTitle:@"收款历史" Frame:CGRectMake(0, 0, 70, 28) backgroundImage:[UIImage imageNamed:@"SMS_historybtn_normal@2x"] backgroundImageHighlighted:[UIImage imageNamed:@"SMS_historybtn_pressed@2x"]];
-    
-    
+
 }
 
 
@@ -355,6 +382,7 @@
 -(void)tapRightButtonItem:(id)sender{
     
     SMSPaymentHistoryTableViewController *vc = [[SMSPaymentHistoryTableViewController alloc]init];
+    vc.delegate = self;
     [self jumpViewController:self newViewController:vc PushAndPresent:YES];
 
 }
@@ -366,7 +394,7 @@
 
 #pragma mark - 输入框
 -(void)SMSReceiptTextField{
-    
+
     UIImageView *vc = [[UIImageView alloc]initWithFrame:CGRectMake(5,13 , 310, 200)];//78
     vc.image = [UIImage imageNamed:@"SMS_1.png"];
 //    vc.layer.cornerRadius = 6;
@@ -382,7 +410,8 @@
         imageView.layer.masksToBounds = YES;
         [vc addSubview:imageView];
         
-        textFields[i] = [[UITextField alloc]initWithFrame:CGRectMake(125, 7+(41+7)*i, 175, 41)];
+        textFields[i] = [[UITextField alloc]initWithFrame:CGRectMake(122, 7+(41+7)*i, 178, 41)];
+        [textFields[i] setFont:[UIFont fontWithName:nil size:16]];
         textFields[i].delegate = self;
         textFields[i].backgroundColor = [UIColor whiteColor];
         textFields[i].textColor= RGBACOLOR(131, 131, 131, 1);
@@ -390,8 +419,10 @@
         textFields[i].layer.cornerRadius = 6;
         textFields[i].layer.masksToBounds = YES;
         [vc addSubview:textFields[i]];
-        
-        self.labels= [[UILabel alloc]initWithFrame:CGRectMake(15, 7+(41+7)*i, 110, 41)];
+ 
+        self.labels= [[UILabel alloc]initWithFrame:CGRectMake(15, 7+(41+7)*i, 105, 41)];
+        self.labels.textColor= RGBACOLOR(62, 62, 62, 1);
+        [self.labels setFont:[UIFont fontWithName:nil size:17]];
         self.labels.tag = 7000+i;
         self.labels.layer.cornerRadius = 6;
         self.labels.layer.masksToBounds = YES;
@@ -402,11 +433,9 @@
         switch (self.labels.tag) {
             case 7000:
                 self.labels.text = @"对方手机号码";
-                self.labels.textColor= RGBACOLOR(62, 62, 62, 1);
                 break;
             case 7001:
                 self.labels.text = @"收款金额(元)";
-                self.labels.textColor= RGBACOLOR(62, 62, 62, 1);
                 break;
             case 7002:
                 self.labels.text = @"手续费(元)";
@@ -414,7 +443,7 @@
                 break;
             case 7003:
                 self.labels.text = @"留言";
-                self.labels.textColor= RGBACOLOR(62, 62, 62, 1);
+                self.labels.frame = CGRectMake(15, 151, 40, 41);
                 break;
                 
             default:
@@ -431,16 +460,19 @@
                 [textFields[0] addTarget:self action:@selector(phoneTextEditingChanged:) forControlEvents:UIControlEventEditingChanged];
                 break;
             case 7001:
-                textFields[1].placeholder = @"单笔收款上限为5千";
+//                textFields[1].placeholder = @"限单笔5千,日累计限2万";
+                //@"限单笔5,000.00，日累计20,000.00"
                 textFields[1].keyboardType = UIKeyboardTypeDecimalPad;
                 [textFields[1] addTarget:self action:@selector(receivablesTextEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+                
                 break;
             case 7002:
                 textFields[2].userInteractionEnabled = NO;
                 [self feeTextField];
                 break;
             case 7003:
-                textFields[3].placeholder = @"限20个汉字";
+                textFields[3].frame = CGRectMake(60, 151, 240, 41);
+                textFields[3].placeholder = @"限20个汉字(如:请付12月份贷款)";
                 textFields[3].keyboardType = UIKeyboardTypeDefault;
                 [textFields[3] addTarget:self action:@selector(theMessageTextEditingChanged:) forControlEvents:UIControlEventEditingChanged];
                 break;
@@ -454,7 +486,7 @@
 }
 
 
-//电话号码限制为11个字符
+#pragma mark - 电话号码限制为11个字符
 -(void)phoneTextEditingChanged:(UITextField *)textField
 {
     if ([textField.text length]>11) {
@@ -469,8 +501,16 @@
 }
 
 
-//单笔收款上限为5千
+#pragma mark - 金额
 -(void)receivablesTextEditingChanged:(UITextField *)textField{
+    
+    //跑马灯效果开关
+    if (textField.text.length >0) {
+        aUILabel.alpha = 0;
+    }else{
+        aUILabel.alpha = 1;
+    }
+    
     
     if ([textField.text intValue]>=5001) {
         self.paymentAmountString = [NSString stringWithFormat:@"%@",textField.text];
@@ -505,12 +545,13 @@
 }
 
 
-//手续费显示框
+#pragma mark - 手续费显示框
 -(void)feeTextField{
-    
+
     self.textFieldFee = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, textFields[2].frame.size.width, textFields[2].frame.size.height)];
+    [self.textFieldFee setFont:[UIFont fontWithName:nil size:16]];
     self.textFieldFee.userInteractionEnabled = NO;
-    self.textFieldFee.placeholder = @"尚未填写收款金额";
+    self.textFieldFee.placeholder = @"手续费由系统计算";
     self.textFieldFee.backgroundColor = [UIColor whiteColor];
     self.textFieldFee.textColor= RGBACOLOR(131, 131, 131, 1);
     self.textFieldFee.userInteractionEnabled = NO;
@@ -519,10 +560,14 @@
 }
 
 
-//留言限制20个字符
+#pragma mark - 留言
 -(void)theMessageTextEditingChanged:(UITextField *)textField
 {
     
+    self.theMessageString = [NSString stringWithFormat:@"%@",textField.text];
+    NSLog(@"\n已输入字符个数 :%d\n当前留言 :%@",self.theMessageString.length,self.theMessageString);
+    
+/*
     if ([textField.text length]>20) {
         textField.text=[textField.text substringToIndex:20];
         self.theMessageString = [self.theMessageString substringWithRange:NSMakeRange(0,20)];
@@ -531,6 +576,85 @@
         self.theMessageString= [NSString stringWithFormat:@"%@",textField.text];
         NSLog(@"当前留言 :%@",self.theMessageString);
     }
+*/
+ 
+}
+
+#pragma mark - 留言限制20个字符
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSLog(@"进入此方法");
+    //手机号码
+    if (textField.tag == 7000) {
+        
+        
+        
+    //输入金额
+    }else if(textField.tag == 7001){
+        
+        NSScanner      *scanner    = [NSScanner scannerWithString:string];
+        NSCharacterSet *numbers;
+        NSRange         pointRange = [textField.text rangeOfString:@"."];
+        
+        if ( (pointRange.length > 0) && (pointRange.location < range.location  || pointRange.location > range.location + range.length) )
+        {
+            numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+        }
+        else
+        {
+            numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
+        }
+        
+        if ( [textField.text isEqualToString:@""] && [string isEqualToString:@"."] )
+        {
+            return NO;
+        }
+        
+        short remain = 2; //默认保留2位小数
+        
+        NSString *tempStr = [textField.text stringByAppendingString:string];
+        NSUInteger strlen = [tempStr length];
+        if(pointRange.length > 0 && pointRange.location > 0){ //判断输入框内是否含有“.”。
+            if([string isEqualToString:@"."]){ //当输入框内已经含有“.”时，如果再输入“.”则被视为无效。
+                return NO;
+            }
+            if(strlen > 0 && (strlen - pointRange.location) > remain+1){ //当输入框内已经含有“.”，当字符串长度减去小数点前面的字符串长度大于需要要保留的小数点位数，则视当次输入无效。
+                return NO;
+            }
+        }
+        
+        NSRange zeroRange = [textField.text rangeOfString:@"0"];
+        if(zeroRange.length == 1 && zeroRange.location == 0){ //判断输入框第一个字符是否为“0”
+            if(![string isEqualToString:@"0"] && ![string isEqualToString:@"."] && [textField.text length] == 1){ //当输入框只有一个字符并且字符为“0”时，再输入不为“0”或者“.”的字符时，则将此输入替换输入框的这唯一字符。
+                textField.text = string;
+                return NO;
+            }else{
+                if(pointRange.length == 0 && pointRange.location > 0){ //当输入框第一个字符为“0”时，并且没有“.”字符时，如果当此输入的字符为“0”，则视当此输入无效。
+                    if([string isEqualToString:@"0"]){
+                        return NO;
+                    }
+                }
+            }
+        }
+        
+        NSString *buffer;
+        if ( ![scanner scanCharactersFromSet:numbers intoString:&buffer] && ([string length] != 0) )
+        {
+            return NO;
+        }
+        
+        
+    //输入留言
+    }else if(textField.tag == 7003){
+      /*
+        if (range.location > 20){
+            [self showErrorInfo:@"您输入的留言已超出20字符。" status:NLHUDState_Error];
+            [textField resignFirstResponder];
+            return NO; // return NO to not change text
+            return YES;
+       }*/
+    }
+    return YES;
 }
 
 
@@ -538,15 +662,24 @@
 #pragma mark - 获取通讯录
 -(void)phoneButton{
     
+    UIButton *viewBtn = [[UIButton alloc]initWithFrame:CGRectMake(120, 0, 60, 41)];
+    [viewBtn setBackgroundColor:[UIColor clearColor]];
+    viewBtn.tag = 7063;
+    [viewBtn addTarget:self action:@selector(tapPhone:) forControlEvents:UIControlEventTouchUpInside];
+    [textFields[0] addSubview:viewBtn];
+    
     UIButton *phone = [[UIButton alloc]initWithFrame:CGRectMake(140, 4, 32, 33)];
     [phone setBackgroundImage:[UIImage imageNamed:@"SMS_phone_book@2x.png"] forState:UIControlStateNormal];
-    [phone addTarget:self action:@selector(tapPhone) forControlEvents:UIControlEventTouchUpInside];
+    phone.tag = 7064;
+    [phone addTarget:self action:@selector(tapPhone:) forControlEvents:UIControlEventTouchUpInside];
     [textFields[0] addSubview:phone];
 }
 
 
--(void)tapPhone{
+-(void)tapPhone:(UIButton *)btn{
+    
     NSLog(@"选择电话簿");
+    
     ABPeoplePickerNavigationController *ppnc = [[ABPeoplePickerNavigationController alloc] init];
     ppnc.peoplePickerDelegate = self;
     [self presentModalViewController:ppnc animated:YES];
@@ -629,6 +762,7 @@
 }
 
 
+#pragma mark - UIAlertView代理方法
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     //buttonIndex坐标为1等于确定 为0等于取消
     
@@ -776,38 +910,42 @@
                 
                 if ([self.paymentAmountString floatValue] >0.00 && [self.paymentAmountString floatValue] <=5000.00) {
                     
-                    if ([self.nameOfBank.text length] >0) {
-                        //提交收款
-                        [self submitReceipts];
+                    if (self.theMessageString.length <=20) {
+                        
+                        if ([self.nameOfBank.text length] >0) {
+                            //提交收款
+                            NSLog(@"点击发起收款");
+                            [self submitReceipts];
+                            
+                        }else{
+                            
+                            [self showErrorInfo:@"尚未选择银行卡。" status:NLHUDState_Error];
+                        }
                         
                     }else{
-                        UIAlertView *alertView3 = [[UIAlertView alloc]initWithTitle:@"提示" message:@"尚未选择银行卡" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
-                        [alertView3 show];
+                        [self showErrorInfo:@"留言超长,请修改。" status:NLHUDState_Error];
                     }
 
                 }else{
-                    UIAlertView *alertView2 = [[UIAlertView alloc]initWithTitle:@"提示" message:@"单笔金额不能小于0元或大于5000元" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
-                    [alertView2 show];
+
+                    [self showErrorInfo:@"收款金额超限，请重新输入或隔日再尝试。目前，短信收款业务单笔交易不超过人民币5,000.00元，日累计不超过人民币20,000.00元。" status:NLHUDState_Error];
                 }
             }else{
-                UIAlertView *alertView1 = [[UIAlertView alloc]initWithTitle:@"提示" message:@"手机号码不合法" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
-                [alertView1 show];
+
+                [self showErrorInfo:@"请确认您输入的手机号码是否正确。" status:NLHUDState_Error];
             }
             
         }else{
-            UIAlertView *alertView0 = [[UIAlertView alloc]initWithTitle:@"提示" message:@"手机号码/收款金额尚未填写" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
-            [alertView0 show];
+
+            [self showErrorInfo:@"手机号码/收款金额尚未填写" status:NLHUDState_Error];
         }
-        
-        
-        
-        NSLog(@"点击发起收款");
         
         
     }else{
         NSLog(@"没有选中服务协议 不能发起收款");
-        self.alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请遵守服务协议再来发起收款" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
-        [self.alertView show];
+        
+        [self showErrorInfo:@"请遵守服务协议再来发起收款。" status:NLHUDState_Error];
+        
     }
     
 }
@@ -819,6 +957,8 @@
     vc.delegate = self;
     [self jumpViewController:self newViewController:vc PushAndPresent:YES];
 }
+
+
 #pragma mark - 默认银行卡列表 协议代理方法
 -(void)agent:(SMSBankCardViewController *)vc BankName:(NSString *)bankName AccountName:(NSString *)accountName TailNumber:(NSString *)tailNumber Category:(NSString *)category BankLogo:(UIImage *)bankLogo Bankphone:(NSString *)bankphone{
     
@@ -854,10 +994,10 @@
     vc.myType = 7;
     [NLUtils presentModalViewController:self newViewController:vc];
     
-    
-//    SMSServiceAgreementViewController *vc = [[SMSServiceAgreementViewController alloc]initWithNibName:@"SMSServiceAgreementViewController" bundle:nil];
-//    [self jumpViewController:self newViewController:vc PushAndPresent:YES];
-    
+  /*
+    SMSServiceAgreementViewController *vc = [[SMSServiceAgreementViewController alloc]initWithNibName:@"SMSServiceAgreementViewController" bundle:nil];
+    [self jumpViewController:self newViewController:vc PushAndPresent:YES];
+  */
 }
 
 
@@ -875,8 +1015,12 @@
          if (![data[@"result"] isEqualToString:@"success"]) {
              
              if ([data[@"message"] isEqualToString:@"付款手机号码非通付宝会员！"]) {
-                 [self showErrorInfo:@"付款手机号码非通付宝会员 !" status:NLHUDState_Error];
+                 [self showErrorInfo:@"付款手机号码非通付宝会员!" status:NLHUDState_Error];
                  [_hud hide:YES afterDelay:2];
+             }else if([data[@"message"] isEqualToString:@"每日交易不能超过20000！"]){
+                 [self showErrorInfo:@"收款金额超限，请重新输入或隔日再尝试。目前，短信收款业务单笔交易不超过人民币5,000.00元，日累计不超过人民币20,000.00元。" status:NLHUDState_Error];
+                 [_hud hide:YES afterDelay:5];
+             
              }else{
                  
                  [self showErrorInfo:data[@"message"] status:NLHUDState_None];//@"请求失败 !"
@@ -885,8 +1029,9 @@
              
          //成功
          }else{
-             [self showErrorInfo:data[@"message"] status:NLHUDState_NoError];
-             [_hud hide:YES afterDelay:2];
+             
+//             [self showErrorInfo:data[@"message"] status:NLHUDState_NoError];
+//             [_hud hide:YES afterDelay:2];
              //跳转交易通知界面
              [self tradingNotice];
          }
@@ -954,6 +1099,7 @@
     vc.bankAccount = [NSString stringWithFormat:@"%@",self.accountNumbers];
 
     [self jumpViewController:self newViewController:vc PushAndPresent:YES];
+    
 }
 
 

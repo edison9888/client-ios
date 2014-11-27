@@ -208,7 +208,7 @@
     ViewControllerProperty;
     
 #endif
-    /*改版*/
+
     [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
     
     [self PhoneMoneyNumIsOk];

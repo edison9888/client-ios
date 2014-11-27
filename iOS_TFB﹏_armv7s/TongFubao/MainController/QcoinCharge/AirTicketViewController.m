@@ -42,14 +42,15 @@
 // 查询选择时间后同步
 -(void)viewWillAppear:(BOOL)animated
 {
+    NSLog(@"-------_timeArray------%@",_timeArray);
     NSString *fromDeaults = [[NSUserDefaults standardUserDefaults] objectForKey:@"FromTime"];
     NSString *toDeaults = [[NSUserDefaults standardUserDefaults] objectForKey:@"ToTime"];
     
     NSString *_dateString = [watchTimeObject changeTime];
     NSString *nowTimeString = [_dateString stringByReplacingOccurrencesOfString :@"-" withString:@""];
     NSString * selectionTime = [fromDeaults stringByReplacingOccurrencesOfString :@"-" withString:@""];
-//    NSLog(@"====nowTimeString====%@",nowTimeString);
-//    NSLog(@"====selectionTime====%@",selectionTime);
+    NSLog(@"====nowTimeString====%@",nowTimeString);
+    NSLog(@"====selectionTime====%@",selectionTime);
 
     if ([fromDeaults length] > 0)
     {
@@ -62,6 +63,8 @@
     {
         [button0 setTitle:@"请选择行程日期" forState:(UIControlStateNormal)];
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"FromTime"];
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！请正确选择航班日期！" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alertView show];
     }
         
     }
@@ -79,6 +82,8 @@
     {
         [button1 setTitle:@"请选择返程日期" forState:(UIControlStateNormal)];
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"ToTime"];
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！请正确选择航班日期！" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alertView show];
 
     }
 
@@ -156,13 +161,16 @@
         [timeButton setBackgroundImage:[UIImage imageNamed:@"text1.png"] forState:(UIControlStateNormal)];
         timeButton.tag = j;
         [timeButton setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+        timeButton.titleLabel.font = [UIFont boldSystemFontOfSize:20];
         if (timeButton.tag == 0)
         {
-            [timeButton setTitle:firstCtiy !=nil ?firstCtiy:@"出发" forState:(UIControlStateNormal)];
+            timeButton.titleLabel.text = @"出发";
+            [timeButton setTitle:firstCtiy !=nil ?firstCtiy:timeButton.titleLabel.text forState:(UIControlStateNormal)];
         }
         if (timeButton.tag == 1)
         {
-            [timeButton setTitle:seconCtiy != nil ?seconCtiy:@"到达" forState:(UIControlStateNormal)];
+            timeButton.titleLabel.text = @"到达";
+            [timeButton setTitle:seconCtiy != nil ?seconCtiy:timeButton.titleLabel.text forState:(UIControlStateNormal)];
         }
         [timeButton addTarget:self action:@selector(ClikCityButton:) forControlEvents:(UIControlEventTouchUpInside)];
         [_fromeToArray addObject:timeButton];
@@ -177,14 +185,20 @@
     {
         UIButton *timeButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
         timeButton.tag = t;
+        timeButton.titleLabel.font = [UIFont boldSystemFontOfSize:20];
         if (timeButton.tag < 2 )
         {
-            if (timeButton.tag == 0) {
-            [timeButton setTitle:firsTime != nil ? firsTime:[fromToArray objectAtIndex:t] forState:(UIControlStateNormal)];
+            if (timeButton.tag == 0)
+            {
+                timeButton.titleLabel.text = [fromToArray objectAtIndex:t];
+
+            [timeButton setTitle:firsTime != nil ? firsTime:timeButton.titleLabel.text  forState:(UIControlStateNormal)];
             }
             else if (timeButton.tag == 1)
             {
-                [timeButton setTitle:seconTime != nil ? seconTime:[fromToArray objectAtIndex:t] forState:(UIControlStateNormal)];
+                timeButton.titleLabel.text = [fromToArray objectAtIndex:t];
+
+                [timeButton setTitle:seconTime != nil ? seconTime:timeButton.titleLabel.text forState:(UIControlStateNormal)];
 
             }
             [timeButton setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
@@ -376,6 +390,8 @@
 //            NSLog(@"========cct==%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"cityCodeTo"] );
 //            NSLog(@"========ft==%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"FromTime"] );
 //            NSLog(@"========tc==%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"ToCity"] );
+//            NSLog(@"========FromCity==%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"FromCity"] );
+
 
             if ([[NSUserDefaults standardUserDefaults] objectForKey:@"cityCodeFrom"] != nil &&  [[NSUserDefaults standardUserDefaults] objectForKey:@"cityCodeTo"] != nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"FromTime"] != nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"FromCity"] != nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"ToCity"] != nil)
             {
@@ -412,15 +428,26 @@
                 RoundTriprReservationViewController *RoundTriprReservationView = [[RoundTriprReservationViewController alloc]init];
                 
                 RoundTriprReservationView.DepartCodeCtity = [[NSUserDefaults standardUserDefaults]objectForKey:@"cityCodeFrom"];
+
                 RoundTriprReservationView.departFromTime = [[NSUserDefaults standardUserDefaults]objectForKey:@"FromTime"];
+
+
                 
                 RoundTriprReservationView.arriveCodeCity = [[NSUserDefaults standardUserDefaults]objectForKey:@"cityCodeTo"];
+
+
                 RoundTriprReservationView.returnToTime = [[NSUserDefaults standardUserDefaults]objectForKey:@"ToTime"];
+
+
                 
                 RoundTriprReservationView.cityIDFrom = [[NSUserDefaults standardUserDefaults] objectForKey:@"cityIdFrom"];
+
+
                 RoundTriprReservationView.cityIDTo = [[NSUserDefaults standardUserDefaults] objectForKey:@"cityIdTo"];
                 
                 RoundTriprReservationView.RoundDepartCity = [[NSUserDefaults standardUserDefaults]objectForKey:@"FromCity"];
+
+
                 RoundTriprReservationView.RoundArriveCity = [[NSUserDefaults standardUserDefaults]objectForKey:@"ToCity"];
                 
                 RoundTriprReservationView.searchType = _searType;

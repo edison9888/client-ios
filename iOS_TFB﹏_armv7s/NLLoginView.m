@@ -164,8 +164,8 @@
         [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"NLLoginView"];
         [[NSUserDefaults standardUserDefaults]synchronize];
         
-        /*忘记手势密码界面来的*/
-        if ( _flagOn == YES) {
+        /*忘记手势密码界面来的 非注销登陆的*/
+        if ( _flagOn == YES && [[response.data find:@"msgbody/gesturepasswd" index:0].value isEqualToString:@"0"]) {
             GestureToLogin *ges= [[GestureToLogin alloc]init];
             [NLUtils presentModalViewController:self newViewController:ges];
             
@@ -179,7 +179,9 @@
                 //            [NLUtils showAlertView:nil message:@"是否设置手势密码" delegate:self tag:2 cancelBtn:@"取消" other:@"确定"];
             }else
             {
-                
+                /**
+                 *  登陆成功普通进入的判断
+                 */
                 NLAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
                 
                 /*** 代理商 or 普通 ***/

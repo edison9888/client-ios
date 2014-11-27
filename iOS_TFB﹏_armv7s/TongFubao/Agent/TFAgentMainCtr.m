@@ -338,7 +338,7 @@
     [self.navigationController pushViewController:agentAddgoodsCtr animated:YES];
 }
 
-//点击查询
+#pragma mark - 点击查询
 - (void)clickSearch
 {
     TFAgentSearchCtr *agentSearchCtr = [[TFAgentSearchCtr alloc]init];
@@ -348,7 +348,7 @@
     [self.navigationController pushViewController:agentSearchCtr animated:YES];
 }
 
-//点击我的通付宝
+#pragma mark - 点击我的通付宝
 - (void)clickTFB
 {
     NLAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
@@ -356,7 +356,7 @@
     [delegate backToMain];
 }
 
-//读取代理商信息
+#pragma mark - 读取代理商信息
 - (void)readagentBaseInfo
 {
     [self showErrorInfo:@"请稍候" status:NLHUDState_None];
@@ -399,6 +399,7 @@
     }
 }
 
+#pragma mark - 哈哈哈
 -(void)doReadagentinfoNotify:(NLProtocolResponse *)response
 {
     NLProtocolData* data = [response.data find:@"msgbody/result" index:0];

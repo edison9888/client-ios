@@ -56,6 +56,9 @@
     NSString *year;
     /*年月bg*/
     UIView *yearview;
+    /*显示的银行卡*/
+    NSString *bankTFstr;
+    NSString *cardTFstr;
 }
 
 @end
@@ -90,6 +93,7 @@
     ViewControllerProperty;
     
 #endif
+    [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
     
     self.title = editOr? @"编辑银行卡" : @"添加银行卡";
     
@@ -99,17 +103,14 @@
     month = _cardInfo.bkcardyxmonth? _cardInfo.bkcardyxmonth : nil;
     //有效年
     year = _cardInfo.bkcardyxyear? _cardInfo.bkcardyxyear : nil;
-    
     //是否为默认支付支付卡
     defaultCard = _cardInfo.bkcardisdefault? _cardInfo.bkcardisdefault : nil;
     NSLog(@"是否为支付默认卡 :%@",defaultCard);
     //是否为默认收款支付卡
     defaultPayment = _cardInfo.bkcardisdefaultPayment?_cardInfo.bkcardisdefaultPayment : nil;
     NSLog(@"是否为付款默认卡 :%@",defaultCard);
-    
     //获取当前屏幕size
     currentHeight = iphoneSize;
-    
     //初始化视图
     [self initView];
 }
@@ -130,8 +131,8 @@
         //类型按扭
         for (int i = 0; i < 2; i++)
         {
-            UIImage *image = i == 0? imageName(@"left_normal_button@2x", @"png") : imageName(@"right_normal_button@2x", @"png");;
-            UIImage *selectedImage = i == 0? imageName(@"left_selected_button@2x", @"png") : imageName(@"right_t_selected_button@2x", @"png");;
+            UIImage *image = i == 0? imageName(@"left_normal_button@2x", @"png") : imageName(@"right_normal_button@2x", @"png");
+            UIImage *selectedImage = i == 0? imageName(@"left_selected_button@2x", @"png") : imageName(@"right_t_selected_button@2x", @"png");
             
             BOOL selected;
             
@@ -197,6 +198,15 @@
         textnumber++;
     }
     
+    /*显示打星号*/
+    if ( editOr ) {
+        bankTFstr = saveCardView[1].infoText.text;
+        NSRange rang = NSMakeRange(4, bankTFstr.length - 8);
+        NSString *changeBank = [saveCardView[1].infoText.text stringByReplacingCharactersInRange:rang withString:@"****"];
+        saveCardView[1].infoText.text= changeBank;
+        NSLog(@"bankTFstr%@ %@",bankTFstr,changeBank);
+    }
+
     int yearNum =  saveCardView[1].frame.origin.y + 45;
     yearview= [[UIView alloc]initWithFrame:CGRectMake(0, yearNum, 320, 40)];
     yearview.hidden= _rightflag ? NO : YES;
@@ -228,11 +238,11 @@
     [yearBtn addTarget:self action:@selector(dateBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [yearview addSubview:yearBtn];
   
-    CGRect saveBtnRect = CGRectMake(10, editOr ? 415 : 455, 300, 35);
+    CGRect saveBtnRect = CGRectMake(10, editOr ? 465 : 505, 300, 38);
 
     if (!creditCard)
     {
-        saveBtnRect = CGRectMake(10,  editOr ? 235 : 235, 300, 35);
+        saveBtnRect = CGRectMake(10,  editOr ? 235 : 245, 300, 38);
     }
     
     //保存按扭
@@ -248,7 +258,7 @@
     //修改
     if (editOr)
     {
-        CGRect removeRect = creditCard? CGRectMake(10, editOr ? 455 : 495, 300, 35) : CGRectMake(10, 275, 300, 35);
+        CGRect removeRect = creditCard? CGRectMake(10, editOr ? 515 : 585, 300, 38) : CGRectMake(10, 285, 300, 38);
         
         removeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         removeBtn.opaque = YES;
@@ -284,7 +294,7 @@
             creditCardView[i] = [[CardInfoView alloc] initWithFrame:CGRectMake(10, 2+46 * i, 300, 42)];
             creditCardView[i].infoLabel.text = infos[textnumber];
             creditCardView[i].infoText.text = _masterInfos[textnumber];
-            creditCardView[i].infoText.placeholder= i == 0? @"请输入安全码" : @"请输入身份证号码";
+            creditCardView[i].infoText.placeholder= i == 0 ? @"请输入安全码" : @"请输入身份证号码";
             creditCardView[i].infoText.keyboardType = UIKeyboardTypeNumberPad;
             creditCardView[i].infoText.delegate = self;
             creditCardView[i].infoText.tag = 2601 + i;
@@ -294,6 +304,15 @@
             textnumber++;
         }
      
+        /*显示信息*/
+        if (_rightflag && editOr) {
+            cardTFstr =  creditCardView[1].infoText.text;
+            NSRange rang = NSMakeRange(4, cardTFstr.length - 8);
+            NSString *changeCard = [creditCardView[1].infoText.text stringByReplacingCharactersInRange:rang withString:@"****"];
+            creditCardView[1].infoText.text = changeCard;
+            NSLog(@"changeCard %@",changeCard);
+        }
+    
         int yearNum =  58;
         //支付默认卡
         UIButton *defaultBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -305,13 +324,13 @@
         [defaultBtn addTarget:self action:@selector(defaultBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [creditView addSubview:defaultBtn];
         
-        UILabel *defaultLabel = [[UILabel alloc] initWithFrame:CGRectMake(45, yearNum + 40, 110, 25)];
+        UILabel *defaultLabel = [[UILabel alloc] initWithFrame:CGRectMake(45, yearNum + 40, 150, 25)];
         defaultLabel.opaque = YES;
         defaultLabel.backgroundColor = [UIColor clearColor];//
         defaultLabel.textAlignment = NSTextAlignmentLeft;
         defaultLabel.textColor = [UIColor grayColor];
         defaultLabel.text = @"设为默认支付卡";
-        defaultLabel.font = [UIFont systemFontOfSize:15.0];
+        defaultLabel.font = [UIFont systemFontOfSize:17.0];
         [creditView addSubview:defaultLabel];
 
         NSString *treatyBtnName = [NSString stringWithFormat:@"*点击查看《通付宝默认支付协议》"];
@@ -319,7 +338,7 @@
         //查看协议
         UIButton *treatyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         treatyBtn.opaque = YES;
-        treatyBtn.frame = CGRectMake(10, yearNum + 66, 300, 25);
+        treatyBtn.frame = CGRectMake(10, yearNum + 113, 300, 25);
         [treatyBtn setTitle:treatyBtnName forState:UIControlStateNormal];
         treatyBtn.backgroundColor= [UIColor clearColor];
         treatyBtn.contentHorizontalAlignment= UIControlContentHorizontalAlignmentLeft;
@@ -332,20 +351,20 @@
         //收款默认卡
         UIButton *defaultBtn2 = [UIButton buttonWithType:UIButtonTypeCustom];
         defaultBtn2.opaque = YES;
-        defaultBtn2.frame = CGRectMake(167, yearNum + 40, 25, 25);
+        defaultBtn2.frame = CGRectMake( 10, yearNum + 80, 25, 25);
         [defaultBtn2 setBackgroundImage:imageName(@"unSelected@2x", @"png") forState:UIControlStateNormal];
         [defaultBtn2 setBackgroundImage:imageName(@"selected@2x", @"png") forState:UIControlStateSelected];
         defaultBtn2.selected = [_cardInfo.bkcardisdefaultPayment isEqualToString:@"1"]? YES : NO;
         [defaultBtn2 addTarget:self action:@selector(defaultBtnAction2:) forControlEvents:UIControlEventTouchUpInside];
         [creditView addSubview:defaultBtn2];
         
-        UILabel *defaultLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(202, yearNum + 40, 110, 25)];
+        UILabel *defaultLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(40, yearNum + 80, 150, 25)];
         defaultLabel2.opaque = YES;
         defaultLabel2.backgroundColor = [UIColor clearColor];
         defaultLabel2.textAlignment = NSTextAlignmentLeft;
         defaultLabel2.textColor = [UIColor grayColor];
         defaultLabel2.text = @"设为默认收款卡";
-        defaultLabel2.font = [UIFont systemFontOfSize:15.0];
+        defaultLabel2.font = [UIFont systemFontOfSize:17.0];
         [creditView addSubview:defaultLabel2];
         
     }
@@ -367,6 +386,30 @@
     return YES;
 }
 
+/*呔*/
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    BOOL retValue = YES;
+    
+    if([[textField text] length] - range.length + string.length > 19 && textField ==  saveCardView[1].infoText )
+    {
+        retValue=NO;
+    }
+    if([[textField text] length] - range.length + string.length > 11 && textField ==  saveCardView[3].infoText )
+    {
+        retValue=NO;
+    }
+    if([[textField text] length] - range.length + string.length > 3 && textField ==  creditCardView[0].infoText )
+    {
+        retValue=NO;
+    }
+    if([[textField text] length] - range.length + string.length > 18 && textField ==  creditCardView[1].infoText )
+    {
+        retValue=NO;
+    }
+    return retValue;
+}
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     if (textField == saveCardView[0].infoText)
@@ -379,14 +422,22 @@
         
         return NO;
     }
+    if (textField == saveCardView[1].infoText) {
+        saveCardView[1].infoText.text= @"";
+    }
+    if (textField == creditCardView[1].infoText) {
+        creditCardView[1].infoText.text= @"";
+        
+    }
     
     return YES;
 }
 
 #pragma mark - NLBankLisDelegate
-- (void)dataSearch:(NLBankListViewController *)controller didSelectWithObject:(id)aObject withState:(NSString *)state
+- (void)dataSearch:(NLBankListViewController *)controller didSelectWithObject:(id)aObject withState:(NSString *)state andBankctt:(NSString *)bankctt
 {
     bankID = state;
+    
     saveCardView[0].infoText.text = (NSString *)aObject;
 }
 
@@ -447,12 +498,12 @@
             num =[NSString stringWithFormat:@"%d", yframe2 + yearframe ];
             [saveCardView[3].layer setValue:num forKeyPath:@"frame.origin.y"];
             
-            [saveBtn.layer setValue:@455 forKeyPath:@"frame.origin.y"];
+            [saveBtn.layer setValue:@505 forKeyPath:@"frame.origin.y"];
             
             if (removeBtn)
             {
             
-                [removeBtn.layer setValue:@465 forKeyPath:@"frame.origin.y"];
+                [removeBtn.layer setValue:@505 forKeyPath:@"frame.origin.y"];
             }
         }
         else
@@ -465,7 +516,7 @@
             num =[NSString stringWithFormat:@"%d",yframe2];
             [saveCardView[3].layer setValue:num forKeyPath:@"frame.origin.y"];
         
-            [saveBtn.layer setValue:@255 forKeyPath:@"frame.origin.y"];
+            [saveBtn.layer setValue:@265 forKeyPath:@"frame.origin.y"];
             
             if (removeBtn)
             {
@@ -477,6 +528,7 @@
         [self reloadInputViews];
     }
 }
+
 
 #pragma mark - 日期选择
 - (void)dateBtnAction:(UIButton *)sender
@@ -510,20 +562,16 @@
 - (void)defaultBtnAction:(UIButton *)sender
 {
     sender.selected = !sender.selected;
-    
     defaultCard = sender.selected? @"1" : @"0";
-
-    NSLog(@"Button selected %d",sender.selected);
+    NSLog(@"defaultCard selected %d",sender.selected);
 }
 
 #pragma mark - 是否默认收款卡
 - (void)defaultBtnAction2:(UIButton *)sender
 {
     sender.selected = !sender.selected;
-    
     defaultPayment = sender.selected? @"1" : @"0";
-    
-    NSLog(@"Button selected2 %d",sender.selected);
+    NSLog(@"defaultPayment selected2 %d",sender.selected);
 }
 
 #pragma mark - 查看协议
@@ -537,11 +585,16 @@
 #pragma mark - 保存银行卡信息
 - (void)saveBtnAction:(UIButton *)sender
 {
+    /*保存处理 bankTFstr cardTFstr
+    saveCardView[1].infoText.text= nil;
+    creditCardView[1].infoText.text= nil;*/
+    
     month = month? month : @" ";
     year = year? year : @" ";
     //是否选择默认银行卡
-    defaultCard = defaultCard? defaultCard : @" ";
-    defaultPayment = defaultPayment? defaultPayment : @" ";/*雨*/
+    defaultCard = defaultCard? defaultCard : @"0 ";
+    defaultPayment = defaultPayment? defaultPayment : @"0";/*雨*/
+    
     NSString *bkcardidcard = creditCardView[1].infoText.text? creditCardView[1].infoText.text : @" ";
     
     //当前输入的卡号长度
@@ -551,11 +604,7 @@
         
         return ;
     }
-    
-    
-    
-    
-    
+  
     if (editOr) 
     {
        

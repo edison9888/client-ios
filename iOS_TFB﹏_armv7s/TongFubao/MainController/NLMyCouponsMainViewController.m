@@ -60,7 +60,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationController.topViewController.title = @"我的优惠券";
-    UIBarButtonItem *anotherButtonL = [[UIBarButtonItem alloc] initWithTitle:@"历史详情"
+    UIBarButtonItem *anotherButtonL = [[UIBarButtonItem alloc] initWithTitle:@"历史记录"
                                                                         style:UIBarButtonItemStyleBordered target:self
                                                                        action:@selector(onHistoryDetailBtnClicked:)] ;
     self.navigationItem.rightBarButtonItem = anotherButtonL;

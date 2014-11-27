@@ -1467,7 +1467,7 @@ static NSString* gPaypasswd      = @"";
     return NO;
 }
 
-//转化
+//转化 日期
 + (NSDateComponents *)componentsOfDate:(NSDate *)date
 {
     NSDate *aDate = date ? date : [NSDate date];

@@ -42,11 +42,13 @@
 #endif
     self.navigationController.topViewController.title = @"确认付款";
    
+     [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
+    
     NSString *str= [NSString stringWithFormat:@"%f",self.view.frame.size.height-70];
     [_onbtnClick.layer setValue:str forKeyPath:@"frame.origin.y"];
     
      self.view.backgroundColor = RGBACOLOR(239, 244, 245, 1.0);
-    _MoneyStr.text= [NSString stringWithFormat:@"需支付金额：%@",_couponmoneyStr];
+    _MoneyStr.text= [NSString stringWithFormat:@"需支付金额：%@元",_couponmoneyStr];
     _MoneyStr.userInteractionEnabled= NO;
 
     UIWebView *webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];

@@ -23,6 +23,8 @@
     NSArray *bkcardbankmans;
     //卡类型
     NSArray *bkcardcardtypes;
+    NSArray *bkcardcardcct;
+
     //银行logo
     NSArray *bkcardbanklogos;
     //卡号
@@ -188,8 +190,6 @@
     }
     else
     {
-        
-        
         //银行卡名
         bkcardbanks = [response.data find:@"msgbody/msgchild/bkcardbank"];
         //用户名
@@ -225,6 +225,10 @@
         
         //卡类型
         bkcardcardtypes = [response.data find:@"msgbody/msgchild/bkcardcardtype"];
+        //cct
+        bkcardcardcct = [response.data find:@"msgbody/msgchild/ctripbankctt"];
+        NSLog(@"======bkcardcardcct====%@",bkcardcardcct);
+
         
         /*易宝支付*/
         if (_bankDF == YES || _bankXY == YES ||_agentflag == YES || _planeFlag== YES)
@@ -244,6 +248,8 @@
             NSString *bkcardbankmansStr= nil;
             NSString *bkcardbanksStr= nil;
             NSString *bkcardbankcode = nil;
+            NSString *bkcardbankcctStr = nil;
+
             
             person= [NSMutableArray array];
             mainPerson = [NSMutableArray array];
@@ -295,6 +301,10 @@
                 /*拿bkcardbankids字段存bkcardbankcode*/
                 data = [bkcardbankids objectAtIndex:i];
                 bkcardbankcode = data.value;
+                // cct
+                data = [bkcardcardcct objectAtIndex:i];
+                bkcardbankcctStr = data.value;
+                NSLog(@"=====bkcardbankcctStr======%@",data.value);
             
                 paylist= [[BankPayList alloc]init];
                 paylist.bkcardbanks= bkcardbanksStr;
@@ -312,8 +322,10 @@
                 paylist.bkcardisdefaultpayment = bkcardisdefaultpaymentStr;/*雨*/
                 paylist.bkcardcardtypes= bkcardcardtypesStr;
                 paylist.bkcardbankcode = bkcardbankcode;
-                
+                paylist.bkcardbankcctp = bkcardbankcctStr;
                 [mainPerson addObject:paylist];
+                NSLog(@"=====mainPerson11======%@",mainPerson);
+
                 
                 /*分类卡号类型*/
                 if ([bkcardcardtypesStr isEqualToString:@"bankcard"] && _bankDF)
@@ -536,9 +548,17 @@
             NSLog(@"=====mainPerson=====%@",mainPerson);
 
             //            [_bankPayListDelegate popWithValue:[mainPerson objectAtIndex:indexPath.row] creditCard:flag];
-            [_bankPayListDelegate popWithValue:[mainPerson objectAtIndex:indexPath.row] creditCard:flag];
-            [self.navigationController popViewControllerAnimated:YES];
-        }
+            if (flag == NO)
+            {
+                [_bankPayListDelegate popWithValue:[mainPerson objectAtIndex:indexPath.row] creditCard:flag];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            else
+            {
+                UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"温馨提示:" message:@"亲！请选择信用卡哦！" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+                [alertView show];
+            }
+                    }
         else
         {
             [self.view endEditing:YES];

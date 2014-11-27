@@ -63,8 +63,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.navigationController.topViewController.title = @"历史详情";
-    
+    self.navigationController.topViewController.title = @"历史记录";
+    [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
     self.myArray = [NSMutableArray arrayWithCapacity:1];
     
     _msgstart = @"0";

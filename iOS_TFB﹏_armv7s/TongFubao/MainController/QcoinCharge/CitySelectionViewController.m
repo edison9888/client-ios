@@ -461,11 +461,11 @@
         FROMTO = YES;
         
     }
-    if ([_fromString length] > 0 && [_toString length] > 0)
-    {
+//    if ([_fromString length] > 0 && [_toString length] > 0)
+//    {
         [self.delegate changVuleFrome:_fromString andTo:_toString];
         [self.navigationController popViewControllerAnimated:YES];
-    }
+//    }
 }
 #pragma mark --  搜索
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar

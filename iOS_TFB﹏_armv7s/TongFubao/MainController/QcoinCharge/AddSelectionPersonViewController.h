@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddSelectionPersonViewController : UIViewController
+@interface AddSelectionPersonViewController : UIViewController<UIAlertViewDelegate>
 
 
 @property (retain,nonatomic) NSString *PassengerName;

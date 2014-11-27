@@ -21,19 +21,21 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
+        self.contentView.backgroundColor= SACOLOR(245, 1.0);
+        
         UIImageView *photoImgView = [[UIImageView alloc]initWithFrame:CGRectMake(43, 18, 10, 10)];
         photoImgView.image= [UIImage imageNamed:@"yellowdot.png"];
         self.iconcell = photoImgView;
         [self.contentView addSubview:self.iconcell];
         
-        UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(63, 10, 100, 25)];
+        UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(63, 10, 140, 25)];
         nameLabel.textColor= [UIColor lightGrayColor];
         nameLabel.backgroundColor= [UIColor clearColor];
         self.typecell = nameLabel;
         self.typecell.text = @"手机收益";
         [self.contentView addSubview:self.typecell];
         
-        UILabel *comLable = [[UILabel alloc]initWithFrame:CGRectMake(220, 10, 100, 25)];
+        UILabel *comLable = [[UILabel alloc]initWithFrame:CGRectMake(170, 10, 80, 25)];
         comLable.textColor= [UIColor lightGrayColor];
         self.moneycell = comLable;
         self.moneycell.text = @"￥800";

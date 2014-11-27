@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *typeCell;
 @property (weak, nonatomic) IBOutlet UILabel *moneyCell;
 @property (weak, nonatomic) IBOutlet UIImageView *iconCell;
+@property (weak, nonatomic) IBOutlet UIImageView *rightIcon;
 
 @end

@@ -69,6 +69,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationController.topViewController.title = @"快递查询";
+    
     UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"查看更多"
                                                                       style:UIBarButtonItemStyleBordered target:self
                                                                      action:@selector(moreOrderQuery)];

@@ -519,7 +519,8 @@
 - (void)departCityCode:(NSString*)newDepartCityCode arriveCityCode:(NSString*)newArriveCityCode departTime:(NSString*)newDepartTime returnTime:(NSString*)newReturnTime searchType:(NSString*)newSearchType flight:(NSString *)newflight returnFlight:(NSString *)newreturnFlight;
 
 // 添加乘机人
-- (void)savePassengerName:(NSString*)newSavePassengerName savePassengerCardType:(NSString*)newSavePassengerCardType savePassengerCardId:(NSString*)newSavePassengerCardId savePassengerPhoneNumber:(NSString*)newsavePassengerPhoneNumber savePassengerPassengerType:(NSString *)newSavePassengerPassengerType;
+
+- (void)savePassengerName:(NSString*)newSavePassengerName savePassengerCardType:(NSString*)newSavePassengerCardType savePassengerCardId:(NSString*)newSavePassengerCardId savePassengerPhoneNumber:(NSString*)newsavePassengerPhoneNumber savePassengerPassengerType:(NSString *)newSavePassengerPassengerType birthday:(NSString *)newBirthDay;
 
 // 读取乘机人
 - (void)getPassengerType:(NSString *)newPassengerType;
@@ -529,7 +530,7 @@
 - (void)getdeletcetionPassengerId:(NSString *)newPassengerId  deletcetionPassengerType:(NSString *)newdeletcetionPassenger;
 
 //确定支付
--(void)TicketBillId:(NSString *)newTicketBillId backTicketId:(NSString *)newBackTicketBillId  styGoBack:(NSString *)newStyGoBsack  perSonIdArray:(NSMutableArray *)newperSonIdArray ContactIdArray:(NSMutableArray *)newContactIdArray   payinfoCardInfoArray:(NSMutableArray *)newpayinfoCardInfoArray;
+-(void)TicketBillId:(NSString *)newTicketBillId backTicketId:(NSString *)newBackTicketBillId  styGoBack:(NSString *)newStyGoBsack  perSonIdArray:(NSMutableArray *)newperSonIdArray ContactIdArray:(NSMutableArray *)newContactIdArray   payinfoCardInfoArray:(NSMutableArray *)newpayinfoCardInfoArray  validity:(NSString *)newValidity amount:(NSString *)newAmount;
 
 // 历史查询
 - (void)getOrderHistoryMsgstart:(NSString*)newMsgstart getOrderHistoryMsgdisplay:(NSString *)newmsgdisplay;

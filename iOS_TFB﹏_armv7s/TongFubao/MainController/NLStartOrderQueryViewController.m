@@ -42,6 +42,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationController.topViewController.title = @"快递查询";
+     [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
     self.myArray = [NSMutableArray arrayWithCapacity:1];
     self.myLabel.text = self.myCompanyName;
     [self.myTextField becomeFirstResponder];

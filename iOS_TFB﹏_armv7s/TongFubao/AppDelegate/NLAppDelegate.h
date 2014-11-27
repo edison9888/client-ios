@@ -17,6 +17,8 @@
 {
      CLNavigationControllerDelegate * delegate;
 }
+/*TEXT*/
+@property (strong,nonatomic) UIViewController * splashViewController;
 
 @property(strong,nonatomic)UIAlertView *alertView;
 @property (strong,nonatomic) UINavigationController * mNavCtrl;

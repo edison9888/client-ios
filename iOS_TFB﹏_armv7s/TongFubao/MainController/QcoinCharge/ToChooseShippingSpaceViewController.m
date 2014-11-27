@@ -41,7 +41,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
     self.title= @"舱位选择";
-    
     //    NSLog(@"=====ShippFirstPlayInfoArray========%@",self.ShippFirstPlayInfoArray);
     //    NSLog(@"=====ShippSeconPlayInfoArray========%@",self.ShippSeconPlayInfoArray);
     
@@ -61,8 +60,10 @@
     [self.infoTextView addGestureRecognizer:TapGestureRecognizer];
     self.navigationController.view.backgroundColor =RGBACOLOR(3, 198, 230, 0.9);
     [self.navigationController.view addSubview:self.infoTextView ];
-    
-    NSArray *PersonArray = @[@"行程舱",@"回程舱"];
+    NSString*xctitle= [NSString stringWithFormat:@"去程(%@-%@)",self.ShippingRoundDepartCity,self.ShippingRoundArriveCity];
+    NSString*fctitle= [NSString stringWithFormat:@"返程(%@-%@)",self.ShippingRoundArriveCity,self.ShippingRoundDepartCity];
+
+    NSArray *PersonArray = @[xctitle,fctitle];
     UILabel *backLable = [[UILabel alloc]initWithFrame:CGRectMake(0, 64, 320, 45)];
     backLable.backgroundColor = RGBACOLOR(204, 225, 152, 1);
     [self.view addSubview:backLable];
@@ -115,6 +116,9 @@
 {
     NLProtocolResponse *response = (NLProtocolResponse *)senderFication.object;
     int error = response.errcode;
+    NSString *string = response.detail;
+    NSLog(@"===string====%@",string);
+
     
     if (error == RSP_NO_ERROR)
     {
@@ -123,21 +127,45 @@
     }
     else if (error == RSP_TIMEOUT)
     {
-        [activityView performSelector:@selector(endActivity) withObject:activityView afterDelay:0.7];
-        [activityView removeFromSuperview];
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！本日期没有航班" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
         [alert show];
-        return ;
+
     }
-    else
+    else if (error == RSP_CANCEL)
     {
-        NSString *string = response.detail;
-        NSLog(@"===string====%@",string);
-        [activityView performSelector:@selector(endActivity) withObject:activityView afterDelay:0.7];
-        [activityView removeFromSuperview];
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！本日期没有航班" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
         [alert show];
+        
     }
+    else if (error == RSP_HAS_EXIST)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    else if (error == RSP_XML_RETTYPE_FAILURE)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    else if (error == RSP_XML_RESULT_FAILURE)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    else if (error == RSP_XML_RETCODE_FAILURE)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    [activityView performSelector:@selector(endActivity) withObject:activityView afterDelay:0.7];
+    [activityView removeFromSuperview];
+
+
 }
 - (void)getDataWithAirline:(NLProtocolResponse *)response
 {
@@ -153,9 +181,7 @@
         NSLog(@"errorData = %@",errorData);
         [activityView performSelector:@selector(endActivity) withObject:activityView afterDelay:0.7];
         [activityView removeFromSuperview];
-        
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！服务数据可能错误。" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
-        [alert show];
+
     }
     else
     {

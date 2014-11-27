@@ -100,10 +100,9 @@
         /*** madfrog add 6.20***/
         [NLUtils setAgentid:[response.data find:@"msgbody/agentid" index:0].value];
   
-        /*判断是否绑定服务代理商的*/
+        /*判断是否绑定服务代理商的 1绑定*/
         [NLUtils setRelateAgent:[response.data find:@"msgbody/relateAgent" index:0].value];
-        
-        /*relateAgent*/
+
         
         /*agenttypeid字段 0普通/1正式/2虚拟 */
         [NLUtils setAgenttypeid:[response.data find:@"msgbody/agenttypeid" index:0].value];

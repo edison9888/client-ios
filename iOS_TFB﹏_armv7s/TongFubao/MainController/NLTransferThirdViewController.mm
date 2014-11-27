@@ -124,7 +124,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
     self.navigationController.topViewController.title = @"付款";
+    
+    [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
     
     [self initValue];
     [self initVisaReader];
@@ -866,7 +869,7 @@
 #pragma mark - NLBankLisDelegate
 
 - (void)dataSearch:(NLBankListViewController *)controller didSelectWithObject:(id)aObject
-         withState:(NSString *)state
+         withState:(NSString *)state andBankctt:(NSString *)bankctt
 {
     _fucardbank = (NSString*)aObject;
     bankID = state;

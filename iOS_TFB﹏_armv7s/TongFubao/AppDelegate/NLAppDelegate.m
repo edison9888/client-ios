@@ -19,7 +19,7 @@
 #import "PushViewController.h"
 #import "NewfirstView.h"
 #import "NLLoginView.h"
-
+#import "watchTimeObject.h"
 @implementation NLAppDelegate
 @synthesize mTouchPoint;
 @synthesize mTouchView;
@@ -30,31 +30,23 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-   
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];//注册一个通知监听网络状态的变化
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-   
-    /*读取本地的手势输入次数*/
+  
     [self customNavigationBar];
-    
-    /*
-    FirstPhonePay *new= [[FirstPhonePay alloc]initWithNibName:@"FirstPhonePay" bundle:nil];
-    self.window.rootViewController= new;
-    [self.window makeKeyAndVisible];
-     暂停当前的首页充值
-     
-     [IQKeyBoardManager installKeyboardManager];
-     [IQKeyBoardManager enableKeyboardManger];
-     [IQKeyBoardManager disableKeyboardManager];
-     */
-    
+
     /*tab 类型*/
     [self someNSUserDefaults];
+     /*读取本地的手势输入次数*/
     [self firstPhonePayView];
    
+    /*text*/
+//    [self animationView];
+    
     return YES;
 }
+
 
 /*bar定制*/
 -(void)customNavigationBar
@@ -410,18 +402,36 @@
     }
     return YES;
 }
-/*
- 
- <?xml version="1.0" encoding="UTF-8"?>
- <operation_request>
- 
- <msgbody><aunewpwd>012</aunewpwd><auoldpwd/><reset>1</reset><aumoditype>1</aumoditype></msgbody>
- 
- <msgheader version="3.0.0">
- <req_bkenv>01</req_bkenv><au_token/><req_time>20141027161947</req_time><channelinfo><api_name>ApiAuthorInfoV2</api_name><api_name_func>authorPwdModify</api_name_func><authorid/></channelinfo><req_token>1OTfh99+U5ORHxLFDf6yLjgT8HxpFd0EWwsvhIMxPlbtnDjVtga1opjJaO8toa8R+egLoLxJuAkoWQYLWWXoPEeVu2XkXHByd/cYTOM0U7uY=</req_token><req_version>3.0.0</req_version><req_appenv>3</req_appenv></msgheader>
- 
- </operation_request>
- */
+
+/*animationView*/
+-(void)animationView
+{
+    [self.window addSubview:self.window.rootViewController.view];
+    //设置splashVC，显示splashVC.view
+    self.splashViewController=[[UIViewController alloc]init];
+    NSString * splashImageName=@"splash.jpg";
+    if(self.window.bounds.size.height>480){
+        splashImageName=@"splashR4.jpg";
+    }
+    self.splashViewController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:splashImageName]];
+    [self.window addSubview:self.splashViewController.view];
+    //显示2s，看一眼得了。
+    [self performSelector:@selector(splashAnimate:) withObject:@0.0 afterDelay:2.0];
+}
+
+
+-(void) splashAnimate:(NSNumber *)alpha{
+    // UIViewAnimationOptionCurveEaseInOut和ViewAnimationOptionTransitionNone两种效果
+    UIView * splashView=self.splashViewController.view;
+    [UIView animateWithDuration:1.0 animations:^{
+        splashView.transform=CGAffineTransformScale(splashView.transform, 1.5, 1.5);
+        splashView.alpha=alpha.floatValue;
+    } completion:^(BOOL finished) {
+        [splashView removeFromSuperview];
+        self.splashViewController=nil;
+    }];
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -465,14 +475,35 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     // 飞机票时间
-    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"FromTime"];
+//    NSLog(@"========cityCodeFrom======%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"cityCodeFrom"] );
+////    NSLog(@"========FromTime======%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"FromTime"] );
+//    NSLog(@"========cityCodeTo======%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"cityCodeTo"] );
+//    NSLog(@"========ToTime======%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"ToTime"] );
+//    NSLog(@"========cityIdFrom======%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"cityIdFrom"] );
+//    NSLog(@"========cityIdTo======%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"cityIdTo"] );
+    [[NSUserDefaults standardUserDefaults] setObject:@"BJS" forKey:@"cityCodeFrom"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"ToTime"];
+
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"SHA" forKey:@"cityCodeTo"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"cityIdFrom"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [[NSUserDefaults standardUserDefaults ]setObject:nil forKey:@"ToCity"];
+    [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"cityIdTo"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"FromCity"];
+    
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[watchTimeObject returnaddTime:nil number:1] forKey:@"FromTime"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSUserDefaults standardUserDefaults] setObject:[watchTimeObject returnaddTime:nil number:2] forKey:@"ToTime"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSUserDefaults standardUserDefaults ]setObject:@"上海" forKey:@"ToCity"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSUserDefaults standardUserDefaults] setObject:@"北京" forKey:@"FromCity"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     // 飞机票乘客联系人
@@ -481,5 +512,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"addContactPerson"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
+
 
 @end

@@ -448,9 +448,9 @@
 - (IBAction)OnbtnClick:(id)sender
 {
     /*只能支付信用卡的*/
-//    [self xybtnonpay];
+    [self xybtnonpay];
     /*储蓄和信用卡的*/
-    [self dfcard];
+//    [self dfcard];
 }
 
 -(void)alertNotoBtn

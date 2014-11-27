@@ -309,7 +309,7 @@
 #pragma mark - NLBankLisDelegate
 
 - (void)dataSearch:(NLBankListViewController *)controller didSelectWithObject:(id)aObject
-         withState:(int)state
+         withState:(int)state 
 {
     _bankname = (NSString*)aObject;
     NLUserInforSettingsCell *cell = (NLUserInforSettingsCell*)[self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
