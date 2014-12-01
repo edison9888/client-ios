@@ -485,6 +485,11 @@
 		24DD77AD19515DE400186A0F /* MLTableAlertShadowMask.png in Resources */ = {isa = PBXBuildFile; fileRef = 24DD77A519515DE400186A0F /* MLTableAlertShadowMask.png */; };
 		24DD77AE19515DE400186A0F /* MLTableAlertShadowMask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24DD77A619515DE400186A0F /* MLTableAlertShadowMask@2x.png */; };
 		24DD77B119515DEF00186A0F /* MLTableAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD77B019515DEF00186A0F /* MLTableAlert.m */; };
+		24DEAA1B1A26B90F005FACB4 /* NLUserSettingViewNew.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DEAA191A26B90E005FACB4 /* NLUserSettingViewNew.m */; };
+		24DEAA1C1A26B90F005FACB4 /* NLUserSettingViewNew.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24DEAA1A1A26B90F005FACB4 /* NLUserSettingViewNew.xib */; };
+		24DEAA1E1A26C0C4005FACB4 /* xxnext@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24DEAA1D1A26C0C4005FACB4 /* xxnext@2x.png */; };
+		24DEAA201A26C19B005FACB4 /* xxpic.png in Resources */ = {isa = PBXBuildFile; fileRef = 24DEAA1F1A26C19B005FACB4 /* xxpic.png */; };
+		24DEAA221A26C4E7005FACB4 /* xxadd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24DEAA211A26C4E7005FACB4 /* xxadd@2x.png */; };
 		24E176A41900C58800050B96 /* UITextField+Shake.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E176A31900C58800050B96 /* UITextField+Shake.m */; };
 		24E176AB1900FCE000050B96 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E176A51900F73900050B96 /* AddressBook.framework */; };
 		24E176AC1900FCE400050B96 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E176A71900F73E00050B96 /* AddressBookUI.framework */; };
@@ -934,6 +939,15 @@
 		3FF1B7CB199DBDDB009112F7 /* AirTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1B7CA199DBDDB009112F7 /* AirTicketViewController.m */; };
 		3FF1B7CE199DBE46009112F7 /* CitySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1B7CD199DBE46009112F7 /* CitySelectionViewController.m */; };
 		3FF1B7D1199DC58E009112F7 /* ButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1B7D0199DC58E009112F7 /* ButtonView.m */; };
+		3FF1FBE61A27114700C201D6 /* CalendarDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1FBD51A27114700C201D6 /* CalendarDayCell.m */; };
+		3FF1FBE71A27114700C201D6 /* CalendarDayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1FBD71A27114700C201D6 /* CalendarDayModel.m */; };
+		3FF1FBE81A27114700C201D6 /* CalendarHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1FBD91A27114700C201D6 /* CalendarHomeViewController.m */; };
+		3FF1FBE91A27114700C201D6 /* CalendarLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1FBDB1A27114700C201D6 /* CalendarLogic.m */; };
+		3FF1FBEA1A27114700C201D6 /* CalendarMonthCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1FBDD1A27114700C201D6 /* CalendarMonthCollectionViewLayout.m */; };
+		3FF1FBEB1A27114700C201D6 /* CalendarMonthHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1FBDF1A27114700C201D6 /* CalendarMonthHeaderView.m */; };
+		3FF1FBEC1A27114700C201D6 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1FBE11A27114700C201D6 /* CalendarViewController.m */; };
+		3FF1FBED1A27114700C201D6 /* chack.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF1FBE21A27114700C201D6 /* chack.png */; };
+		3FF1FBEE1A27114700C201D6 /* NSDate+WQCalendarLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1FBE51A27114700C201D6 /* NSDate+WQCalendarLogic.m */; };
 		3FFC14C319A49EF800C58DA0 /* AddPassengersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFC14C219A49EF800C58DA0 /* AddPassengersViewController.m */; };
 		3FFC14D319A4A31D00C58DA0 /* addPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFC14D219A4A31D00C58DA0 /* addPersonViewController.m */; };
 		3FFC14D619A4A48D00C58DA0 /* selectionPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFC14D519A4A48D00C58DA0 /* selectionPerson.m */; };
@@ -1409,6 +1423,7 @@
 		A694A65C1A25B3B6003E0232 /* ACDistributionRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A694A6551A25B3B6003E0232 /* ACDistributionRecordsViewController.m */; };
 		A6960B631A1EDF750011CF39 /* ACImmediatelyBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = A6960B621A1EDF750011CF39 /* ACImmediatelyBinding.m */; };
 		A6960B671A1EEA870011CF39 /* AC_InputBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6960B661A1EEA870011CF39 /* AC_InputBox@2x.png */; };
+		A6971BA91A26BC7C00A51514 /* ACPaymentIsSuccessfulViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6971BA71A26BC7C00A51514 /* ACPaymentIsSuccessfulViewController.m */; };
 		A698154C1A1AE84B00EE2201 /* SMSPaymentHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A698154B1A1AE84B00EE2201 /* SMSPaymentHistoryTableViewController.m */; };
 		A69EC45A1A1DC4AD004A8CBE /* AC_BaseMap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69EC4591A1DC4AD004A8CBE /* AC_BaseMap@2x.png */; };
 		A69EC45E1A1DEC4D004A8CBE /* ACMyAuthorizationCode.m in Sources */ = {isa = PBXBuildFile; fileRef = A69EC45D1A1DEC4D004A8CBE /* ACMyAuthorizationCode.m */; };
@@ -2124,6 +2139,12 @@
 		24DD77A619515DE400186A0F /* MLTableAlertShadowMask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MLTableAlertShadowMask@2x.png"; sourceTree = "<group>"; };
 		24DD77AF19515DEF00186A0F /* MLTableAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLTableAlert.h; sourceTree = "<group>"; };
 		24DD77B019515DEF00186A0F /* MLTableAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLTableAlert.m; sourceTree = "<group>"; };
+		24DEAA181A26B90E005FACB4 /* NLUserSettingViewNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NLUserSettingViewNew.h; path = ../../../NLUserSettingViewNew.h; sourceTree = "<group>"; };
+		24DEAA191A26B90E005FACB4 /* NLUserSettingViewNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NLUserSettingViewNew.m; path = ../../../NLUserSettingViewNew.m; sourceTree = "<group>"; };
+		24DEAA1A1A26B90F005FACB4 /* NLUserSettingViewNew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NLUserSettingViewNew.xib; path = ../../../NLUserSettingViewNew.xib; sourceTree = "<group>"; };
+		24DEAA1D1A26C0C4005FACB4 /* xxnext@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xxnext@2x.png"; sourceTree = "<group>"; };
+		24DEAA1F1A26C19B005FACB4 /* xxpic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xxpic.png; sourceTree = "<group>"; };
+		24DEAA211A26C4E7005FACB4 /* xxadd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xxadd@2x.png"; sourceTree = "<group>"; };
 		24E176A21900C58800050B96 /* UITextField+Shake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Shake.h"; sourceTree = "<group>"; };
 		24E176A31900C58800050B96 /* UITextField+Shake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Shake.m"; sourceTree = "<group>"; };
 		24E176A51900F73900050B96 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -2625,6 +2646,24 @@
 		3FF1B7CD199DBE46009112F7 /* CitySelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitySelectionViewController.m; sourceTree = "<group>"; };
 		3FF1B7CF199DC58E009112F7 /* ButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonView.h; sourceTree = "<group>"; };
 		3FF1B7D0199DC58E009112F7 /* ButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonView.m; sourceTree = "<group>"; };
+		3FF1FBD41A27114700C201D6 /* CalendarDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDayCell.h; sourceTree = "<group>"; };
+		3FF1FBD51A27114700C201D6 /* CalendarDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDayCell.m; sourceTree = "<group>"; };
+		3FF1FBD61A27114700C201D6 /* CalendarDayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDayModel.h; sourceTree = "<group>"; };
+		3FF1FBD71A27114700C201D6 /* CalendarDayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDayModel.m; sourceTree = "<group>"; };
+		3FF1FBD81A27114700C201D6 /* CalendarHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarHomeViewController.h; sourceTree = "<group>"; };
+		3FF1FBD91A27114700C201D6 /* CalendarHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarHomeViewController.m; sourceTree = "<group>"; };
+		3FF1FBDA1A27114700C201D6 /* CalendarLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarLogic.h; sourceTree = "<group>"; };
+		3FF1FBDB1A27114700C201D6 /* CalendarLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarLogic.m; sourceTree = "<group>"; };
+		3FF1FBDC1A27114700C201D6 /* CalendarMonthCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarMonthCollectionViewLayout.h; sourceTree = "<group>"; };
+		3FF1FBDD1A27114700C201D6 /* CalendarMonthCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarMonthCollectionViewLayout.m; sourceTree = "<group>"; };
+		3FF1FBDE1A27114700C201D6 /* CalendarMonthHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarMonthHeaderView.h; sourceTree = "<group>"; };
+		3FF1FBDF1A27114700C201D6 /* CalendarMonthHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarMonthHeaderView.m; sourceTree = "<group>"; };
+		3FF1FBE01A27114700C201D6 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
+		3FF1FBE11A27114700C201D6 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
+		3FF1FBE21A27114700C201D6 /* chack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chack.png; sourceTree = "<group>"; };
+		3FF1FBE31A27114700C201D6 /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
+		3FF1FBE41A27114700C201D6 /* NSDate+WQCalendarLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+WQCalendarLogic.h"; sourceTree = "<group>"; };
+		3FF1FBE51A27114700C201D6 /* NSDate+WQCalendarLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+WQCalendarLogic.m"; sourceTree = "<group>"; };
 		3FFC14C119A49EF800C58DA0 /* AddPassengersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPassengersViewController.h; sourceTree = "<group>"; };
 		3FFC14C219A49EF800C58DA0 /* AddPassengersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPassengersViewController.m; sourceTree = "<group>"; };
 		3FFC14D119A4A31D00C58DA0 /* addPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addPersonViewController.h; sourceTree = "<group>"; };
@@ -3291,6 +3330,8 @@
 		A6960B611A1EDF750011CF39 /* ACImmediatelyBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACImmediatelyBinding.h; sourceTree = "<group>"; };
 		A6960B621A1EDF750011CF39 /* ACImmediatelyBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACImmediatelyBinding.m; sourceTree = "<group>"; };
 		A6960B661A1EEA870011CF39 /* AC_InputBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AC_InputBox@2x.png"; path = "AuthorizationCodeImage/AC_InputBox@2x.png"; sourceTree = "<group>"; };
+		A6971BA71A26BC7C00A51514 /* ACPaymentIsSuccessfulViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPaymentIsSuccessfulViewController.m; sourceTree = "<group>"; };
+		A6971BA81A26BC7C00A51514 /* ACPaymentIsSuccessfulViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPaymentIsSuccessfulViewController.h; sourceTree = "<group>"; };
 		A698154A1A1AE84B00EE2201 /* SMSPaymentHistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSPaymentHistoryTableViewController.h; sourceTree = "<group>"; };
 		A698154B1A1AE84B00EE2201 /* SMSPaymentHistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSPaymentHistoryTableViewController.m; sourceTree = "<group>"; };
 		A69EC4591A1DC4AD004A8CBE /* AC_BaseMap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AC_BaseMap@2x.png"; path = "AuthorizationCodeImage/AC_BaseMap@2x.png"; sourceTree = "<group>"; };
@@ -3677,7 +3718,7 @@
 				32E3261019F77AE000D36643 /* ImpowerController.xib */,
 				A69EC45B1A1DEB6E004A8CBE /* MyAuthorizationCode */,
 				A6960B601A1EDF3B0011CF39 /* ImmediatelyBinding */,
-				A6960B681A1EFFFD0011CF39 /* PurchaseALicenseCode */,
+				A6960B681A1EFFFD0011CF39 /* PaymentIsSuccessful */,
 				324912C51A00BD4F00204D51 /* MyNumberController.h */,
 				324912C61A00BD4F00204D51 /* MyNumberController.m */,
 				321DA03D19FA3C3900EBD79E /* ImpowerPayController.h */,
@@ -3928,6 +3969,9 @@
 		2475A1A319BEC5AF00CBBD53 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				24DEAA211A26C4E7005FACB4 /* xxadd@2x.png */,
+				24DEAA1F1A26C19B005FACB4 /* xxpic.png */,
+				24DEAA1D1A26C0C4005FACB4 /* xxnext@2x.png */,
 				2442844C19DA8C4F005D9AC2 /* phone_book_blue@2x.png */,
 				241E1CA719CC3A12004775EE /* shanghu.png */,
 				243476C119D17C51006F69B1 /* btn_done_down@2x.png */,
@@ -3960,12 +4004,10 @@
 		2475A1A419BEC5B400CBBD53 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				24DEAA171A26B8E8005FACB4 /* 用户信息设置界面 */,
 				2475A19D19BEC4A600CBBD53 /* NLPeopleLevel.h */,
 				2475A19E19BEC4A600CBBD53 /* NLPeopleLevel.m */,
 				2475A19F19BEC4A600CBBD53 /* NLPeopleLevel.xib */,
-				44ED783F17CB381F00B330E3 /* NLUsersInfoSettingsViewController.h */,
-				44ED784017CB381F00B330E3 /* NLUsersInfoSettingsViewController.m */,
-				44ED784117CB381F00B330E3 /* NLUsersInfoSettingsViewController.xib */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -4460,14 +4502,14 @@
 			name = blockView;
 			sourceTree = "<group>";
 		};
-		24B36BEF1A1F2863001F8E5C /* 新版代理商界面 */ = {
+		24B36BEF1A1F2863001F8E5C /* 新界面暂时没用 */ = {
 			isa = PBXGroup;
 			children = (
 				24B36BF01A1F29AB001F8E5C /* AgentNew.h */,
 				24B36BF11A1F29AB001F8E5C /* AgentNew.m */,
 				24B36BF21A1F29AB001F8E5C /* AgentNew.xib */,
 			);
-			name = "新版代理商界面";
+			name = "新界面暂时没用";
 			sourceTree = "<group>";
 		};
 		24B66AA71A22CE40001CCC3C /* 另外一种节点展开显示 */ = {
@@ -4908,6 +4950,19 @@
 				24DD77A619515DE400186A0F /* MLTableAlertShadowMask@2x.png */,
 			);
 			name = image;
+			sourceTree = "<group>";
+		};
+		24DEAA171A26B8E8005FACB4 /* 用户信息设置界面 */ = {
+			isa = PBXGroup;
+			children = (
+				44ED783F17CB381F00B330E3 /* NLUsersInfoSettingsViewController.h */,
+				44ED784017CB381F00B330E3 /* NLUsersInfoSettingsViewController.m */,
+				44ED784117CB381F00B330E3 /* NLUsersInfoSettingsViewController.xib */,
+				24DEAA181A26B90E005FACB4 /* NLUserSettingViewNew.h */,
+				24DEAA191A26B90E005FACB4 /* NLUserSettingViewNew.m */,
+				24DEAA1A1A26B90F005FACB4 /* NLUserSettingViewNew.xib */,
+			);
+			name = "用户信息设置界面";
 			sourceTree = "<group>";
 		};
 		24E277DB19CFBE3500D704D1 /* ASIWebPageRequest */ = {
@@ -5584,7 +5639,8 @@
 		32EA13571980CFA40068A0B6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				24B36BEF1A1F2863001F8E5C /* 新版代理商界面 */,
+				A694A63F1A25B2A1003E0232 /* NewVersion */,
+				24B36BEF1A1F2863001F8E5C /* 新界面暂时没用 */,
 				24A809701A1C33F000542519 /* 代理商收益 */,
 				A693E3C419C6C56C007BE726 /* 汇通卡 */,
 				24BEB39719B6B94E00B773D4 /* ApplyAgentViewControllerNew.h */,
@@ -5594,7 +5650,6 @@
 				321A5E0B197F7DA700BD7E88 /* ApplyAgentViewController.m */,
 				321461A319879491004CC401 /* ApplyOrTestViewController.h */,
 				321461A419879491004CC401 /* ApplyOrTestViewController.m */,
-				A694A63F1A25B2A1003E0232 /* NewVersion */,
 				A6BD54E4191B8167008448BC /* TFAgentMainCtr.h */,
 				A6BD54E5191B8167008448BC /* TFAgentMainCtr.m */,
 				A6BD54E6191B8167008448BC /* TFAgentMainCtr.xib */,
@@ -5762,6 +5817,7 @@
 		3F1C8E6A19A31D1400716D16 /* 日历 */ = {
 			isa = PBXGroup;
 			children = (
+				3FF1FBD31A27114700C201D6 /* ZFCalendar */,
 				3F6C11FE19B59521006A1A5F /* CKCalendarView.h */,
 				3F6C11FF19B59521006A1A5F /* CKCalendarView.m */,
 				3F1C8E6E19A31DAA00716D16 /* WatchTimeViewController.h */,
@@ -5949,6 +6005,31 @@
 			);
 			name = AriTicket;
 			path = MainController/QcoinCharge;
+			sourceTree = "<group>";
+		};
+		3FF1FBD31A27114700C201D6 /* ZFCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				3FF1FBD41A27114700C201D6 /* CalendarDayCell.h */,
+				3FF1FBD51A27114700C201D6 /* CalendarDayCell.m */,
+				3FF1FBD61A27114700C201D6 /* CalendarDayModel.h */,
+				3FF1FBD71A27114700C201D6 /* CalendarDayModel.m */,
+				3FF1FBD81A27114700C201D6 /* CalendarHomeViewController.h */,
+				3FF1FBD91A27114700C201D6 /* CalendarHomeViewController.m */,
+				3FF1FBDA1A27114700C201D6 /* CalendarLogic.h */,
+				3FF1FBDB1A27114700C201D6 /* CalendarLogic.m */,
+				3FF1FBDC1A27114700C201D6 /* CalendarMonthCollectionViewLayout.h */,
+				3FF1FBDD1A27114700C201D6 /* CalendarMonthCollectionViewLayout.m */,
+				3FF1FBDE1A27114700C201D6 /* CalendarMonthHeaderView.h */,
+				3FF1FBDF1A27114700C201D6 /* CalendarMonthHeaderView.m */,
+				3FF1FBE01A27114700C201D6 /* CalendarViewController.h */,
+				3FF1FBE11A27114700C201D6 /* CalendarViewController.m */,
+				3FF1FBE21A27114700C201D6 /* chack.png */,
+				3FF1FBE31A27114700C201D6 /* Color.h */,
+				3FF1FBE41A27114700C201D6 /* NSDate+WQCalendarLogic.h */,
+				3FF1FBE51A27114700C201D6 /* NSDate+WQCalendarLogic.m */,
+			);
+			path = ZFCalendar;
 			sourceTree = "<group>";
 		};
 		3FFC14D019A4A2EB00C58DA0 /* 添加乘机人 */ = {
@@ -6927,15 +7008,15 @@
 		A694A6411A25B2FD003E0232 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				A694A6421A25B351003E0232 /* ACDistributionRecordsCell.xib */,
 				A694A6431A25B351003E0232 /* ACDistributionRecordsCell.h */,
 				A694A6441A25B351003E0232 /* ACDistributionRecordsCell.m */,
-				A694A6451A25B351003E0232 /* ACAssignmentCell.xib */,
+				A694A6421A25B351003E0232 /* ACDistributionRecordsCell.xib */,
 				A694A6461A25B351003E0232 /* ACAssignmentCell.h */,
 				A694A6471A25B351003E0232 /* ACAssignmentCell.m */,
-				A694A6481A25B351003E0232 /* ACTwoAgentsCell.xib */,
+				A694A6451A25B351003E0232 /* ACAssignmentCell.xib */,
 				A694A6491A25B351003E0232 /* ACTwoAgentsCell.h */,
 				A694A64A1A25B351003E0232 /* ACTwoAgentsCell.m */,
+				A694A6481A25B351003E0232 /* ACTwoAgentsCell.xib */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -6976,11 +7057,13 @@
 			name = ImmediatelyBinding;
 			sourceTree = "<group>";
 		};
-		A6960B681A1EFFFD0011CF39 /* PurchaseALicenseCode */ = {
+		A6960B681A1EFFFD0011CF39 /* PaymentIsSuccessful */ = {
 			isa = PBXGroup;
 			children = (
+				A6971BA81A26BC7C00A51514 /* ACPaymentIsSuccessfulViewController.h */,
+				A6971BA71A26BC7C00A51514 /* ACPaymentIsSuccessfulViewController.m */,
 			);
-			name = PurchaseALicenseCode;
+			name = PaymentIsSuccessful;
 			sourceTree = "<group>";
 		};
 		A69B29FA1941BFB8000FC3B9 /* gameCharge */ = {
@@ -7172,6 +7255,7 @@
 				24C045D719418DB60085EDD3 /* phone@2x.png in Resources */,
 				2475A1BB19BEC5D600CBBD53 /* next@2x.png in Resources */,
 				3F314FB819C6DEF100DC6169 /* HO@2x.png in Resources */,
+				24DEAA1E1A26C0C4005FACB4 /* xxnext@2x.png in Resources */,
 				24DD77AC19515DE400186A0F /* MLTableAlertButtonPressed@2x.png in Resources */,
 				4482528117AB4CF6000B1170 /* creditCardPayments@2x.png in Resources */,
 				3F314FAF19C6DEF100DC6169 /* arrow@2x.png in Resources */,
@@ -7319,6 +7403,7 @@
 				24E5F79819949C9500928391 /* 银行商标-30.png in Resources */,
 				2475A1BD19BEC5D600CBBD53 /* o_btn@2x.png in Resources */,
 				3F314FB719C6DEF100DC6169 /* MU@2x.png in Resources */,
+				3FF1FBED1A27114700C201D6 /* chack.png in Resources */,
 				A62C9BBE192B40C200488CBB /* Lgreen_phone@2x.png in Resources */,
 				2448E007197CDB17004F9DAA /* to@2x.png in Resources */,
 				2475A1B519BEC5D600CBBD53 /* blue_click@2x.png in Resources */,
@@ -7638,7 +7723,9 @@
 				A679EC321932DACC0005A8A5 /* facePay@2x.png in Resources */,
 				24EF8698197E4A8200F7D849 /* hotel_normal@2x.png in Resources */,
 				44ED784317CB382000B330E3 /* NLUsersInfoSettingsViewController.xib in Resources */,
+				24DEAA1C1A26B90F005FACB4 /* NLUserSettingViewNew.xib in Resources */,
 				2448E001197CDB17004F9DAA /* left_normal_buttton@2x.png in Resources */,
+				24DEAA201A26C19B005FACB4 /* xxpic.png in Resources */,
 				24B81F071920D14200999E6C /* Default-568h@2x1.png in Resources */,
 				32F53C5019986FC300573174 /* bank14.png in Resources */,
 				44ED784E17CB38BF00B330E3 /* NLAboutUsViewController.xib in Resources */,
@@ -7736,6 +7823,7 @@
 				241021AD198652CC0085965E /* icon_airplane.png in Resources */,
 				24F4A46319B9A9840095146D /* payMoneyToPay.xib in Resources */,
 				24F850D31A10843E007331F5 /* leaderblu_btn_nor@2x.png in Resources */,
+				24DEAA221A26C4E7005FACB4 /* xxadd@2x.png in Resources */,
 				A67B462B1921EEB7003D0EDC /* siloheadred@2x.png in Resources */,
 				A69302D71A132ACE00C3C864 /* SMS_triangle@2x.png in Resources */,
 				44083C2818EEACD9009436BE /* icon~iphone_old.png in Resources */,
@@ -8095,6 +8183,7 @@
 				A669D88019373D5D001C301B /* WaterEleBillSure.m in Sources */,
 				4482524E17AB4AAB000B1170 /* NLAppDelegate.m in Sources */,
 				320D207219A5F56C0032EA03 /* CustomAlertView.m in Sources */,
+				3FF1FBE91A27114700C201D6 /* CalendarLogic.m in Sources */,
 				32FFAEE319B04E9D00D8465A /* HotelListController.m in Sources */,
 				4482527117AB4AF0000B1170 /* LeftController.m in Sources */,
 				24E95E8819EB84F9009A32DF /* PersonView.m in Sources */,
@@ -8112,6 +8201,7 @@
 				241238EA19629EB40015E09D /* SVModalWebViewController.m in Sources */,
 				24DB3E6719CA6BCC003BB4EE /* SingPayMoney.m in Sources */,
 				2494E9021991C7F300944DFF /* UIImage+GIF.m in Sources */,
+				A6971BA91A26BC7C00A51514 /* ACPaymentIsSuccessfulViewController.m in Sources */,
 				44E6C22B17AF372A002CFE44 /* NLMyWalletViewController.m in Sources */,
 				2448E011197E15B9004F9DAA /* planeAdd.m in Sources */,
 				2494E8FA1991C7F300944DFF /* SDWebImageCompat.m in Sources */,
@@ -8163,6 +8253,7 @@
 				44F491AA17B4DF500055D9AB /* NLRechargeCreditCardThirdViewController.m in Sources */,
 				24C4A16F1A0C531800934809 /* FirstLeadView.m in Sources */,
 				A693E3C919C6C56C007BE726 /* TFAgentBookCardCtr.m in Sources */,
+				3FF1FBE71A27114700C201D6 /* CalendarDayModel.m in Sources */,
 				2494E9131991C82A00944DFF /* MJPhoto.m in Sources */,
 				44F491AF17B4E7040055D9AB /* NLRechargeResultViewController.m in Sources */,
 				24D81B1E193DAFA800715683 /* PaymentDf.m in Sources */,
@@ -8225,6 +8316,7 @@
 				249FE3B019EE55D700274AD5 /* NSString+PinYin4Cocoa.m in Sources */,
 				32DD539619B573C5006D8211 /* HotelPhotoCell.m in Sources */,
 				A624FB5D19D128A90021C657 /* ASICloudFilesObjectRequest.m in Sources */,
+				3FF1FBEA1A27114700C201D6 /* CalendarMonthCollectionViewLayout.m in Sources */,
 				A669D87A19373D09001C301B /* WaterEleBillCtr.m in Sources */,
 				24BC1AAB1964EB1F00653560 /* RADataObject.m in Sources */,
 				44F9D71617BE04A5007C63B8 /* NLProtocolNotify.m in Sources */,
@@ -8244,6 +8336,7 @@
 				24DA266E1A19DDBA00727EEA /* MainViewController.m in Sources */,
 				24C4A17A1A0C756200934809 /* CLNavigationControllerDelegate.m in Sources */,
 				2414A1F919C03F5F008A8F63 /* AFNetworkReachabilityManager.m in Sources */,
+				3FF1FBE61A27114700C201D6 /* CalendarDayCell.m in Sources */,
 				2494E8FD1991C7F300944DFF /* SDWebImageDownloaderOperation.m in Sources */,
 				3FFC14D619A4A48D00C58DA0 /* selectionPerson.m in Sources */,
 				32DF56F419D2955F0040A353 /* HistoryAccountCell.m in Sources */,
@@ -8254,6 +8347,7 @@
 				A6E2FFAE1925B299005C28DD /* TFAgentAddgoodsCell.m in Sources */,
 				24C8E41319B83CE300F75A52 /* NLhhzTestViewController.m in Sources */,
 				327F41E819B0546A000721AB /* SimpleXMLViewController.m in Sources */,
+				24DEAA1B1A26B90F005FACB4 /* NLUserSettingViewNew.m in Sources */,
 				241238C419615BB30015E09D /* IDJScrollComponent.m in Sources */,
 				44ED783D17CB33BD00B330E3 /* NLMoreViewController.m in Sources */,
 				320DF89519A71B83007DA412 /* ReserveHotelController.m in Sources */,
@@ -8485,6 +8579,7 @@
 				A6026C6D19235A15002894F0 /* UIViewController+NavigationItem.m in Sources */,
 				44F708C217F95D31002AE198 /* iToast.m in Sources */,
 				2494E8F81991C7F300944DFF /* NSData+GIF.m in Sources */,
+				3FF1FBE81A27114700C201D6 /* CalendarHomeViewController.m in Sources */,
 				44F708C317F95D31002AE198 /* NLToast.m in Sources */,
 				24CF131019C80C170045C26A /* ExpressageMain.m in Sources */,
 				2414A1B219C03ED6008A8F63 /* ASINetworkQueue.m in Sources */,
@@ -8505,9 +8600,11 @@
 				3F1C8E7619A340A000716D16 /* HistoricalRecordViewController.m in Sources */,
 				24227B75195C05280075CCC2 /* BlockText.m in Sources */,
 				44F24299180503B100FE518B /* NLCreditCardSecondViewController.mm in Sources */,
+				3FF1FBEC1A27114700C201D6 /* CalendarViewController.m in Sources */,
 				2401EB4D19C042DC00C82B45 /* DDXMLNode.m in Sources */,
 				24BC1ABE19652E2600653560 /* planeChage.m in Sources */,
 				44F2429E18055F3300FE518B /* NLTransferSecondViewController.m in Sources */,
+				3FF1FBEE1A27114700C201D6 /* NSDate+WQCalendarLogic.m in Sources */,
 				44DA355418064F4B0057C021 /* NLTransferThirdViewController.mm in Sources */,
 				24903F0319B5776000768112 /* GLBucket.m in Sources */,
 				24BC1AA81964EAEA00653560 /* RATreeNodeInfo+Private.m in Sources */,
@@ -8522,6 +8619,7 @@
 				A69303341A132C9600C3C864 /* SUNSlideSwitchView.m in Sources */,
 				24AA4F4119065F5000EDD3D7 /* Reachability.m in Sources */,
 				44DA355B1806A0DC0057C021 /* NLReturnSecondViewController.mm in Sources */,
+				3FF1FBEB1A27114700C201D6 /* CalendarMonthHeaderView.m in Sources */,
 				24E71FD819D25CE900E5CA3D /* IQToolbar.m in Sources */,
 				32EA63BF19AC20AC00BFF076 /* CityChangeController.m in Sources */,
 				44DA35601806ADA90057C021 /* NLOnceListViewController.m in Sources */,
@@ -8664,7 +8762,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TongFubao/TongFubao.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: MO XING (9D44C6L83U)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: GuangZhou DianDuo Software Technology Co.,Ltd (967UFS6SL4)";
 				FRAMEWORK_SEARCH_PATHS = (
 					/usr/lib/libxml2.dylib,
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -8696,7 +8794,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "14059A89-822B-4299-BB70-6FA7A9461A02";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F0E14699-F4AA-4E12-8469-7F10D22B2E5B";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -8716,7 +8814,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TongFubao/TongFubao.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: MO XING (9D44C6L83U)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: GuangZhou DianDuo Software Technology Co.,Ltd (967UFS6SL4)";
 				FRAMEWORK_SEARCH_PATHS = (
 					/usr/lib/libxml2.dylib,
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -8746,8 +8844,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "CA02DEC2-CD6C-4663-9C27-B3926490EE11";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "14059A89-822B-4299-BB70-6FA7A9461A02";
+				PROVISIONING_PROFILE = "F0E14699-F4AA-4E12-8469-7F10D22B2E5B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F0E14699-F4AA-4E12-8469-7F10D22B2E5B";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = 1;

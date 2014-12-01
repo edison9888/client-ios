@@ -82,3 +82,13 @@
 
 @end
 
+/*用户信息设置*/
+@interface ModelImage :NSObject
+
+@property (nonatomic,copy) NSString *picid;  /*自增长id*/
+@property (nonatomic,copy) NSString *picpath;  /*图片地址*/
+@property (nonatomic,copy) NSString *uppicUrl;  /*图片url*/
+@property (nonatomic,copy) NSString *pictype;  /*图片l类型*/
+
+@property (nonatomic,copy) NSMutableArray *modelarray;  /*数据*/
+@end

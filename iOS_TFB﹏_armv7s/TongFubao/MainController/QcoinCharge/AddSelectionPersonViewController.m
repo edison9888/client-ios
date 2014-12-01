@@ -88,6 +88,9 @@
 {
     NLProtocolResponse *response = (NLProtocolResponse *)senderFication.object;
     int error = response.errcode;
+    NSString *string = response.detail;
+    NSLog(@"===string====%@",string);
+
     
     if (error == RSP_NO_ERROR)
     {
@@ -96,12 +99,11 @@
     }
     else if (error == RSP_TIMEOUT)
     {
-        return ;
+        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+        [_activityView removeFromSuperview];
     }
     else
     {
-        NSString *string = response.detail;
-        NSLog(@"===string====%@",string);
         [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
         [_activityView removeFromSuperview];
         if ([string isEqualToString:@"请勿重复添加信息"])
@@ -123,13 +125,16 @@
     //获取数据标记，判断是否请求成功
     NLProtocolData *data = [response.data find:@"msgbody/result" index:0];
     NSString *result = data.value;
+    NSLog(@"======result=======%@",result);
     NSRange range = [result rangeOfString:@"succ"];
-    
+
     if (range.length <= 0)
     {
         //获取错误信息
         NLProtocolData *errorData = [response.data find:@"msgbody/message" index:0];
         NSLog(@"errorData = %@",errorData);
+        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+        [_activityView removeFromSuperview];
     }
     else
     {
@@ -143,13 +148,14 @@
         textFieldIphone.placeholder = @"请输入手机号码";
         [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
         [_activityView removeFromSuperview];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(message:) name:@"添加联系人" object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"添加联系人" object:nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"成功添加联系人!" message:@"" delegate:self cancelButtonTitle:@"添加联系人" otherButtonTitles:@"退出", nil];
+        alert.tag = 100;
+        [alert show];
+        [self.delegate UpdateAddSelectionPersonPassengers];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(message:) name:@"添加联系人" object:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"添加联系人" object:nil];
+
     }
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！是否需要添加联系人！" delegate:self cancelButtonTitle:@"添加联系人" otherButtonTitles:@"退出", nil];
-    alert.tag = 100;
-    [alert show];
 
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -162,10 +168,10 @@
         }
     }
 }
--(void)message:(NSNotificationCenter *)sender
-{
-    NSLog(@"=====添加了联系人添加了联系人添加了联系人===");
-}
+//-(void)message:(NSNotificationCenter *)sender
+//{
+//    NSLog(@"=====添加了联系人添加了联系人添加了联系人===");
+//}
 -(void)allControllerView
 {
     for (int i = 0; i < 2; i++)

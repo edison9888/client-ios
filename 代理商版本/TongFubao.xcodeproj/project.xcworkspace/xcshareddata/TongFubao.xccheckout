@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>20C71EA3-13C1-4C7A-90E8-85C6355B356E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TongFubao</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>7DB2BF5C-3D31-410C-A2D0-C43FD7EA85ED</key>
+		<string>http://192.168.0.182:80/svn/ios_client/TongFubao</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TongFubao.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>7118BAB0-4486-4A4C-93AA-939309CA0518</key>
+		<string>../../../../随写/playView</string>
+		<key>7DB2BF5C-3D31-410C-A2D0-C43FD7EA85ED</key>
+		<string>../..</string>
+		<key>A0F7BDA9-FE35-4025-85F5-FFA142DDB78B</key>
+		<string>../../../../keyBrob</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>7DB2BF5C-3D31-410C-A2D0-C43FD7EA85ED</key>
+		<string>http://192.168.0.182:80/svn/ios_client</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>http://192.168.0.182:80/svn/ios_client/TongFubao/TongFubao.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>7DB2BF5C-3D31-410C-A2D0-C43FD7EA85ED</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7DB2BF5C-3D31-410C-A2D0-C43FD7EA85ED</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ios_clinet612</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A0F7BDA9-FE35-4025-85F5-FFA142DDB78B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>keyBrob</string>
+		</dict>
+	</array>
+</dict>
+</plist>

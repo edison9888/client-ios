@@ -71,14 +71,10 @@
 #pragma mark - UITableView创建
 -(void)tableVC{
     
-    table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
-    table.delegate = self;
-    table.dataSource = self;
-    [self.view addSubview:table];
-    
-    UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, table.frame.size.width, 160)];
+    UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 160)];
     vc.backgroundColor = RGBACOLOR(242, 242, 242, 1.0);
-    table.tableHeaderView = vc;
+    [self.view addSubview:vc];
+//    table.tableHeaderView = vc;
     
     
     UIImageView *imageView1 = [[UIImageView alloc]initWithFrame:CGRectMake(10, 20, 300, 50)];
@@ -135,6 +131,11 @@
     label6.font = [UIFont systemFontOfSize:16];
     [vc addSubview:label6];
     
+    
+    table = [[UITableView alloc]initWithFrame:CGRectMake(0, 224, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+    table.delegate = self;
+    table.dataSource = self;
+    [self.view addSubview:table];
     
 }
 

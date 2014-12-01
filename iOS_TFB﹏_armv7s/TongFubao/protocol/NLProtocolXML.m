@@ -4888,7 +4888,7 @@ static NLProtocolXML* gProtocolXML = nil;
                                                    attr:nil
                                                attrName:nil
                                               valueType:NLProtocolDataValueNoCData]];
-    
+    NSLog(@"=========pd========%@",pd);
     return pd;
 }
 
@@ -5007,11 +5007,11 @@ static NLProtocolXML* gProtocolXML = nil;
                                                attrName:nil
                                               valueType:NLProtocolDataValueNoCData]];
     
-    [payinfo addChild:[[NLProtocolData alloc] initValue:[newpayinfoCardInfoArray objectAtIndex:1]
-                                                 forKey:@"cardValidity"
-                                                   attr:nil
-                                               attrName:nil
-                                              valueType:NLProtocolDataValueNoCData]];
+//    [payinfo addChild:[[NLProtocolData alloc] initValue:[newpayinfoCardInfoArray objectAtIndex:1]
+//                                                 forKey:@"cardValidity"
+//                                                   attr:nil
+//                                               attrName:nil
+//                                              valueType:NLProtocolDataValueNoCData]];
     
     [payinfo addChild:[[NLProtocolData alloc] initValue:[newpayinfoCardInfoArray objectAtIndex:2]
                                                  forKey:@"cardCVV2No"
@@ -5025,7 +5025,7 @@ static NLProtocolXML* gProtocolXML = nil;
                                                attrName:nil
                                               valueType:NLProtocolDataValueNoCData]];
     
-    [payinfo addChild:[[NLProtocolData alloc] initValue:@"信用卡"
+    [payinfo addChild:[[NLProtocolData alloc] initValue:@"1"
                                                  forKey:@"cardHolderIdCardType"
                                                    attr:nil
                                                attrName:nil

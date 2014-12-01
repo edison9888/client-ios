@@ -179,7 +179,7 @@
                   symbolName = "-[NewloginRestive removeSelf]"
                   moduleName = "TongFubao"
                   urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/NewloginRestive.m"
-                  timestampString = "438689543.844823"
+                  timestampString = "438861119.041783"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "415"
@@ -193,7 +193,7 @@
                   symbolName = "__29-[NewloginRestive removeSelf]_block_invoke"
                   moduleName = "TongFubao"
                   urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/NewloginRestive.m"
-                  timestampString = "438689543.845649"
+                  timestampString = "438861119.042247"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "415"
@@ -381,7 +381,7 @@
                   symbolName = "-[PhoneMoneyToOK STAlertView]"
                   moduleName = "TongFubao"
                   urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/PhoneMoneyToOK.m"
-                  timestampString = "438689545.434874"
+                  timestampString = "438861119.046911"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "14"
@@ -395,7 +395,7 @@
                   symbolName = "-[PhoneMoneyToOK setSTAlertView:]"
                   moduleName = "TongFubao"
                   urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/PhoneMoneyToOK.m"
-                  timestampString = "438689545.43579"
+                  timestampString = "438861119.047484"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "14"
@@ -731,7 +731,7 @@
                   symbolName = "-[NLFindPasswordViewController doforgetPwdModifyNotify:]"
                   moduleName = "TongFubao"
                   urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/LeftController/NLFindPasswordViewController.m"
-                  timestampString = "438689546.025645"
+                  timestampString = "438861119.054255"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "225"
@@ -745,7 +745,7 @@
                   symbolName = "-[NLFindPasswordViewController doforgetPwdModifyNotify:]"
                   moduleName = "TongFubao"
                   urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/LeftController/NLFindPasswordViewController.m"
-                  timestampString = "438689546.026293"
+                  timestampString = "438861119.054868"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "225"
@@ -873,7 +873,7 @@
                   symbolName = "-[NewLoginView keyboardWasHidden:]"
                   moduleName = "TongFubao"
                   urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/NewLoginView.m"
-                  timestampString = "438689546.223857"
+                  timestampString = "438861119.059045"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "680"
@@ -887,7 +887,7 @@
                   symbolName = "__34-[NewLoginView keyboardWasHidden:]_block_invoke"
                   moduleName = "TongFubao"
                   urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/NewLoginView.m"
-                  timestampString = "438689546.224577"
+                  timestampString = "438861119.059747"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "680"
@@ -1085,7 +1085,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1552"
             endingLineNumber = "1552"
-            landmarkName = "-TicketBillId:backTicketId:styGoBack:perSonIdArray:ContactIdArray:payinfoCardInfoArray:"
+            landmarkName = "-TicketBillId:backTicketId:styGoBack:perSonIdArray:ContactIdArray:payinfoCardInfoArray:validity:amount:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1117,7 +1117,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1548"
             endingLineNumber = "1548"
-            landmarkName = "-TicketBillId:backTicketId:styGoBack:perSonIdArray:ContactIdArray:payinfoCardInfoArray:"
+            landmarkName = "-TicketBillId:backTicketId:styGoBack:perSonIdArray:ContactIdArray:payinfoCardInfoArray:validity:amount:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1133,7 +1133,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "5020"
             endingLineNumber = "5020"
-            landmarkName = "-TicketBillIdXML:backTicketIdXML:styGoBack:perSonIdArrayXML:ContactIdArrayXML:payinfoCardInfoArrayXML:"
+            landmarkName = "-TicketBillIdXML:backTicketIdXML:styGoBack:perSonIdArrayXML:ContactIdArrayXML:payinfoCardInfoArrayXML:ValidityXML:AmountXML:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1247,6 +1247,36 @@
             endingLineNumber = "72"
             landmarkName = "-addRightButtonOnKeyboardWithText:target:action:titleText:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UIView(Toolbar) addRightButtonOnKeyboardWithText:target:action:titleText:]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/UIView+IQKeyboardToolbar.m"
+                  timestampString = "438861116.715657"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "720">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UIView(Toolbar) addRightButtonOnKeyboardWithText:target:action:titleText:]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/UIView+IQKeyboardToolbar.m"
+                  timestampString = "438861119.072576"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "724">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1263,6 +1293,36 @@
             endingLineNumber = "207"
             landmarkName = "-addRightLeftOnKeyboardWithTarget:leftButtonTitle:rightButtonTitle:rightButtonAction:leftButtonAction:titleText:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UIView(Toolbar) addRightLeftOnKeyboardWithTarget:leftButtonTitle:rightButtonTitle:rightButtonAction:leftButtonAction:titleText:]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/UIView+IQKeyboardToolbar.m"
+                  timestampString = "438861116.716537"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "207"
+                  endingLineNumber = "207"
+                  offsetFromSymbolStart = "742">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UIView(Toolbar) addRightLeftOnKeyboardWithTarget:leftButtonTitle:rightButtonTitle:rightButtonAction:leftButtonAction:titleText:]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/UIView+IQKeyboardToolbar.m"
+                  timestampString = "438861119.073071"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "207"
+                  endingLineNumber = "207"
+                  offsetFromSymbolStart = "746">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1279,6 +1339,36 @@
             endingLineNumber = "277"
             landmarkName = "-addCancelDoneOnKeyboardWithTarget:cancelAction:doneAction:titleText:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UIView(Toolbar) addCancelDoneOnKeyboardWithTarget:cancelAction:doneAction:titleText:]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/UIView+IQKeyboardToolbar.m"
+                  timestampString = "438861116.717475"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "277"
+                  endingLineNumber = "277"
+                  offsetFromSymbolStart = "688">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UIView(Toolbar) addCancelDoneOnKeyboardWithTarget:cancelAction:doneAction:titleText:]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/UIView+IQKeyboardToolbar.m"
+                  timestampString = "438861119.073711"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "277"
+                  endingLineNumber = "277"
+                  offsetFromSymbolStart = "692">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1295,6 +1385,36 @@
             endingLineNumber = "268"
             landmarkName = "-addCancelDoneOnKeyboardWithTarget:cancelAction:doneAction:titleText:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UIView(Toolbar) addCancelDoneOnKeyboardWithTarget:cancelAction:doneAction:titleText:]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/UIView+IQKeyboardToolbar.m"
+                  timestampString = "438861116.718596"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "268"
+                  endingLineNumber = "268"
+                  offsetFromSymbolStart = "506">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UIView(Toolbar) addCancelDoneOnKeyboardWithTarget:cancelAction:doneAction:titleText:]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/UIView+IQKeyboardToolbar.m"
+                  timestampString = "438861119.074342"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "268"
+                  endingLineNumber = "268"
+                  offsetFromSymbolStart = "508">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1311,6 +1431,36 @@
             endingLineNumber = "197"
             landmarkName = "-addRightLeftOnKeyboardWithTarget:leftButtonTitle:rightButtonTitle:rightButtonAction:leftButtonAction:titleText:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UIView(Toolbar) addRightLeftOnKeyboardWithTarget:leftButtonTitle:rightButtonTitle:rightButtonAction:leftButtonAction:titleText:]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/UIView+IQKeyboardToolbar.m"
+                  timestampString = "438861116.719415"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "198"
+                  endingLineNumber = "198"
+                  offsetFromSymbolStart = "560">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UIView(Toolbar) addRightLeftOnKeyboardWithTarget:leftButtonTitle:rightButtonTitle:rightButtonAction:leftButtonAction:titleText:]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/UIView+IQKeyboardToolbar.m"
+                  timestampString = "438861119.074972"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "198"
+                  endingLineNumber = "198"
+                  offsetFromSymbolStart = "562">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1327,6 +1477,36 @@
             endingLineNumber = "68"
             landmarkName = "-addRightButtonOnKeyboardWithText:target:action:titleText:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UIView(Toolbar) addRightButtonOnKeyboardWithText:target:action:titleText:]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/UIView+IQKeyboardToolbar.m"
+                  timestampString = "438861116.720465"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "69"
+                  endingLineNumber = "69"
+                  offsetFromSymbolStart = "548">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UIView(Toolbar) addRightButtonOnKeyboardWithText:target:action:titleText:]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/UIView+IQKeyboardToolbar.m"
+                  timestampString = "438861119.075573"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "69"
+                  endingLineNumber = "69"
+                  offsetFromSymbolStart = "552">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1343,6 +1523,36 @@
             endingLineNumber = "61"
             landmarkName = "-addRightButtonOnKeyboardWithText:target:action:titleText:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UIView(Toolbar) addRightButtonOnKeyboardWithText:target:action:titleText:]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/UIView+IQKeyboardToolbar.m"
+                  timestampString = "438861116.721297"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "388">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UIView(Toolbar) addRightButtonOnKeyboardWithText:target:action:titleText:]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/UIView+IQKeyboardToolbar.m"
+                  timestampString = "438861119.076165"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "390">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1359,6 +1569,36 @@
             endingLineNumber = "333"
             landmarkName = "-adjustFrame"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[IQKeyboardManager adjustFrame]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/IQKeyboardManager.m"
+                  timestampString = "438861116.722399"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "333"
+                  endingLineNumber = "333"
+                  offsetFromSymbolStart = "1606">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[IQKeyboardManager adjustFrame]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/IQKeyboardManager.m"
+                  timestampString = "438861119.076757"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "333"
+                  endingLineNumber = "333"
+                  offsetFromSymbolStart = "1598">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1375,6 +1615,36 @@
             endingLineNumber = "395"
             landmarkName = "-adjustFrame"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[IQKeyboardManager adjustFrame]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/IQKeyboardManager.m"
+                  timestampString = "438861116.72338"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "395"
+                  endingLineNumber = "395"
+                  offsetFromSymbolStart = "3948">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[IQKeyboardManager adjustFrame]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/IQKeyboardManager.m"
+                  timestampString = "438861119.077316"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "395"
+                  endingLineNumber = "395"
+                  offsetFromSymbolStart = "3940">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1391,6 +1661,36 @@
             endingLineNumber = "388"
             landmarkName = "-adjustFrame"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[IQKeyboardManager adjustFrame]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/IQKeyboardManager.m"
+                  timestampString = "438861116.724292"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "388"
+                  endingLineNumber = "388"
+                  offsetFromSymbolStart = "3444">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[IQKeyboardManager adjustFrame]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/IQKeyboardManager.m"
+                  timestampString = "438861119.077929"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "388"
+                  endingLineNumber = "388"
+                  offsetFromSymbolStart = "3436">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1407,6 +1707,36 @@
             endingLineNumber = "384"
             landmarkName = "-adjustFrame"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[IQKeyboardManager adjustFrame]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/IQKeyboardManager.m"
+                  timestampString = "438861116.725279"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "384"
+                  endingLineNumber = "384"
+                  offsetFromSymbolStart = "3162">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[IQKeyboardManager adjustFrame]"
+                  moduleName = "TongFubao"
+                  urlString = "file:///Users/shun/Desktop/iOS_TFB%EF%B9%8F%EF%A3%BF_armv7s/TongFubao/IQKeyboardManager.m"
+                  timestampString = "438861119.078571"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "384"
+                  endingLineNumber = "384"
+                  offsetFromSymbolStart = "3150">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1438,6 +1768,38 @@
             startingLineNumber = "448"
             endingLineNumber = "448"
             landmarkName = "-jumpToPayType"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NLUserSettingViewNew.m"
+            timestampString = "438860918.017555"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "502"
+            endingLineNumber = "502"
+            landmarkName = "-viewToLastView"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NLUserSettingViewNew.m"
+            timestampString = "438860918.017555"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "533"
+            endingLineNumber = "533"
+            landmarkName = "-doUploadUserUpPictureInfor"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

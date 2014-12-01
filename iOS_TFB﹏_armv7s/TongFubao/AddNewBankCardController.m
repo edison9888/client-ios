@@ -199,8 +199,10 @@
     }
     
     /*显示打星号*/
+
+    bankTFstr = saveCardView[1].infoText.text;
+
     if ( editOr ) {
-        bankTFstr = saveCardView[1].infoText.text;
         NSRange rang = NSMakeRange(4, bankTFstr.length - 8);
         NSString *changeBank = [saveCardView[1].infoText.text stringByReplacingCharactersInRange:rang withString:@"****"];
         saveCardView[1].infoText.text= changeBank;
@@ -305,8 +307,9 @@
         }
      
         /*显示信息*/
+         cardTFstr =  creditCardView[1].infoText.text;
         if (_rightflag && editOr) {
-            cardTFstr =  creditCardView[1].infoText.text;
+           
             NSRange rang = NSMakeRange(4, cardTFstr.length - 8);
             NSString *changeCard = [creditCardView[1].infoText.text stringByReplacingCharactersInRange:rang withString:@"****"];
             creditCardView[1].infoText.text = changeCard;
@@ -423,10 +426,16 @@
         return NO;
     }
     if (textField == saveCardView[1].infoText) {
-        saveCardView[1].infoText.text= @"";
+        if (![saveCardView[1].infoText.text isEqualToString:bankTFstr]) {
+            saveCardView[1].infoText.text= @"";
+            bankTFstr= @"";
+        }
     }
     if (textField == creditCardView[1].infoText) {
-        creditCardView[1].infoText.text= @"";
+        if (![creditCardView[1].infoText.text isEqualToString:cardTFstr]) {
+            creditCardView[1].infoText.text= @"";
+            cardTFstr= @"";
+        }
         
     }
     
@@ -594,11 +603,12 @@
     //是否选择默认银行卡
     defaultCard = defaultCard? defaultCard : @"0 ";
     defaultPayment = defaultPayment? defaultPayment : @"0";/*雨*/
-    
-    NSString *bkcardidcard = creditCardView[1].infoText.text? creditCardView[1].infoText.text : @" ";
+  
+    cardTFstr= creditCardView[1].infoText.text;
+    NSString *bkcardidcard = cardTFstr? cardTFstr : @" ";
     
     //当前输入的卡号长度
-    if (![NLUtils checkInterNum:saveCardView[1].infoText.text] || saveCardView[1].infoText.text.length < 14)
+    if (![NLUtils checkInterNum:bankTFstr] || bankTFstr.length < 14)
     {
         [self showErrorInfo:@"请输入正确的卡号" status:NLHUDState_Error];
         
@@ -612,7 +622,7 @@
         REGISTER_NOTIFY_OBSERVER(self, checkDataForCardEdit, name);
         [[[NLProtocolRequest alloc] initWithRegister:YES] getApiAuthorKuaibkcardInfoEdit:_cardInfo.bkcardid
                                                                             bkcardbankid:_cardInfo.bkcardbankid
-                                                                              bkcardbank:saveCardView[0].infoText.text bkcardno:saveCardView[1].infoText.text
+                                                                              bkcardbank:saveCardView[0].infoText.text bkcardno:bankTFstr
                                                                            bkcardbankman:saveCardView[2].infoText.text
                                                                          bkcardbankphone:saveCardView[3].infoText.text
                                                                            bkcardyxmonth:month
@@ -631,7 +641,7 @@
         REGISTER_NOTIFY_OBSERVER(self, checkDataForNewCard, name);
         [[[NLProtocolRequest alloc] initWithRegister:YES] getApiAuthorKuaibkcardInfoAdd:bankID
                                                                              bkcardbank:saveCardView[0].infoText.text
-                                                                               bkcardno:saveCardView[1].infoText.text
+                                                                               bkcardno:bankTFstr
                                                                           bkcardbankman:saveCardView[2].infoText.text
                                                                         bkcardbankphone:saveCardView[3].infoText.text
                                                                           bkcardyxmonth:month

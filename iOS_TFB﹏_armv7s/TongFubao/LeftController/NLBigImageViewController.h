@@ -11,6 +11,6 @@
 @interface NLBigImageViewController : UIViewController
 
 @property(nonatomic,retain) IBOutlet UIImageView* myImageView;
-@property(nonatomic,retain) IBOutlet UIImage* myImage;
+@property(nonatomic,retain) UIImage* myImage;
 
 @end

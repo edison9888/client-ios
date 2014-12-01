@@ -67,7 +67,8 @@
 #import "IQKeyBoardManager.h"
 #import "TransferInfoView.h"
 #import "PayWidgetView.h"
-//#import "NLModel.h"
+#import "TFNewVersionAgentMainCtr.h"
+#import "NLUserSettingViewNew.h"
 
 //版本
 #define IOSVERSion ([[[UIDevice currentDevice] systemVersion] floatValue])

@@ -1,0 +1,130 @@
+//
+// Prefix header for all source files of the 'TongFubao' target in the 'TongFubao' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
+#import <CoreText/CoreText.h>
+#import "NLAppDelegate.h"
+#import "BaseButton.h"
+#import "_cow.h"
+#import "TFDataConfig.h"
+#import "BZGFormField.h"
+#import <CoreData/CoreData.h>
+#import "TFDBManager.h"
+#import "TFManageObjects.h"
+#import "TFDataConfig.h"
+#import "TFData.h"
+#import "NLUtils.h"
+#import "NLProtocolRequest.h"
+#import "NLTransferRemittanceViewController.h"
+#import "NewLoginView.h"
+#import "GestureToLogin.h"
+#import "ProtocolDefine.h"
+#import "Gesture.h"
+#import "DropDownChooseProtocol.h"
+#import "DropDownListView.h"
+#import "UIViewController+NavigationItem.h"
+#import "PushViewController.h"
+#import "tabViewController.h"
+#import "planePay.h"
+#import "EveryCategory.h"
+#import "ToOkView.h"
+#import "MyBankCardViewController.h"
+#import "PhoneMoneyToOK.h"
+#import "NLBankListViewController.h"
+#import "NLRegisterSecondViewController.h"
+#import "NLTransferResultViewController.h"
+#import "XMLDictionary.h"
+#import "NLKeyboardAvoid.h"
+#import "GLBucket.h"
+#import "NLKeyboardAvoid.h"
+#import "NLUserInforSettingsCell.h"
+#import "NLKeyboardAvoid.h"
+#import "NLhhzTestViewController.h"
+#import "AddressCell.h"
+#import "CustomTable.h"
+#import "HeadView.h"
+#import "NLTressTableList.h"
+#import "NLHistoricalAccountCell.h"
+#import "MobileRechangeHistoryCtr.h"
+#import "NLpublic.h"
+#import "ASIHTTPRequest.h"
+#import "AppRecord.h"
+#import "UPPayPluginDelegate.h"
+#import "UPPayPlugin.h"
+#import "TimerButtonView.h"
+#import "LoadDataWithASI.h"
+#import "IQKeyBoardManager.h"
+
+//版本
+#define IOSVERSion ([[[UIDevice currentDevice] systemVersion] floatValue])
+
+//适配
+#define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
+
+#define ViewControllerProperty   if ( IOS7_OR_LATER ){ self.edgesForExtendedLayout = UIRectEdgeNone; self.extendedLayoutIncludesOpaqueBars = NO; self.modalPresentationCapturesStatusBarAppearance = NO; }
+
+//视图高度与宽度
+#define SelfWidth self.view.bounds.size.width
+#define SelfHeight self.view.bounds.size.height
+#define SelfX self.view.frame.origin.x
+#define SelfY self.view.frame.origin.y
+
+#define IOS7_OR_IPHONE4 (self.view.bounds.size.height == 480)
+
+#define IOS7_OR_SCREEN ([UIScreen mainScreen].bounds.size.height == 480)
+
+//屏幕尺寸
+#define iphoneSize (([[UIScreen mainScreen] bounds].size.height == 568? 568 : 480))
+
+#define Release(obj) if(obj){[obj release]; obj=nil;}
+
+//屏幕尺寸
+#define iphoneSize (([[UIScreen mainScreen] bounds].size.height == 568? 568 : 480))
+#define ADDSIZE (([[UIScreen mainScreen] bounds].size.height == 568? 60 : 0))
+#define ADDVIEWSIZE (([[UIScreen mainScreen] bounds].size.height == 568? 80 : 0))
+
+
+
+//图片添加
+#define imageName(name, type) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:name ofType:type]]
+
+/*系统适配*/
+#define IOS7 if( ([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0))\
+{self.edgesForExtendedLayout=UIRectEdgeNone;\
+self.navigationController.navigationBar.translucent = NO;}
+
+#define CGRECT_NO_NAV(x,y,w,h) CGRectMake((x), (y+(IsIOS7?20:0)), (w), (h))
+
+#define CGRECT_HAVE_NAV(x,y,w,h) CGRectMake((x), (y+(IsIOS7?64:0)), (w), (h))
+
+#define IsIOS7 ([[[[UIDevice currentDevice] systemVersion] substringToIndex:1] intValue]>=7)
+
+#define CGRECT_HAVE_NAV(x,y,w,h) CGRectMake((x), (y+(IsIOS7?64:0)), (w), (h))
+
+#define iPhone4Retina   ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
+
+#define iPhone5         ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+
+#define ORIGIN_X(view) view.frame.origin.x
+#define ORIGIN_Y(view) view.frame.origin.y
+#define SIZE_WITDH(view) view.frame.size.width
+#define SIZE_HEIGHT(view) view.frame.size.height
+
+#endif
+
+
+
+
+
+
+

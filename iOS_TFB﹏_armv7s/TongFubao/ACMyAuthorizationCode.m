@@ -30,9 +30,6 @@
 @implementation ACMyAuthorizationCode
 
 
--(void)tapleftBarButtonItemBack{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,7 +55,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.navigationItem.leftBarButtonItem = [self leftBarButtonItem];
+    [self leftBarButtonBack];//返回按钮
     
     [self scrollVC];
     [self initView];
@@ -76,12 +73,19 @@
 
 #pragma mark - 显示框与确定按钮
 -(void)initView{
- 
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 20, 300, 120)];
-    imageView.backgroundColor = [UIColor lightGrayColor];
-    imageView.layer.cornerRadius = 5;
-    imageView.layer.masksToBounds = YES;
+ //AC_InputBox
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 20, 300, 75)];
+    imageView.image = [UIImage imageNamed:@"AC_InputBox"];
+//    imageView.backgroundColor = [UIColor lightGrayColor];
+//    imageView.layer.cornerRadius = 5;
+//    imageView.layer.masksToBounds = YES;
     [scrollView addSubview:imageView];
+    
+    
+    UIImageView *imageView2 = [[UIImageView alloc]initWithFrame:CGRectMake(10, 96, 300, 45)];
+    imageView2.image = [UIImage imageNamed:@"AC_InputBox"];
+    [scrollView addSubview:imageView2];
+    
     
     UILabel *label1 = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, 110, 21)];
 //    label1.backgroundColor = [UIColor yellowColor];
@@ -96,25 +100,24 @@
     authorizationCodeLabel.textColor = RGBACOLOR(229, 145, 51, 1);
     //    authorizationCodeLabel.
     authorizationCodeLabel.font = [UIFont fontWithName:nil size:27];
-    authorizationCodeLabel.textColor = [UIColor redColor];
     authorizationCodeLabel.numberOfLines = 2;
     [imageView addSubview:authorizationCodeLabel];
     
     
-    UILabel *label2 = [[UILabel alloc]initWithFrame:CGRectMake(10, 90, 100, 21)];
+    UILabel *label2 = [[UILabel alloc]initWithFrame:CGRectMake(10, 12, 100, 21)];
     label2.text = @"绑定设备为:";
     label2.font = [UIFont fontWithName:nil size:16];
     label2.textColor = RGBACOLOR(86, 86, 86, 1);
 //    label2.backgroundColor = [UIColor yellowColor];
-    [imageView addSubview:label2];
+    [imageView2 addSubview:label2];
     
-    UILabel *bindingEquipmentLabel = [[UILabel alloc]initWithFrame:CGRectMake(115, 90, 175, 21)];
+    UILabel *bindingEquipmentLabel = [[UILabel alloc]initWithFrame:CGRectMake(115, 12, 175, 21)];
     NSLog(@"当前状态值  state %d",self.state);
     bindingEquipmentLabel.text = self.state == 1 ? @"未绑定" : self.bindingEquipment;
     bindingEquipmentLabel.textColor = RGBACOLOR(86, 86, 86, 1);
     bindingEquipmentLabel.font = [UIFont fontWithName:nil size:16];
 //    bindingEquipmentLabel.backgroundColor = [UIColor yellowColor];
-    [imageView addSubview:bindingEquipmentLabel];
+    [imageView2 addSubview:bindingEquipmentLabel];
     
     
     bindingBtton = [[UIButton alloc]initWithFrame:CGRectMake(10, 160, 300, 40)];

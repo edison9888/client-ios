@@ -85,6 +85,15 @@
 
 @end
 
+
+@implementation ModelImage
+@synthesize picpath,pictype,picid,uppicUrl,modelarray;
+-(NSString *)description{
+    NSString *print= [NSString stringWithFormat:@"picid- %@, picpath=%@ uppicUrl=%@ pictype=%@ ",picid,picpath,uppicUrl,pictype];
+    return print;
+}
+@end
+
 @implementation BankPayList
 
 @synthesize bkcardbanks,bkcardbankmans,bkcardnos,bkcardids,bkcardbankids,Bkcardbanklogos,bkcardbankphones,bkcardyxmonths,bkcardyxyears,bkcardcvvs,bkcardidcards,bkcardisdefaults,bkcardcardtypes,bkcardbankcode,bkcardisdefaultpayment,bkcardbankcctp;

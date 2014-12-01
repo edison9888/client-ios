@@ -383,14 +383,12 @@
         
         //有效年
         NLProtocolData* bkcardyxyearCheck = [response.data find:@"msgbody/bkcardyxyear" index:0];
-        bkcardyxyearStr = bkcardyxyearCheck.value;
-        NSLog(@"=======bkcardyxyearStr=======%@",bkcardyxyearStr);
+        if ([bkcardyxyearStr length] > 0)
+        {
+            bkcardyxyearStr = [NSString stringWithFormat:@"20%@",bkcardyxyearCheck.value];
+        }
 
-        
-        NSString *validityStr = [bkcardyxyearStr stringByAppendingString:bkcardyxmonthStr];
-        self.carYearMonth = validityStr;
-        NSLog(@"=======self.carYearMonth111=======%@",self.carYearMonth);
-        
+        NSLog(@"=======bkcardyxyearStr=======%@",bkcardyxyearStr);
         
         //CVV校验
         NLProtocolData* bkcardcvvCheck = [response.data find:@"msgbody/bkcardcvv" index:0];
@@ -414,19 +412,25 @@
         //刷卡状态
         SHUAKA = YES;
 
-        self.carYearMonth = [bkcardyxyearStr stringByAppendingString:bkcardyxmonthStr];
-        NSMutableArray *personArray = [[NSMutableArray alloc]initWithObjects:bkcardnoCheckStr,self.carYearMonth,bkcardcvvStr,bkcardmanCheckStr,@"1", bkcardidcardStr,bkcardphoneStr, bkcardbanknameStr,bkcardtypeCCTStr,nil];
-        NSLog(@"=======personArray=======%@",personArray);
-
-        for (NSString *STRING in personArray)
-        {
-            NSLog(@"====STRING===%@",STRING);
-        }
-        if ([personArray count] == 9) {
-            self.sureInfoArray =personArray;
-        }
-
         
+        if ([bkcardyxmonthStr length] > 0)
+        {
+            NSString *validityStr = [bkcardyxyearStr stringByAppendingString:bkcardyxmonthStr];
+            self.carYearMonth = validityStr;
+            NSLog(@"=======self.carYearMonth111=======%@",self.carYearMonth);
+            self.carYearMonth = [bkcardyxyearStr stringByAppendingString:bkcardyxmonthStr];
+            NSMutableArray *personArray = [[NSMutableArray alloc]initWithObjects:bkcardnoCheckStr,self.carYearMonth,bkcardcvvStr,bkcardmanCheckStr,@"1", bkcardidcardStr,bkcardphoneStr, bkcardbanknameStr,bkcardtypeCCTStr,nil];
+            NSLog(@"=======personArray=======%@",personArray);
+            
+            for (NSString *STRING in personArray)
+            {
+                NSLog(@"====STRING===%@",STRING);
+            }
+            if ([personArray count] == 9)
+            {
+                self.sureInfoArray =personArray;
+            }
+        }
     }
 }
 
@@ -436,7 +440,7 @@
     // 一开始默认刷卡状态为no
     SHUAKA = NO;
 
-    NSString *bkcardid= @" ";
+    NSString *bkcardid= @"";
     NSString *bkcardisdefault= @"1";
     
     _activityView = [[PlayCustomActivityView alloc] initWithFrame:CGRectMake(0, 0, 130, 130)];
@@ -529,12 +533,12 @@
         
         //有效年
         NLProtocolData* bkcardyxyearsData = [response.data find:@"msgbody/msgchild/bkcardyxyear" index:0];
-        _bkcardyxyears = bkcardyxyearsData.value;
-        
+        _bkcardyxyears = [NSString stringWithFormat:@"%@",bkcardyxyearsData.value];
+
         
         //有效月
         NLProtocolData* bkcardyxmonthsData = [response.data find:@"msgbody/msgchild/bkcardyxmonth" index:0];
-        if ([bkcardyxmonthsData.value length]==1) {
+        if ([bkcardyxmonthsData.value length]==1){
             _bkcardyxmonths = [NSString stringWithFormat:@"0%@",bkcardyxmonthsData.value];
         }
         else
@@ -1022,7 +1026,7 @@
     NSLog(@"=======self.carYearMonth=======%@",self.carYearMonth);
     
     
-    NSString *cardYM = [NSString stringWithFormat:@"%@-%@",[person valueForKey:@"bkcardyxyears"],[person valueForKey:@"bkcardyxmonths"]];
+    NSString *cardYM = [NSString stringWithFormat:@"%@%@",[person valueForKey:@"bkcardyxyears"],[person valueForKey:@"bkcardyxmonths"]];
     NSMutableArray *personArray = [[NSMutableArray alloc]initWithObjects:[person valueForKey:@"bkcardnos"],cardYM,[person valueForKey:@"bkcardcvvs"],[person valueForKey:@"bkcardbankmans"],@"1", [person valueForKey:@"bkcardidcards"],[person valueForKey:@"bkcardbankphones"], [person valueForKey:@"bkcardbanks"],[person valueForKey:@"bkcardbankcctp"],nil];
 
     for (NSString *STRING in personArray)
@@ -1037,12 +1041,12 @@
     _scrollView.frame = CGRectMake(0, -64, self.view.frame.size.width, self.view.frame.size.height+64);
 }
 #pragma mark -- 输入框
--(void)textFieldDidBeginEditing:(UITextField *)textField
-{
-//    [UIView animateWithDuration:0.3 animations:^{
-//        [_scrollView setContentOffset:CGPointMake(0, 100) animated:YES];
-//    }];
-}
+//-(void)textFieldDidBeginEditing:(UITextField *)textField
+//{
+////    [UIView animateWithDuration:0.3 animations:^{
+////        [_scrollView setContentOffset:CGPointMake(0, 100) animated:YES];
+////    }];
+//}
 
 //-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 //{
@@ -1133,6 +1137,9 @@
 {
     NLProtocolResponse *response = (NLProtocolResponse *)senderFication.object;
     int error = response.errcode;
+    NSString *string = response.detail;
+    NSLog(@"===string====%@",string);
+
     
     if (error == RSP_NO_ERROR)
     {
@@ -1148,8 +1155,6 @@
     }
     else
     {
-        NSString *string = response.detail;
-        NSLog(@"===string====%@",string);
         [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
         [_activityView removeFromSuperview];
     }
@@ -1211,7 +1216,7 @@
 
                 NSString* name = [NLUtils getNameForRequest:Notify_getpayWithCreditCard];
                 REGISTER_NOTIFY_OBSERVER(self, ApipayValidationCreditCardNotify, name);
-                [[[NLProtocolRequest alloc] initWithRegister:YES] getApiPayverify:self.OrderId OrderId:self.verify];
+                [[[NLProtocolRequest alloc] initWithRegister:YES] getApiPayverify:alertViewText.text OrderId:self.OrderId];
             }
         }
         else
@@ -1260,7 +1265,7 @@
     NSLog(@"===result====%@",result);
     if ([result isEqualToString:@"success"])
     {
-        UIAlertView *AlertView = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"交易成功！" delegate:nil cancelButtonTitle:@"请退出" otherButtonTitles:nil, nil];
+        UIAlertView *AlertView = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"恭喜您,下单成功,30分钟内完成扣款，请耐心等待，客服会尽快给您确认！" delegate:nil cancelButtonTitle:@"请退出" otherButtonTitles:nil, nil];
         AlertView.tag = 20;
         [AlertView show];
     }

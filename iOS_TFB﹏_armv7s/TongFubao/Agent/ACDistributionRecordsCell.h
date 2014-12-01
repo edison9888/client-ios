@@ -10,4 +10,11 @@
 
 @interface ACDistributionRecordsCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *authorizationCode;//授权码
+@property (weak, nonatomic) IBOutlet UILabel *distributionAccount;//分配账户
+@property (weak, nonatomic) IBOutlet UILabel *allocationOfTime;//分配时间
+
+
+
+
 @end

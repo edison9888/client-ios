@@ -11,7 +11,7 @@
 #import "addPersonViewController.h"
 #import "PlayCustomActivityView.h"
 
-@interface AddPassengersViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface AddPassengersViewController ()<UITableViewDataSource,UITableViewDelegate,addPersonViewDelegate>
 
 @end
 
@@ -54,7 +54,7 @@
     [self InternetDownloads];
 
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(personMessage:) name:@"添加乘机人" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(personMessage:) name:@"添加乘机人" object:nil];
     
 }
 -(void)navigationView
@@ -86,12 +86,16 @@
     }
 }
 #pragma mark --- 通知方法
--(void)personMessage:(NSNotificationCenter *)sender
-{
+//-(void)personMessage:(NSNotificationCenter *)sender
+//{
 //    [self.CellButtonArray removeAllObjects];
+//    [self InternetDownloads];
+//}
+-(void)UpdateTheDataUpPassengers
+{
+    [self.CellButtonArray removeAllObjects];
     [self InternetDownloads];
 }
-
 -(void)InternetDownloads
 {
     _activityView = [[PlayCustomActivityView alloc] initWithFrame:CGRectMake(0, 0, 130, 130)];
@@ -109,41 +113,19 @@
 {
     NLProtocolResponse *response = (NLProtocolResponse *)senderFication.object;
     int error = response.errcode;
+    NSString *string = response.detail;
+    NSLog(@"===string====%@",string);
     
     if (error == RSP_NO_ERROR)
     {
         [self getPassenger:response];
-        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
-        [_activityView removeFromSuperview];
-        
-    }
-    else if (error == RSP_TIMEOUT)
-    {
-        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
-        [_activityView removeFromSuperview];
-
-        return ;
     }
     else
     {
-        NSString *string = response.detail;
-        NSLog(@"===string====%@",string);
         [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
         [_activityView removeFromSuperview];
-
-        
     }
 }
-//-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    if (buttonIndex == 0)
-//    {
-//        [self InternetDownloads];
-//        //        NSString* name = [NLUtils getNameForRequest:Notify_GetPassenger];
-//        //        REGISTER_NOTIFY_OBSERVER(self, ReadUpPassengers, name);
-//        //        [[[NLProtocolRequest alloc] initWithRegister:YES] getPassengerType:@"1"];
-//    }
-//}
 
 - (void)getPassenger:(NLProtocolResponse *)response
 {
@@ -153,6 +135,8 @@
     NSLog(@"======result=====%@",result);
     NSRange range = [result rangeOfString:@"succ"];
     NSLog(@"======range====%d",range.length);
+    REMOVE_NOTIFY_OBSERVER_FOR_NAME(self, Notify_GetPassenger);
+
     if (range.length <= 0)
     {
         //获取错误信息
@@ -173,7 +157,7 @@
             for (NLProtocolData *PassengerNameData in PassengerName)
             {
                 [PassengerNameArray addObject:PassengerNameData.value];
-//                NSLog(@"=====PassengerNameArray====%@",PassengerNameArray);
+                NSLog(@"=====PassengerNameArray====%@",PassengerNameArray);
 
             }
 
@@ -185,9 +169,8 @@
         {
 
             [PassengerCardTypeArray addObject:PassengerCardData.value];
-//            NSLog(@"=====PassengerCardTypeArray====%@",PassengerCardTypeArray);
-//            NSLog(@"=====PassengerCardData====%@",PassengerCardData.value);
-
+            NSLog(@"=====PassengerCardTypeArray====%@",PassengerCardTypeArray);
+            NSLog(@"=====PassengerCardData====%@",PassengerCardData.value);
 
         }
         }
@@ -197,7 +180,7 @@
             for (NLProtocolData *PassengerCardIdData in PassengerCardId)
             {
                 [PassengerCardIdArray addObject:PassengerCardIdData.value];
-//                NSLog(@"=====passengerTypeData====%@",PassengerCardIdArray);
+                NSLog(@"=====passengerTypeData====%@",PassengerCardIdArray);
 
             }
         }
@@ -207,18 +190,18 @@
             for (NLProtocolData *passengerIdData in PassengerId)
             {
                 [PassengerIdArray addObject:passengerIdData.value];
-//                NSLog(@"=====PassengerIdArray====%@",PassengerIdArray);
+                NSLog(@"=====PassengerIdArray====%@",PassengerIdArray);
             }
 
         }
         
         NSArray *PassengerType = [response.data find:@"msgbody/msgchild/passengerType"];
-//        NSLog(@"=====PassengerType====%@",PassengerType);
+        NSLog(@"=====PassengerType1111====%@",PassengerType);
 
         if ([PassengerType count] > 0) {
             for (NLProtocolData *passengerTypeData in PassengerType)
             {
-//                NSLog(@"=====passengerTypeData====%@",passengerTypeData.value);
+                NSLog(@"=====passengerTypeData====%@",passengerTypeData.value);
                 [PassengerTypeArray addObject:passengerTypeData.value];
             }
         }
@@ -227,25 +210,25 @@
             {
                 NSMutableArray *otherArray = [[NSMutableArray alloc]init];
                 [otherArray addObject:[PassengerNameArray objectAtIndex:i]];
-//                NSLog(@"====otherArray===%@",otherArray);
+                NSLog(@"====otherArray===%@",otherArray);
 
                 [otherArray addObject:[worldUnmber objectForKey:[PassengerCardTypeArray objectAtIndex:i]]];
-//                NSLog(@"====otherArray===%@",otherArray);
+                NSLog(@"====otherArray===%@",otherArray);
 
                 [otherArray addObject:[PassengerCardIdArray objectAtIndex:i]];
-//                NSLog(@"====otherArray===%@",otherArray);
+                NSLog(@"====otherArray===%@",otherArray);
 
                 [otherArray addObject:[PassengerIdArray objectAtIndex:i]];
-//                NSLog(@"====otherArray===%@",otherArray);
+                NSLog(@"====otherArray===%@",otherArray);
 
                 [otherArray addObject:[PassengerTypeArray objectAtIndex:i]];
-//                NSLog(@"====otherArray===%@",otherArray);
+                NSLog(@"====otherArray===%@",otherArray);
                 
                 [otherArray addObject:[PassengerCardTypeArray objectAtIndex:i]];
-//                NSLog(@"====otherArray===%@",otherArray);
+                NSLog(@"====otherArray===%@",otherArray);
                 
                 [self.CellDateArray addObject:otherArray];
-//                NSLog(@"====self.CellDateArray===%@",self.CellDateArray);
+                NSLog(@"====self.CellDateArray===%@",self.CellDateArray);
 
             }
 
@@ -302,6 +285,9 @@
             }
         }
     }
+        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+        [_activityView removeFromSuperview];
+        
     [_historicalTableView reloadData];
     }
     
@@ -364,18 +350,30 @@
     NLProtocolResponse *response = (NLProtocolResponse *)senderFication.object;
     int error = response.errcode;
     
+    
+    NSString *string = response.detail;
+    NSLog(@"===string====%@",string);
+
+    
     if (error == RSP_NO_ERROR)
     {
         [self getdeletePassenger:response];
     }
     else if (error == RSP_TIMEOUT)
     {
+        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+        [_activityView removeFromSuperview];
+        
+        [_historicalTableView reloadData];
+
         return ;
     }
     else
     {
-        NSString *string = response.detail;
-        NSLog(@"===string====%@",string);
+        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+        [_activityView removeFromSuperview];
+        
+        [_historicalTableView reloadData];
     }
 }
 
@@ -542,6 +540,7 @@
     // 页面推送
     teger = 0;
     addPersonViewController *addPersonView = [[addPersonViewController alloc]init];
+    addPersonView.delegate = self;
     [self.navigationController pushViewController:addPersonView animated:YES];
 }
 - (void)didReceiveMemoryWarning

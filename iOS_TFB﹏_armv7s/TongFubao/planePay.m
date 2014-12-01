@@ -12,6 +12,7 @@
 #import "NLShowTextViewController.h"
 #import "NLKeyboardAvoid.h"
 #import "PhoneMoneyToOK.h"
+#import "PlayCustomActivityView.h"
 
 #import "PayMoneyOK.h"
 
@@ -66,6 +67,7 @@
     
     /*短信验证数据*/
     NSMutableDictionary * SmsVerifyData;
+    PlayCustomActivityView*_activityView;
 }
 
 @property (nonatomic,strong)NLProgressHUD     *myHUD;
@@ -1356,12 +1358,15 @@
 {
     
 //    NSLog(@"===%@===%@===%@==%@==%d", PayperSonIdArray,PayContactIdArray,PayTicketBillId,PayCarTextString,PayPriceOilTax);
-    NSString *yearMonth =[NSString stringWithFormat:@"%@-%@",_yearTF.text,_monthTF.text];
-//    NSLog(@"=====yearMonth======%@",yearMonth);
+    NSString *yearMonth1 =[_yearTF.text stringByAppendingString:_monthTF.text];
+    NSLog(@"=====yearMonth======%@",yearMonth1);
+    NSLog(@"=====_yearTF.text======%@",_yearTF.text);
+    NSLog(@"=====_monthTF======%@",_monthTF.text);
+    NSString *yearMonth = [yearMonth1 stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    NSLog(@"=====yearMonth======%@",yearMonth);
 
-    NSMutableArray *sureInfoArray = [[NSMutableArray alloc]initWithObjects:self.paycard.text,yearMonth, self.payYZM.text,self.payName.text,@"1",self.payId.text ,_payPhone.text,banName,self.Bankctt,nil];
-//    NSMutableArray *bankInfoArray = [[NSMutableArray alloc]initWithObjects:_bkcardnos,bankYm,_bkcardcvv,_bkcardbankman,@"1",_bkcardnos,_bkcardbankphones,_bankString, _bkcardbankcct,nil];
 
+    NSMutableArray *sureInfoArray = [[NSMutableArray alloc]initWithObjects:self.paycard.text,yearMonth, self.payYZM.text,self.payName.text,[NSString stringWithFormat:@"%d",1],self.payId.text ,_payPhone.text,banName,self.Bankctt,nil];
     NSLog(@"=====sureInfoArray======%@",sureInfoArray);
     
     NSString *name = [NLUtils getNameForRequest:Notify_createOrder];
@@ -1369,8 +1374,8 @@
     NSLog(@"=====carYearMonth======%@",_monthTF.text);
 
     // 票,乘机人,联系人,卡
-    NSString *carYearMonth = [_yearTF.text stringByAppendingString:_monthTF.text];
-//    NSLog(@"=====carYearMonth======%@",carYearMonth);
+    NSString *carYearMonth = [NSString stringWithFormat:@"20%@%@",_yearTF.text,_monthTF.text];
+    NSLog(@"=====carYearMonth======%@",carYearMonth);
     [[[NLProtocolRequest alloc]initWithRegister:YES] TicketBillId:self.PayTicketBillId  backTicketId:self.playBackTicketId  styGoBack:self.playStyGoBack perSonIdArray:self.PayperSonIdArray ContactIdArray:self.PayContactIdArray   payinfoCardInfoArray:sureInfoArray   validity:carYearMonth amount:[NSString stringWithFormat:@"%d",PayPriceOilTax]];
     
 }
@@ -1417,10 +1422,6 @@
         self.verify  = verifyCode.value;
         NSLog(@"=====verifyCode=====%@",verifyCode.value);
         NSLog(@"=====verifyCode=====%@",self.verify);
-//       _AlertView = [[UIAlertView alloc]initWithTitle:@"请输入验证码" message:self.verify delegate:self cancelButtonTitle:@"退出" otherButtonTitles:@"支付", nil];
-////        _AlertView.tag = 10;
-//        [_AlertView setAlertViewStyle:UIAlertViewStyleSecureTextInput];
-//        [_AlertView show];
         
         UIAlertView *agentAlertView = [[UIAlertView alloc] initWithTitle:@"请输入验证码"  message:nil delegate:self cancelButtonTitle:@"退出" otherButtonTitles:@"支付", nil];
         agentAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
@@ -1437,7 +1438,13 @@
 {
     NSString* name = [NLUtils getNameForRequest:Notify_getpayWithCreditCard];
     REGISTER_NOTIFY_OBSERVER(self, ApipayValidationCreditCardNotify, name);
-    [[[NLProtocolRequest alloc] initWithRegister:YES] getApiPayverify:self.OrderId OrderId:verifyCodeStr];
+    [[[NLProtocolRequest alloc] initWithRegister:YES] getApiPayverify:verifyCodeStr OrderId:self.OrderId];
+    _activityView = [[PlayCustomActivityView alloc] initWithFrame:CGRectMake(0, 0, 130, 130)];
+    _activityView.center = self.view.center;
+    [_activityView setTipsText:@"正在提交信息..."];
+    [_activityView starActivity];
+    [self.view addSubview:_activityView];
+
 }
 
 -(void)ApipayValidationCreditCardNotify:(NSNotification *)senderFication
@@ -1452,7 +1459,9 @@
     }
     else if (error == RSP_TIMEOUT)
     {
-        return ;
+        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+        [_activityView removeFromSuperview];
+        
     }
     else
     {
@@ -1463,6 +1472,9 @@
         [AlertView show];
         
     }
+    [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+    [_activityView removeFromSuperview];
+
 }
 - (void)getpayValidationWithCreditCard:(NLProtocolResponse *)response
 {
@@ -1473,7 +1485,7 @@
     NSLog(@"===result====%@",result);
     if ([result isEqualToString:@"success"])
     {
-        UIAlertView *AlertView = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"交易成功！" delegate:nil cancelButtonTitle:@"请退出" otherButtonTitles:nil, nil];
+        UIAlertView *AlertView = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"恭喜您,下单成功,30分钟内完成扣款，请耐心等待，客服会尽快给您确认！" delegate:nil cancelButtonTitle:@"请退出" otherButtonTitles:nil, nil];
         AlertView.tag = 20;
         [AlertView show];
     }
@@ -1495,6 +1507,10 @@
         //            NSLog(@"=====bkcardnoCheck==%@",bkcardnoCheck.value);
         //        }
     }
+    [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+    [_activityView removeFromSuperview];
+    
+
 }
 
 /*

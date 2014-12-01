@@ -279,7 +279,7 @@
     NSString *string1 =[[self.OrderdAllArray objectAtIndex:indexPath.row] objectAtIndex:1];
     NSLog(@"=====%@=====%@===",string,string1);
     
-    NSString *fromTime = [[[self.OrderdAllArray objectAtIndex:indexPath.row]objectAtIndex:2] substringToIndex:10];
+    NSString *fromTime = [[[self.OrderdAllArray objectAtIndex:indexPath.row] objectAtIndex:2] substringToIndex:10];
 
     [cell addNameLable:[NSString stringWithFormat:@"%@-%@",[[self.OrderdAllArray objectAtIndex:indexPath.row] objectAtIndex:0],[[self.OrderdAllArray objectAtIndex:indexPath.row]objectAtIndex:1]] moneyLable:[NSString stringWithFormat:@"￥%@",[[self.OrderdAllArray objectAtIndex:indexPath.row]objectAtIndex:6]] wacthTimeLable:fromTime];
 

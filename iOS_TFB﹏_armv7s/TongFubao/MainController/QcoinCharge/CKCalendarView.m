@@ -318,7 +318,7 @@
 
 
     [self setCurrentDateTextColor:UIColorFromRGB(0xF2F2F2)];
-    [self setCurrentDateBackgroundColor:[UIColor redColor]];
+    [self setCurrentDateBackgroundColor:[UIColor whiteColor]];
 }
 
 - (CGRect)calculateDayCellFrame:(NSDate *)date {

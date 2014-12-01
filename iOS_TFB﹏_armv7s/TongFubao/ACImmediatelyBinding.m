@@ -35,10 +35,6 @@
 
 @implementation ACImmediatelyBinding
 
--(void)tapleftBarButtonItemBack{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -64,7 +60,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.leftBarButtonItem = [self leftBarButtonItem];
+    [self leftBarButtonBack];//返回按钮
     
     NSLog(@"当前状态值  state :%d",self.state);
     self.title = self.state == 1 || self.state == 2 ? str8 : str9;

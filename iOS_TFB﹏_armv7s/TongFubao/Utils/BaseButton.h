@@ -42,3 +42,4 @@
 @interface UIColor (Art)
 +(UIColor*)colorWithHex:(long)hex;
 @end
+

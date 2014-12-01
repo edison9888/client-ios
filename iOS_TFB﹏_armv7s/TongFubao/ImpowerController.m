@@ -12,7 +12,7 @@
 #import "XIAOYU_TheControlPackage.h"
 #import "ACMyAuthorizationCode.h"
 #import "ACImmediatelyBinding.h"
-
+#import "ACPaymentIsSuccessfulViewController.h"
 
 @interface ImpowerController ()
 {
@@ -107,9 +107,6 @@
             userInfoDic = @{@"paycardid":@"18810200030",@"paycardIMEI":@"iphone4S"};
         }
         
-        
-        
-        
         if (![data[@"result"] isEqualToString:@"success"]){
 //            [self showErrorInfo:data[@"message"] status:NLHUDState_NoError];//@"请求失败 !"
 //            [_hud hide:YES afterDelay:2];
@@ -185,7 +182,8 @@
 #pragma mark - 购买授权码
 - (IBAction)payAction:(id)sender
 {
-    
+    ACPaymentIsSuccessfulViewController *vc = [[ACPaymentIsSuccessfulViewController alloc]init];
+    [self jumpViewController:self newViewController:vc PushAndPresent:YES];
 }
 
 //判断信息是否正确

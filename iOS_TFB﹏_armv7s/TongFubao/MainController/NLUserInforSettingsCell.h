@@ -26,7 +26,7 @@
 - (IBAction)onSelectedBtnClicked:(id)sender;
 -(void)setKeyBoard;
 
-//查看酒店相片
+//查看相片
 @property (nonatomic, copy) void (^CellBlock)(void);
 
 @end

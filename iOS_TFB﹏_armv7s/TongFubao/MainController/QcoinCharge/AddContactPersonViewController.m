@@ -10,7 +10,7 @@
 #import "TicketCustomTableViewCell.h"
 #import "AddSelectionPersonViewController.h"
 #import "PlayCustomActivityView.h"
-@interface AddContactPersonViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
+@interface AddContactPersonViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,AddSelectionPersonVieDelegate>
 {
     UITableView *_historicalTableView ;
     PlayCustomActivityView *_activityView ;
@@ -42,16 +42,21 @@
     [self allControllerView];
     
     [self DownloadOnlineContacts];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(message:) name:@"添加联系人" object:nil];
+
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(message:) name:@"添加联系人" object:nil];
     
 }
-#pragma mark --- 通知
--(void)message:(NSNotification*)aNotification
+//#pragma mark --- 通知
+//-(void)message:(NSNotification*)aNotification
+//{
+//    [self.CellButtonArray removeAllObjects];
+//    [self DownloadOnlineContacts];
+//}
+-(void)UpdateAddSelectionPersonPassengers
 {
     [self.CellButtonArray removeAllObjects];
     [self DownloadOnlineContacts];
 }
-
 -(void)DownloadOnlineContacts
 {
     _activityView = [[PlayCustomActivityView alloc] initWithFrame:CGRectMake(0, 0, 130, 130)];
@@ -60,7 +65,6 @@
     [_activityView starActivity];
     [self.view addSubview:_activityView];
     self.CellDateArray  = [[NSMutableArray alloc]init];
-    
     NSString* name = [NLUtils getNameForRequest:Notify_GetPassenger];
     REGISTER_NOTIFY_OBSERVER(self, ReadUpPassengers, name);
     [[[NLProtocolRequest alloc] initWithRegister:YES] getPassengerType:@"2"];
@@ -102,6 +106,9 @@
 -(void)ReadUpPassengers:(NSNotification *)senderFication
 {
     NLProtocolResponse *response = (NLProtocolResponse *)senderFication.object;
+    NSString *string = response.detail;
+    NSLog(@"===string====%@",string);
+
     int error = response.errcode;
     
     if (error == RSP_NO_ERROR)
@@ -110,29 +117,17 @@
     }
     else if (error == RSP_TIMEOUT)
     {
-        return ;
+        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+        [_activityView removeFromSuperview];
+
     }
     else
     {
-        NSString *string = response.detail;
-        NSLog(@"===string====%@",string);
         [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
         [_activityView removeFromSuperview];
-        
-        //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！加载数据失败！" delegate:self cancelButtonTitle:@"请重新加载" otherButtonTitles:@"退出", nil];
-        //        [alert show];
     }
+
 }
-//-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    if (buttonIndex == 0)
-//    {
-//        [self DownloadOnlineContacts];
-//        //        NSString* name = [NLUtils getNameForRequest:Notify_GetPassenger];
-//        //        REGISTER_NOTIFY_OBSERVER(self, ReadUpPassengers, name);
-//        //        [[[NLProtocolRequest alloc] initWithRegister:YES] getPassengerType:@"2"];
-//    }
-//}
 - (void)getPassenger:(NLProtocolResponse *)response
 {
     //获取数据标记，判断是否请求成功
@@ -160,18 +155,22 @@
         {
             [PassengerIdArray addObject:PassengerIdData.value];
         }
+        NSLog(@"=======PassengerIdArray=====%@",PassengerIdArray);
         
         NSArray *PassengerName = [response.data find:@"msgbody/msgchild/name"];
         for (NLProtocolData *PassengerNameData in PassengerName)
         {
             [PassengerNameArray addObject:PassengerNameData.value];
         }
-        
+        NSLog(@"=======PassengerNameArray=====%@",PassengerNameArray);
+
         NSArray *PassengerNumber = [response.data find:@"msgbody/msgchild/phoneNumber"];
         for (NLProtocolData *PassengerNameData in PassengerNumber)
         {
             [PassengerNumberArray addObject:PassengerNameData.value];
         }
+        NSLog(@"=======PassengerNumberArray=====%@",PassengerNumberArray);
+
         
         for (int i = 0; i < [PassengerNameArray count]; i++)
         {
@@ -182,6 +181,8 @@
             [self.CellDateArray addObject:otherArray];
             
         }
+        NSLog(@"=======self.CellDateArray=====%@",self.CellDateArray);
+
         for (int i = 0; i < [self.CellDateArray count]; i++)
         {
             [[self.CellDateArray objectAtIndex:i] addObject:@"a"];
@@ -207,6 +208,7 @@
         else if(teger == 0)
         {
             self.ticketArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"PersonIphone"];
+            NSLog(@"=====ticketArray=====%@",self.ticketArray);
             if ([self.ticketArray count] > 0)
             {
                 for (int i = 0; i < [self.CellDateArray count]; i++)
@@ -461,6 +463,7 @@
     teger = 0;
     
     AddSelectionPersonViewController *addContactPersonView = [[AddSelectionPersonViewController alloc]init];
+    addContactPersonView.delegate = self;
     [self.navigationController pushViewController:addContactPersonView animated:YES];
 }
 

@@ -291,14 +291,14 @@
 #pragma mark - UITableView创建
 -(void)tableViewController{
     
-    UIView *vc = [[UIView alloc]initWithFrame:table.tableFooterView.frame];
+    UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 5, 280, 40)];
     label.text = @"该账户将作为您的默认收款账户。您可以通过“我的银行卡”菜单进行账户的新增、变更或删除。";
     label.numberOfLines = 2;
     [label setFont:[UIFont fontWithName:nil size:13]];
     [vc addSubview:label];
     
-    table = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStylePlain];
+    table = [[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     table.delegate = self;
     table.dataSource = self;
     table.tableFooterView = vc;

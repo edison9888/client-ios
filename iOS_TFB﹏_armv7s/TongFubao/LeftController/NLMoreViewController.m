@@ -259,7 +259,7 @@
             
         case 2:
         {
-           
+           /*旧版*/
              NLUsersInfoSettingsViewController *vc=  [[NLUsersInfoSettingsViewController alloc] initWithNibName:@"NLUsersInfoSettingsViewController" bundle:nil];
             
                 if (_agentFlag==YES) {
@@ -267,7 +267,10 @@
                     vc.agentFlag= YES;
                 }
             
-            [self.navigationController pushViewController:vc animated:YES];
+            /*新版
+            NLUserSettingViewNew *use=  [[NLUserSettingViewNew alloc] initWithNibName:@"NLUserSettingViewNew" bundle:nil];
+            
+            [self.navigationController pushViewController:use animated:YES];*/
             
         }
             break;

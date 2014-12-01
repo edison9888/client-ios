@@ -10,4 +10,11 @@
 
 @interface ACAssignmentCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *authorizationCode;//授权码
+@property (weak, nonatomic) IBOutlet UITextField *distributionAccount;//分配账户
+@property (weak, nonatomic) IBOutlet UIButton *operation;//操作
+
+
+
+
 @end

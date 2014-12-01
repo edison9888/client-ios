@@ -25,6 +25,11 @@
     UILabel *theAreaOfHistoryAndTotalRevenue;//本区历史总收益
     UILabel *inThisAreaTheNumberOfUsers;//本区用户数
     
+    /*下面4个属性都是导航条的*/
+    UIImageView *backgroundView;
+    UIImageView *titleImgView;
+    UIImageView *backImageView;
+    UIButton *backButton;
 }
 
 
@@ -44,6 +49,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"AgentFlag"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
 	// Do any additional setup after loading the view, typically from a nib.
     self.totalRevenue = @"0.00";//本区历史总收益
     self.theNumberOfUsers = @"0";//本区用户数
@@ -61,9 +70,6 @@
     scrollView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:scrollView];
     
-    
-    [self navigationItemTitleView];//导航条图片
-    [self leftBarButtonHome];//跳转主页
     [self upView];//上部视图
     [self underTheView];//下部视图
     
@@ -101,6 +107,7 @@
             
         case NLHUDState_None:
         {
+            //网络请求
             [self networkRequest];
             _hud.labelText = error;
             [_hud show:YES];
@@ -202,53 +209,59 @@
 
 
 
-#pragma mark - 导航条图片
--(void)navigationItemTitleView{
- /*
-    CGRect svFrame = IOS7_OR_LATER? CGRectMake(0, -20, 320, 64) : CGRectMake(0, 0, 320, 44);
-    UIView *vc = [[UIView alloc] initWithFrame:svFrame];
-    vc.opaque = YES;
-    vc.backgroundColor = RGBACOLOR(0, 102, 156, 1.0);
+#pragma mark - 导航条
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    NSLog(@"创建导航条背景");
+    if (!backgroundView) {
+        //背景
+        CGRect svFrame = IOS7_OR_LATER? CGRectMake(0, -20, self.view.frame.size.width, 64) : CGRectMake(0, 0, self.view.frame.size.width, 44);
+        backgroundView = [[UIImageView alloc] initWithFrame:svFrame];
+        backgroundView.backgroundColor = RGBACOLOR(0, 102, 156, 1.0);
+        backgroundView.userInteractionEnabled = YES;
+        [self.navigationController.navigationBar addSubview:backgroundView];
+        
+        //LOGO图标
+        titleImgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"logo@@x"]];
+        titleImgView.frame = CGRectMake(115, 20, 106, 44);
+        [backgroundView addSubview:titleImgView];
+        
+        //返回图片
+        backImageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 43, 0, 0)];
+        backImageView.image = [UIImage imageNamed:@"navigationLeftBtnBack2"];
+        backImageView.userInteractionEnabled = YES;
+        backImageView.contentMode = UIViewContentModeLeft;
+        
+        //返回文字
+        backButton= [UIButton buttonWithType:UIButtonTypeCustom];
+        backButton.frame = CGRectMake(10, 29, 60, 28);
+        [backButton addTarget:self action:@selector(tapHome:) forControlEvents:UIControlEventTouchUpInside];
+        [[backButton titleLabel] setFont:[UIFont boldSystemFontOfSize:17]];
+        [backButton setTitle:@" 主页" forState:UIControlStateNormal];
+        [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+        [backButton.titleLabel setTextAlignment:NSTextAlignmentRight];
+        [backgroundView addSubview:backImageView];
+        [backgroundView addSubview:backButton];
+    }
     
-    [self.navigationController.navigationBar addSubview:vc];
-    */
-    
-    //标题图片
-    UIImageView *titleImgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"logo@@x"]];
-    titleImgView.frame = CGRectMake(40, 0, 106, 44);
-    UIView *titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
-    [titleView addSubview:titleImgView];
-    
-    
-    self.navigationItem.titleView = titleView;
-    self.navigationController.view.backgroundColor = RGBACOLOR(0, 102, 152, 1.0);
-  
-  
-  
 }
 
-
-#pragma mark - 跳转主页
--(void)leftBarButtonHome{
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 14, 0, 0)];
-    imageView.image = [UIImage imageNamed:@"navigationLeftBtnBack2"];
-    imageView.userInteractionEnabled = YES;
-    imageView.contentMode = UIViewContentModeLeft;
-    
-    UIButton* backButton= [UIButton buttonWithType:UIButtonTypeCustom];
-    backButton.frame = CGRectMake(0, 0, 55, 28);
-    
-    [backButton addTarget:self action:@selector(tapHome:) forControlEvents:UIControlEventTouchUpInside];
-    [[backButton titleLabel] setFont:[UIFont boldSystemFontOfSize:17]];
-    [backButton setTitle:@"  主页" forState:UIControlStateNormal];
-    [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [backButton.titleLabel setTextAlignment:NSTextAlignmentRight];
-    
-    [backButton addSubview:imageView];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    NSLog(@"删除导航条背景");
+    if (backgroundView){
+        [backgroundView removeFromSuperview];
+        backgroundView = nil;
+        [titleImgView removeFromSuperview];
+        titleImgView = nil;
+        [backImageView removeFromSuperview];
+        backImageView = nil;
+        [backButton removeFromSuperview];
+        backButton = nil;
+    }
 }
+
 
 
 #pragma mark - 上部视图
@@ -445,12 +458,12 @@
                 break;
             case 7114:
                 [functionButton[i] setTitle:@"订购优惠卡" forState:UIControlStateNormal];
-                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"bank8"] forState:UIControlStateNormal];
+                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"bank15"] forState:UIControlStateNormal];
                 [functionButton[i] addTarget:self action:@selector(tapTheFormalApplication:) forControlEvents:UIControlEventTouchUpInside];
                 break;
             case 7115:
                 [functionButton[i] setTitle:@"更多模块" forState:UIControlStateNormal];
-                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"bank11"] forState:UIControlStateNormal];
+                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"bank101"] forState:UIControlStateNormal];
                 [functionButton[i] addTarget:self action:@selector(tapMoreModules:) forControlEvents:UIControlEventTouchUpInside];
                 break;
             default:
@@ -527,6 +540,7 @@
 }
 
 
+#pragma mark - 跳转主页
 -(void)tapHome:(UIButton *)btn{
     
     NSLog(@"主页");

@@ -120,7 +120,7 @@ static  NSString       *MNUNOISONE[9];
     return self;
 }
 
-#pragma mark - 下载图片 暂时不用这个方法了
+/*下载图片*/
 void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^errorBlock)(void) )
 {
     NSLog(@"URL = %@",URL);

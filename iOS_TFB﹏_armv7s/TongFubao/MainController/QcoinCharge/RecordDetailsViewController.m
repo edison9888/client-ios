@@ -28,13 +28,14 @@
 }
 - (void)viewDidLoad
 {
-    _titleArray = @[@"出发时间",@"到达时间",@"行程",@"航班",@"总价",@"订单日期",@"处理状态"];
+    _titleArray = @[@"出发时间",@"行程",@"航班",@"总价",@"订单日期",@"处理状态"];
+    NSLog(@"====RecordDetailsArray=======%@",self.RecordDetailsArray);
     NSString *fromTime = [self.RecordDetailsArray objectAtIndex:2];
     NSString *toTime = [self.RecordDetailsArray objectAtIndex:3];
     NSString *fromToCity = [NSString stringWithFormat:@"%@-%@",[self.RecordDetailsArray objectAtIndex:0],[self.RecordDetailsArray objectAtIndex:1]];
     NSString *toleStirng= [NSString stringWithFormat:@"￥%@",[self.RecordDetailsArray objectAtIndex:6]];
 
-    _otherArray = @[fromTime,toTime,fromToCity,[self.RecordDetailsArray objectAtIndex:5],toleStirng,fromTime,[self.RecordDetailsArray objectAtIndex:7]];
+    _otherArray = @[toTime,fromToCity,[self.RecordDetailsArray objectAtIndex:5],toleStirng,fromTime,[self.RecordDetailsArray objectAtIndex:7]];
     
 //    for (NSString *string in self.RecordDetailsArray) {
 //        NSLog(@"====string======%@",string);

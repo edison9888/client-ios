@@ -147,5 +147,4 @@
     float blue  = ((float)((hex & 0xFF)))/255.0;
     return [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
 }
-
 @end

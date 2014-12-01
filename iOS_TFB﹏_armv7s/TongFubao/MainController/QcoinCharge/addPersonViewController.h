@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-//@protocol addPersonViewDelegate <NSObject>
+@protocol addPersonViewDelegate <NSObject>
 //
 ////-(void)returPersonIphoneDate:(NSMutableArray *)newPersonIphoneDate;
-////-(void)UpdateTheDataUpPassengers;
+-(void)UpdateTheDataUpPassengers;
 //
-//@end
+@end
 
 @interface addPersonViewController : UIViewController<UITextFieldDelegate>
 
@@ -25,10 +25,11 @@
 @property(nonatomic,retain)NSString * PassengerBirthDay;
 @property(nonatomic,retain)NSMutableArray *PassengerPersonIphone;
 @property(nonatomic,retain)NSMutableArray *selectionPersonIphone;
-//@property(nonatomic,retain)id<addPersonViewDelegate>delegate;
+@property(nonatomic,retain)id<addPersonViewDelegate>delegate;
+@property(nonatomic,retain)UIView *viewPicker;
+@property(retain,nonatomic)UIDatePicker *datePicker;
 
 
-//@property(nonatomic,retain)id<addPersonViewDelegate>delegate;
 
 
 @end

@@ -148,12 +148,13 @@
     [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"SlideBroadFlag"];
     [[NSUserDefaults standardUserDefaults]synchronize];
     
-    feedController = (UIViewController *)[[TFAgentMainCtr alloc] initWithNibName:@"TFAgentMainCtr" bundle:nil] ;
+    //TFAgentMainCtr TFNewVersionAgentMainCtr
+    feedController = (UIViewController *)[[TFAgentMainCtr alloc] init] ;
     
     UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:feedController];
     
-    mNavCtrl = navigationController;
-    delegate = [[CLNavigationControllerDelegate alloc]init];
+//    mNavCtrl = navigationController;
+//    delegate = [[CLNavigationControllerDelegate alloc]init];
     navigationController.delegate = delegate;
     
     [UIView
@@ -163,7 +164,7 @@
      animations:^(void) {
          BOOL oldState = [UIView areAnimationsEnabled];
          [UIView setAnimationsEnabled:NO];
-         self.window.rootViewController = (UIViewController*)mNavCtrl;
+         self.window.rootViewController = (UIViewController*)navigationController;
          [UIView setAnimationsEnabled:oldState];
      }
      completion:nil];
@@ -246,17 +247,16 @@
 {
     UIViewController *newLeftController = [[LeftController alloc] init];
     
-    TFAgentMainCtr *feed = [[TFAgentMainCtr alloc] initWithNibName:@"TFAgentMainCtr" bundle:nil] ;
+    //TFNewVersionAgentMainCtr
+    TFAgentMainCtr *feed = [[TFAgentMainCtr alloc] init] ;
     
     UIViewController * newrightSideDrawerViewController = nil;
     
     UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:feed];
-    
-    mNavCtrl = navigationController;
-    delegate = [[CLNavigationControllerDelegate alloc]init];
+//    delegate = [[CLNavigationControllerDelegate alloc]init];
     navigationController.delegate = delegate;
     
-    NLSlideBroadsideController* root = [[NLSlideBroadsideController alloc] initWithCenterViewController:mNavCtrl
+    NLSlideBroadsideController* root = [[NLSlideBroadsideController alloc] initWithCenterViewController:navigationController
                                                                                leftDrawerViewController:newLeftController
                                                                               rightDrawerViewController:newrightSideDrawerViewController
                                                                                               leftWidth:0

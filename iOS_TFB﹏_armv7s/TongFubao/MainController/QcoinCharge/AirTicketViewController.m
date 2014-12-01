@@ -14,6 +14,9 @@
 #import "watchTimeObject.h"
 #import "RoundTriprReservationViewController.h"
 
+
+#import "CalendarHomeViewController.h"
+#import "CalendarViewController.h"
 @interface AirTicketViewController ()
 
 @end
@@ -29,6 +32,7 @@
     NSMutableArray *_fromeToArray;
     NSInteger fromToNumber;
     NSString *_searType;
+
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -45,7 +49,7 @@
     NSLog(@"-------_timeArray------%@",_timeArray);
     NSString *fromDeaults = [[NSUserDefaults standardUserDefaults] objectForKey:@"FromTime"];
     NSString *toDeaults = [[NSUserDefaults standardUserDefaults] objectForKey:@"ToTime"];
-    
+
     NSString *_dateString = [watchTimeObject changeTime];
     NSString *nowTimeString = [_dateString stringByReplacingOccurrencesOfString :@"-" withString:@""];
     NSString * selectionTime = [fromDeaults stringByReplacingOccurrencesOfString :@"-" withString:@""];
@@ -63,8 +67,6 @@
     {
         [button0 setTitle:@"请选择行程日期" forState:(UIControlStateNormal)];
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"FromTime"];
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！请正确选择航班日期！" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
-        [alertView show];
     }
         
     }
@@ -82,9 +84,6 @@
     {
         [button1 setTitle:@"请选择返程日期" forState:(UIControlStateNormal)];
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"ToTime"];
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"亲！请正确选择航班日期！" delegate:nil cancelButtonTitle:@"退出" otherButtonTitles:nil, nil];
-        [alertView show];
-
     }
 
     }
@@ -98,6 +97,7 @@
     _timeArray = [[NSMutableArray alloc]init];
     _allButtonImage = [[NSMutableArray alloc]init];
     _fromeToArray = [[NSMutableArray alloc]init];
+    [NLUtils getAuthorid];
     // 导航
     [self navigationView];
     // 控件
@@ -376,11 +376,46 @@
 {
     if (sender.tag == 0 || sender.tag == 1)
     {
-        WatchTimeViewController *watchTimeView = [[WatchTimeViewController alloc]init];
-        fromToNumber = sender.tag;
-        watchTimeView.watchLogo = fromToNumber;
-        watchTimeView.delegate = self;
-        [self.navigationController pushViewController:watchTimeView animated:YES];
+//        WatchTimeViewController *watchTimeView = [[WatchTimeViewController alloc]init];
+//        fromToNumber = sender.tag;
+//        watchTimeView.watchLogo = fromToNumber;
+//        watchTimeView.delegate = self;
+//        [self.navigationController pushViewController:watchTimeView animated:YES];
+//        if (!chvc) {
+        
+            CalendarHomeViewController *chvc = [[CalendarHomeViewController alloc]init];
+            
+            chvc.calendartitle = @"日历";
+            
+            [chvc setAirPlaneToDay:365 ToDateforString:nil];//飞机初始化方法
+            
+//        }
+        [self.navigationController pushViewController:chvc animated:YES];
+
+        UIButton *button0 = [_timeArray objectAtIndex:0];
+        UIButton *button1 = [_timeArray objectAtIndex:1];
+        
+        chvc.calendarblock = ^(CalendarDayModel *model){
+            
+//            NSLog(@"\n---------------------------");
+//            NSLog(@"1星期 %@",[model getWeek]);
+//            NSLog(@"2字符串 %@",[model toString]);
+//            NSLog(@"3节日  %@",model.holiday);
+            if (sender.tag  == 0) {
+                [button0 setTitle:[model toString] forState:(UIControlStateNormal)];
+                [[NSUserDefaults standardUserDefaults] setObject:[model toString] forKey:@"FromTime"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+            else if (sender.tag == 1)
+            {
+                [button1 setTitle:[model toString] forState:(UIControlStateNormal)];
+                [[NSUserDefaults standardUserDefaults] setObject:[model toString] forKey:@"ToTime"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+        };
+        
+        
+
     }
     else if (sender.tag == 2)
     {
@@ -466,15 +501,7 @@
 #pragma mark -- 日历
 -(void)returnTime:(NSString *)newTime seletionWatchLogo:(NSInteger)newWatchLogo
 {
-//    NSString *_dateString = [watchTimeObject changeTime];
-//    NSString *nowTimeString = [_dateString stringByReplacingOccurrencesOfString :@"-" withString:@""];
-//    NSString * selectionTime = [newTime stringByReplacingOccurrencesOfString :@"-" withString:@""];
-//    if ([selectionTime integerValue] >= [nowTimeString integerValue])
-//    {
-//    
-//    NSString *_fromTime ;
-//    NSString *_toTime ;
-//    
+
     if (newWatchLogo == 0)
     {
 
@@ -484,59 +511,7 @@
     {
             [[NSUserDefaults standardUserDefaults] setObject:newTime forKey:@"ToTime"];
     }
-//    _fromTime = [[NSUserDefaults standardUserDefaults]objectForKey:@"FromTime"];
-//    _toTime = [[NSUserDefaults standardUserDefaults]objectForKey:@"ToTime"];
-//    
-//    if (_fromTime == nil && _toTime != nil)
-//    {
-//        UIButton *button = [_timeArray objectAtIndex:1];
-//        [button setTitle:_toTime forState:(UIControlStateNormal)];
-//    }
-//    else if (_toTime == nil && _fromTime != nil)
-//    {
-//        UIButton *button = [_timeArray objectAtIndex:0];
-//        [button setTitle:_fromTime forState:(UIControlStateNormal)];
-//    }
-//    else if (_toTime != nil && _fromTime != nil)
-//    {
-//        NSComparisonResult result = [_fromTime compare:_toTime];
-//        if (result == NSOrderedAscending)
-//        {
-//            UIButton *button0 = [_timeArray objectAtIndex:0];
-//            [button0 setTitle:_fromTime forState:(UIControlStateNormal)];
-//            UIButton *button = [_timeArray objectAtIndex:1];
-//            [button setTitle:_toTime forState:(UIControlStateNormal)];
-//        }
-//        else if (result == NSOrderedSame)
-//        {
-//            UIButton *button0 = [_timeArray objectAtIndex:0];
-//            [button0 setTitle:_fromTime forState:(UIControlStateNormal)];
-//            UIButton *button1 = [_timeArray objectAtIndex:1];
-//            [button1 setTitle:_toTime forState:(UIControlStateNormal)];
-//        }
-//        else if (result == NSOrderedDescending)
-//        {
-//            UIButton *button0 = [_timeArray objectAtIndex:0];
-//            [button0 setTitle:_fromTime forState:(UIControlStateNormal)];
-//            UIButton *button1 = [_timeArray objectAtIndex:1];
-//            [button1 setTitle:@"请选择返程日期" forState:(UIControlStateNormal)];
-//        }
-//     }
-//    }
-//    else
-//    {
-//        if (newWatchLogo == 0)
-//        {
-//            UIButton *button0 = [_timeArray objectAtIndex:0];
-//            [button0 setTitle:@"请选择行程日期" forState:(UIControlStateNormal)];
-//        }
-//        else if(newWatchLogo == 1)
-//        {
-//            UIButton *button1 = [_timeArray objectAtIndex:1];
-//            [button1 setTitle:@"请选择返程日期" forState:(UIControlStateNormal)];
-//        }
-//        
-//    }
+
 }
 
 - (void)didReceiveMemoryWarning

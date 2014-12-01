@@ -62,13 +62,12 @@
                         <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=". . . . . . . . . . . . . . . . . . . . . " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hIK-Ab-taD">
-                        <rect key="frame" x="88" y="28" width="200" height="10"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SMS_line.png" id="9No-yb-W9y">
+                        <rect key="frame" x="87" y="36" width="200" height="1"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.6588235294117647" green="0.6588235294117647" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -78,13 +77,9 @@
                 <outlet property="twoAgentsLogo" destination="7n5-Qa-YqF" id="Vcl-PS-fnY"/>
             </connections>
         </tableViewCell>
-        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="9No-yb-W9y">
-            <rect key="frame" x="0.0" y="0.0" width="200" height="1"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-        </imageView>
     </objects>
     <resources>
+        <image name="SMS_line.png" width="300" height="1"/>
         <image name="bank4.png" width="63" height="63"/>
     </resources>
 </document>

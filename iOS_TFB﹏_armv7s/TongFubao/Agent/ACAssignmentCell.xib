@@ -37,6 +37,11 @@
                     </button>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="authorizationCode" destination="2ku-Vk-INi" id="grr-Y9-dgQ"/>
+                <outlet property="distributionAccount" destination="yQ4-EX-DxJ" id="RhW-cZ-Ndg"/>
+                <outlet property="operation" destination="dCZ-42-sD3" id="XMt-7b-RXG"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

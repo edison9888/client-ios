@@ -37,6 +37,11 @@
                     </label>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="allocationOfTime" destination="IEI-mz-ya9" id="Oth-tX-6Wu"/>
+                <outlet property="authorizationCode" destination="Duc-vP-fVt" id="K5d-ub-vVG"/>
+                <outlet property="distributionAccount" destination="jR5-Qf-7hF" id="c4L-v4-hGy"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>
