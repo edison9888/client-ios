@@ -402,7 +402,8 @@
 }
 
 //现在要求是信用卡支付的
--(void)xybtnonpay{
+-(void)xybtnonpay
+{
     if ([self checkCreditCardMoneyInfoPay])
     {
         /*刷卡后返回读取是否有保存默认卡*/
@@ -448,9 +449,27 @@
 - (IBAction)OnbtnClick:(id)sender
 {
     /*只能支付信用卡的*/
-    [self xybtnonpay];
+//    [self xybtnonpay];
     /*储蓄和信用卡的*/
 //    [self dfcard];
+    
+    /*银联 text*/
+     NSDictionary *dataDictionaryBankCard = @{ @"wagepaymoney" : cellAllPayMoney, @"wagemoney":cellAllPayMoney, @"wagemonth": _TimerStr, @"fucardbank": @"",  @"wagelistid": @"1" , @"fucardno": @"1234567890123" };
+     
+     [LoadDataWithASI loadDataWithMsgbody:dataDictionaryBankCard apiName:@"ApiWageInfo" apiNameFunc:@"paywageRq" rolePath:@"//operation_response/msgbody" type:PublicList completionBlock:^(id data, NSError *error) {
+        NSLog(@"请求成功%@",data);
+        
+        _bkntnoStr= [[data valueForKey:@"bkntno"] objectAtIndex:0];
+        [_hud hide:YES];
+        [self doStartPay:_bkntnoStr
+              sysProvide:nil
+                    spId:nil
+                    mode:[NLUtils get_req_bkenv]
+          viewController:self
+                delegate:self];
+        
+    }];
+
 }
 
 -(void)alertNotoBtn

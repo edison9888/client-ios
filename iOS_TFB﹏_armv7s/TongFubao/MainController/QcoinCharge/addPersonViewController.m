@@ -60,7 +60,6 @@
     UITextField *textFieldName = [_textFieldArray objectAtIndex:0];
     UITextField *textFieldcarsty = [_textFieldArray objectAtIndex:1];
     UITextField *textFieldcarId = [_textFieldArray objectAtIndex:2];
-//    UITextField *textFieldbrithday = [_textFieldArray objectAtIndex:3];
 
     [textFieldName resignFirstResponder];
     [textFieldcarsty resignFirstResponder];
@@ -69,25 +68,8 @@
     self.PassengerName = textFieldName.text;
     self.PassengerCardType = textFieldcarsty.text;
     self.PassengerCardId = textFieldcarId.text;
-//    self.PassengerBirthDay = textFieldbrithday.text;
     
-//    NSString *string ;
-//    NSString *string1;
-//    NSString *stringday;
-//    int dayInt;
-//    NSString *stringtime;
-//    int timeInt;
-//    if ([self.PassengerBirthDay length] == 10)
-//    {
-//    string = [self.PassengerBirthDay substringWithRange:NSMakeRange(4, 1)];
-//    string1 = [self.PassengerBirthDay substringWithRange:NSMakeRange(7, 1)];
-//    stringday = [self.PassengerBirthDay substringWithRange:NSMakeRange(5, 2)];
-//    dayInt = [stringday intValue];
-//    stringtime = [self.PassengerBirthDay substringWithRange:NSMakeRange(8, 2)];
-//    timeInt = [stringtime intValue];
-//    }
-    
-//    if ([self.PassengerName length] >0 && [self.PassengerCardId length] > 0 && [self.PassengerCardType length] > 0 && [self.PassengerBirthDay length] == 10 && [string isEqualToString:@"-"] && [string1 isEqualToString:@"-"] && dayInt < 13 && timeInt < 32)
+
      if ([self.PassengerName length] >0 && [self.PassengerCardId length] > 0 && [self.PassengerCardType length] > 0 && [self.PassengerBirthDay length] > 0)
     {
         _activityView = [[PlayCustomActivityView alloc] initWithFrame:CGRectMake(0, 0, 130, 130)];
@@ -129,10 +111,13 @@
 {
     NLProtocolResponse *response = (NLProtocolResponse *)senderFication.object;
     int error = response.errcode;
+    NSString *string = response.detail;
+//    NSLog(@"===string====%@",string);
+//    REMOVE_NOTIFY_OBSERVER_FOR_NAME(self, Notify_SavePassenger);
     
     if (error == RSP_NO_ERROR)
     {
-        [self getApiAirticket:response];
+        [self getApiAirticketSavePassenger:response];
         [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
         [_activityView removeFromSuperview];
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"成功添加乘机人!" message:@"" delegate:self cancelButtonTitle:@"添加乘机人" otherButtonTitles:@"退出", nil];
@@ -148,8 +133,6 @@
     }
     else
     {
-        NSString *string = response.detail;
-        NSLog(@"===string====%@",string);
         [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
         [_activityView removeFromSuperview];
         if ([string isEqualToString:@"请勿重复添加信息"])
@@ -164,12 +147,12 @@
     }
 }
 
-- (void)getApiAirticket:(NLProtocolResponse *)response
+- (void)getApiAirticketSavePassenger:(NLProtocolResponse *)response
 {
     //获取数据标记，判断是否请求成功
     NLProtocolData *data = [response.data find:@"msgbody/result" index:0];
     NSString *result = data.value;
-    NSLog(@"======result======%@",result);
+//    NSLog(@"======result======%@",result);
     NSRange range = [result rangeOfString:@"succ"];
     
     if (range.length <= 0)
@@ -193,46 +176,10 @@
         textFieldcarId.placeholder = @"请输入证件号";
         [timeButton setTitle:@"请您选择生日" forState:(UIControlStateNormal)];
         
-        REMOVE_NOTIFY_OBSERVER_FOR_NAME(self, Notify_SavePassenger);
         [self.delegate UpdateTheDataUpPassengers];
-
-        
-//        UITextField *textFieldBrithDay = [_textFieldArray objectAtIndex:3];
-//        textFieldBrithDay.text = nil;
-//        textFieldBrithDay.placeholder = @"请填写出生日期如：1999—08—03";
     }
-    else
-    {
-        // 机票实际价格
-        //        self.priceArray = [response.data find:@"msgbody/msgchild/price"];
-
-//        UITextField *textFieldName = [_textFieldArray objectAtIndex:0];
-//        textFieldName.text = nil;
-//        textFieldName.placeholder = @"请输入姓名";
-//        
-//        UITextField *textFieldcarsty = [_textFieldArray objectAtIndex:1];
-//        textFieldcarsty.text = nil;
-//        textFieldcarsty.placeholder = @"证件类型";
-//        
-//        UITextField *textFieldcarId = [_textFieldArray objectAtIndex:2];
-//        textFieldcarId.text = nil;
-//        textFieldcarId.placeholder = @"请输入证件号";
-//        
-//        UITextField *textFieldBrithDay = [_textFieldArray objectAtIndex:3];
-//        textFieldBrithDay.text = nil;
-//        textFieldBrithDay.placeholder = @"请填写出生日期如：1999—08—03";
-        
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(personMessage:) name:@"添加乘机人" object:nil];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"添加乘机人" object:nil];
-    }
-    
 }
-//-(void)personMessage:(NSNotificationCenter *)sender
-//{
-//    [[NSNotificationCenter defaultCenter ] removeObserver:self name:@"添加乘机人" object:nil];
-//    NSLog(@"=====添加乘机人添加乘机人添加乘机人添加乘机人===");
-//    
-//}
+
 
 
 -(void)allControllerView
@@ -371,7 +318,7 @@
     self.PassengerBirthDay = dateString;
     [timeButton setTitle:self.PassengerBirthDay forState:(UIControlStateNormal)];
 
-    NSLog(@"========%@",self.PassengerBirthDay);
+//    NSLog(@"========%@",self.PassengerBirthDay);
 }
 
 //-(void)textFieldDidBeginEditing:(UITextField *)textField

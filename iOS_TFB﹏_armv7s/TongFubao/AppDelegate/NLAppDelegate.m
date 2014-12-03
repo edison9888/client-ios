@@ -511,6 +511,13 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"addContactPerson"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    //添加乘机人联系人
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"ticketPeson"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"PersonIphone"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+
 }
 
 

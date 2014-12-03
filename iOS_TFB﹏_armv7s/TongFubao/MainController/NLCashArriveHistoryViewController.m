@@ -68,7 +68,7 @@
     self.myArray = [NSMutableArray arrayWithCapacity:1];
     
     _msgstart = @"0";
-    _msgdisplay = @"5";
+    _msgdisplay = @"10";
     _shouldFree = YES;
     
     [self setExtraCellLineHidden:self.myTableView];
@@ -844,15 +844,6 @@
     cell.myDateLabel.text = [dic objectForKey:@"ccgtime"];
 }
 
--(void)doTransferMoneyTablViewCell:(NSIndexPath *)indexPath cell:(NLInOutcomeDetailCell *)cell
-{
-    NSDictionary* dic = [self.myArray objectAtIndex:indexPath.row];
-    cell.myTypeLabel.text = [dic objectForKey:@"ccgno"];
-    cell.myAmountLabel.text = [dic objectForKey:@"allmoney"];
-    cell.myResultLabel.text = [dic objectForKey:@"state"];
-    cell.myDateLabel.text = [dic objectForKey:@"ccgtime"];
-}
-
 /*商户收款历史*/
 -(void)doCashArriveTablViewCell:(NSIndexPath *)indexPath cell:(NLInOutcomeDetailCell *)cell
 {
@@ -872,11 +863,20 @@
     cell.myDateLabel.text = [dic objectForKey:@"ccgtime"];
 }
 
+-(void)doTransferMoneyTablViewCell:(NSIndexPath *)indexPath cell:(NLInOutcomeDetailCell *)cell
+{
+    NSDictionary* dic = [self.myArray objectAtIndex:indexPath.row];
+    cell.myTypeLabel.text = [dic objectForKey:@"ccgno"];
+    cell.myAmountLabel.text =  [NSString stringWithFormat:@"%@",[dic objectForKey:@"paymoney"]];
+    cell.myResultLabel.text = [dic objectForKey:@"state"];
+    cell.myDateLabel.text = [dic objectForKey:@"ccgtime"];
+}
+
 -(void)doSupTransferMoneyTablViewCell:(NSIndexPath *)indexPath cell:(NLInOutcomeDetailCell*)cell
 {
     NSDictionary* dic = [self.myArray objectAtIndex:indexPath.row];
     cell.myTypeLabel.text = [dic objectForKey:@"ccgno"];
-    cell.myAmountLabel.text = [dic objectForKey:@"allmoney"];
+    cell.myAmountLabel.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"paymoney"]];
     cell.myResultLabel.text = [dic objectForKey:@"state"];
     cell.myDateLabel.text = [dic objectForKey:@"ccgtime"];
 }
@@ -903,11 +903,9 @@
      state  状态
      */
     
-    NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易类别",@"header", @"信用卡还款",@"content", nil];
+    NSDictionary*  dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易流水号",@"header", [dictionary objectForKey:@"ccgno"],@"content", nil];
     [arr addObject:dic];
-    dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易流水号",@"header", [dictionary objectForKey:@"ccgno"],@"content", nil];
-    [arr addObject:dic];
-    
+   
     dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易时间",@"header", [dictionary objectForKey:@"ccgtime"],@"content", nil];
     [arr addObject:dic];
     
@@ -927,9 +925,7 @@
     
     dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易金额",@"header", [NSString stringWithFormat:@"%@元",[dictionary objectForKey:@"allmoney"]],@"content", nil];
     [arr addObject:dic];
-    dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易状态",@"header", [dictionary objectForKey:@"message"],@"content", nil];
-    [arr addObject:dic];
-  
+ 
     return arr;
 }
 
@@ -949,10 +945,9 @@
      state  状态
      */
     
-    NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易类别",@"header", @"转账汇款",@"content", nil];
+    NSDictionary*  dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易流水号",@"header", [dictionary objectForKey:@"ccgno"],@"content", nil];
     [arr addObject:dic];
-    dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易流水号",@"header", [dictionary objectForKey:@"ccgno"],@"content", nil];
-    [arr addObject:dic];
+   
     dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易时间",@"header", [dictionary objectForKey:@"ccgtime"],@"content", nil];
     [arr addObject:dic];
     
@@ -967,16 +962,15 @@
     
     dic = [NSDictionary dictionaryWithObjectsAndKeys:@"付款银行",@"header", [dictionary objectForKey:@"fucardbank"],@"content", nil];
     [arr addObject:dic];
-    dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易金额",@"header", [NSString stringWithFormat:@"%@元",[dictionary objectForKey:@"allmoney"]],@"content", nil];
+   
     [arr addObject:dic];
     dic = [NSDictionary dictionaryWithObjectsAndKeys:@"转账金额",@"header", [NSString stringWithFormat:@"%@元",[dictionary objectForKey:@"paymoney"]],@"content", nil];
     [arr addObject:dic];
     dic = [NSDictionary dictionaryWithObjectsAndKeys:@"手续费",@"header", [NSString stringWithFormat:@"%@元",[dictionary objectForKey:@"feemoney"]],@"content", nil];
     [arr addObject:dic];
     
-    dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易状态",@"header", [dictionary objectForKey:@"state"],@"content", nil];
+    dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易金额",@"header", [NSString stringWithFormat:@"%@元",[dictionary objectForKey:@"allmoney"]],@"content", nil];
     [arr addObject:dic];
-    
     return arr;    
 }
 
@@ -995,10 +989,7 @@
      couponcardno   付款卡号
      */
     
-    NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易类别",@"header", @"购买抵用券",@"content", nil];
-    [arr addObject:dic];
-    
-    dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易流水号",@"header", [dictionary objectForKey:@"couponno"],@"content", nil];
+    NSDictionary*  dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易流水号",@"header", [dictionary objectForKey:@"couponno"],@"content", nil];
     [arr addObject:dic];
     
     dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易金额",@"header", [NSString stringWithFormat:@"%@元",[dictionary objectForKey:@"couponmoney"]],@"content", nil];
@@ -1042,10 +1033,9 @@
      state  状态
      */
     
-    NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易类别",@"header", @"还贷款",@"content", nil];
+    NSDictionary*  dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易流水号",@"header", [dictionary objectForKey:@"ccgno"],@"content", nil];
     [arr addObject:dic];
-    dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易流水号",@"header", [dictionary objectForKey:@"ccgno"],@"content", nil];
-    [arr addObject:dic];
+   
     dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易时间",@"header", [dictionary objectForKey:@"ccgtime"],@"content", nil];
     [arr addObject:dic];
     
@@ -1059,16 +1049,13 @@
     
     dic = [NSDictionary dictionaryWithObjectsAndKeys:@"付款银行",@"header", [dictionary objectForKey:@"fucardbank"],@"content", nil];
     [arr addObject:dic];
-    dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易金额",@"header", [NSString stringWithFormat:@"%@元",[dictionary objectForKey:@"allmoney"]],@"content", nil];
-    [arr addObject:dic];
-
+    
     dic = [NSDictionary dictionaryWithObjectsAndKeys:@"还贷金额",@"header", [NSString stringWithFormat:@"%@元",[dictionary objectForKey:@"paymoney"]],@"content", nil];
     [arr addObject:dic];
     
     dic = [NSDictionary dictionaryWithObjectsAndKeys:@"手续费",@"header", [NSString stringWithFormat:@"%@元",[dictionary objectForKey:@"feemoney"]],@"content", nil];
     [arr addObject:dic];
-    
-    dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易状态",@"header", [dictionary objectForKey:@"state"],@"content", nil];
+    dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易金额",@"header", [NSString stringWithFormat:@"%@元",[dictionary objectForKey:@"allmoney"]],@"content", nil];
     [arr addObject:dic];
     
     return arr;
@@ -1090,12 +1077,9 @@
      state  状态
      */
     
-    NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易类别",@"header", @"超级转账",@"content", nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易流水号",@"header", [dictionary objectForKey:@"ccgno"],@"content", nil];
     [arr addObject:dic];
-    
-    dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易流水号",@"header", [dictionary objectForKey:@"ccgno"],@"content", nil];
-    [arr addObject:dic];
- 
+
     dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易时间",@"header", [dictionary objectForKey:@"ccgtime"],@"content", nil];
     [arr addObject:dic];
     
@@ -1111,17 +1095,15 @@
     dic = [NSDictionary dictionaryWithObjectsAndKeys:@"付款银行",@"header", [dictionary objectForKey:@"fucardbank"],@"content", nil];
     [arr addObject:dic];
     
-    dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易金额",@"header", [NSString stringWithFormat:@"%@元",[dictionary objectForKey:@"allmoney"]],@"content", nil];
-    [arr addObject:dic];
-    
     dic = [NSDictionary dictionaryWithObjectsAndKeys:@"转账金额",@"header", [NSString stringWithFormat:@"%@元",[dictionary objectForKey:@"paymoney"]],@"content", nil];
     [arr addObject:dic];
     
     dic = [NSDictionary dictionaryWithObjectsAndKeys:@"手续费",@"header",[NSString stringWithFormat:@"%@元", [dictionary objectForKey:@"feemoney"]],@"content", nil];
     [arr addObject:dic];
     
-    dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易状态",@"header", [dictionary objectForKey:@"state"],@"content", nil];
+    dic = [NSDictionary dictionaryWithObjectsAndKeys:@"交易金额",@"header", [NSString stringWithFormat:@"%@元",[dictionary objectForKey:@"allmoney"]],@"content", nil];
     [arr addObject:dic];
+
     
     return arr;
 }
@@ -1193,14 +1175,14 @@
     if (isDownPush)//下拉
     {
         _msgstart = @"0";
-        _msgdisplay = @"5";
+        _msgdisplay = @"10";
     }
     else
     {
         int start = [_msgstart intValue];
         int display = [_msgdisplay intValue];
         _msgstart = [NSString stringWithFormat:@"%d",(start+display)];
-        _msgdisplay = @"5";
+        _msgdisplay = @"10";
     }
 }
 

@@ -938,15 +938,15 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
     switch (sender.tag) {
         case 21:
         {
-            /*
+        
             PaySKQ *vc= [[PaySKQ alloc]init];
             [NLUtils presentModalViewController:self newViewController:vc];
-            */
+        
              
             /*刷卡器授权码*/
-            ImpowerController *impowerView = [[ImpowerController alloc] init];
-            UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:impowerView];
-            [self presentViewController:navigation animated:YES completion:nil];
+//            ImpowerController *impowerView = [[ImpowerController alloc] init];
+//            UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:impowerView];
+//            [self presentViewController:navigation animated:YES completion:nil];
         }
             break;
         case 22:
@@ -1105,10 +1105,10 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
     else if
         ([sender.titleLabel.text isEqualToString:@"Q币充值"] && [self isUserRegister:NLPushViewType_QCoinCharge]){
   
-//            QCoinView *vc= [[QCoinView alloc]init];
-//            [NLUtils presentModalViewController:self newViewController:vc];
-            TFNewVersionAgentMainCtr *vc = [[TFNewVersionAgentMainCtr alloc]init];
+            QCoinView *vc= [[QCoinView alloc]init];
             [NLUtils presentModalViewController:self newViewController:vc];
+//            TFNewVersionAgentMainCtr *vc = [[TFNewVersionAgentMainCtr alloc]init];
+//            [NLUtils presentModalViewController:self newViewController:vc];
             
        
         }

@@ -53,7 +53,7 @@
         [self.AirLineArray addObject:allAirLineDic];
     }
 
-    NSLog(@"========newariNameDictionary======%@",AirLineArray);
+//    NSLog(@"========newariNameDictionary======%@",AirLineArray);
 //    for (NSString *key in newAirLineKeys)
 //    {
 //        [AirLineDicKeys addObject:key];
@@ -89,8 +89,8 @@
     
     NSString *key = [[[self.AirLineArray objectAtIndex:indexPath.row] allKeys] objectAtIndex:0];
     NSString *keyVlue = [[self.AirLineArray objectAtIndex:indexPath.row] objectForKey:key];
-    NSLog(@"========key======%@",key);
-    NSLog(@"========keyVlue======%@",keyVlue);
+//    NSLog(@"========key======%@",key);
+//    NSLog(@"========keyVlue======%@",keyVlue);
     [cell titleLable:keyVlue cellImage:[NSString stringWithFormat:@"%@@2x.png",key]];
     return cell;
     

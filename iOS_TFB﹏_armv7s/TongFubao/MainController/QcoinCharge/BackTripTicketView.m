@@ -152,17 +152,19 @@
     if ([self.PaiXuaAllArray count] > 0) {
     NSString *fromTimeData = [[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:0] substringWithRange:NSMakeRange(11, 5)];
     NSString *toTimeData = [[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:1] substringWithRange:NSMakeRange(11, 5)];
-    NSString *chaotoTimeData = [[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:1] substringWithRange:NSMakeRange(11, 1)];
-    //    NSLog(@"====chaotoTimeData===%@",chaotoTimeData);
-    NSString *addString ;
-    if ([chaotoTimeData isEqualToString:@"0"])
-    {
-        addString= @"(次)";
-    }
-    else
-    {
-        addString = @"";
-    }
+        NSString *fromtoTimeData = [[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:0] substringWithRange:NSMakeRange(8, 2)];
+//        NSLog(@"====fromtoTimeData===%@",fromtoTimeData);
+        NSString *chaotoTimeData = [[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:1] substringWithRange:NSMakeRange(8, 2)];
+//        NSLog(@"====chaotoTimeData===%@",chaotoTimeData);
+        NSString *addString ;
+        if ([fromtoTimeData intValue] < [chaotoTimeData intValue])
+        {
+            addString= @"(次)";
+        }
+        else
+        {
+            addString = @"";
+        }
     
     [cell nameTicket:[NSString stringWithFormat:@"%@-%@",[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:5],[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:6]] timeTicket:[NSString stringWithFormat:@"￥%@",[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:2]] priceTicket:@" " discountTicket:[NSString stringWithFormat:@"%@-%@%@",fromTimeData,toTimeData,addString] modelsTicket:[NSString stringWithFormat:@"%@/%@",[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:4],[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:7]]];
     }
@@ -208,7 +210,7 @@
     NSString *airLineCodeTagData = [[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:12];
     
     NSMutableArray *airLineInfoArray = [[NSMutableArray alloc]initWithObjects:takeOffTimeData,arriveTimeData,priceArrayData,airLineCodeData,airLineNameData,dPortNameData,aPortNameData,flightData,craftTypeData,quantityData,dPortCodeData,aPortCodeData,airLineCodeTagData,nil];
-    NSLog(@"======airLineInfoArray=====%@",airLineInfoArray);
+//    NSLog(@"======airLineInfoArray=====%@",airLineInfoArray);
 
     [self.delegata BackTripTicketViewAirLineInfoArray:airLineInfoArray];
 }

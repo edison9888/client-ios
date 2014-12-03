@@ -48,7 +48,7 @@
     self.infoTextView = [[UITextView alloc]initWithFrame:CGRectMake(320, 0, 320, self.view.frame.size.height)];
     self.infoTextView.text =@"\v儿童票须知：\n1、使用儿童票的乘客：登机当天应满2周岁但未满12周岁。\v2、购买儿童票可优先使用：户口簿、身份证、护照。\n3、登机时出示的证件号码，应与订票时所填证件号码一致。\v4、儿童票为全价票的50%，机场建设费免收，燃油税减半。\v\v退改签说明：\v套餐退订：起飞前2小时以外需收取票面价5%的退票费，起飞前2小时（含）以内及起飞后需收取票面价10％的退票费（婴儿、儿童免收退票费）。套餐更改：起飞前2小时以外同等舱位免费更改，起飞前2小时（含）以内及起飞后需收取票面价5％的更改费。改期费与升舱费同时发生时，需同时收取。\v\v婴儿票须知：\v1、使用婴儿票的乘客：登机当天应满14天但未满2周岁，未满14天的婴儿不能乘机。\v2、购买婴儿票可优先使用：出生证明、户口簿、身份证、护照。\v3、登机时出示的证件号码，应与订票时所填证件号码一致。\v4、婴儿票为全价票的10%，机场建设费和燃油税免收。";
     self.infoTextView.editable = NO;
-    self.infoTextView.backgroundColor = RGBACOLOR(3, 198, 230, 0.9);
+    self.infoTextView.backgroundColor = RGBACOLOR(10, 10, 10, 0.9);
     self.infoTextView.font = [UIFont systemFontOfSize:18];
     self.infoTextView.textColor = [UIColor whiteColor];
     UISwipeGestureRecognizer *swipe=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(moveView)];
@@ -117,7 +117,7 @@
     NLProtocolResponse *response = (NLProtocolResponse *)senderFication.object;
     int error = response.errcode;
     NSString *string = response.detail;
-    NSLog(@"===string====%@",string);
+//    NSLog(@"===string====%@",string);
 
     
     if (error == RSP_NO_ERROR)
@@ -370,8 +370,8 @@
         }
         self.firstPaiXuaAllArray = ShippFirstObjectArray;
         self.secondPaiXuaAllArray = ShippSeconObjectArray;
-        NSLog(@"====self.firstPaiXuaAllArray====%@",self.firstPaiXuaAllArray);
-        NSLog(@"====self.secondPaiXuaAllArray====%@",self.secondPaiXuaAllArray);
+//        NSLog(@"====self.firstPaiXuaAllArray====%@",self.firstPaiXuaAllArray);
+//        NSLog(@"====self.secondPaiXuaAllArray====%@",self.secondPaiXuaAllArray);
     }
     
     [activityView performSelector:@selector(endActivity) withObject:activityView afterDelay:0.7];
@@ -383,7 +383,7 @@
 #pragma mark --- 代理方法舱位选择
 -(void)GoShippingSpaceView:(NSMutableArray *)newGoShippingSpaceArray
 {
-    NSLog(@"=======newGoShippingSpaceArray========%@",newGoShippingSpaceArray);
+//    NSLog(@"=======newGoShippingSpaceArray========%@",newGoShippingSpaceArray);
     self.goFirstPaiXuaAllArray = newGoShippingSpaceArray;
     [UIView animateWithDuration:0.3 animations:^{
         self.selectionLable.frame = CGRectMake(320/2, 64, 320/2, 45);
@@ -395,7 +395,7 @@
 {
     
     self.returnSecondPaiXuaArray = newBackShippingSpaceArray;
-    NSLog(@"=======returnSecondPaiXuaArray======%@",self.returnSecondPaiXuaArray);
+//    NSLog(@"=======returnSecondPaiXuaArray======%@",self.returnSecondPaiXuaArray);
     
     if ([self.goFirstPaiXuaAllArray count] > 0 && [self.returnSecondPaiXuaArray count] > 0)
     {
@@ -425,11 +425,11 @@
         NSMutableArray *fromTicketInfo = [[NSMutableArray alloc]initWithObjects:[self.goFirstPaiXuaAllArray objectAtIndex:15],[self.goFirstPaiXuaAllArray objectAtIndex:13],[self.goFirstPaiXuaAllArray objectAtIndex:12],[self.goFirstPaiXuaAllArray objectAtIndex:11],[self.goFirstPaiXuaAllArray objectAtIndex:10],[self.goFirstPaiXuaAllArray objectAtIndex:9],[self.goFirstPaiXuaAllArray objectAtIndex:8],[self.goFirstPaiXuaAllArray objectAtIndex:7],[self.goFirstPaiXuaAllArray objectAtIndex:6], nil];
         
         TicketInfoImationView.fromTicketPriceArray = fromTicketInfo;
-        NSLog(@"====fromTicketInfo====%@",fromTicketInfo);
+//        NSLog(@"====fromTicketInfo====%@",fromTicketInfo);
         // 回程的价，油，税
         NSMutableArray *backTicketInfo = [[NSMutableArray alloc]initWithObjects:[self.returnSecondPaiXuaArray objectAtIndex:15],[self.returnSecondPaiXuaArray objectAtIndex:13],[self.returnSecondPaiXuaArray objectAtIndex:12],[self.returnSecondPaiXuaArray objectAtIndex:11],[self.returnSecondPaiXuaArray objectAtIndex:10],[self.returnSecondPaiXuaArray objectAtIndex:9],[self.returnSecondPaiXuaArray objectAtIndex:8],[self.returnSecondPaiXuaArray objectAtIndex:7],[self.returnSecondPaiXuaArray objectAtIndex:6], nil];
         TicketInfoImationView.backTicketPrice = backTicketInfo;
-        NSLog(@"====backTicketInfo====%@",backTicketInfo);
+//        NSLog(@"====backTicketInfo====%@",backTicketInfo);
         
         // 去回程票id
         TicketInfoImationView.fromPriceTicketId = [self.goFirstPaiXuaAllArray objectAtIndex:16];

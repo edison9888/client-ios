@@ -94,8 +94,6 @@
         [alert show];
         
     }
-    NSString *string = response.detail;
-    NSLog(@"===string====%@",string);
     [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
     [_activityView removeFromSuperview];
 
@@ -178,12 +176,12 @@
         for (NLProtocolData *statusData  in statusCityArray)
         {
             NSString *dic;
-            NSLog(@"======statusData=====%@",statusData.value);
+//            NSLog(@"======statusData=====%@",statusData.value);
             if (statusData.value == nil) {
                 dic =@"未处理";
             }else{
                 dic = [dictionary objectForKey:statusData.value];
-                NSLog(@"======statusData=====%@",dic);
+//                NSLog(@"======statusData=====%@",dic);
              }
 
             [OrderdstatusArray addObject:dic];
@@ -208,7 +206,7 @@
         }
 
     }
-    NSLog(@"=====OrderdAllArray====%@",self.OrderdAllArray);
+//    NSLog(@"=====OrderdAllArray====%@",self.OrderdAllArray);
     if ([self.OrderdAllArray count] > 5)
     {
         self.historicalTableView.tableFooterView = self.buttonView;
@@ -275,9 +273,9 @@
     
     if ([self.OrderdAllArray count] > 0)
     {
-    NSString *string =[[self.OrderdAllArray objectAtIndex:indexPath.row] objectAtIndex:0];
-    NSString *string1 =[[self.OrderdAllArray objectAtIndex:indexPath.row] objectAtIndex:1];
-    NSLog(@"=====%@=====%@===",string,string1);
+//    NSString *string =[[self.OrderdAllArray objectAtIndex:indexPath.row] objectAtIndex:0];
+//    NSString *string1 =[[self.OrderdAllArray objectAtIndex:indexPath.row] objectAtIndex:1];
+//    NSLog(@"=====%@=====%@===",string,string1);
     
     NSString *fromTime = [[[self.OrderdAllArray objectAtIndex:indexPath.row] objectAtIndex:2] substringToIndex:10];
 

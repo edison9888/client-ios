@@ -183,7 +183,7 @@
         AccordingInfoImage.image = [[UIImage imageNamed:@"BG2white1@2x.png"] resizableImageWithCapInsets:(UIEdgeInsetsMake(12, 0, 12, 0)) resizingMode:UIImageResizingModeStretch];
         [self addSubview:AccordingInfoImage];
         
-        NSArray *accorArray = @[@"票价",[newfirstSecondArray objectAtIndex:20],@"基建",[newfirstSecondArray objectAtIndex:21],@"燃油",[newfirstSecondArray objectAtIndex:22]];
+        NSArray *accorArray = @[@"票价",[newfirstSecondArray objectAtIndex:20],@"机建",[newfirstSecondArray objectAtIndex:21],@"燃油",[newfirstSecondArray objectAtIndex:22]];
         NSInteger accorInteger = 0;
         for (int i = 0; i < 3; i++)
         {

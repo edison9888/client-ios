@@ -45,6 +45,7 @@
 @property (retain,nonatomic)UILabel *contactName;
 @property (retain,nonatomic)UILabel *contactIphone;
 
+
 // 付临门
 @property(retain,nonatomic)UITextField *infoTextField;
 @property (retain,nonatomic)UILabel *savingNameLable;

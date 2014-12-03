@@ -116,7 +116,7 @@
         self.PassengercardId.textColor = [UIColor grayColor];
         [self addSubview:self.PassengercardId];
         
-        // 添加乘机人
+        // 添加联系人
         self.contactName = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 100, 50)];
         self.contactName.font = [UIFont systemFontOfSize:18];
         self.contactName.textColor = [UIColor grayColor];
@@ -128,6 +128,8 @@
         self.contactIphone.textColor = [UIColor grayColor];
         self.contactIphone.backgroundColor = [UIColor clearColor];
         [self addSubview:self.contactIphone];
+        
+
         // 付临门
         self.savingNameLable = [[UILabel alloc]initWithFrame:CGRectMake(25, 0, 80, 60)];
         self.savingNameLable.font = [UIFont boldSystemFontOfSize:18];
@@ -149,24 +151,24 @@
     return self;
 }
 
--(void)selectionButtonHidde
-{
-    
-    self.selectionBotton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    self.selectionBotton.frame = CGRectMake(10, 10, 30, 30);
-    [self.selectionBotton setImage:[UIImage imageNamed:@"91@2x.png"] forState:(UIControlStateNormal)];
-    self.selectionBotton.selected = YES;
-    [self.selectionBotton addTarget:self action:@selector(selectionPasseng:) forControlEvents:(UIControlEventTouchUpInside)];
-    [self addSubview:self.selectionBotton];
-    
-    self.delectionBotton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    self.delectionBotton.frame = CGRectMake(280, 10, 30, 30);
-    [self.delectionBotton setImage:[UIImage imageNamed:@"delete2@2x.png"] forState:(UIControlStateNormal)];
-    self.delectionBotton.selected = YES;
-    [self.delectionBotton addTarget:self action:@selector(delectionPasseng:) forControlEvents:(UIControlEventTouchUpInside)];
-    [self addSubview:self.delectionBotton];
-    
-}
+//-(void)selectionButtonHidde
+//{
+//    
+//    self.selectionBotton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+//    self.selectionBotton.frame = CGRectMake(10, 10, 30, 30);
+//    [self.selectionBotton setImage:[UIImage imageNamed:@"91@2x.png"] forState:(UIControlStateNormal)];
+//    self.selectionBotton.selected = YES;
+//    [self.selectionBotton addTarget:self action:@selector(selectionPasseng:) forControlEvents:(UIControlEventTouchUpInside)];
+//    [self addSubview:self.selectionBotton];
+//    
+//    self.delectionBotton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+//    self.delectionBotton.frame = CGRectMake(280, 10, 30, 30);
+//    [self.delectionBotton setImage:[UIImage imageNamed:@"delete2@2x.png"] forState:(UIControlStateNormal)];
+//    self.delectionBotton.selected = YES;
+//    [self.delectionBotton addTarget:self action:@selector(delectionPasseng:) forControlEvents:(UIControlEventTouchUpInside)];
+//    [self addSubview:self.delectionBotton];
+//    
+//}
 
 // 航空查询
 -(void)nameTicket:(NSString *)newName timeTicket:(NSString *)newTimeTiceket priceTicket:(NSString *)newPriceTicket discountTicket:(NSString *)newDiscountTicket modelsTicket:(NSString *)newModelsTicket

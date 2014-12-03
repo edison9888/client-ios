@@ -38,7 +38,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *bankLOGO;//银行LOGO
 @property (weak, nonatomic) IBOutlet UIButton *initiateCollection;//发起收款
 @property(strong,nonatomic)NSString *bankCardNumberStr;//全局银行卡号
-@property(strong,nonatomic)NSString *bankPhoneStr;//全局预留银行点号号码
+@property(strong,nonatomic)NSString *bankPhoneStr;//全局预留银行电话号码
 
 @property(strong,nonatomic)UILabel *labels;//输入框前面的标签
 
@@ -183,17 +183,119 @@
 }
 
 
+-(void)showErrorInfoDefaultPaymentCard:(NSString*)error status:(NLHUDState)status
+{
+    [_hud hide:YES];
+    _hud = [[NLProgressHUD alloc] initWithParentView: self.view];
+    
+    switch (status)
+    {
+        case NLHUDState_Error:
+        {
+            _hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"unCheckmark.png"]] ;//失败
+            _hud.mode = MBProgressHUDModeCustomView;
+            _hud.detailsLabelText = error;
+            [_hud show:YES];
+            [_hud hide:YES afterDelay:2];
+        }
+            break;
+            
+        case NLHUDState_NoError:
+        {
+            _hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark.png"]] ;//成功
+            _hud.mode = MBProgressHUDModeCustomView;
+            _hud.labelText = error;
+            [_hud show:YES];
+            [_hud hide:YES afterDelay:2];
+        }
+            break;
+            
+        case NLHUDState_None:
+        {
+            [self theDefaultPaymentCard];//检测是否有默认收款卡
+            
+            _hud.labelText = error;
+            [_hud show:YES];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    return;
+}
+
+
 #pragma mark - 检测是否有默认收款卡
 -(void)theDefaultPaymentCard{
     NSLog(@"正在检测是否有默认收款卡");
     
+    NSDictionary *dataDictionary = @{@"bkcardshoudefault" : @"1"};
+    
+    NSLog(@"传的参数 :%@",dataDictionary);
+    
+    [LoadDataWithASI loadDataWithMsgbody:dataDictionary apiName:@"ApiPaychannelInfo" apiNameFunc:@"readKuaipaybkcardInfo" rolePath:@"//operation_response/msgbody/msgchild" type:PublicList completionBlock:^(id data, NSError *error)
+     {
+         [_hud hide:YES];
+         
+         //没有默认卡
+         if ([[data valueForKey:@"bkcardno"] objectAtIndex:0] == nil) {
+
+              NSLog(@"没有默认银行卡数据获取");
+             //如果没有绑定银行卡
+             if (!self.alertView) {
+                 [self SMSReceiptAlertView];//弹窗 提示添加默认卡
+             }
+             
+         //有默认卡
+         }else{
+             
+             NSLog(@"解析到的默认银行卡 :%@",data);
+             
+             for (NSDictionary *dic in data) {
+ 
+//             NSString *bkcardshoudefault = [dic objectForKey:@"bkcardisdefault"];//默认银行卡号 1:默认 0:非默认
+             
+                 self.bankLOGO.image = [UIImage imageNamed:[dic objectForKey:@"bkcardbanklogo"]] ;//银行LOGO
+                 
+                 self.bankCardNumberStr = [dic objectForKey:@"bkcardno"];//银行卡号 传参用
+                 self.accountNumbers = [dic objectForKey:@"bkcardno"];//银行卡号 传值用
+             
+                 self.bankPhoneStr = [dic objectForKey:@"bkcardbankphone"];//预留电话
+
+                 NSString *cardNumbe = self.bankCardNumberStr.length > 4? [self.bankCardNumberStr substringFromIndex:(self.bankCardNumberStr.length - 4)] : @" ";
+                 self.tailNumber.text = [NSString stringWithFormat:@"尾号:%@",cardNumbe];//尾号
+
+                 self.nameOfBank.text = [dic objectForKey:@"bkcardbank"];//银行名称
+                 self.accountName.text = [dic objectForKey:@"bkcardbankman"];//开户名
+             
+                 NSString *bkcardcardtypesStr = [dic objectForKey:@"bkcardcardtype"];//银行卡类型
+             
+                 if ([bkcardcardtypesStr isEqualToString:@"bankcard"]) {
+                    self.category.text = [NSString stringWithFormat:@"%@",@"储蓄卡" ];
+                }else if ([bkcardcardtypesStr isEqualToString:@"creditcard"]){
+                    self.category.text = [NSString stringWithFormat:@"%@",@"信用卡" ];
+                }else if ([bkcardcardtypesStr isEqualToString:@"x"]){
+                    self.category.text = [NSString stringWithFormat:@"%@",@"信用卡" ];
+                }else{
+                    self.category.text = bkcardcardtypesStr;//银行卡类别
+                }
+
+             }
+         }
+     }];
+    
+    
+/*
     NSString *name = [NLUtils getNameForRequest:Notify_ApiAuthorKuaibkcardInfoLists];
     REGISTER_NOTIFY_OBSERVER(self, checkDataForCardLists, name);
     [[[NLProtocolRequest alloc] initWithRegister:YES] getApiAuthorKuaibkcardInfoLists];
     [self showErrorInfo:@"请稍候" status:NLHUDState_None];
+*/
+ 
 }
 
-
+/*
 - (void)checkDataForCardLists:(NSNotification *)notify
 {
     NLProtocolResponse *response = (NLProtocolResponse *)notify.object;
@@ -218,6 +320,8 @@
     }
 }
 
+ 
+ 
 - (void)getApiAuthorKuaibkcardInfoListsWithResponse:(NLProtocolResponse *)response
 {
     //获取数据标记，判断是否请求成功
@@ -314,7 +418,7 @@
     }
 }
 
-
+*/
 
 -(NSString *)checkInfo:(NSString *)str
 {
@@ -338,8 +442,8 @@
     
     self.navigationItem.leftBarButtonItem = [self leftBarButtonItem];
     
-    [self theDefaultPaymentCard];//检测是否有默认收款卡
-    
+    [self showErrorInfoDefaultPaymentCard:@"请稍后" status:NLHUDState_None];//检测是否有默认收款卡
+
     [self PaymentHistoryButtonItem];//收款历史
     [self SMSReceiptTextField];//所有输入框
     [self RadioButton];
@@ -1012,26 +1116,30 @@
     [LoadDataWithASI loadDataWithMsgbody:dataDictionary apiName:@"ApiSMSReceiptInfo" apiNameFunc:@"addSMSReceipt" rolePath:@"//operation_response/msgbody" type:PublicCommon completionBlock:^(NSDictionary *data, NSError *error)
      {
          //失败
-         if (![data[@"result"] isEqualToString:@"success"]) {
-             
+         if (![data[@"message"] isEqualToString:@"发送成功"]) {
+             NSLog(@"收款失败");
+            
              if ([data[@"message"] isEqualToString:@"付款手机号码非通付宝会员！"]) {
-                 [self showErrorInfo:@"付款手机号码非通付宝会员!" status:NLHUDState_Error];
+//                 [self showErrorInfo:@"付款手机号码非通付宝会员!" status:NLHUDState_Error];
+                 [self showErrorInfo:data[@"message"] status:NLHUDState_Error];
                  [_hud hide:YES afterDelay:2];
+                 
              }else if([data[@"message"] isEqualToString:@"每日交易不能超过20000！"]){
-                 [self showErrorInfo:@"收款金额超限，请重新输入或隔日再尝试。目前，短信收款业务单笔交易不超过人民币5,000.00元，日累计不超过人民币20,000.00元。" status:NLHUDState_Error];
+//                 [self showErrorInfo:@"收款金额超限，请重新输入或隔日再尝试。目前，短信收款业务单笔交易不超过人民币5,000.00元，日累计不超过人民币20,000.00元。" status:NLHUDState_Error];
+                 [self showErrorInfo:data[@"message"] status:NLHUDState_Error];
                  [_hud hide:YES afterDelay:5];
              
              }else{
                  
-                 [self showErrorInfo:data[@"message"] status:NLHUDState_None];//@"请求失败 !"
+                 [self showErrorInfo:@"因网络原因，您当前申请的收款交易未能成功，请你稍后尝试" status:NLHUDState_Error];
                  [_hud hide:YES afterDelay:2];
              }
-             
+            
          //成功
          }else{
-             
-//             [self showErrorInfo:data[@"message"] status:NLHUDState_NoError];
-//             [_hud hide:YES afterDelay:2];
+             NSLog(@"收款成功");
+             [self showErrorInfo:@"请稍后" status:NLHUDState_NoError];
+             [_hud hide:YES afterDelay:2];
              //跳转交易通知界面
              [self tradingNotice];
          }

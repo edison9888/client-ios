@@ -29,7 +29,7 @@
 //#define SERVER_URL @"http://14.18.205.153/tfb_test/sever/getapi.php/"
 
 //正式环境屏蔽这句话
-#define TFB_LOCAL_ENVIROMENT   @"developer"
+//#define TFB_LOCAL_ENVIROMENT   @"developer"
 
 //#ifdef TFB_LOCAL_ENVIROMENT
 //
@@ -53,15 +53,15 @@
 //#define SERVER_URL @"http://192.168.0.128:8080/test/servlet/HelloWorldServlet"
 //
 //#else
-//#define SERVER_URL  @"http://www.tfbpay.cn/mobilepay/sever/getapi.php"            //正式
+#define SERVER_URL  @"http://www.tfbpay.cn/mobilepay/sever/getapi.php"            //正式
 
-#define SERVER_URL @"http://www.tfbpay.cn/tfb_test/sever/getapi.php"     //测试环境蔡玖兵
+//#define SERVER_URL @"http://www.tfbpay.cn/tfb_test/sever/getapi.php"     //测试环境蔡玖兵
 
 //#endif
 
 #define ProtocolRequestNameLoc  27
 
-#define ProtocolRequestCount  151
+#define ProtocolRequestCount  153
 
 typedef enum
 {
@@ -209,8 +209,13 @@ typedef enum
     NLProtocolRequest_GetAirlineDetail,/**/
     /*添加登机人*/
     NLProtocolRequest_SavePassenger,/**/
+    /*添加联系人*/
+    NLProtocolRequest_SaveContact,/**/
     /*读取登机人*/
     NLProtocolRequest_getPassenger,
+    /*读取联系人*/
+    NLProtocolRequest_getcontion,
+
     /*删除登机人*/
     NLProtocolRequest_deletePassenger,
     /*生成订单号*/
@@ -515,8 +520,14 @@ typedef enum
 /*添加乘机人*/
 #define Notify_SavePassenger   @"savePassenger"
 
+/*添加联系人*/
+#define Notify_SaveContact   @"saveContact"
+
 /*读取乘机人信息*/
 #define Notify_GetPassenger   @"getPassenger"
+
+/*读取联系人信息*/
+#define Notify_Getcontact   @"getContact"
 
 /*删除乘机人信息*/
 #define Notify_deletePassenger   @"deletePassenger"

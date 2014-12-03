@@ -7,6 +7,7 @@
 //
 
 #import "NLTressTableList.h"
+#import "SIAlertView.h"
 
 @implementation NLTressTableList
 
@@ -101,21 +102,34 @@
     return headView.backBtn.selected?  [[listDic valueForKey:currentlist] count] + num : 0;
 }
 
+/*长按删除*/
+-(void)longCell:(NLHistoricalAccountCell*)gesture
+{
+    SIAlertView *alert = [[SIAlertView alloc] initWithTitle:@"温馨提示"
+                                                 andMessage:[NSString stringWithFormat:@"确定删除该地址？"]];
+    [alert setTransitionStyle:SIAlertViewTransitionStyleSlideFromTop];
+    [alert addButtonWithTitle:@"取消" type:SIAlertViewButtonTypeCancel handler:^(SIAlertView *alertView) {
+    }];
+      [alert addButtonWithTitle:@"确定" type:SIAlertViewButtonTypeDefault handler:^(SIAlertView *SIAlertView){
+      }];
+    [alert show];
+
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *identifier = @"cell";
     NLHistoricalAccountCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell)
+    if (cell==nil)
     {
-        NSArray* temp = [[NSBundle mainBundle] loadNibNamed:@"NLHistoricalAccountCell" owner:self options:nil];
-        cell=[temp objectAtIndex:0];
+        cell = [[NLHistoricalAccountCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
-    else{
-        
-        [cell removeFromSuperview];//防止数据重用
-        cell= [[NLHistoricalAccountCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
-        cell.backgroundView=nil;
-    }
+//    else{
+//        
+//        [cell removeFromSuperview];//防止数据重用
+//        cell= [[NLHistoricalAccountCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
+//        cell.backgroundView=nil;
+//    }
     
     /*发放工资历史*/
     if ([indexPath row] == 0 &&_flagQian!=YES)
@@ -134,16 +148,18 @@
         lable.text= [NSString stringWithFormat:@"手机号                 姓名           本月工资"];
         
         if (![[listArr[indexPath.section] objectForKey:@"wagestanum"] isEqualToString:@"0"]) {
-            
+       
             [cell addSubview:_bgImageView];
             [_bgImageView addSubview:_lableText];
             [_bgImageView addSubview:img];
             [_bgImageView addSubview:lable];
+     
         }
-       
+
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
+       
     }
-    /*签收工资历史*/
+    /*发放工资历史*/
     else if ([indexPath row] != 0&& _flagQian!=YES)
     {
         cell.myCardNumberLabel.text = [[[listDic valueForKey:currentlist]objectAtIndex:indexPath.row-1 ]valueForKey:@"mobile"];
@@ -154,6 +170,7 @@
         }else{
             cell.myCardBankLabel.text = [[[listDic valueForKey:currentlist]objectAtIndex:indexPath.row-1 ]valueForKey:@"staname"];
         }
+        cell.listlongDelegate= self;
         cell.myCardNameLabel.text = [[[listDic valueForKey:currentlist]objectAtIndex:indexPath.row-1 ]valueForKey:@"wagemoney"];
     }
     if (_flagQian==YES) {

@@ -203,8 +203,8 @@ static NLPushViewIntoNav* gPushViewIntoNav = nil;
             break;
         case NLPushViewType_Agent:{
            
-            //代理商登录 TFAgentMainCtr
-                 vc = (UIViewController*)[[TFNewVersionAgentMainCtr alloc]init];
+            //代理商登录 TFAgentMainCtr TFNewVersionAgentMainCtr
+                 vc = (UIViewController*)[[TFAgentMainCtr alloc]init];
         }
             break;
         case NLPushViewType_AgentAddgoodsCtr:{

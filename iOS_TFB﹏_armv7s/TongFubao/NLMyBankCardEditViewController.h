@@ -13,7 +13,7 @@
 
 @interface NLMyBankCardEditViewController : UIViewController<UITextFieldDelegate,NLBankLisDelegate,/*VisaReaderDelegate,*/UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
-
+@property (nonatomic ,assign) BOOL singInFlag;/*发工资*/
 @property (nonatomic ,assign) NLMyBankCardViewController *delegate;
 
 -(void)setInitValue:(NSString*)bank no:(NSString*)no man:(NSString*)man mobile:(NSString*)mobile;

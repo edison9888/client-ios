@@ -54,7 +54,7 @@
 -(void)clik:(UIButton *)sender
 {
     UIButton *senderButton = (UIButton *)sender;
-    NSLog(@"===%d",senderButton.tag);
+//    NSLog(@"===%d",senderButton.tag);
     [senderButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     if (senderButton.tag == 0)
     {

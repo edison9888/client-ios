@@ -57,7 +57,7 @@
 //}
 -(void)nextWork
 {
-    NSLog(@"==qwqwqw====%@===%@===%@===%@===%@===%@====",self.DepartCtityShip,self.arriveCityShip,self.shipTimeCity,self.shipReturnTimeCity,self.shipSearchTypeCity,self.shipFlihtCity);
+//    NSLog(@"==qwqwqw====%@===%@===%@===%@===%@===%@====",self.DepartCtityShip,self.arriveCityShip,self.shipTimeCity,self.shipReturnTimeCity,self.shipSearchTypeCity,self.shipFlihtCity);
     
     activityView = [[PlayCustomActivityView alloc] initWithFrame:CGRectMake(0, 0, 130, 130)];
     activityView.center = self.view.center;
@@ -75,8 +75,8 @@
 {
     NLProtocolResponse *response = (NLProtocolResponse *)senderFication.object;
     int error = response.errcode;
-    NSString *string = response.detail;
-    NSLog(@"===string====%@",string);
+//    NSString *string = response.detail;
+//    NSLog(@"===string====%@",string);
     
     if (error == RSP_NO_ERROR)
     {
@@ -190,15 +190,15 @@
         
         // 更改政策说明
         self.rerNoteArray = [response.data find:@"msgbody/msgchild/rerNote"];
-        NSLog(@"====rerNoteArray======%@",self.rerNoteArray);
+//        NSLog(@"====rerNoteArray======%@",self.rerNoteArray);
         
         // 改签政策说明
         self.endNoteArray = [response.data find:@"msgbody/msgchild/endNote"];
-        NSLog(@"====endNoteArray======%@",self.endNoteArray);
+//        NSLog(@"====endNoteArray======%@",self.endNoteArray);
         
         // 退票政策说明
         self.refNoteArray = [response.data find:@"msgbody/msgchild/refNote"];
-        NSLog(@"====refNoteArray======%@",self.refNoteArray);
+//        NSLog(@"====refNoteArray======%@",self.refNoteArray);
         
         // 舱位等级
         self.classArray = [response.data find:@"msgbody/msgchild/class"];
@@ -238,7 +238,7 @@
     self.infoTextView = [[UITextView alloc]initWithFrame:CGRectMake(320, 0, 320, self.view.frame.size.height)];
     self.infoTextView.text =@"\v儿童票须知：\n1、使用儿童票的乘客：登机当天应满2周岁但未满12周岁。\v2、购买儿童票可优先使用：户口簿、身份证、护照。\n3、登机时出示的证件号码，应与订票时所填证件号码一致。\v4、儿童票为全价票的50%，机场建设费免收，燃油税减半。\v\v退改签说明：\v套餐退订：起飞前2小时以外需收取票面价5%的退票费，起飞前2小时（含）以内及起飞后需收取票面价10％的退票费（婴儿、儿童免收退票费）。套餐更改：起飞前2小时以外同等舱位免费更改，起飞前2小时（含）以内及起飞后需收取票面价5％的更改费。改期费与升舱费同时发生时，需同时收取。\v\v婴儿票须知：\v1、使用婴儿票的乘客：登机当天应满14天但未满2周岁，未满14天的婴儿不能乘机。\v2、购买婴儿票可优先使用：出生证明、户口簿、身份证、护照。\v3、登机时出示的证件号码，应与订票时所填证件号码一致。\v4、婴儿票为全价票的10%，机场建设费和燃油税免收。";
     self.infoTextView.editable = NO;
-    self.infoTextView.backgroundColor = RGBACOLOR(3, 198, 230, 0.9);
+    self.infoTextView.backgroundColor = RGBACOLOR(10, 10, 10, 0.9);
     self.infoTextView.font = [UIFont systemFontOfSize:18];
     self.infoTextView.textColor = [UIColor whiteColor];
     UISwipeGestureRecognizer *swipe=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(moveView)];

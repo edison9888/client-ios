@@ -23,7 +23,7 @@
         TimeMaxMin = newshijianca;
         self.backgroundColor = RGBACOLOR(255, 255, 255, 255);
         self.dateString = newWacthTime;
-        NSLog(@"====_dateString====%@",self.dateString);
+//        NSLog(@"====_dateString====%@",self.dateString);
         // 比较时间获取现在时间或对比时间
         self.nowTimeString = [[watchTimeObject changeTime] stringByReplacingOccurrencesOfString :@"-" withString:@""];
 
@@ -64,10 +64,10 @@
 {
     // 选择的时间
     self.dateString = newDateTime;
-    NSLog(@"======dateString====%@",self.dateString);
+//    NSLog(@"======dateString====%@",self.dateString);
 
     self.nowTimeString = [newGoTime stringByReplacingOccurrencesOfString :@"-" withString:@""];
-    NSLog(@"======nowTimeString====%@",self.nowTimeString);
+//    NSLog(@"======nowTimeString====%@",self.nowTimeString);
 
     UIButton *button = [_timeArray objectAtIndex:1];
     [button setTitle:self.dateString forState:(UIControlStateNormal)];
@@ -86,7 +86,7 @@
         if ([selectionTime integerValue] > [self.nowTimeString integerValue])
         {
             TimeMaxMin--;
-            NSLog(@"===时间变量＋＋－－==%d",TimeMaxMin);
+//            NSLog(@"===时间变量＋＋－－==%d",TimeMaxMin);
             self.dateString = [watchTimeObject returnaddTime:self.dateString number:TimeMaxMin];
             UIButton *button = [_timeArray objectAtIndex:1];
             [button setTitle:self.dateString forState:(UIControlStateNormal)];
@@ -100,8 +100,8 @@
     else if (senderButton.tag == 2)
     {
         TimeMaxMin ++;
-        NSLog(@"===222=%d",TimeMaxMin);
-        NSLog(@"====_dateString====%@",self.dateString);
+//        NSLog(@"===222=%d",TimeMaxMin);
+//        NSLog(@"====_dateString====%@",self.dateString);
         self.dateString = [watchTimeObject returnaddTime:self.dateString number:TimeMaxMin];
         UIButton *button = [_timeArray objectAtIndex:1];
         [button setTitle:self.dateString forState:(UIControlStateNormal)];

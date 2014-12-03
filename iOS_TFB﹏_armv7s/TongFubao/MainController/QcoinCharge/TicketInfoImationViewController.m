@@ -68,7 +68,7 @@
         self.infoArray = [[NSMutableArray alloc]initWithObjects:dateFrom,dateTo,timeFrom,timeTo,TicketDepartPlay,TicketInfoDepartCtity,TicketInfoArriveCity,TicketArrivePlay,playName,TicketFlihtCity,classTicket,[NSString stringWithFormat:@"￥%@", priceTicket],[NSString stringWithFormat:@"￥%@", taxTicket], [NSString stringWithFormat:@"￥%@",oilFeeTicket],nil];
         //  总价格
         self.AllPriceArray = [[NSMutableArray alloc]initWithObjects:self.priceTicket,self.oilFeeTicket,self.taxTicket,self.standardPriceChirldTicket,self.oilFeeChirldTicket,self.taxForTicket,self.standardPricebadyTicket,self.oilFeeForBabyTicket,self.taxForBabyTicket,nil];
-        NSLog(@"=====self.AllPriceArray=====%@",self.AllPriceArray);
+//        NSLog(@"=====self.AllPriceArray=====%@",self.AllPriceArray);
     }
     else
     {
@@ -244,9 +244,10 @@
     
     self.infoTextView = [[UITextView alloc]initWithFrame:CGRectMake(320, 0, 320, self.view.frame.size.height)];
     self.infoTextView.editable = NO;
-    self.infoTextView.backgroundColor = RGBACOLOR(3, 198, 230, 0.9);
+    self.infoTextView.backgroundColor = RGBACOLOR(10, 10, 10, 0.9);
     self.infoTextView.font = [UIFont systemFontOfSize:18];
     self.infoTextView.textColor = [UIColor whiteColor];
+    
     UISwipeGestureRecognizer *swipe=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(moveView)];
     swipe.direction=UISwipeGestureRecognizerDirectionRight|UISwipeGestureRecognizerDirectionLeft;
     [self.infoTextView addGestureRecognizer:swipe];
@@ -254,7 +255,7 @@
     UITapGestureRecognizer *TapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(moveView)];
     TapGestureRecognizer.numberOfTapsRequired = 1;
     [self.infoTextView addGestureRecognizer:TapGestureRecognizer];
-    self.navigationController.view.backgroundColor =RGBACOLOR(3, 198, 230, 0.9);
+    self.navigationController.view.backgroundColor = RGBACOLOR(10, 10, 10, 0.9);
     [self.navigationController.view addSubview:self.infoTextView ];
     
     if ([self.FlightType  isEqualToString:@"S"])
@@ -263,9 +264,35 @@
         _desperAriView = [[PlayFromToView alloc]initWithFrame:CGRectMake(0, 0, 320, 278) infoArray:self.infoArray];
         _desperAriView.delegate = self;
         [_ticketInfoScrollView addSubview:_desperAriView];
-        NSString *allInfo = [rerNoteTicket stringByAppendingString:endNoteTicket];
-        self.infoTextView.text = [NSString stringWithFormat:@"\v%@",allInfo];
-        NSLog(@"=======allInfo=======%@",allInfo);
+//        NSString *allInfo = [rerNoteTicket stringByAppendingString:endNoteTicket];
+//        self.infoTextView.text = [NSString stringWithFormat:@"\v%@",allInfo];
+//        NSLog(@"=======allInfo=======%@",allInfo);
+        
+        NSArray *array=@[@"更改政策说明",rerNoteTicket,@"改签政策说明",endNoteTicket,@"退票政策说明",refNoteTicket];
+        CGFloat firstHeigth = 30.0;
+        for (int i=0; i<6; i++) {
+            UILabel *weiXinLabel=[[UILabel alloc]init];
+            weiXinLabel.text=array[i];
+            weiXinLabel.textColor = [UIColor whiteColor];
+            NSDictionary *dictionar=@{NSFontAttributeName: [UIFont systemFontOfSize:17]};
+            CGSize weiSize=[array[i] boundingRectWithSize:CGSizeMake(280, 480) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:dictionar context:nil].size;
+            weiXinLabel.frame=CGRectMake(0, firstHeigth, 320, weiSize.height+20);
+            firstHeigth+=weiSize.height+20;
+            
+            weiXinLabel.tag=i;
+            if (weiXinLabel.tag==0 || weiXinLabel.tag==2 || weiXinLabel.tag==4) {
+                weiXinLabel.backgroundColor=RGBACOLOR(100, 100, 100, 0.6);
+            }
+            else{
+                weiXinLabel.backgroundColor=[UIColor clearColor];
+            }
+            //换行
+            weiXinLabel.numberOfLines=0;
+            weiXinLabel.lineBreakMode=NSLineBreakByWordWrapping;
+            [self.infoTextView addSubview:weiXinLabel];
+        }
+        
+
         
     }
     else
@@ -274,12 +301,33 @@
         _ReturnPlayAriView = [[ReturnPlayView alloc]initWithFrame:CGRectMake(0, 0, 320, 350) firstSecondArray:self.allPlayInfo];
         _ReturnPlayAriView.delegate = self;
         [_ticketInfoScrollView addSubview:_ReturnPlayAriView];
-        NSString *allInfo = [[self.airPlayInfoArray objectAtIndex:3] stringByAppendingString:[self.airPlayInfoArray objectAtIndex:4]];
+//        NSString *allInfo = [[self.airPlayInfoArray objectAtIndex:3] stringByAppendingString:[self.airPlayInfoArray objectAtIndex:4]];
         
-        self.infoTextView.text =  [NSString stringWithFormat:@"\v%@",allInfo];;
-        NSLog(@"=======allInfo=======%@",allInfo);
-        
-        
+//        self.infoTextView.text =  [NSString stringWithFormat:@"\v%@",allInfo];;
+//        NSLog(@"=======allInfo=======%@",allInfo);
+        NSArray *array=@[@"更改政策说明",[self.airPlayInfoArray objectAtIndex:2],@"改签政策说明",[self.airPlayInfoArray objectAtIndex:3],@"退票政策说明",[self.airPlayInfoArray objectAtIndex:4]];
+        CGFloat firstHeigth = 30.0;
+        for (int i=0; i<6; i++) {
+            UILabel *weiXinLabel=[[UILabel alloc]init];
+            weiXinLabel.text=array[i];
+            weiXinLabel.textColor = [UIColor whiteColor];
+            NSDictionary *dictionar=@{NSFontAttributeName: [UIFont systemFontOfSize:17]};
+            CGSize weiSize=[array[i] boundingRectWithSize:CGSizeMake(280, 480) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:dictionar context:nil].size;
+            weiXinLabel.frame=CGRectMake(0, firstHeigth, 320, weiSize.height+20);
+            firstHeigth+=weiSize.height+20;
+            
+            weiXinLabel.tag=i;
+            if (weiXinLabel.tag==0 || weiXinLabel.tag==2 || weiXinLabel.tag==4) {
+                weiXinLabel.backgroundColor=RGBACOLOR(100, 100, 100, 0.6);
+            }
+            else{
+                weiXinLabel.backgroundColor=[UIColor clearColor];
+            }
+            //换行
+            weiXinLabel.numberOfLines=0;
+            weiXinLabel.lineBreakMode=NSLineBreakByWordWrapping;
+            [self.infoTextView addSubview:weiXinLabel];
+        }
     }
     
     SingleHighBack = [self.FlightType  isEqualToString:@"S"] ? (_desperAriView.frame.origin.y+_desperAriView.frame.size.height):(_ReturnPlayAriView.frame.origin.y+_ReturnPlayAriView.frame.size.height);
@@ -416,7 +464,7 @@
             // 价钱
             ticketInfoView.allPriceBillsArray = self.AllPriceArray;
             ticketInfoView.styGoBack = @"S";
-            NSLog(@"======AllPriceArray====%@",self.AllPriceArray);
+//            NSLog(@"======AllPriceArray====%@",self.AllPriceArray);
             
             //        ticketInfoView.TicketBillFlightInformation = self.TicketdAllFlightInformation;
             

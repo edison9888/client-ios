@@ -13,8 +13,7 @@
 #import "HistoricalRecordViewController.h"
 #import "watchTimeObject.h"
 #import "RoundTriprReservationViewController.h"
-
-
+//#import "NLUtils.h"
 #import "CalendarHomeViewController.h"
 #import "CalendarViewController.h"
 @interface AirTicketViewController ()
@@ -46,15 +45,15 @@
 // 查询选择时间后同步
 -(void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"-------_timeArray------%@",_timeArray);
+//    NSLog(@"-------_timeArray------%@",_timeArray);
     NSString *fromDeaults = [[NSUserDefaults standardUserDefaults] objectForKey:@"FromTime"];
     NSString *toDeaults = [[NSUserDefaults standardUserDefaults] objectForKey:@"ToTime"];
 
     NSString *_dateString = [watchTimeObject changeTime];
     NSString *nowTimeString = [_dateString stringByReplacingOccurrencesOfString :@"-" withString:@""];
     NSString * selectionTime = [fromDeaults stringByReplacingOccurrencesOfString :@"-" withString:@""];
-    NSLog(@"====nowTimeString====%@",nowTimeString);
-    NSLog(@"====selectionTime====%@",selectionTime);
+//    NSLog(@"====nowTimeString====%@",nowTimeString);
+//    NSLog(@"====selectionTime====%@",selectionTime);
 
     if ([fromDeaults length] > 0)
     {
@@ -73,7 +72,6 @@
     
     if ([toDeaults length] > 0)
     {
-        
     UIButton *button1 = [_timeArray objectAtIndex:1];
     NSComparisonResult comparison = [fromDeaults compare:toDeaults];
     if (comparison == NSOrderedAscending || comparison == NSOrderedSame)

@@ -132,7 +132,7 @@
     [vc addSubview:label6];
     
     
-    table = [[UITableView alloc]initWithFrame:CGRectMake(0, 224, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+    table = [[UITableView alloc]initWithFrame:CGRectMake(0, 224, self.view.frame.size.width, 344) style:UITableViewStylePlain];
     table.delegate = self;
     table.dataSource = self;
     [self.view addSubview:table];

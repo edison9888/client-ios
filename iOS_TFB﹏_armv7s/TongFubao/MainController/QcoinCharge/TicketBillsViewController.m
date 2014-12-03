@@ -121,8 +121,8 @@
     
     self.ContactIdArray = contactId;
     
-    NSLog(@"========perSonIdArray=========%@",self.perSonIdArray);
-    NSLog(@"========ContactIdArray=========%@",self.ContactIdArray);
+//    NSLog(@"========perSonIdArray=========%@",self.perSonIdArray);
+//    NSLog(@"========ContactIdArray=========%@",self.ContactIdArray);
     // 插卡
     [self initVisaReader];
 
@@ -342,35 +342,35 @@
         //银行卡号
         NLProtocolData* bkcardnoCheck = [response.data find:@"msgbody/bkcardno" index:0];
         bkcardnoCheckStr = bkcardnoCheck.value;
-        NSLog(@"=======bkcardnoCheckStr=======%@",bkcardnoCheckStr);
+//        NSLog(@"=======bkcardnoCheckStr=======%@",bkcardnoCheckStr);
 
         //执卡人
         NLProtocolData* bkcardmanCheck = [response.data find:@"msgbody/bkcardman" index:0];
         bkcardmanCheckStr = bkcardmanCheck.value;
-        NSLog(@"=======bkcardmanCheckStr=======%@",bkcardmanCheckStr);
+//        NSLog(@"=======bkcardmanCheckStr=======%@",bkcardmanCheckStr);
 
         
         //预留手机号码
         NLProtocolData* bkcardphoneCheck = [response.data find:@"msgbody/bkcardphone" index:0];
         bkcardphoneStr = bkcardphoneCheck.value;
-        NSLog(@"=======bkcardphoneStr=======%@",bkcardphoneStr);
+//        NSLog(@"=======bkcardphoneStr=======%@",bkcardphoneStr);
 
         
         //银行id
         NLProtocolData* bkcardbankidCheck = [response.data find:@"msgbody/bkcardbankid" index:0];
         bkcardbankidCheckStr = bkcardbankidCheck.value;
-        NSLog(@"=======bkcardbankidCheckStr=======%@",bkcardbankidCheckStr);
+//        NSLog(@"=======bkcardbankidCheckStr=======%@",bkcardbankidCheckStr);
 
         
         //银行名
         NLProtocolData* bkcardbanknameCheck = [response.data find:@"msgbody/bkcardbankname" index:0];
         bkcardbanknameStr = bkcardbanknameCheck.value;
-        NSLog(@"=======bkcardbanknameStr=======%@",bkcardbanknameStr);
+//        NSLog(@"=======bkcardbanknameStr=======%@",bkcardbanknameStr);
 
         //有效月
         NLProtocolData* bkcardyxmonthCheck = [response.data find:@"msgbody/bkcardyxmonth" index:0];
         bkcardyxmonthStr = bkcardyxmonthCheck.value;
-        NSLog(@"=======bkcardyxmonthStr=======%@",bkcardyxmonthStr);
+//        NSLog(@"=======bkcardyxmonthStr=======%@",bkcardyxmonthStr);
 
         if ([bkcardyxmonthCheck.value length]==1)
         {
@@ -388,27 +388,27 @@
             bkcardyxyearStr = [NSString stringWithFormat:@"20%@",bkcardyxyearCheck.value];
         }
 
-        NSLog(@"=======bkcardyxyearStr=======%@",bkcardyxyearStr);
+//        NSLog(@"=======bkcardyxyearStr=======%@",bkcardyxyearStr);
         
         //CVV校验
         NLProtocolData* bkcardcvvCheck = [response.data find:@"msgbody/bkcardcvv" index:0];
         bkcardcvvStr = bkcardcvvCheck.value;
-        NSLog(@"=======bkcardcvvStr=======%@",bkcardcvvStr);
+//        NSLog(@"=======bkcardcvvStr=======%@",bkcardcvvStr);
 
         //身份证
         NLProtocolData* bkcardidcardCheck = [response.data find:@"msgbody/bkcardidcard" index:0];
         bkcardidcardStr = bkcardidcardCheck.value;
-        NSLog(@"=======bkcardidcardStr=======%@",bkcardidcardStr);
+//        NSLog(@"=======bkcardidcardStr=======%@",bkcardidcardStr);
 
         //银行卡类型
         NLProtocolData* bkcardtypeCheck = [response.data find:@"msgbody/bkcardtype" index:0];
         bkcardtypeStr = bkcardtypeCheck.value;
-        NSLog(@"=======bkcardtypeStr=======%@",bkcardtypeStr);
+//        NSLog(@"=======bkcardtypeStr=======%@",bkcardtypeStr);
 
         //银行卡类型
         NLProtocolData* bkcardtypeCCT = [response.data find:@"msgbody/ctripbankctt" index:0];
         bkcardtypeCCTStr = bkcardtypeCCT.value;
-        NSLog(@"=======bkcardtypeCCTStr=======%@",bkcardtypeCCTStr);
+//        NSLog(@"=======bkcardtypeCCTStr=======%@",bkcardtypeCCTStr);
         //刷卡状态
         SHUAKA = YES;
 
@@ -417,15 +417,15 @@
         {
             NSString *validityStr = [bkcardyxyearStr stringByAppendingString:bkcardyxmonthStr];
             self.carYearMonth = validityStr;
-            NSLog(@"=======self.carYearMonth111=======%@",self.carYearMonth);
+//            NSLog(@"=======self.carYearMonth111=======%@",self.carYearMonth);
             self.carYearMonth = [bkcardyxyearStr stringByAppendingString:bkcardyxmonthStr];
             NSMutableArray *personArray = [[NSMutableArray alloc]initWithObjects:bkcardnoCheckStr,self.carYearMonth,bkcardcvvStr,bkcardmanCheckStr,@"1", bkcardidcardStr,bkcardphoneStr, bkcardbanknameStr,bkcardtypeCCTStr,nil];
-            NSLog(@"=======personArray=======%@",personArray);
+//            NSLog(@"=======personArray=======%@",personArray);
             
-            for (NSString *STRING in personArray)
-            {
-                NSLog(@"====STRING===%@",STRING);
-            }
+//            for (NSString *STRING in personArray)
+//            {
+////                NSLog(@"====STRING===%@",STRING);
+//            }
             if ([personArray count] == 9)
             {
                 self.sureInfoArray =personArray;
@@ -495,7 +495,7 @@
     {
         NLProtocolData* data = [response.data find:@"msgbody/message" index:0];
         NSString* value = data.value;
-        NSLog(@"======value====%@",value);
+//        NSLog(@"======value====%@",value);
     }
     else
     {
@@ -548,14 +548,14 @@
         }
         NSString *validityStr = [_bkcardyxyears stringByAppendingString:_bkcardyxmonths];
         self.carYearMonth = validityStr;
-        NSLog(@"=======self.carYearMonth000=======%@",self.carYearMonth);
+//        NSLog(@"=======self.carYearMonth000=======%@",self.carYearMonth);
         
         
         
         //预留电话
         NLProtocolData* bkcardbankphonesData = [response.data find:@"msgbody/msgchild/bkcardbankphone" index:0];
         _bkcardbankphones = bkcardbankphonesData.value;
-        NSLog(@"=======_bkcardbankphones=======%@",_bkcardbankphones);
+//        NSLog(@"=======_bkcardbankphones=======%@",_bkcardbankphones);
 
         
         
@@ -576,7 +576,7 @@
         //cct
         NLProtocolData* bkcardbankcctData = [response.data find:@"msgbody/msgchild/ctripbankctt" index:0];
         _bkcardbankcct = bkcardbankcctData.value;
-        NSLog(@"=======_bkcardbankcct=======%@",_bkcardbankcct);
+//        NSLog(@"=======_bkcardbankcct=======%@",_bkcardbankcct);
         
         
         //        NSLog(@"==%@===%@===%@==%@===%@==%@===%@===%@====%@====%@====%@===%@=",_bankString,
@@ -592,7 +592,7 @@
         //              _bkcardbankmans,_bkcardyxmonths);
         NSString *bankYm = [NSString stringWithFormat:@"%@－%@",_bkcardyxyears,_bkcardyxmonths];
         NSMutableArray *bankInfoArray = [[NSMutableArray alloc]initWithObjects:_bkcardnos,bankYm,_bkcardcvv,_bkcardbankman,@"1",_bkcardnos,_bkcardbankphones,_bankString, _bkcardbankcct,nil];
-        NSLog(@"======bankInfoArray=====%@",bankInfoArray);
+//        NSLog(@"======bankInfoArray=====%@",bankInfoArray);
         self.sureInfoArray =bankInfoArray;
         // 判断1是有默认卡
         STY = 1;
@@ -619,10 +619,10 @@
     [_scrollView setContentSize:CGSizeMake(self.view.frame.size.width, 650)];
     [self.view addSubview:_scrollView];
     
-    NSArray *infoArray = @[@"账单信息",@"总票价(元)",@"总基建(元)",@"总油费(元)",@"总票数(张)",@"总金额(元)"];
+    NSArray *infoArray = @[@"账单信息",@"总票价(元)",@"总机建(元)",@"总燃油费(元)",@"总票数(张)",@"总金额(元)"];
     ticketPriceObject *ticketObject = [[ticketPriceObject alloc]init];
     int ADULT = 0,CHILDREN = 0,BABY = 0;
-    NSLog(@"===========TicketBillsArray=======%d",[self.TicketBillsArray count]);
+    //    NSLog(@"===========TicketBillsArray=======%d",[self.TicketBillsArray count]);
     for (int i = 0; i < [self.TicketBillsArray count]; i++)
     {
         if ([[[self.TicketBillsArray objectAtIndex:i] objectAtIndex:4] isEqualToString:@"1" ])
@@ -638,12 +638,10 @@
             BABY++;
         }
     }
-    //  每张票价信息
-//    NSLog(@"=========asdfasdf========%d",[self.TicketBillsArray count]);
+       //  每张票价信息
+      //NSLog(@"=========asdfasdf========%d",[self.TicketBillsArray count]);
     
-    
-    
-    //    NSLog(@"========self.TicketBillsArray======%@",self.TicketBillsArray);
+     //    NSLog(@"========self.TicketBillsArray======%@",self.TicketBillsArray);
     //    NSLog(@"========allPriceBillsArray======%@",allPriceBillsArray);
     
     
@@ -659,7 +657,7 @@
         // 所有费用
         priceOilTax = priceInteger + OilInteger + TaxInteger;
         
-        _moneyArray = @[[NSString stringWithFormat:@"￥%d",priceInteger],[NSString stringWithFormat:@"￥%d",OilInteger],[NSString stringWithFormat:@"￥%d",TaxInteger],[NSString stringWithFormat:@"%d张", [self.TicketBillsArray count]]];
+        _moneyArray = @[[NSString stringWithFormat:@"￥%d",priceInteger],[NSString stringWithFormat:@"￥%d",TaxInteger],[NSString stringWithFormat:@"￥%d",OilInteger],[NSString stringWithFormat:@"%d张", [self.TicketBillsArray count]]];
     }
     else
     {
@@ -687,7 +685,7 @@
         
         priceOilTax = gopriceOilTax + backpriceOilTax;
         
-        _moneyArray = @[[NSString stringWithFormat:@"￥%d",priceInteger + backpriceInteger],[NSString stringWithFormat:@"￥%d",OilInteger + backOilInteger],[NSString stringWithFormat:@"￥%d",TaxInteger + backTaxInteger],[NSString stringWithFormat:@"%d张", [self.TicketBillsArray count]*2]];
+        _moneyArray = @[[NSString stringWithFormat:@"￥%d",priceInteger + backpriceInteger],[NSString stringWithFormat:@"￥%d",TaxInteger + backTaxInteger],[NSString stringWithFormat:@"￥%d",OilInteger + backOilInteger],[NSString stringWithFormat:@"%d张", [self.TicketBillsArray count]*2]];
     }
     
     
@@ -739,7 +737,7 @@
     zhifuLabel.backgroundColor = [UIColor clearColor];
     zhifuLabel.textColor = RGBACOLOR(19, 193, 245, 1);
     zhifuLabel.font = [UIFont boldSystemFontOfSize:20];
-    zhifuLabel.text =  @"账户信息";
+    zhifuLabel.text =  @"支付信息";
     [_scrollView addSubview:zhifuLabel];
     
     
@@ -875,11 +873,12 @@
     
     
     UIButton *selecButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    selecButton.frame = CGRectMake(190, 425, 120, 40);
-    selecButton.backgroundColor = RGBACOLOR(19, 195, 245, 1);
-    selecButton.layer.masksToBounds = YES;
-    selecButton.layer.cornerRadius = 2;
-    [selecButton setTitle:@"选择付款卡" forState:(UIControlStateNormal)];
+    selecButton.frame = CGRectMake(250, 430, 50, 30);
+//    selecButton.backgroundColor = RGBACOLOR(19, 195, 245, 1);
+//    selecButton.layer.masksToBounds = YES;
+//    selecButton.layer.cornerRadius = 2;
+    [selecButton setImage:[UIImage imageNamed:@"SMS_cardicon@2x.png"] forState:(UIControlStateNormal)];
+//    [selecButton setTitle:@"选择付款卡" forState:(UIControlStateNormal)];
     [selecButton addTarget:self action:@selector(SeleButton) forControlEvents:(UIControlEventTouchUpInside)];
     [_scrollView addSubview:selecButton];
     
@@ -911,13 +910,13 @@
     _imageview1.frame=CGRectMake(250, 0, 60, 40);
     _carText.rightView=_imageview1;
     _carText.rightViewMode=UITextFieldViewModeAlways;
-    _carText.placeholder = @"请输入卡号";
+    _carText.placeholder = @"请刷卡或输入卡号";
     _carText.keyboardType = UIKeyboardTypeNumberPad;
     [_scrollView addSubview:_carText];
     
     UIButton *sureButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     sureButton.frame = CGRectMake(10, 545, 300, 45);
-    sureButton.titleLabel.text = @"确认提交";
+    sureButton.titleLabel.text = @"前往信用卡支付";
     sureButton.layer.masksToBounds = YES;
     sureButton.layer.cornerRadius = 5;
     sureButton.titleLabel.font = [UIFont boldSystemFontOfSize:20];
@@ -951,7 +950,7 @@
         
         NSString *bankYm = [NSString stringWithFormat:@"%@－%@",_bkcardyxyears,_bkcardyxmonths];
         NSMutableArray *bankInfoArray = [[NSMutableArray alloc]initWithObjects:_bkcardnos,bankYm,_bkcardcvv,_bkcardbankman,@"1",_bkcardnos,_bkcardbankphones,_bankString, _bkcardbankcct,nil];
-        NSLog(@"======bankInfoArray=====%@",bankInfoArray);
+//        NSLog(@"======bankInfoArray=====%@",bankInfoArray);
         NSString *validityStr = [_bkcardyxyears stringByAppendingString:_bkcardyxmonths];
         self.carYearMonth = validityStr;
         self.sureInfoArray =bankInfoArray;
@@ -1021,18 +1020,18 @@
 {
     // 选卡状态
     PushState = YES;
-    NSLog(@"====flag===%d",flag);
+//    NSLog(@"====flag===%d",flag);
     self.carYearMonth = [[person valueForKey:@"bkcardyxyears"]stringByAppendingString:[person valueForKey:@"bkcardyxmonths"]];
-    NSLog(@"=======self.carYearMonth=======%@",self.carYearMonth);
+//    NSLog(@"=======self.carYearMonth=======%@",self.carYearMonth);
     
     
     NSString *cardYM = [NSString stringWithFormat:@"%@%@",[person valueForKey:@"bkcardyxyears"],[person valueForKey:@"bkcardyxmonths"]];
     NSMutableArray *personArray = [[NSMutableArray alloc]initWithObjects:[person valueForKey:@"bkcardnos"],cardYM,[person valueForKey:@"bkcardcvvs"],[person valueForKey:@"bkcardbankmans"],@"1", [person valueForKey:@"bkcardidcards"],[person valueForKey:@"bkcardbankphones"], [person valueForKey:@"bkcardbanks"],[person valueForKey:@"bkcardbankcctp"],nil];
 
-    for (NSString *STRING in personArray)
-    {
-        NSLog(@"====STRING===%@",STRING);
-    }
+//    for (NSString *STRING in personArray)
+//    {
+//        NSLog(@"====STRING===%@",STRING);
+//    }
     if ([person valueForKey:@"bkcardbankcctp"] > 0) {
         self.sureInfoArray = personArray;
     }
@@ -1120,7 +1119,7 @@
     
     NSString *name = [NLUtils getNameForRequest:Notify_createOrder];
     REGISTER_NOTIFY_OBSERVER(self, GetcreateOrder, name);
-    NSLog(@"=====sureInfoArray=====%@",self.sureInfoArray);
+//    NSLog(@"=====sureInfoArray=====%@",self.sureInfoArray);
     
     //    NSLog(@"========perSonIdArray=========%@",self.perSonIdArray);
     //    NSLog(@"========ContactIdArray=========%@",self.ContactIdArray);
@@ -1128,8 +1127,9 @@
     //    _bkcardyxmonths = bkcardyxmonthsData.value;
     
     
-    NSLog(@"=======self.carYearMonth=======%@",self.carYearMonth);
+//    NSLog(@"=======self.carYearMonth=======%@",self.carYearMonth);
     // 票,乘机人,联系人,卡
+    NSLog(@"=====TicketBillId======%@===backTicketId====%@=======",self.TicketBillId,self.backTicketId);
     [[[NLProtocolRequest alloc]initWithRegister:YES] TicketBillId:self.TicketBillId  backTicketId:self.backTicketId  styGoBack:self.styGoBack perSonIdArray:self.perSonIdArray ContactIdArray:self.ContactIdArray   payinfoCardInfoArray:self.sureInfoArray validity:self.carYearMonth amount:[NSString stringWithFormat:@"%d",priceOilTax]];
 }
 
@@ -1137,8 +1137,8 @@
 {
     NLProtocolResponse *response = (NLProtocolResponse *)senderFication.object;
     int error = response.errcode;
-    NSString *string = response.detail;
-    NSLog(@"===string====%@",string);
+//    NSString *string = response.detail;
+//    NSLog(@"===string====%@",string);
 
     
     if (error == RSP_NO_ERROR)
@@ -1170,7 +1170,7 @@
     {
         //获取错误信息
         NLProtocolData *errorData = [response.data find:@"msgbody/message" index:0];
-        NSLog(@"errorData = %@",errorData);
+//        NSLog(@"errorData = %@",errorData);
     }
     else
     {
@@ -1178,7 +1178,7 @@
         NSArray *OrderIdArray = [response.data find:@"msgbody/orderId"];
         NLProtocolData *OrderIdCode = [OrderIdArray objectAtIndex:0];
         self.OrderId  = OrderIdCode.value;
-        NSLog(@"=====OrderId=====%@",self.OrderId);
+//        NSLog(@"=====OrderId=====%@",self.OrderId);
         
 //        NSArray *verifyArray = [response.data find:@"msgbody/verifyCode"];
 //        NLProtocolData *verifyCode = [verifyArray objectAtIndex:0];
@@ -1203,7 +1203,7 @@
 
 
         UITextField *alertViewText=[alertView textFieldAtIndex:0];
-        NSLog(@"=====alertViewText=====%@",alertViewText.text);
+//        NSLog(@"=====alertViewText=====%@",alertViewText.text);
         if ([alertView textFieldAtIndex:0] > 0)
         {
             if (buttonIndex == 0)
@@ -1245,8 +1245,8 @@
     }
     else
     {
-        NSString *string = response.detail;
-        NSLog(@"===string====%@",string);
+//        NSString *string = response.detail;
+//        NSLog(@"===string====%@",string);
         UIAlertView *AlertView = [[UIAlertView alloc]initWithTitle:@"温馨提示!" message:@"交易不成功!" delegate:nil cancelButtonTitle:@"请退出" otherButtonTitles:nil, nil];
         AlertView.tag = 21;
         [AlertView show];
@@ -1262,7 +1262,7 @@
     NLProtocolData *data = [response.data find:@"msgbody/result" index:0];
     NSString *result = data.value;
     NSRange range = [result rangeOfString:@"succ"];
-    NSLog(@"===result====%@",result);
+//    NSLog(@"===result====%@",result);
     if ([result isEqualToString:@"success"])
     {
         UIAlertView *AlertView = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"恭喜您,下单成功,30分钟内完成扣款，请耐心等待，客服会尽快给您确认！" delegate:nil cancelButtonTitle:@"请退出" otherButtonTitles:nil, nil];

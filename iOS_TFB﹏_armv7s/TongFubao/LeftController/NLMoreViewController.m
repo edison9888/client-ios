@@ -268,9 +268,9 @@
                 }
             
             /*新版
-            NLUserSettingViewNew *use=  [[NLUserSettingViewNew alloc] initWithNibName:@"NLUserSettingViewNew" bundle:nil];
-            
-            [self.navigationController pushViewController:use animated:YES];*/
+            NLUserSettingViewNew *vc=  [[NLUserSettingViewNew alloc] initWithNibName:@"NLUserSettingViewNew" bundle:nil];
+            */
+            [self.navigationController pushViewController:vc animated:YES];
             
         }
             break;

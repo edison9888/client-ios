@@ -41,6 +41,7 @@
 @property (nonatomic,strong) UILabel *totalDeviceNum;
 @property (nonatomic,strong) UILabel *totalUserNum;
 @property (nonatomic,strong) UILabel *estimatedIncomeLabel; /*雨*/
+@property (nonatomic,strong) UILabel *todayLabel; /*雨*/
 
 @property (nonatomic,strong) NSString *todayEarnStr;
 @property (nonatomic,strong) NSString *totalEarnStr;
@@ -102,7 +103,7 @@
     _monthSellNumStr = @"0";  //本月出售设备
     _totalDeviceNumStr = @"0"; //总设备
     _totalUserNumStr = @"0";
-    self.agentsNo = @"0"; /*雨*/
+    self.agentsNo = @""; /*雨*/
     self.estimatedIncome = @"0"; /*雨*/
 }
 
@@ -148,12 +149,13 @@
     [earnFlag setImage:[UIImage imageNamed:@"board"]];
     [topImgView addSubview:earnFlag];
     
-    UILabel *todayLabel = [[UILabel alloc]initWithFrame:CGRectMake(27, 13, 270, 20)];
-    todayLabel.textColor = [UIColor whiteColor];
-    todayLabel.backgroundColor = [UIColor clearColor];
-    todayLabel.font = [UIFont fontWithName:TFB_FONT size:14];
-    todayLabel.text = [NSString stringWithFormat:@"代理商%@, 您今天的收益（元）",self.agentsNo];
-    [topImgView addSubview:todayLabel];
+    self.todayLabel = [[UILabel alloc]initWithFrame:CGRectMake(27, 13, 270, 20)];
+    self.todayLabel.textColor = [UIColor whiteColor];
+    self.todayLabel.backgroundColor = [UIColor clearColor];
+    self.todayLabel.font = [UIFont fontWithName:TFB_FONT size:14];
+//    self.todayLabel.text = [NSString stringWithFormat:@"代理商%@, 您今天的收益（元）",self.agentsNo];
+    self.todayLabel.text = [NSString stringWithFormat:@"%@",@"您今天的收益（元）"];
+    [topImgView addSubview:self.todayLabel];
     
     _todayEarn = [[UILabel alloc]initWithFrame:CGRectMake(4, 35, 300, 80)];
     _todayEarn.font = [UIFont fontWithName:TFB_FONT size:62.0f];
@@ -167,7 +169,7 @@
     self.estimatedIncomeLabel.textColor = [UIColor redColor];
     self.estimatedIncomeLabel.font = [UIFont fontWithName:TFB_FONT size:14];
     self.estimatedIncomeLabel.text = [NSString stringWithFormat:@"(+%@)",self.estimatedIncome ];
-    [topImgView addSubview:self.estimatedIncomeLabel];
+//    [topImgView addSubview:self.estimatedIncomeLabel];
     
     _totalEarn = [[UILabel alloc]initWithFrame:CGRectMake(8, 131, 290, 25)];
     _totalEarn.font = [UIFont fontWithName:TFB_FONT size:16];
@@ -449,9 +451,13 @@
         
         data = [response.data find:@"msgbody/todayyufenrun" index:0];//预计收入 /*雨*/
         self.estimatedIncome = data.value;
-        if ([self.estimatedIncome isEqualToString:@""]) {
+        if (self.estimatedIncome.length <=0) {
             self.estimatedIncome = @"0";
         }
+        
+        
+//        self.todayLabel.text = [NSString stringWithFormat:@"代理商%@, 您今天的收益（元）",self.agentsNo];//代理商号 /*雨*/
+//        self.estimatedIncomeLabel.text = [NSString stringWithFormat:@"(+%@)",self.estimatedIncome ];//预计收入 /*雨*/
         
         
         //本区用户数 /销售数量 (正式 虚拟)

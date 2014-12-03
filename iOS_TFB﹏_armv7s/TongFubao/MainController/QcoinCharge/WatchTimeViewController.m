@@ -63,7 +63,7 @@
     [dateformat setDateFormat:@"yyyy-MM-dd"];
     //当前的时间格式
     NSString * newDateOne = [dateformat stringFromDate:date];
-    NSLog(@"=====newDateOne=====%@",newDateOne);
+//    NSLog(@"=====newDateOne=====%@",newDateOne);
     [self.delegate returnTime:newDateOne seletionWatchLogo:watchLogo];
     [self.navigationController popViewControllerAnimated:YES];
     

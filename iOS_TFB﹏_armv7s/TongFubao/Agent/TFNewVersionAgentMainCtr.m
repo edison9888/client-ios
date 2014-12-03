@@ -11,6 +11,7 @@
 #import "ACTwoAgentsViewController.h"
 #import "ACAuthorizationCodeAssignmentViewController.h"
 #import "ACMoreModulesViewController.h"
+#import "ApplyAgentViewControllerNew.h"
 
 #import "TFAgentSearchCtr.h"
 #import "TFAgentBookCardCtr.h"
@@ -19,17 +20,27 @@
 @interface TFNewVersionAgentMainCtr ()
 {
     NLProgressHUD *_hud;
-    UIScrollView *scrollView;
-    UIButton *functionButton[6];
-    UILabel *onTheSameDayReturn[9];
+    UIScrollView *scrollView;//整体滚动视图
+    UIScrollView *underTheVC;//下部滚动视图
+    UIButton *functionButton[6];//正式代理商的功能入口
+    UIButton *virtualFunctionButton[2];//虚拟代理商的功能入口
+    UILabel *onTheSameDayReturn[9];//共用的上部视图
+    UIImageView *onTheSameDayReturnImage[9];//上部视图底图
     UILabel *theAreaOfHistoryAndTotalRevenue;//本区历史总收益
     UILabel *inThisAreaTheNumberOfUsers;//本区用户数
+    UILabel *otsdr;//代理商号
+    UILabel *anticipatedRevenue;//预计收入
+
+    
+    
     
     /*下面4个属性都是导航条的*/
     UIImageView *backgroundView;
     UIImageView *titleImgView;
     UIImageView *backImageView;
     UIButton *backButton;
+    
+    
 }
 
 
@@ -56,11 +67,13 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.totalRevenue = @"0.00";//本区历史总收益
     self.theNumberOfUsers = @"0";//本区用户数
-    self.onTheSameDayReturns = @"0";//代理商号
+    self.onTheSameDayReturns = @"";//代理商号
     self.anticipatedRevenues = @"0.00";//新增收益
     //前面补足钱标￥ 后面如果没有小数点 自动补足.00 当金额超过9个字符的时候需要加个判断 不然显示不完整
     self.amountOfMoneys = @"￥0.00";//当天收益
  
+    
+    
     
     scrollView = [[UIScrollView alloc]initWithFrame:self.view.frame];
     scrollView.backgroundColor = RGBACOLOR(223, 223, 223, 1.0);
@@ -70,8 +83,19 @@
     scrollView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:scrollView];
     
+    
     [self upView];//上部视图
-    [self underTheView];//下部视图
+    
+    
+    NSLog(@"代理商类型 :%@   1:正式代理商  2:虚拟代理商",[NLUtils getAgenttypeid]);
+    
+    // 1:正式代理商  2:虚拟代理商
+    /*备注: 登陆接口会返回一个agenttypeid的字段 0:普通用户  1:正式代理商用户  2:虚拟代理山用户*/
+//    if ([[NLUtils getAgenttypeid]isEqualToString:@"1"]) {
+        [self underTheView];//正式代理商下部视图
+//    }else if([[NLUtils getAgenttypeid]isEqualToString:@"2"]){
+//        [self virtualAgentsUnderTheView];//虚拟代理商下部视图
+//    }
     
     
     [self showErrorInfo:@"请稍候" status:NLHUDState_None];
@@ -142,8 +166,8 @@
             NSLog(@"解析成功 \n%@",data);
             
             //前面补足钱标￥ 后面如果没有小数点 自动补足.00 当金额超过9个字符的时候需要加个判断 不然显示不完整
-            NSString *string1 = @"￥";
-            NSString *string2 = @"￥";
+            NSString *string1 = @"";
+            NSString *string2 = @"";
             NSString *string3 = @"￥";
             
             //本区历史总收益
@@ -155,18 +179,22 @@
                 string1 = [string1 stringByAppendingFormat:@"%@%@",str1,@".00"];
             }
             self.totalRevenue = string1;
-            
+            theAreaOfHistoryAndTotalRevenue.text = self.totalRevenue;
             
             //本区用户数
             self.theNumberOfUsers = [data objectForKey:@"areaauthornum"];
-            
+            inThisAreaTheNumberOfUsers.text = self.theNumberOfUsers;
             
             //代理商号
             self.onTheSameDayReturns = [data objectForKey:@"agentno"];
+            otsdr.text = [NSString stringWithFormat:@"代理商%@,您今天的收益",self.onTheSameDayReturns];
             
             
-            //新增收益
-            NSString *str2 = [data objectForKey:@"areapaycardnum"];
+            //预计收益
+            NSString *str2 = [data objectForKey:@"todayyufenrun"];
+            if ([str2 isEqualToString:@""]) {
+                str2 = @"0";
+            }
             if ([str2 rangeOfString:@"."].location != NSNotFound) {
                 string2 = [string2 stringByAppendingFormat:@"%@",str2];
                 
@@ -174,6 +202,7 @@
                 string2 = [string2 stringByAppendingFormat:@"%@%@",str2,@".00"];
             }
             self.anticipatedRevenues = string2;
+            anticipatedRevenue.text = [NSString stringWithFormat:@"( +%@ )",self.anticipatedRevenues];
             
             
             //当天收益
@@ -185,7 +214,24 @@
                 string3 = [string3 stringByAppendingFormat:@"%@%@",str3,@".00"];
             }
             self.amountOfMoneys = string3;
-
+            
+            for (int c=1 ; c<(int)self.amountOfMoneys.length+1; c++) {
+                
+                NSString *newString = [self.amountOfMoneys substringFromIndex:[self.amountOfMoneys length] - c];
+                self.toString = [newString substringToIndex:1];
+                
+                NSLog(@"最后一个字符 %@",self.toString);
+                int y=9;
+                
+                onTheSameDayReturn[y-c].text = self.toString;
+                
+            }
+            
+            
+            
+            NSLog(@"本区历史总收益:%@,本区用户数:%@,代理商号:%@,预计收益:%@,当天收益:%@",self.totalRevenue,self.theNumberOfUsers,self.onTheSameDayReturns,self.anticipatedRevenues,self.amountOfMoneys);
+            
+//agentlevel  代理商等级	1代表1级代理商 2代表2级代理商 如果无代表旧数据，默认当作1
             
             /*
              agentlevel = 1;
@@ -267,30 +313,34 @@
 #pragma mark - 上部视图
 -(void)upView{
     
-    UIView *upVC = [[UIView alloc]initWithFrame:CGRectMake(scrollView.frame.origin.x
+    UIImageView *upVC = [[UIImageView alloc]initWithFrame:CGRectMake(scrollView.frame.origin.x
                                                            , scrollView.frame.origin.y, scrollView.frame.size.width, 242)];
-    upVC.backgroundColor = RGBACOLOR(71, 136, 187, 1.0);
+//    upVC.backgroundColor = RGBACOLOR(71, 136, 187, 1.0);
+    upVC.image = [UIImage imageNamed:@"AC_polyBG"];
     [scrollView addSubview:upVC];
     
     /*******今天收益*******/
     
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 25, 300, 125)];
-    imageView.backgroundColor = RGBACOLOR(117, 174, 208, 1.0);
+    imageView.image = [UIImage imageNamed:@"AC_crystalBG"];
+//    imageView.backgroundColor = RGBACOLOR(117, 174, 208, 1.0);
     [upVC addSubview:imageView];
     
-    UILabel *otsdr = [[UILabel alloc]initWithFrame:CGRectMake(50, 6, 230, 15)];
+    //代理商号
+    otsdr = [[UILabel alloc]initWithFrame:CGRectMake(50, 6, 230, 15)];
     //    otsdr.backgroundColor = [UIColor redColor];
     otsdr.text = [NSString stringWithFormat:@"代理商%@,您今天的收益",self.onTheSameDayReturns];
     otsdr.font = [UIFont systemFontOfSize:14];
     otsdr.textColor = RGBACOLOR(27, 71, 128, 1.0);
     [imageView addSubview:otsdr];
     
-    UIImageView *imageViewDiTu1 = [[UIImageView alloc]initWithFrame:CGRectMake(20, 24, 245, 2)];
-    imageViewDiTu1.backgroundColor = RGBACOLOR(186, 211, 227, 1.0);
+    UIImageView *imageViewDiTu1 = [[UIImageView alloc]initWithFrame:CGRectMake(20, 25, 245, 1)];// AC_line_on_bg
+    imageViewDiTu1.image = [UIImage imageNamed:@"AC_line_on_crystal"];
+//    imageViewDiTu1.backgroundColor = RGBACOLOR(186, 211, 227, 1.0);
     [imageView addSubview:imageViewDiTu1];
     
-    
-    UILabel *anticipatedRevenue = [[UILabel alloc]initWithFrame:CGRectMake(99, 104, 190, 15)];
+    //预计收入
+    anticipatedRevenue = [[UILabel alloc]initWithFrame:CGRectMake(99, 104, 190, 15)];
     //    anticipatedRevenue.backgroundColor = [UIColor redColor];
     anticipatedRevenue.text = [NSString stringWithFormat:@"( +%@ )",self.anticipatedRevenues];
     anticipatedRevenue.textAlignment = NSTextAlignmentRight;
@@ -298,8 +348,9 @@
     anticipatedRevenue.textColor = RGBACOLOR(206, 36, 39, 1.0);
     [imageView addSubview:anticipatedRevenue];
     
-    UIImageView *image = [[UIImageView alloc]initWithFrame:CGRectMake(10, 39, 280, 60)];
-    image.backgroundColor = RGBACOLOR(194, 204, 207, 1.0);
+    UIImageView *image = [[UIImageView alloc]initWithFrame:CGRectMake(10, 38, 280, 61)];
+    image.image = [UIImage imageNamed:@"AC_counterBG"];
+//    image.backgroundColor = RGBACOLOR(194, 204, 207, 1.0);
     [imageView addSubview:image];
     
     NSLog(@"amountOfMoneys %@",self.amountOfMoneys);
@@ -307,50 +358,26 @@
     
     
     for (int i=0; i<9; i++) {
+        
+        onTheSameDayReturnImage[i] = [[UIImageView alloc]initWithFrame:CGRectMake(5+30*i, 5, 30, 50)];
+        onTheSameDayReturnImage[i].tag = 7140+i;
+        if (onTheSameDayReturnImage[i].tag == 7140) {
+            onTheSameDayReturnImage[i].image = [UIImage imageNamed:@"AC_counter_left"];
+        }else if(onTheSameDayReturnImage[i].tag == 7148){
+            onTheSameDayReturnImage[i].image = [UIImage imageNamed:@"AC_counter_right"];
+        }else{
+            onTheSameDayReturnImage[i].image = [UIImage imageNamed:@"AC_counter_middle"];
+        }
+        
+        [image addSubview:onTheSameDayReturnImage[i]];
+        
+        
         onTheSameDayReturn[i] = [[UILabel alloc]initWithFrame:CGRectMake(5+30*i, 5, 30, 50)];
-        onTheSameDayReturn[i].backgroundColor = [UIColor yellowColor];
+        onTheSameDayReturn[i].backgroundColor = [UIColor clearColor];
         onTheSameDayReturn[i].textColor = [UIColor whiteColor];
         onTheSameDayReturn[i].textAlignment = NSTextAlignmentCenter;
         onTheSameDayReturn[i].font = [UIFont systemFontOfSize:37];
         onTheSameDayReturn[i].tag = 7150+i;
-        
-        
-        
-        
-        switch (onTheSameDayReturn[i].tag) {
-            case 7150:
-                onTheSameDayReturn[i].backgroundColor = RGBACOLOR(234, 133, 51, 1.0);
-                break;
-            case 7151:
-                onTheSameDayReturn[i].backgroundColor = RGBACOLOR(240, 166, 65, 1.0);
-                break;
-            case 7152:
-                onTheSameDayReturn[i].backgroundColor = RGBACOLOR(234, 133, 51, 1.0);
-                break;
-            case 7153:
-                onTheSameDayReturn[i].backgroundColor = RGBACOLOR(240, 166, 65, 1.0);
-                break;
-            case 7154:
-                onTheSameDayReturn[i].backgroundColor = RGBACOLOR(234, 133, 51, 1.0);
-                break;
-            case 7155:
-                onTheSameDayReturn[i].backgroundColor = RGBACOLOR(240, 166, 65, 1.0);
-                break;
-            case 7156:
-                onTheSameDayReturn[i].backgroundColor = RGBACOLOR(234, 133, 51, 1.0);
-                break;
-            case 7157:
-                onTheSameDayReturn[i].backgroundColor = RGBACOLOR(240, 166, 65, 1.0);
-                break;
-            case 7158:
-                onTheSameDayReturn[i].backgroundColor = RGBACOLOR(234, 133, 51, 1.0);
-                break;
-                
-            default:
-                break;
-        }
-        
-        
         [image addSubview:onTheSameDayReturn[i]];
     }
     
@@ -359,7 +386,7 @@
         NSString *newString = [self.amountOfMoneys substringFromIndex:[self.amountOfMoneys length] - c];
         self.toString = [newString substringToIndex:1];
         
-        NSLog(@"最后一个字符 %@",self.toString);
+//        NSLog(@"最后一个字符 %@",self.toString);
         int y=9;
         
         onTheSameDayReturn[y-c].text = self.toString;
@@ -408,19 +435,21 @@
     inThisAreaTheNumberOfUsers.font = [UIFont boldSystemFontOfSize:22];
     [upVC addSubview:inThisAreaTheNumberOfUsers];
     
-    UIImageView *imageViewDiTu2 = [[UIImageView alloc]initWithFrame:CGRectMake(10, 168, 300, 2)];
-    imageViewDiTu2.backgroundColor = RGBACOLOR(144, 178, 203, 1.0);
+    UIImageView *imageViewDiTu2 = [[UIImageView alloc]initWithFrame:CGRectMake(10, 168, 300, 1)];
+    imageViewDiTu2.image = [UIImage imageNamed:@"AC_line_on_crystal"];
+//    imageViewDiTu2.backgroundColor = RGBACOLOR(144, 178, 203, 1.0);
     [upVC addSubview:imageViewDiTu2];
     
-    UIImageView *imageViewDiTu3 = [[UIImageView alloc]initWithFrame:CGRectMake(171, 176, 2, 55)];
-    imageViewDiTu3.backgroundColor = RGBACOLOR(142, 182, 211, 1.0);
+    UIImageView *imageViewDiTu3 = [[UIImageView alloc]initWithFrame:CGRectMake(171, 176, 1, 55)];
+    imageViewDiTu3.image = [UIImage imageNamed:@"AC_partline"];
+//    imageViewDiTu3.backgroundColor = RGBACOLOR(142, 182, 211, 1.0);
     [upVC addSubview:imageViewDiTu3];
 }
 
-#pragma mark - 下部视图
+#pragma mark - 正式代理商下部视图
 -(void)underTheView{
     
-    UIScrollView *underTheVC = [[UIScrollView alloc]initWithFrame:CGRectMake(scrollView.frame.origin.x, 242, scrollView.frame.size.width, 270)];
+    underTheVC = [[UIScrollView alloc]initWithFrame:CGRectMake(scrollView.frame.origin.x, 242, scrollView.frame.size.width, 270)];
     underTheVC.backgroundColor = RGBACOLOR(223, 223, 223, 1.0);
     [scrollView addSubview:underTheVC];
     
@@ -438,32 +467,38 @@
         switch (functionButton[i].tag) {
             case 7110:
                 [functionButton[i] setTitle:@"历史收益" forState:UIControlStateNormal];
-                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"bank1"] forState:UIControlStateNormal];
+                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"AC_history_normal"] forState:UIControlStateNormal];
+                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"AC_history_normal"] forState:UIControlStateHighlighted];
                 [functionButton[i] addTarget:self action:@selector(tapHistoricalReturn:) forControlEvents:UIControlEventTouchUpInside];
                 break;
             case 7111:
                 [functionButton[i] setTitle:@"购买刷卡器" forState:UIControlStateNormal];
-                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"bank2"] forState:UIControlStateNormal];
+                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"AC_tfbskq_normal"] forState:UIControlStateNormal];
+                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"AC_tfbskq_selected"] forState:UIControlStateHighlighted];
                 [functionButton[i] addTarget:self action:@selector(tapBuyACardReader:) forControlEvents:UIControlEventTouchUpInside];
                 break;
             case 7112:
                 [functionButton[i] setTitle:@"分配授权码" forState:UIControlStateNormal];
-                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"bank3"] forState:UIControlStateNormal];
+                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"AC_fpsqm_normal"] forState:UIControlStateNormal];
+                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"AC_fpsqm_selected"] forState:UIControlStateHighlighted];
                 [functionButton[i] addTarget:self action:@selector(tapTheDistributionOfTheAuthorizationCode:) forControlEvents:UIControlEventTouchUpInside];
                 break;
             case 7113:
                 [functionButton[i] setTitle:@"二级代理商" forState:UIControlStateNormal];
-                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"bank4"] forState:UIControlStateNormal];
+                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"AC_ejdls_normal"] forState:UIControlStateNormal];
+                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"AC_ejdls_selected"] forState:UIControlStateHighlighted];
                 [functionButton[i] addTarget:self action:@selector(tapTwoaAgents:) forControlEvents:UIControlEventTouchUpInside];
                 break;
             case 7114:
                 [functionButton[i] setTitle:@"订购优惠卡" forState:UIControlStateNormal];
-                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"bank15"] forState:UIControlStateNormal];
+                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"AC_ejdls_normal"] forState:UIControlStateNormal];
+                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"AC_ejdls_selected"] forState:UIControlStateHighlighted];
                 [functionButton[i] addTarget:self action:@selector(tapTheFormalApplication:) forControlEvents:UIControlEventTouchUpInside];
                 break;
             case 7115:
                 [functionButton[i] setTitle:@"更多模块" forState:UIControlStateNormal];
-                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"bank101"] forState:UIControlStateNormal];
+                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"AC_more_normal"] forState:UIControlStateNormal];
+                [functionButton[i] setBackgroundImage:[UIImage imageNamed:@"AC_more_selected"] forState:UIControlStateHighlighted];
                 [functionButton[i] addTarget:self action:@selector(tapMoreModules:) forControlEvents:UIControlEventTouchUpInside];
                 break;
             default:
@@ -473,16 +508,14 @@
         
     }
     
-    
-    
 }
 
 #pragma mark - 历史收益
 -(void)tapHistoricalReturn:(UIButton *)btn{
     NSLog(@"历史收益");
     
-    TFAgentSearchCtr *agentSearchCtr = [[TFAgentSearchCtr alloc]init];
-    [self jumpViewController:self newViewController:agentSearchCtr PushAndPresent:YES];
+    TFAgentSearchCtr *vc = [[TFAgentSearchCtr alloc]init];
+    [self jumpViewController:self newViewController:vc PushAndPresent:YES];
 //    agentSearchCtr.title = @"查询历史收益";
 //    [agentSearchCtr addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
     //    MainViewController *agentSearchCtr = [[MainViewController alloc]init];
@@ -523,10 +556,19 @@
 -(void)tapTheFormalApplication:(UIButton *)btn{
     NSLog(@"订购优惠卡");
     
-    TFAgentBookCardCtr *bookcardView = [[TFAgentBookCardCtr alloc]init];
-    [bookcardView setTitle:@"汇通卡订购"];
-    [self jumpViewController:self newViewController:bookcardView PushAndPresent:YES];
+    TFAgentBookCardCtr *vc = [[TFAgentBookCardCtr alloc]init];
+    [vc setTitle:@"汇通卡订购"];
+    [self jumpViewController:self newViewController:vc PushAndPresent:YES];
     
+}
+
+
+#pragma mark - 正式申请
+-(void)tapFormalApplication:(UIButton *)btn{
+    NSLog(@"正式申请");
+    
+    ApplyAgentViewControllerNew *vc = [[ApplyAgentViewControllerNew alloc] init];
+    [self jumpViewController:self newViewController:vc PushAndPresent:YES];
 }
 
 
@@ -542,13 +584,62 @@
 
 #pragma mark - 跳转主页
 -(void)tapHome:(UIButton *)btn{
-    
     NSLog(@"主页");
     
     NLAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     
     [delegate backToMain];
 }
+
+
+
+
+#pragma mark - 虚拟代理商下部视图
+-(void)virtualAgentsUnderTheView{
+    
+    underTheVC = [[UIScrollView alloc]initWithFrame:CGRectMake(scrollView.frame.origin.x, 242, scrollView.frame.size.width, 270)];
+    underTheVC.backgroundColor = RGBACOLOR(223, 223, 223, 1.0);
+    [scrollView addSubview:underTheVC];
+    
+    for (int i=0; i<3; i++) {
+        
+        virtualFunctionButton[i] = [[UIButton alloc]initWithFrame:CGRectMake((i%3)*(78+30)+13, 18, 78, 78)];
+        [virtualFunctionButton[i] setTitleColor:RGBACOLOR(22, 52, 81, 1.0) forState:UIControlStateNormal];
+        [virtualFunctionButton[i] setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, -105, 0.0)];
+        [virtualFunctionButton[i].titleLabel setTextAlignment:NSTextAlignmentCenter];
+        [virtualFunctionButton[i].titleLabel setFont:[UIFont systemFontOfSize: 15.0]];
+        virtualFunctionButton[i].tag = 7170+i;
+        
+        switch (virtualFunctionButton[i].tag) {
+            case 7170:
+                [virtualFunctionButton[i] setTitle:@"历史收益" forState:UIControlStateNormal];
+                [virtualFunctionButton[i] setBackgroundImage:[UIImage imageNamed:@"AC_history_normal"] forState:UIControlStateNormal];
+                [virtualFunctionButton[i] setBackgroundImage:[UIImage imageNamed:@"AC_history_normal"] forState:UIControlStateHighlighted];
+                [virtualFunctionButton[i] addTarget:self action:@selector(tapHistoricalReturn:) forControlEvents:UIControlEventTouchUpInside];
+                break;
+            case 7171:
+                [virtualFunctionButton[i] setTitle:@"正式申请" forState:UIControlStateNormal];
+                [virtualFunctionButton[i] setBackgroundImage:[UIImage imageNamed:@"normalAC_application_normal"] forState:UIControlStateNormal];
+                [virtualFunctionButton[i] setBackgroundImage:[UIImage imageNamed:@"AC_application_selected"] forState:UIControlStateHighlighted];
+                [virtualFunctionButton[i] addTarget:self action:@selector(tapFormalApplication:) forControlEvents:UIControlEventTouchUpInside];
+                break;
+
+            case 7172:
+                [virtualFunctionButton[i] setTitle:@"更多模块" forState:UIControlStateNormal];
+                [virtualFunctionButton[i] setBackgroundImage:[UIImage imageNamed:@"AC_more_normal"] forState:UIControlStateNormal];
+                [virtualFunctionButton[i] setBackgroundImage:[UIImage imageNamed:@"AC_more_selected"] forState:UIControlStateHighlighted];
+                [virtualFunctionButton[i] addTarget:self action:@selector(tapMoreModules:) forControlEvents:UIControlEventTouchUpInside];
+                break;
+            default:
+                break;
+        }
+        [underTheVC addSubview:virtualFunctionButton[i]];
+    }
+}
+
+
+
+
 
 - (void)didReceiveMemoryWarning
 {

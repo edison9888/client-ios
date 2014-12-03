@@ -503,10 +503,15 @@
 
 // 添加乘机人
 - (NLProtocolData*)getSavePassengerNameXML:(NSString*)newSavePassengerName SavePassengerCardType:(NSString*)newSavePassengerCardType SavePassengerCardId:(NSString*)newSavePassengerCardId phoneNumber:(NSString*)newPhoneNumber passengerType:(NSString*)newPassengerType birthdayXML:(NSString *)newBirthDay;
+// 添加联系人
+- (NLProtocolData*)getcontactNameXML:(NSString*)newcontactName SavecontactCardType:(NSString*)newcontactCardType SavecontactCardId:(NSString*)newcontactCardId phonecontactNumber:(NSString*)newcontactPhoneNumber contactpassengerType:(NSString*)newcontactPassengerType contactbirthdayXML:(NSString *)newcontactBirthDay;
 
 
 // 读取乘机人信息
 - (NLProtocolData*)getPlayPassengerInfo:(NSString*)newPlayPassengerInfo;
+// 读取联系人信息
+- (NLProtocolData*)getPlayContactTypeInfo:(NSString*)newContactType;
+
 
 // 删除乘机人信息
 - (NLProtocolData *)getdeletcetionPassengerIdXML:(NSString *)newPassengerIdXML  deletcetionPassengerTypeXML:(NSString *)newdeletcetionPassengerXML;

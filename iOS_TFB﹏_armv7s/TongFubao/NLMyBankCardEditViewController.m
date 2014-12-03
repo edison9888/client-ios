@@ -78,6 +78,7 @@
 
 -(void)viewOther
 {
+    /*这是收款银行卡*/
     self.navigationController.topViewController.title = @"收款银行卡";
     UITapGestureRecognizer *oneFingerTwoTaps = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                        action:@selector(oneFingerTwoTaps)];
@@ -99,6 +100,25 @@
     [self viewOther];
     [self mainview];
     [self readAuBkCardInfo];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    BOOL retValue = YES;
+    
+    if([[textField text] length] - range.length + string.length > 19 && textField ==  infoView[0].infoText)
+    {
+        retValue=NO;
+    }
+    if([[textField text] length] - range.length + string.length > 5 && textField ==  infoView[2].infoText)
+    {
+        retValue=NO;
+    }
+    if([[textField text] length] - range.length + string.length > 11 && textField ==  infoView[3].infoText)
+    {
+        retValue=NO;
+    }
+    return retValue;
 }
 
 /*以前界面太恶心了重新做啊 呔 直接hidden原来的代码*/
@@ -129,7 +149,7 @@
         infoView[i].infoText.placeholder  = infoTexts[i];
         infoView[i].infoText.delegate     = self;
         infoView[i].infoText.tag          = 3838+i;
-        infoView[i].infoText.font         = [UIFont systemFontOfSize:15.0];
+        infoView[i].infoText.font         = [UIFont systemFontOfSize: i==0 ? 14.5 : 15.0];
         infoView[i].infoText.keyboardType = i == 0 || i == 3 ? UIKeyboardTypeNumberPad : UIKeyboardTypeDefault;
         [infoBasicView addSubview:infoView[i]];
         
@@ -623,7 +643,14 @@
 
 -(void)goBack
 {
-    [self dismissModalViewControllerAnimated:YES];
+    /*发工资*/
+    if (_singInFlag == YES) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else
+    {
+          [self dismissModalViewControllerAnimated:YES];
+    }
+  
 //    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

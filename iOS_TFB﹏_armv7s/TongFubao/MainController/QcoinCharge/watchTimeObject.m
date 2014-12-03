@@ -35,7 +35,7 @@
 
     //当前的时间格式
     NSString * newDateOne = [dateformat stringFromDate:shijian];
-    NSLog(@"====newDateOne====%@",newDateOne);
+//    NSLog(@"====newDateOne====%@",newDateOne);
     return newDateOne;
     
 }
@@ -46,7 +46,7 @@
     NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];//实例化一个NSDateFormatter对象
     [dateFormat setDateFormat:@"yyyy-MM-dd"];//设定时间格式,这里可以设置成自己需要的格式
     NSDate *date =[dateFormat dateFromString:nowselectionTime];
-    NSLog(@"++++++date+++++++%@",date);
+//    NSLog(@"++++++date+++++++%@",date);
     
     NSTimeInterval terval=[date timeIntervalSince1970];
     NSCalendar *cal=[NSCalendar currentCalendar];

@@ -104,7 +104,6 @@ static NSInteger clickOneNumber = 1;
             _cellButton.selected = NO;
         }
         clickNumber++;
-        NSLog(@"======sdfasdf=======");
     }
 
       else  if (Sender.tag == 1)

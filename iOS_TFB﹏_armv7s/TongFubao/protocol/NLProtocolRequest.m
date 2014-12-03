@@ -1479,7 +1479,6 @@
     
 }
 // 添加乘机人
-
 - (void)savePassengerName:(NSString*)newSavePassengerName savePassengerCardType:(NSString*)newSavePassengerCardType savePassengerCardId:(NSString*)newSavePassengerCardId savePassengerPhoneNumber:(NSString*)newsavePassengerPhoneNumber savePassengerPassengerType:(NSString *)newSavePassengerPassengerType birthday:(NSString *)newBirthDay
 {
     BOOL send= [self preRequest:NLProtocolRequest_SavePassenger name:Notify_SavePassenger];
@@ -1492,6 +1491,19 @@
     }
     
 }
+//添加联系人
+- (void)savecontactName:(NSString*)newSavecontactName savecontactCardType:(NSString*)newSavecontactCardType savecontactCardId:(NSString*)newcontactCardId savecontactPhoneNumber:(NSString*)newcontactPhoneNumber savecontactType:(NSString *)newSavecontactPassengerType contactbirthday:(NSString *)newcontactBirthDay
+{
+    BOOL send= [self preRequest:NLProtocolRequest_SaveContact name:Notify_SaveContact];
+    if (!send)
+    {
+        NLProtocolData *pd= [[NLProtocolXML shareProtocolXML]getSavePassengerNameXML:newSavecontactName SavePassengerCardType:newSavecontactCardType SavePassengerCardId:newcontactCardId phoneNumber:newcontactPhoneNumber passengerType:newSavecontactPassengerType birthdayXML:newcontactBirthDay];
+        
+        [_request startRequest:pd action:Notify_SaveContact];
+    }
+    
+}
+
 // 读取乘机人
 - (void)getPassengerType:(NSString *)newPassengerType
 {
@@ -1503,6 +1515,19 @@
         
         [_request startRequest:pd action:Notify_GetPassenger];
     }
+}
+// 读取联系人
+- (void)getContactType:(NSString *)newContactType
+{
+    BOOL send= [self preRequest:NLProtocolRequest_getcontion name:Notify_Getcontact];
+    
+    if (!send)
+    {
+        NLProtocolData *pd= [[NLProtocolXML shareProtocolXML]getPlayContactTypeInfo:newContactType];
+        
+        [_request startRequest:pd action:Notify_Getcontact];
+    }
+
 }
 // 删除乘机人
 - (void)getdeletcetionPassengerId:(NSString *)newPassengerId  deletcetionPassengerType:(NSString *)newdeletcetionPassenger

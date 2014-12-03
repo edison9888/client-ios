@@ -104,11 +104,12 @@ void UIImageFromURLUse( NSURL * URL, void (^imageBlock)(UIImage * image), void (
 
 -(void)mainView
 {
-    self.title= @"用户信息设置";
+    self.title= @"用户信息登记";
     [self addRightButtonItemWithTitle:@"提交审核"];
     _scroller.contentSize = CGSizeMake(SelfWidth, 504);
     myDownImage = [[NLAsynImageView alloc]init];
     array       = [NSMutableArray array];
+    imageModel  = [[UIImageView alloc]init];
     
 }
 
@@ -292,7 +293,7 @@ void UIImageFromURLUse( NSURL * URL, void (^imageBlock)(UIImage * image), void (
         [array addObject:[NSDictionary dictionaryWithObjectsAndKeys:uploadmethodStr,@"uploadmethod",pictypeStr,@"pictype",picpathStr,@"picpath",uploadpictypeStr,@"uploadpictype",uploadurlStr,@"uploadurl",picidStr,@"picid",nil]];
         
         UIImageFromURLUse([NSURL URLWithString:picpathStr], ^(UIImage *image) {
-            
+           
             /*1正面 2反面 9自拍 4营业执照*/
             imageModel = ([uploadpictypeStr isEqualToString:@"1"] ? _cardidIG : [uploadpictypeStr isEqualToString:@"2"] ? _cardid2IG : [uploadpictypeStr isEqualToString:@"9"] ? _vipCardidIG : _vipLicenseIG );
        
@@ -309,9 +310,8 @@ void UIImageFromURLUse( NSURL * URL, void (^imageBlock)(UIImage * image), void (
 {
     if ([self checkNoPictureInfo])
     {
-//         [self modifyAuthorInfo];
-//         [self doUploadUserUpPictureInfor];
-        [self doUploadUserUpPictureInforNew];
+         [self modifyAuthorInfo];
+  
     }
 }
 
@@ -321,14 +321,12 @@ void UIImageFromURLUse( NSURL * URL, void (^imageBlock)(UIImage * image), void (
     NSString* document = [NLSandboxFile GetDocumentPath];
     NSString* path = nil;
     NSDictionary* dic = nil;
+    /*是否选取图片*/
     if (_up_image_name.length > 0)
     {
-        for (int i=0; i<array.count; i++)
-        {
-            path = [NSString stringWithFormat:@"%@/%@",document,_up_image_name];
-            dic = [NSDictionary dictionaryWithObjectsAndKeys:[array valueForKey:@"uploadurl"][i],@"url",path,@"path",nil];
-            [NSThread detachNewThreadSelector:@selector(uploadPicture:) toTarget:self withObject:dic];
-        }
+        path = [NSString stringWithFormat:@"%@/%@",document,_up_image_name];
+        dic = [NSDictionary dictionaryWithObjectsAndKeys:[array valueForKey:@"uploadurl"][0],@"url",path,@"path",nil];
+        [NSThread detachNewThreadSelector:@selector(uploadPicture:) toTarget:self withObject:dic];
     }
 
 }
@@ -566,19 +564,27 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     NSString* document = [NLSandboxFile GetDocumentPath];
     NSString* path = nil;
-    /*多次请求bug修改*/
-  for (int i=0; i<array.count; i++) {
   
-      _up_image_name = [NSString stringWithFormat:@"%@_%@_%@.jpg",[NLUtils getRegisterMobile], [array valueForKey:@"uploadpictype"][i],[NLUtils get_req_time]];
-      path = [NSString stringWithFormat:@"%@/%@",document,_up_image_name];
-      NSData* data = UIImageJPEGRepresentation(image, 1.0);
-      [data writeToFile:path atomically:YES];
-  }
- 
     /*我感觉我太机智了*/
-    UIImageView *imageStr = (sender == 2 ? _cardidIG : sender == 3 ? _cardid2IG : sender == 4 ? _vipCardidIG : _vipLicenseIG );
-    imageStr.image= image;
-
+    UIImageView *imageMore = (sender == 2 ? _cardidIG : sender == 3 ? _cardid2IG : sender == 4 ? _vipCardidIG : _vipLicenseIG );
+    imageMore.image= image;
+    
+    NSString *imageStr;
+    if ((imageStr = (sender == 2 ? [array valueForKey:@"uploadpictype"][0] : sender == 3 ? [array valueForKey:@"uploadpictype"][1] : sender == 4 ? [array valueForKey:@"uploadpictype"][2] : [array valueForKey:@"uploadpictype"][3] )))
+    {
+        _up_image_name = [NSString stringWithFormat:@"%@_%@_%@.jpg",[NLUtils getRegisterMobile], imageStr,[NLUtils get_req_time]];
+        path = [NSString stringWithFormat:@"%@/%@",document,_up_image_name];
+        NSData* data = UIImageJPEGRepresentation(image, 1.0);
+        [data writeToFile:path atomically:YES];
+    }
+    
+//  for (int i=0; i<array.count; i++) {
+//  
+//      _up_image_name = [NSString stringWithFormat:@"%@_%@_%@.jpg",[NLUtils getRegisterMobile], [array valueForKey:@"picid"][i],[NLUtils get_req_time]];
+//      path = [NSString stringWithFormat:@"%@/%@",document,_up_image_name];
+//      NSData* data = UIImageJPEGRepresentation(imageStr.image, 1.0);
+//      [data writeToFile:path atomically:YES];
+//  }
 }
 
 -(void)setDownImage:(UIImage *)image pathUrl:(NSString *)pathUrl

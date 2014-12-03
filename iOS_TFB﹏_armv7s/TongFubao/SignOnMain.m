@@ -98,7 +98,36 @@
          [_hud hide:YES];
          NSLog(@"reqxml %@",data);
          if (![data[@"result"]  isEqualToString:@"success"]) {
-             [NLUtils showAlertView:@"提 示" message:data[@"message"] delegate:self tag:1 cancelBtn:@"返回" other:@"确定"];
+            
+             NSRange range = [data[@"message"] rangeOfString:@"未补充"];
+             //审批
+             if (range.length > 0)/*>0 <=不正确*/
+             {
+                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提 示"
+                                                                 message:data[@"message"]
+                                                                delegate:self
+                                                       cancelButtonTitle:@"返回"
+                                                       otherButtonTitles:@"确定",nil];
+                 [alert showWithCompletionHandler:^(NSInteger buttonIndex) {
+                     NSLog(@"选择的按钮%d",buttonIndex);
+                     switch (buttonIndex) {
+                         case 1:
+                         {
+                             NLMyBankCardEditViewController *bank=[[NLMyBankCardEditViewController alloc]init];
+                             bank.singInFlag= YES;
+                             [self.navigationController pushViewController:bank animated:YES];
+                         }
+                             break;
+                             
+                         default:
+                             break;
+                     }
+                 }];
+             }else
+             {
+                 [NLUtils showAlertView:@"提 示" message:data[@"message"] delegate:self tag:1 cancelBtn:nil other:@"确 定"];
+             }
+            
          }else{
              NSRange range = [data[@"message"] rangeOfString:@"绑定"];
            //审批
@@ -360,6 +389,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    /*
+     id thisClass = [[NSClassFromString(@"NLMyBankCardEditViewController") alloc] initWithNibName:@"NLMyBankCardEditViewController" bundle:nil];
+     [self.navigationController pushViewController:thisClass animated:YES];
+     */
 }
 
 @end

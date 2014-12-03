@@ -88,6 +88,9 @@
 {
     NLProtocolResponse *response = (NLProtocolResponse *)senderFication.object;
     int error = response.errcode;
+    NSString *string = response.detail;
+    NSLog(@"===string===%@",string);
+
     
     if (error == RSP_NO_ERROR)
     {
@@ -131,8 +134,6 @@
         
     }
 
-    NSString *string = response.detail;
-    NSLog(@"===string====%@",string);
     [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
     [_activityView removeFromSuperview];
 }
@@ -289,7 +290,7 @@
         // 筛选数据
         self.PaiXuaAllArray = combinationPaiXuaAllArray;
         self.temporaryPaiXuaAllArray = combinationPaiXuaAllArray;
-        NSLog(@"=====temporaryPaiXuaAllArray=====%@",self.temporaryPaiXuaAllArray);
+//        NSLog(@"=====temporaryPaiXuaAllArray=====%@",self.temporaryPaiXuaAllArray);
     }
     
     // 活动指示器
@@ -630,10 +631,12 @@
 
     NSString *fromTimeData = [[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:0] substringWithRange:NSMakeRange(11, 5)];
     NSString *toTimeData = [[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:1] substringWithRange:NSMakeRange(11, 5)];
-    NSString *chaotoTimeData = [[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:1] substringWithRange:NSMakeRange(11, 1)];
+    NSString *fromtoTimeData = [[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:0] substringWithRange:NSMakeRange(8, 2)];
+//    NSLog(@"====fromtoTimeData===%@",fromtoTimeData);
+    NSString *chaotoTimeData = [[[self.PaiXuaAllArray objectAtIndex:indexPath.row] objectAtIndex:1] substringWithRange:NSMakeRange(8, 2)];
 //    NSLog(@"====chaotoTimeData===%@",chaotoTimeData);
     NSString *addString ;
-    if ([chaotoTimeData isEqualToString:@"0"])
+    if ([fromtoTimeData intValue] < [chaotoTimeData intValue])
     {
         addString= @"(次)";
     }
@@ -720,13 +723,13 @@
     shippingSpaceView.ShippingCtity = self.BookingDepartCity;
     // 到达城市
     shippingSpaceView.ShippingarriveCity = self.BookingArriveCity;
-    NSLog(@"==shipDepartCity==%@===shipArriveCity=%@",dPortNameData,aPortNameData);
+//    NSLog(@"==shipDepartCity==%@===shipArriveCity=%@",dPortNameData,aPortNameData);
 
     // 起飞城市id
     shippingSpaceView.ShippingFromCtityId = self.cityIDFromBookin;
     // 到达城市id
     shippingSpaceView.ShippingToArriveCityId = self.cityIDToBooking;
-    NSLog(@"====%@====%@",airLineCodeData,craftTypeData);
+//    NSLog(@"====%@====%@",airLineCodeData,craftTypeData);
     [self.navigationController pushViewController:shippingSpaceView animated:YES];
 }
 

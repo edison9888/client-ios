@@ -20,7 +20,7 @@
 
 @implementation AddContactPersonViewController
 
-@synthesize CellDateArray,teger,ticketArray,CellButtonArray;
+@synthesize CellDateArray,teger,ticketArray;
 
 
 
@@ -37,26 +37,30 @@
 {
     [super viewDidLoad];
     self.CellButtonArray = [[NSMutableArray alloc]init];
+
     // 导航
     [self navigationView];
     [self allControllerView];
     
     [self DownloadOnlineContacts];
-
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(message:) name:@"添加联系人" object:nil];
     
 }
-//#pragma mark --- 通知
+//-(void)viewDidAppear:(BOOL)animated
+//{
+//    self.CellDateArray  = [[NSMutableArray alloc]init];
+//    [self DownloadOnlineContacts];
+//}
+#pragma mark --- 通知
 //-(void)message:(NSNotification*)aNotification
 //{
-//    [self.CellButtonArray removeAllObjects];
 //    [self DownloadOnlineContacts];
 //}
 -(void)UpdateAddSelectionPersonPassengers
 {
-    [self.CellButtonArray removeAllObjects];
     [self DownloadOnlineContacts];
 }
+
 -(void)DownloadOnlineContacts
 {
     _activityView = [[PlayCustomActivityView alloc] initWithFrame:CGRectMake(0, 0, 130, 130)];
@@ -65,14 +69,14 @@
     [_activityView starActivity];
     [self.view addSubview:_activityView];
     self.CellDateArray  = [[NSMutableArray alloc]init];
-    NSString* name = [NLUtils getNameForRequest:Notify_GetPassenger];
-    REGISTER_NOTIFY_OBSERVER(self, ReadUpPassengers, name);
-    [[[NLProtocolRequest alloc] initWithRegister:YES] getPassengerType:@"2"];
+    
+    NSString* name = [NLUtils getNameForRequest:Notify_Getcontact];
+    REGISTER_NOTIFY_OBSERVER(self, ReadUpPasseng, name);
+    [[[NLProtocolRequest alloc] initWithRegister:YES] getContactType:@"2"];
     
 }
 
--(void)navigationView
-{
+-(void)navigationView{
     [self addBackButtonItemWithImage:[UIImage imageNamed:@"navigationLeftBtnBack2"]];
     self.title= @"选择联系人";
     [self addRightButtonItemWithTitle:@"编辑"];
@@ -103,32 +107,32 @@
 }
 
 
--(void)ReadUpPassengers:(NSNotification *)senderFication
+-(void)ReadUpPasseng:(NSNotification *)senderFication
 {
     NLProtocolResponse *response = (NLProtocolResponse *)senderFication.object;
+    int error = response.errcode;
     NSString *string = response.detail;
     NSLog(@"===string====%@",string);
 
-    int error = response.errcode;
     
     if (error == RSP_NO_ERROR)
     {
-        [self getPassenger:response];
-    }
-    else if (error == RSP_TIMEOUT)
-    {
-        [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
-        [_activityView removeFromSuperview];
-
+        [self getPasse:response];
     }
     else
     {
         [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
         [_activityView removeFromSuperview];
     }
-
 }
-- (void)getPassenger:(NLProtocolResponse *)response
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        [self DownloadOnlineContacts];
+    }
+}
+- (void)getPasse:(NLProtocolResponse *)response
 {
     //获取数据标记，判断是否请求成功
     NLProtocolData *data = [response.data find:@"msgbody/result" index:0];
@@ -151,27 +155,35 @@
         NSMutableArray *PassengerNumberArray  = [[NSMutableArray alloc]init];
         
         NSArray *PassengerId = [response.data find:@"msgbody/msgchild/id"];
-        for (NLProtocolData *PassengerIdData in PassengerId)
+//        NSLog(@"=====PassengerId====%@",PassengerId);
+        if ([PassengerId count] > 0)
         {
-            [PassengerIdArray addObject:PassengerIdData.value];
+            for (NLProtocolData *PassengerIdData in PassengerId)
+            {
+                [PassengerIdArray addObject:PassengerIdData.value];
+            }
         }
-        NSLog(@"=======PassengerIdArray=====%@",PassengerIdArray);
         
         NSArray *PassengerName = [response.data find:@"msgbody/msgchild/name"];
+//        NSLog(@"=====PassengerName====%@",PassengerName);
+        if ([PassengerName count] > 0)
+        {
         for (NLProtocolData *PassengerNameData in PassengerName)
         {
             [PassengerNameArray addObject:PassengerNameData.value];
         }
-        NSLog(@"=======PassengerNameArray=====%@",PassengerNameArray);
-
+        }
+        
         NSArray *PassengerNumber = [response.data find:@"msgbody/msgchild/phoneNumber"];
+//        NSLog(@"=====PassengerNumber====%@",PassengerNumber);
+
+        if ([PassengerNumber count] > 0)
+        {
         for (NLProtocolData *PassengerNameData in PassengerNumber)
         {
             [PassengerNumberArray addObject:PassengerNameData.value];
         }
-        NSLog(@"=======PassengerNumberArray=====%@",PassengerNumberArray);
-
-        
+        }
         for (int i = 0; i < [PassengerNameArray count]; i++)
         {
             NSMutableArray *otherArray = [[NSMutableArray alloc]init];
@@ -181,8 +193,6 @@
             [self.CellDateArray addObject:otherArray];
             
         }
-        NSLog(@"=======self.CellDateArray=====%@",self.CellDateArray);
-
         for (int i = 0; i < [self.CellDateArray count]; i++)
         {
             [[self.CellDateArray objectAtIndex:i] addObject:@"a"];
@@ -208,7 +218,6 @@
         else if(teger == 0)
         {
             self.ticketArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"PersonIphone"];
-            NSLog(@"=====ticketArray=====%@",self.ticketArray);
             if ([self.ticketArray count] > 0)
             {
                 for (int i = 0; i < [self.CellDateArray count]; i++)
@@ -279,9 +288,8 @@
     [_activityView setTipsText:@"正在删除数据..."];
     [_activityView starActivity];
     [self.view addSubview:_activityView];
-    [self.CellButtonArray removeObjectAtIndex:indexPathId];
-    [[self.CellDateArray objectAtIndex:indexPathId] removeObjectAtIndex:3];
-
+    [self.CellButtonArray removeAllObjects];
+//    NSLog(@"======CellButtonArray=====%@",self.CellButtonArray);
     
     NSString* name = [NLUtils getNameForRequest:Notify_deletePassenger];
     REGISTER_NOTIFY_OBSERVER(self, GetdeletePassengerNotify, name);
@@ -292,20 +300,19 @@
 {
     NLProtocolResponse *response = (NLProtocolResponse *)senderFication.object;
     int error = response.errcode;
+//    NSString *string = response.detail;
+//    NSLog(@"===string====%@",string);
+
     
     if (error == RSP_NO_ERROR)
     {
         [self getdeletePassenger:response];
     }
-    else if (error == RSP_TIMEOUT)
-    {
-        return ;
-    }
-    else
-    {
-        NSString *string = response.detail;
-        NSLog(@"===string====%@",string);
-    }
+    [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
+    [_activityView removeFromSuperview];
+    
+    [_historicalTableView reloadData];
+
 }
 - (void)getdeletePassenger:(NLProtocolResponse *)response
 {
@@ -320,11 +327,11 @@
         NLProtocolData *errorData = [response.data find:@"msgbody/message" index:0];
         NSLog(@"errorData = %@",errorData);
     }
-    else
-    {
-        // 机票实际价格
-        //        self.priceArray = [response.data find:@"msgbody/msgchild/price"];
-    }
+//    else
+//    {
+//        // 机票实际价格
+//        //        self.priceArray = [response.data find:@"msgbody/msgchild/price"];
+//    }
     
     [_activityView performSelector:@selector(endActivity) withObject:_activityView afterDelay:0.7];
     [_activityView removeFromSuperview];
@@ -366,7 +373,7 @@
     }
     
     UIButton *selectionBotton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    selectionBotton.frame =  CGRectMake(280, 10, 30, 30);
+    selectionBotton.frame =  CGRectMake(0, 10, 280, 30);
     selectionBotton.tag =indexPath.row;
     NSString * Stdey = [[self.CellDateArray objectAtIndex:indexPath.row] objectAtIndex:3];
     
@@ -378,13 +385,13 @@
     {
         [selectionBotton setImage:[UIImage imageNamed:@"9@2x.png"] forState:(UIControlStateNormal)];
     }
+    [selectionBotton setImageEdgeInsets:(UIEdgeInsetsMake(0, 250, 0, 0))];
     selectionBotton.selected = YES;
-    selectionBotton.enabled = NO;
     selectionBotton.tag = indexPath.row;
+    [selectionBotton addTarget:self action:@selector(btnclick:event:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.CellButtonArray addObject:selectionBotton];
-    NSLog(@"========indexPath======%@",self.CellButtonArray);
-//    [selectionBotton addTarget:self action:@selector(btnclick:event:) forControlEvents:(UIControlEventTouchUpInside)];
-    cell. accessoryView = selectionBotton;
+    [cell.contentView addSubview: selectionBotton];
+
     cell.textLabel.text =[[self.CellDateArray objectAtIndex:indexPath.row] objectAtIndex:1];
     
     UILabel *PassengerNumbeLabel = [[UILabel alloc]initWithFrame:CGRectMake(105, 0, 150, 50)];
@@ -396,17 +403,46 @@
     
     return cell;
 }
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    
+//    UIButton *button = [self.CellButtonArray objectAtIndex:indexPath.row];
+//    [button addTarget:self action:@selector(btnclick:indexPath:) forControlEvents:(UIControlEventTouchUpInside)];
+//    [self buttonID:button newIndexPath:indexPath];
+//}
+//-(void)buttonID:(UIButton *)sender newIndexPath:(NSIndexPath*)senderIndex
+//{
+//    NSLog(@"============senderIndex=========%@",senderIndex);
+//    NSLog(@"============senderIndex==tag=======%ld",(long)sender.tag);
+//
+//    if (senderIndex!= nil)
+//    {
+//        if (sender.selected == YES)
+//        {
+//            [sender setImage:[UIImage imageNamed:@"9@2x.png"] forState:(UIControlStateNormal)];
+//            [[self.CellDateArray objectAtIndex:sender.tag] removeObjectAtIndex:3];
+//            [[self.CellDateArray objectAtIndex:sender.tag] addObject:@"b"];
+//            sender.selected = NO;
+//        }
+//        else
+//        {
+//            [sender setImage:[UIImage imageNamed:@"91@2x.png"] forState:(UIControlStateNormal)];
+//            [[self.CellDateArray objectAtIndex:sender.tag] removeObjectAtIndex:3];
+//            [[self.CellDateArray objectAtIndex:sender.tag] addObject:@"a"];
+//            sender.selected = YES;
+//        }
+//    }
+//}
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+
+#pragma mark-单选中按钮状态
+-(void)btnclick:(UIButton *)sender event:(id)event1
 {
-    NSLog(@"========indexPath======%ld",(long)indexPath.row);
-    UIButton *button = [self.CellButtonArray objectAtIndex:indexPath.row];
-    [button addTarget:self action:@selector(btnclick:indexPath:) forControlEvents:(UIControlEventTouchUpInside)];
-    [self buttonID:button newIndexPath:indexPath];
-}
--(void)buttonID:(UIButton *)sender newIndexPath:(NSIndexPath*)senderIndex
-{
-    if (senderIndex!= nil)
+    NSSet *touches =[event1 allTouches];
+    UITouch *touch =[touches anyObject];
+    CGPoint currentTouchPosition = [touch locationInView:_historicalTableView];
+    NSIndexPath *indexPath= [_historicalTableView indexPathForRowAtPoint:currentTouchPosition];
+    if (indexPath!= nil)
     {
         if (sender.selected == YES)
         {
@@ -424,41 +460,14 @@
         }
     }
 }
-//
-//#pragma mark-单选中按钮状态
-//-(void)btnclick:(UIButton *)sender event:(id)event1
-//{
-//    NSSet *touches =[event1 allTouches];
-//    UITouch *touch =[touches anyObject];
-//    CGPoint currentTouchPosition = [touch locationInView:_historicalTableView];
-//    NSIndexPath *indexPath= [_historicalTableView indexPathForRowAtPoint:currentTouchPosition];
-//    if (indexPath!= nil)
-//    {
-//        if (sender.selected == YES)
-//        {
-//            [sender setImage:[UIImage imageNamed:@"9@2x.png"] forState:(UIControlStateNormal)];
-//            [[self.CellDateArray objectAtIndex:sender.tag] removeObjectAtIndex:3];
-//            [[self.CellDateArray objectAtIndex:sender.tag] addObject:@"b"];
-//            sender.selected = NO;
-//        }
-//        else
-//        {
-//            [sender setImage:[UIImage imageNamed:@"91@2x.png"] forState:(UIControlStateNormal)];
-//            [[self.CellDateArray objectAtIndex:sender.tag] removeObjectAtIndex:3];
-//            [[self.CellDateArray objectAtIndex:sender.tag] addObject:@"a"];
-//            sender.selected = YES;
-//        }
-//    }
-//    
-//}
 
 -(void)addClik
 {
     [[NSUserDefaults standardUserDefaults] setObject:self.CellDateArray forKey:@"PersonIphone"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    NSArray *ticket_UserDefaults = [[NSUserDefaults standardUserDefaults] objectForKey:@"PersonIphone"];
-    NSLog(@"=========PersonIphone========%@",ticket_UserDefaults);
+//    NSArray *ticket_UserDefaults = [[NSUserDefaults standardUserDefaults] objectForKey:@"PersonIphone"];
+//    NSLog(@"=========PersonIphone========%@",ticket_UserDefaults);
     //  机票订单推送标识
     teger = 0;
     
@@ -503,4 +512,39 @@
  */
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

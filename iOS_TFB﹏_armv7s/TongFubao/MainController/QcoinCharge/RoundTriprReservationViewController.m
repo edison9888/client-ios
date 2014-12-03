@@ -229,7 +229,7 @@
         
         // 起飞时间
         self.takeOffTimeArray = [response.data find:@"msgbody/msgchild/takeOffTime"];
-        NSLog(@"=====self.takeOffTimeArray=====%@",self.takeOffTimeArray);
+//        NSLog(@"=====self.takeOffTimeArray=====%@",self.takeOffTimeArray);
 
         if ([self.takeOffTimeArray count] > 0)
         {
@@ -241,7 +241,7 @@
         
         // 到达时间
         self.arriveTimeArray = [response.data find:@"msgbody/msgchild/arriveTime"];
-        NSLog(@"=====arriveTimeArray=====%@",self.arriveTimeArray);
+//        NSLog(@"=====arriveTimeArray=====%@",self.arriveTimeArray);
 
         if ([self.arriveTimeArray count] > 0)
         {
@@ -252,7 +252,7 @@
         }
         // 航空名
         self.airLineNameArray = [response.data find:@"msgbody/msgchild/airLineName"];
-        NSLog(@"=====airLineNameArray=====%@",self.airLineNameArray);
+//        NSLog(@"=====airLineNameArray=====%@",self.airLineNameArray);
 
         if ([self.airLineNameArray count] > 0)
         {
@@ -264,7 +264,7 @@
     
         // 航班号
         self.flightArray = [response.data find:@"msgbody/msgchild/flight"];
-        NSLog(@"=====flightArray=====%@",self.flightArray);
+//        NSLog(@"=====flightArray=====%@",self.flightArray);
 
         if ([self.flightArray count] > 0)
         {
@@ -276,7 +276,7 @@
         
         // 机型
         self.craftTypeArray = [response.data find:@"msgbody/msgchild/craftType"];
-        NSLog(@"=====craftTypeArray=====%@",self.craftTypeArray);
+//        NSLog(@"=====craftTypeArray=====%@",self.craftTypeArray);
 
         if ([self.craftTypeArray count] > 0){
 
@@ -288,7 +288,7 @@
     
         // 航空公司代码
         self.airLineCodeArray = [response.data find:@"msgbody/msgchild/airLineCode"];
-        NSLog(@"=====airLineCodeArray=====%@",self.airLineCodeArray);
+//        NSLog(@"=====airLineCodeArray=====%@",self.airLineCodeArray);
 
         if ([self.airLineCodeArray count] > 0){
 
@@ -300,7 +300,7 @@
         
         // 机票实际价格
         self.priceArray = [response.data find:@"msgbody/msgchild/price"];
-        NSLog(@"=====priceArray=====%@",self.priceArray);
+//        NSLog(@"=====priceArray=====%@",self.priceArray);
 
         if ([self.priceArray count] > 0){
 
@@ -312,7 +312,7 @@
         
         // 剩余票量
         self.quantityArray = [response.data find:@"msgbody/msgchild/quantity"];
-        NSLog(@"=====quantityArray=====%@",self.quantityArray);
+//        NSLog(@"=====quantityArray=====%@",self.quantityArray);
 
         if ([self.quantityArray count] > 0){
 
@@ -324,7 +324,7 @@
         
         // 出发机场
         self.dPortNameArray = [response.data find:@"msgbody/msgchild/dPortName"];
-        NSLog(@"=====dPortNameArray=====%@",self.dPortNameArray);
+//        NSLog(@"=====dPortNameArray=====%@",self.dPortNameArray);
 
         if ([self.dPortNameArray count] > 0){
 
@@ -336,7 +336,7 @@
         
         // 到达机场
         self.aPortNameArray = [response.data find:@"msgbody/msgchild/aPortName"];
-        NSLog(@"=====aPortNameArray=====%@",self.aPortNameArray);
+//        NSLog(@"=====aPortNameArray=====%@",self.aPortNameArray);
 
         if ([self.aPortNameArray count] > 0){
 
@@ -348,7 +348,7 @@
         
         // 出发机场三字码
         self.dPortCodeArray = [response.data find:@"msgbody/msgchild/dPortCode"];
-        NSLog(@"=====dPortCodeArray=====%@",self.dPortCodeArray);
+//        NSLog(@"=====dPortCodeArray=====%@",self.dPortCodeArray);
 
         if ([self.dPortCodeArray count] > 0){
 
@@ -361,7 +361,7 @@
         
         // 到达机场三字码
         self.aPortCodeArray = [response.data find:@"msgbody/msgchild/aPortCode"];
-        NSLog(@"=====aPortCodeArray=====%@",self.aPortCodeArray);
+//        NSLog(@"=====aPortCodeArray=====%@",self.aPortCodeArray);
 
         if ([self.aPortCodeArray count] > 0){
 
@@ -372,7 +372,7 @@
         }
         // 出发城市
         self.dCityCodeArray= [response.data find:@"msgbody/msgchild/dCityCode"];
-        NSLog(@"=====self.dCityCodeArray=====%@",self.dCityCodeArray);
+//        NSLog(@"=====self.dCityCodeArray=====%@",self.dCityCodeArray);
         if ([self.dCityCodeArray count] > 0){
         for (NLProtocolData *dPortCode  in self.dCityCodeArray)
         {
@@ -441,10 +441,10 @@
                 [ToCodeArray addObject:[[combinationPaiXuaAllArray objectAtIndex:i] objectAtIndex:3]];
             }
         }
-        NSLog(@"=====ToNameArray=====%@",ToNameArray);
-        NSLog(@"=====ToCodeArray=====%@",ToCodeArray);
-        NSLog(@"=====FromNameArray=====%@",FromNameArray);
-        NSLog(@"=====FromCodeArray=====%@",FromCodeArray);
+//        NSLog(@"=====ToNameArray=====%@",ToNameArray);
+//        NSLog(@"=====ToCodeArray=====%@",ToCodeArray);
+//        NSLog(@"=====FromNameArray=====%@",FromNameArray);
+//        NSLog(@"=====FromCodeArray=====%@",FromCodeArray);
         self.TripFromTimeArray = FromObjectArray;
         
         // 数据刷新
@@ -477,7 +477,7 @@
     {
         timeInteger = 1;
     }
-    NSLog(@"====timeInteger===%d",timeInteger);
+//    NSLog(@"====timeInteger===%d",timeInteger);
     
 
     // 时间选择按钮
@@ -511,11 +511,11 @@
         NSComparisonResult comparison = [self.departFromTime compare:self.returnToTime];
         if (comparison == NSOrderedAscending)
         {
-            NSLog(@"====departFromTime====%@",self.departFromTime);
+//            NSLog(@"====departFromTime====%@",self.departFromTime);
         }
         else
         {
-            NSLog(@"====returnToTime====%@",self.returnToTime);
+//            NSLog(@"====returnToTime====%@",self.returnToTime);
             self.returnToTime = self.departFromTime;
         }
     }
@@ -536,11 +536,11 @@
     NSComparisonResult comparison = [self.departFromTime compare:self.returnToTime];
     if (comparison == NSOrderedAscending)
     {
-        NSLog(@"====departFromTime====%@",self.departFromTime);
+//        NSLog(@"====departFromTime====%@",self.departFromTime);
     }
     else
     {
-        NSLog(@"====returnToTime====%@",self.returnToTime);
+//        NSLog(@"====returnToTime====%@",self.returnToTime);
         self.returnToTime = self.departFromTime;
     }
     // 重新计时间
@@ -559,7 +559,7 @@
     {
         timeInteger = 1;
     }
-    NSLog(@"====timeInteger===%d",timeInteger);
+//    NSLog(@"====timeInteger===%d",timeInteger);
     
 
     [_ButtonView selectionDateTime:self.returnToTime  goTime:self.departFromTime  shijianca:timeInteger];

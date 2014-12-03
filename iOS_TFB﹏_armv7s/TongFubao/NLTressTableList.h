@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-
+#import "NLHistoricalAccountCell.h"
 //显示类型
 typedef enum
 {
@@ -30,7 +29,7 @@ typedef enum
 
 @end
 
-@interface NLTressTableList : UITableView<UITableViewDataSource, UITableViewDelegate, HeadViewDelegate>
+@interface NLTressTableList : UITableView<UITableViewDataSource, UITableViewDelegate, HeadViewDelegate,NLHistoricalAccountCellDelegate>
 {
 @private
     
@@ -47,7 +46,6 @@ typedef enum
     NLTressTableListType currentType;
     
     NSMutableArray *cirtArr;
-    
     int tagbtn;
     BOOL btnFlag;
     BOOL flagLast;
@@ -63,6 +61,7 @@ typedef enum
 @property (nonatomic,strong) UIView         *CellView;
 @property (nonatomic,strong) NSDictionary   *dic;
 @property (nonatomic, weak) id <NLTressTableListDelegate> NLTressTableListDelegate;
+
 
 - (id)initWithFrame:(CGRect)frame style:(UITableViewStyle)style headInfos:(NSArray *)headInfos customTableType:(NLTressTableListType)customTableType flag:(BOOL)flag;
 

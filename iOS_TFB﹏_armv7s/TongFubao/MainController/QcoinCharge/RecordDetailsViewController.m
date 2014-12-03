@@ -29,7 +29,6 @@
 - (void)viewDidLoad
 {
     _titleArray = @[@"出发时间",@"行程",@"航班",@"总价",@"订单日期",@"处理状态"];
-    NSLog(@"====RecordDetailsArray=======%@",self.RecordDetailsArray);
     NSString *fromTime = [self.RecordDetailsArray objectAtIndex:2];
     NSString *toTime = [self.RecordDetailsArray objectAtIndex:3];
     NSString *fromToCity = [NSString stringWithFormat:@"%@-%@",[self.RecordDetailsArray objectAtIndex:0],[self.RecordDetailsArray objectAtIndex:1]];

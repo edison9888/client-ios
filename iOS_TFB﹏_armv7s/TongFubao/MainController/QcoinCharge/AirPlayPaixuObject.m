@@ -96,7 +96,7 @@
         [objectDictionary setObject:[newPricePaiXiu objectAtIndex:i] forKey:[[newPricePaiXiu objectAtIndex:i] objectAtIndex:2]];
         [priceArray addObject:objectDictionary];
     }
-    NSLog(@"=====priceArray====%@",priceArray);
+//    NSLog(@"=====priceArray====%@",priceArray);
     NSArray *pricePaiHaoArray;
     
     if (newPriceTager == 0)
@@ -115,7 +115,7 @@
                                 }
                                 return [num1 compare:num2];
                             }];
-        NSLog(@"=====pricePaiHaoArray====%@",pricePaiHaoArray);
+//        NSLog(@"=====pricePaiHaoArray====%@",pricePaiHaoArray);
 
 
     }
@@ -125,7 +125,7 @@
                             {
                                 return [[[obj1 allKeys] firstObject] compare:[[obj2 allKeys] firstObject] options:NSNumericSearch];
                             }];
-        NSLog(@"=====pricePaiHaoArray====%@",pricePaiHaoArray);
+//        NSLog(@"=====pricePaiHaoArray====%@",pricePaiHaoArray);
     }
     
     for (int i = 0; i < [pricePaiHaoArray count]; i++)
@@ -133,7 +133,7 @@
         [allPricePaiHaoArray addObject:[[pricePaiHaoArray objectAtIndex:i] allValues]];
         [allAganPriceArray addObject:[[allPricePaiHaoArray objectAtIndex:i] objectAtIndex:0]];
     }
-    NSLog(@"=======allAganPriceArray=====%@",allAganPriceArray);
+//    NSLog(@"=======allAganPriceArray=====%@",allAganPriceArray);
     return allAganPriceArray;
 }
 
@@ -164,14 +164,14 @@
     {
         NSString *timeIndex = [[newPmTimePaiXiu objectAtIndex:i] objectAtIndex:0];
         NSString *day = [timeIndex substringWithRange:NSMakeRange(11, 2)];
-        NSLog(@"==day==%@",day);
+//        NSLog(@"==day==%@",day);
 
         if (timeTager == 0)
         {
             if ([day integerValue] >= 00 && [day integerValue] < 12)
             {
                 [timeArray addObject:[newPmTimePaiXiu objectAtIndex:i]];
-                NSLog(@"====000====%@",timeArray);
+//                NSLog(@"====000====%@",timeArray);
             }
         }
        else  if (timeTager == 1)
@@ -179,7 +179,7 @@
         if ([day integerValue] >= 12 && [day integerValue] < 18)
             {
                 [timeArray addObject:[newPmTimePaiXiu objectAtIndex:i]];
-                NSLog(@"===111=====%@",timeArray);
+//                NSLog(@"===111=====%@",timeArray);
             }
         }
         else if (timeTager == 2)
@@ -187,7 +187,7 @@
             if ([day integerValue] >= 18 && [day integerValue] <= 24)
             {
                 [timeArray addObject:[newPmTimePaiXiu objectAtIndex:i]];
-                NSLog(@"==22======%@",timeArray);
+//                NSLog(@"==22======%@",timeArray);
             }
         }
     }

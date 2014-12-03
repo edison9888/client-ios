@@ -14,12 +14,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line1_pla.png" id="dwc-Al-ddt">
+                        <rect key="frame" x="11" y="40" width="300" height="0.0"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="bLe-Dh-dpg">
+                        <rect key="frame" x="0.0" y="0.0" width="319" height="43"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="卡号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3">
                         <rect key="frame" x="4" y="11" width="106" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="银行名" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6">
                         <rect key="frame" x="106" y="11" width="106" height="21"/>
@@ -37,11 +45,16 @@
                     </label>
                 </subviews>
             </tableViewCellContentView>
+            <gestureRecognizers/>
             <connections>
+                <outlet property="bgimage" destination="bLe-Dh-dpg" id="jqf-nG-XEP"/>
                 <outlet property="myCardBankLabel" destination="6" id="14"/>
                 <outlet property="myCardNameLabel" destination="9" id="15"/>
                 <outlet property="myCardNumberLabel" destination="3" id="13"/>
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="line1_pla.png" width="1" height="1"/>
+    </resources>
 </document>

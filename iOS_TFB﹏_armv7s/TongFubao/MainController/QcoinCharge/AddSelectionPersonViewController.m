@@ -8,7 +8,6 @@
 
 #import "AddSelectionPersonViewController.h"
 #import "PlayCustomActivityView.h"
-#import "NLUtils.h"
 
 @interface AddSelectionPersonViewController ()
 
@@ -72,9 +71,10 @@
         [self.view addSubview:_activityView];
         
         
-        NSString* name = [NLUtils getNameForRequest:Notify_SavePassenger];
-        REGISTER_NOTIFY_OBSERVER(self, GetSavePassengerNotify, name);
-        [[[NLProtocolRequest alloc]initWithRegister:YES]savePassengerName:self.PassengerName savePassengerCardType:@"" savePassengerCardId:@"" savePassengerPhoneNumber:self.PassengerIphone savePassengerPassengerType:@"2" birthday:@" "];
+        NSString* name = [NLUtils getNameForRequest:Notify_SaveContact];
+        REGISTER_NOTIFY_OBSERVER(self, GetSaveContactNotify, name);
+        [[[NLProtocolRequest alloc]initWithRegister:YES] savecontactName:self.PassengerName savecontactCardType:@"" savecontactCardId:@"" savecontactPhoneNumber:self.PassengerIphone savecontactType:@"2" contactbirthday:@""];
+
     }
     else
     {
@@ -84,18 +84,17 @@
     
 }
 
--(void)GetSavePassengerNotify:(NSNotification *)senderFication
+-(void)GetSaveContactNotify:(NSNotification *)senderFication
 {
     NLProtocolResponse *response = (NLProtocolResponse *)senderFication.object;
     int error = response.errcode;
     NSString *string = response.detail;
-    NSLog(@"===string====%@",string);
+//    NSLog(@"===string====%@",string);
 
     
     if (error == RSP_NO_ERROR)
     {
-        [self getApiAirticket:response];
-        
+        [self getSaveContactApiAirticket:response];
     }
     else if (error == RSP_TIMEOUT)
     {
@@ -120,12 +119,12 @@
     }
 }
 
-- (void)getApiAirticket:(NLProtocolResponse *)response
+- (void)getSaveContactApiAirticket:(NLProtocolResponse *)response
 {
     //获取数据标记，判断是否请求成功
     NLProtocolData *data = [response.data find:@"msgbody/result" index:0];
     NSString *result = data.value;
-    NSLog(@"======result=======%@",result);
+//    NSLog(@"======result=======%@",result);
     NSRange range = [result rangeOfString:@"succ"];
 
     if (range.length <= 0)
@@ -151,6 +150,7 @@
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"成功添加联系人!" message:@"" delegate:self cancelButtonTitle:@"添加联系人" otherButtonTitles:@"退出", nil];
         alert.tag = 100;
         [alert show];
+        
         [self.delegate UpdateAddSelectionPersonPassengers];
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(message:) name:@"添加联系人" object:nil];
 //        [[NSNotificationCenter defaultCenter] postNotificationName:@"添加联系人" object:nil];
@@ -235,87 +235,5 @@
  */
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

@@ -139,7 +139,7 @@
     [vc addSubview:label6];
     
     
-    table = [[UITableView alloc]initWithFrame:CGRectMake(0, 224, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+    table = [[UITableView alloc]initWithFrame:CGRectMake(0, 224, self.view.frame.size.width, 344) style:UITableViewStylePlain];
     table.delegate = self;
     table.dataSource = self;
     [self.view addSubview:table];
@@ -231,8 +231,8 @@
         _header.delegate = self;
         _header.scrollView = table;
         
-        //        [_header endRefreshing];
-        //        [_footer endRefreshing];
+//        [_header endRefreshing];
+//        [_footer endRefreshing];
     }
     
     // 上拉加载更多
@@ -242,8 +242,8 @@
         _footer.delegate = self;
         _footer.scrollView = table;
         
-        //        [_header endRefreshing];
-        //        [_footer endRefreshing];
+//        [_header endRefreshing];
+//        [_footer endRefreshing];
     }
 }
 
@@ -272,16 +272,30 @@
 {
     if (isDownPush)//下拉
     {
+        NSLog(@"下拉");
         _msgstart = @"0";
         _msgdisplay = @"10";
     }
     else
     {
+        NSLog(@"上拉");
+        
         int start = [_msgstart intValue];
         int display = [_msgdisplay intValue];
         _msgstart = [NSString stringWithFormat:@"%d",(start+display)];
         _msgdisplay = @"10";
     }
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [_footer free];
+    [_header free];
+    _footer = nil;
+    _header = nil;
+
+    [super viewWillDisappear:animated];
 }
 
 

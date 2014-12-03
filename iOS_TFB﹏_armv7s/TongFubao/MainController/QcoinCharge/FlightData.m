@@ -21,7 +21,7 @@
 }
 -(void)CitytToFindTheNetworkRequest:(NSString *)newfirstLetter requestCityName:(NSString *)newCityName buttonTag:(NSInteger)newTag
 {
-    NSLog(@"====newfirstLetter=====%@",newfirstLetter);
+//    NSLog(@"====newfirstLetter=====%@",newfirstLetter);
     self.CityName  = newCityName;
     self.logoString = newfirstLetter;
     self.buttonTeger = newTag;
@@ -48,7 +48,7 @@
     else
     {
         NSString *string = response.detail;
-        NSLog(@"====string=====%@",string);
+//        NSLog(@"====string=====%@",string);
         
     }
 }

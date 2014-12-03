@@ -124,10 +124,10 @@
         // 是否每次按button请求
         if (buttonSelection == YES)
         {
-            NSLog(@"====newTag====%d",newTag);
+//            NSLog(@"====newTag====%d",newTag);
             //_cellArrayStype装着按钮所有的状态，按钮的标识newTag，通过标识找到每一个按钮的状态
             NSString *boolString = [_cellArrayStype objectAtIndex:newTag];
-            NSLog(@"====boolString====%@",boolString);
+//            NSLog(@"====boolString====%@",boolString);
             BOOL cellBool = [boolString boolValue];
             cellBool = !cellBool;
             boolString= [NSString stringWithFormat:@"%d",cellBool];
@@ -136,8 +136,8 @@
             _cellArrayStype = newArray;
             // 将点击段中key返回一个数组（即段中的所有行）
             NSArray *selecTionArray = [self.LetterSelectionDictionary objectForKey:[_addArray objectAtIndex:newTag]];
-            NSLog(@"====selecTionArray===%@",selecTionArray);
-            NSLog(@"====cellBool===%d",cellBool);
+//            NSLog(@"====selecTionArray===%@",selecTionArray);
+//            NSLog(@"====cellBool===%d",cellBool);
             // 判断选中行
             if (cellBool)
             {
@@ -153,7 +153,7 @@
         }
     }
     
-    NSLog(@"=====self.LetterSelectionDictionary======%@",self.LetterSelectionDictionary);
+//    NSLog(@"=====self.LetterSelectionDictionary======%@",self.LetterSelectionDictionary);
     
     [activityView performSelector:@selector(endActivity) withObject:activityView afterDelay:0.7];
     [activityView removeFromSuperview];
@@ -275,7 +275,7 @@
         }
         [_cellArrayStype addObject:[NSString stringWithFormat:@"%d",CellStype]];
     }
-    NSLog(@"======_cellArrayStype=======%@",_cellArrayStype );
+//    NSLog(@"======_cellArrayStype=======%@",_cellArrayStype );
     
     _searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
     _searchBar.delegate = self;
@@ -445,7 +445,7 @@
         NLProtocolData *cityIdData = [[self.cityIdDictionary objectForKey:[_addArray objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
         [[NSUserDefaults standardUserDefaults] setObject:cityIdData.value forKey:@"cityIdTo"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        NSLog(@"====cityIdData=11===%@",cityIdData.value);
+//        NSLog(@"====cityIdData=11===%@",cityIdData.value);
         
         [[_buttonArray objectAtIndex: 1] setTitle:cellData.value forState:(UIControlStateNormal)] ;
         UIButton *button = [_buttonArray objectAtIndex:0];
@@ -489,7 +489,7 @@
 
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    NSLog(@"=========searchBarTextDidEndEditingsearchBarTextDidEndEditing===");
+//    NSLog(@"=========searchBarTextDidEndEditingsearchBarTextDidEndEditing===");
     ButtonView * btView = [self.ButtonViewArray objectAtIndex:1];
     [btView ChangingIndexStateButton:btView._cellButton];
 }
@@ -499,7 +499,7 @@
 {
     buttonSelection = YES;
     UIButton *senderButton = (UIButton*)sender;
-    NSLog(@"=======tag========%d",senderButton.tag);
+//    NSLog(@"=======tag========%d",senderButton.tag);
 
     if ([self.LetterSelectionDictionary objectForKey:[_addArray objectAtIndex:senderButton.tag]] == nil)
     {
@@ -532,10 +532,10 @@
             // 是否每次按button请求
             if (buttonSelection == YES)
             {
-                NSLog(@"====newTag====%d",senderButton.tag);
+//                NSLog(@"====newTag====%d",senderButton.tag);
                 //_cellArrayStype装着按钮所有的状态，按钮的标识newTag，通过标识找到每一个按钮的状态
                 NSString *boolString = [_cellArrayStype objectAtIndex:senderButton.tag];
-                NSLog(@"====boolString====%@",boolString);
+//                NSLog(@"====boolString====%@",boolString);
                 BOOL cellBool = [boolString boolValue];
                 cellBool = !cellBool;
                 boolString= [NSString stringWithFormat:@"%d",cellBool];
@@ -544,8 +544,8 @@
                 _cellArrayStype = newArray;
                 // 将点击段中key返回一个数组（即段中的所有行）
                 NSArray *selecTionArray = [self.LetterSelectionDictionary objectForKey:[_addArray objectAtIndex:senderButton.tag]];
-                NSLog(@"====selecTionArray===%@",selecTionArray);
-                NSLog(@"====cellBool===%d",cellBool);
+//                NSLog(@"====selecTionArray===%@",selecTionArray);
+//                NSLog(@"====cellBool===%d",cellBool);
                 // 判断选中行
                 if (cellBool)
                 {
@@ -560,7 +560,7 @@
                 }
             }
         }
-        NSLog(@"=====self.LetterSelectionDictionary======%@",self.LetterSelectionDictionary);
+//        NSLog(@"=====self.LetterSelectionDictionary======%@",self.LetterSelectionDictionary);
         [self.citySelectionTableView reloadData];
     }
 }

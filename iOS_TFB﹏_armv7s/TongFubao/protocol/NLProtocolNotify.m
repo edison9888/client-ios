@@ -209,8 +209,12 @@ static NLProtocolNotify* gProtocolNotify = nil;
 - (void)ApigetAirlineDetailNotify:(NSNotification *)notify;
 // 添加乘机人
 - (void)ApiAirticketSavePassengerDetailNotify:(NSNotification *)notify;
+// 添加联系人
+- (void)ApiAirticketSaveContactDetailNotify:(NSNotification *)notify;
 // 读取乘机人
 - (void)ApiGetPassengerDetailNotify:(NSNotification *)notify;
+// 读取联系人
+- (void)ApiGetcontionDetailNotify:(NSNotification *)notify;
 // 删除乘机人
 - (void)ApiGetDeletePassengerNotify:(NSNotification *)notify;
 // 生成订单
@@ -866,10 +870,19 @@ static NLProtocolNotify* gProtocolNotify = nil;
         case NLProtocolRequest_SavePassenger:
             REGISTER_NOTIFY_OBSERVER(self,ApiAirticketSavePassengerDetailNotify, Notify_SavePassenger);
             break;
+        case NLProtocolRequest_SaveContact:
+            REGISTER_NOTIFY_OBSERVER(self,ApiAirticketSaveContactDetailNotify, Notify_SaveContact);
+            break;
+
             /*读取乘机人*/
         case NLProtocolRequest_getPassenger:
             REGISTER_NOTIFY_OBSERVER(self,ApiGetPassengerDetailNotify, Notify_GetPassenger);
             break;
+            /*读取联系人*/
+        case NLProtocolRequest_getcontion:
+            REGISTER_NOTIFY_OBSERVER(self,ApiGetcontionDetailNotify, Notify_Getcontact);
+            break;
+
             /*删除乘机人*/
         case NLProtocolRequest_deletePassenger:
             REGISTER_NOTIFY_OBSERVER(self,ApiGetDeletePassengerNotify, Notify_deletePassenger);
@@ -1656,10 +1669,19 @@ static NLProtocolNotify* gProtocolNotify = nil;
         case NLProtocolRequest_SavePassenger:
             REMOVE_NOTIFY_OBSERVER_FOR_NAME(self, Notify_SavePassenger);
             break;
+            /*添加联系人*/
+        case NLProtocolRequest_SaveContact:
+            REMOVE_NOTIFY_OBSERVER_FOR_NAME(self, Notify_SaveContact);
+            break;
             /*读取登机人*/
         case NLProtocolRequest_getPassenger:
             REMOVE_NOTIFY_OBSERVER_FOR_NAME(self, Notify_GetPassenger);
             break;
+            /*读取联系人*/
+        case NLProtocolRequest_getcontion:
+            REMOVE_NOTIFY_OBSERVER_FOR_NAME(self, Notify_Getcontact);
+            break;
+
             /*删除登机人*/
         case NLProtocolRequest_deletePassenger:
             REMOVE_NOTIFY_OBSERVER_FOR_NAME(self, Notify_deletePassenger);
@@ -4074,6 +4096,19 @@ static NLProtocolNotify* gProtocolNotify = nil;
     }
     [self doDefaultEnd:NLProtocolRequest_SavePassenger response:response];
 }
+// 添加联系人
+- (void)ApiAirticketSaveContactDetailNotify:(NSNotification *)notify
+{
+    NLProtocolResponse *response = (NLProtocolResponse *)notify.object;
+    int errorCode = [self getErrorcode:response];
+    if (errorCode != RSP_NO_ERROR)
+    {
+        [self doDefaultEnd:NLProtocolRequest_SaveContact response:response];
+        return ;
+    }
+    [self doDefaultEnd:NLProtocolRequest_SaveContact response:response];
+}
+
 
 // 读取乘机人
 - (void)ApiGetPassengerDetailNotify:(NSNotification *)notify
@@ -4086,6 +4121,18 @@ static NLProtocolNotify* gProtocolNotify = nil;
         return ;
     }
     [self doDefaultEnd:NLProtocolRequest_getPassenger response:response];
+}
+// 读取联系人
+- (void)ApiGetcontionDetailNotify:(NSNotification *)notify
+{
+    NLProtocolResponse *response = (NLProtocolResponse *)notify.object;
+    int errorCode = [self getErrorcode:response];
+    if (errorCode != RSP_NO_ERROR)
+    {
+        [self doDefaultEnd:NLProtocolRequest_getcontion response:response];
+        return ;
+    }
+    [self doDefaultEnd:NLProtocolRequest_getcontion response:response];
 }
 
 // 删除乘机人

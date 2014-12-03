@@ -200,9 +200,8 @@
     
     /*显示打星号*/
 
-    bankTFstr = saveCardView[1].infoText.text;
-
-    if ( editOr ) {
+    if ( editOr && saveCardView[1].infoText.text.length > 14 ) {
+        bankTFstr = saveCardView[1].infoText.text;
         NSRange rang = NSMakeRange(4, bankTFstr.length - 8);
         NSString *changeBank = [saveCardView[1].infoText.text stringByReplacingCharactersInRange:rang withString:@"****"];
         saveCardView[1].infoText.text= changeBank;
@@ -307,9 +306,8 @@
         }
      
         /*显示信息*/
-         cardTFstr =  creditCardView[1].infoText.text;
-        if (_rightflag && editOr) {
-           
+        if (_rightflag && editOr && creditCardView[1].infoText.text.length >17 ) {
+           cardTFstr =  creditCardView[1].infoText.text;
             NSRange rang = NSMakeRange(4, cardTFstr.length - 8);
             NSString *changeCard = [creditCardView[1].infoText.text stringByReplacingCharactersInRange:rang withString:@"****"];
             creditCardView[1].infoText.text = changeCard;
@@ -396,6 +394,7 @@
     
     if([[textField text] length] - range.length + string.length > 19 && textField ==  saveCardView[1].infoText )
     {
+       
         retValue=NO;
     }
     if([[textField text] length] - range.length + string.length > 11 && textField ==  saveCardView[3].infoText )
@@ -413,6 +412,44 @@
     return retValue;
 }
 
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    /*添加*/
+    //    if (saveCardView[1].infoText.text.length < 14 && ![NLUtils checkBankCard:saveCardView[1].infoText.text] ) {
+    //
+    //        [self showErrorInfo:@"请输入正确的卡号" status:NLHUDState_Error];
+    //
+    //        return ;
+    //    }
+    //    if (![NLUtils checkIdentity:creditCardView[1].infoText.text] &&
+    //        creditCard) {
+    //        [self showErrorInfo:@"请输入正确的身份证" status:NLHUDState_Error];
+    //
+    //        return ;
+    //    }
+  
+    
+    if (textField == creditCardView[1].infoText && textField.text.length >= 18)
+    {
+        if (![NLUtils checkInterNum:saveCardView[1].infoText.text] && textField.text.length >= 18)
+        {
+            [self showErrorInfo:@"请输入正确的身份证" status:NLHUDState_Error];
+            
+            return;
+        }
+    }
+    
+    if (textField == saveCardView[1].infoText && textField.text.length >= 15)
+    {
+        if (![NLUtils checkInterNum:saveCardView[1].infoText.text] && textField.text.length > 15)
+        {
+            [self showErrorInfo:@"请输入正确的卡号" status:NLHUDState_Error];
+            
+            return;
+        }
+    }
+}
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     if (textField == saveCardView[0].infoText)
@@ -428,15 +465,12 @@
     if (textField == saveCardView[1].infoText) {
         if (![saveCardView[1].infoText.text isEqualToString:bankTFstr]) {
             saveCardView[1].infoText.text= @"";
-            bankTFstr= @"";
         }
     }
     if (textField == creditCardView[1].infoText) {
         if (![creditCardView[1].infoText.text isEqualToString:cardTFstr]) {
             creditCardView[1].infoText.text= @"";
-            cardTFstr= @"";
         }
-        
     }
     
     return YES;
@@ -607,22 +641,41 @@
     cardTFstr= creditCardView[1].infoText.text;
     NSString *bkcardidcard = cardTFstr? cardTFstr : @" ";
     
-    //当前输入的卡号长度
-    if (![NLUtils checkInterNum:bankTFstr] || bankTFstr.length < 14)
+    if (![NLUtils checkMobilePhone:saveCardView[3].infoText.text] )
     {
-        [self showErrorInfo:@"请输入正确的卡号" status:NLHUDState_Error];
+        [self showErrorInfo:@"请输入正确的手机" status:NLHUDState_Error];
         
         return ;
     }
-  
-    if (editOr) 
+    if (saveCardView[2].infoText.text == nil)
     {
-       
+        [self showErrorInfo:@"请输入正确信息" status:NLHUDState_Error];
+        
+        return ;
+    }
+    
+
+    if (editOr)
+    {
+        /*打了星号再按编辑已有银行卡时候的处理*/
+        if (saveCardView[1].infoText.text.length<8)
+        {
+            [self showErrorInfo:@"请输入正确的卡号" status:NLHUDState_Error];
+            
+            return ;
+        }
+        if (creditCardView[1].infoText.text.length<8 && creditCard)
+        {
+            [self showErrorInfo:@"请输入正确的身份证" status:NLHUDState_Error];
+            
+            return ;
+        }
+        
         NSString *name = [NLUtils getNameForRequest:Notify_ApiAuthorKuaibkcardInfoEdit];
         REGISTER_NOTIFY_OBSERVER(self, checkDataForCardEdit, name);
         [[[NLProtocolRequest alloc] initWithRegister:YES] getApiAuthorKuaibkcardInfoEdit:_cardInfo.bkcardid
                                                                             bkcardbankid:_cardInfo.bkcardbankid
-                                                                              bkcardbank:saveCardView[0].infoText.text bkcardno:bankTFstr
+                                                                              bkcardbank:saveCardView[0].infoText.text bkcardno:bankTFstr.length ==0 ? saveCardView[1].infoText.text : bankTFstr
                                                                            bkcardbankman:saveCardView[2].infoText.text
                                                                          bkcardbankphone:saveCardView[3].infoText.text
                                                                            bkcardyxmonth:month
@@ -633,10 +686,12 @@
                                                                          bkcardisdefault:defaultCard
                                                                   bkcardisdefaultPayment:defaultPayment];
         NSLog(@"编辑保存   支付：%@  付款：%@",defaultCard,defaultPayment);
-        
     }
     else
     {
+    /*添加*/
+        bankTFstr = saveCardView[1].infoText.text;
+        
         NSString *name = [NLUtils getNameForRequest:Notify_ApiAuthorKuaibkcardInfoAdd];
         REGISTER_NOTIFY_OBSERVER(self, checkDataForNewCard, name);
         [[[NLProtocolRequest alloc] initWithRegister:YES] getApiAuthorKuaibkcardInfoAdd:bankID

@@ -519,11 +519,16 @@
 - (void)departCityCode:(NSString*)newDepartCityCode arriveCityCode:(NSString*)newArriveCityCode departTime:(NSString*)newDepartTime returnTime:(NSString*)newReturnTime searchType:(NSString*)newSearchType flight:(NSString *)newflight returnFlight:(NSString *)newreturnFlight;
 
 // 添加乘机人
-
 - (void)savePassengerName:(NSString*)newSavePassengerName savePassengerCardType:(NSString*)newSavePassengerCardType savePassengerCardId:(NSString*)newSavePassengerCardId savePassengerPhoneNumber:(NSString*)newsavePassengerPhoneNumber savePassengerPassengerType:(NSString *)newSavePassengerPassengerType birthday:(NSString *)newBirthDay;
+// 添加联系人
+- (void)savecontactName:(NSString*)newSavecontactName savecontactCardType:(NSString*)newSavecontactCardType savecontactCardId:(NSString*)newcontactCardId savecontactPhoneNumber:(NSString*)newcontactPhoneNumber savecontactType:(NSString *)newSavecontactPassengerType contactbirthday:(NSString *)newcontactBirthDay;
+
 
 // 读取乘机人
 - (void)getPassengerType:(NSString *)newPassengerType;
+// 读取联系人
+- (void)getContactType:(NSString *)newContactType;
+
 
 
 // 删除乘机人
